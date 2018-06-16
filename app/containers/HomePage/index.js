@@ -9,16 +9,49 @@
  * the linting exception.
  */
 
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+ import React from "react";
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  render() {
-    return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
-    );
-  }
-}
+ // @material-ui/core components
+ import withStyles from "@material-ui/core/styles/withStyles";
+
+ // @material-ui/icons
+ import Schedule from "@material-ui/icons/Schedule";
+
+ // core components
+ import GridContainer from "components/Grid/GridContainer.jsx";
+ import GridItem from "components/Grid/GridItem.jsx";
+ import Card from "components/Card/Card.jsx";
+ import CardBody from "components/Card/CardBody.jsx";
+ import CardHeader from "components/Card/CardHeader.jsx";
+ import CardIcon from "components/Card/CardIcon.jsx";
+ import Quote from "components/Typography/Quote.jsx";
+
+ import userProfileStyles from "./comingSoon.jsx";
+
+
+ function UserProfile(props) {
+   const { classes } = props;
+   return (
+     <div>
+       <GridContainer>
+         <GridItem xs={12} sm={12} md={6}>
+           <Card>
+             <CardHeader color="info" icon>
+               <CardIcon color="info">
+                 <Schedule />
+               </CardIcon>
+               <h4 className={classes.cardIconTitle}>
+                 Coming Soon - <small>We're working really hard!</small>
+               </h4>
+             </CardHeader>
+             <CardBody>
+              <Quote text="Rome wasn't built in a day" author="Usually a smartass"/>
+             </CardBody>
+           </Card>
+         </GridItem>
+       </GridContainer>
+     </div>
+   );
+ }
+
+ export default withStyles(userProfileStyles)(UserProfile);

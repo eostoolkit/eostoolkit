@@ -20,7 +20,7 @@ module.exports = (options) => ({
   module: {
     rules: [
       {
-        test: /\.js$/, // Transform all .js files required somewhere with Babel
+        test: /\.(js|jsx)$/, // Transform all .js and .jsx files required somewhere with Babel
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -46,7 +46,7 @@ module.exports = (options) => ({
         use: 'file-loader',
       },
       {
-        test: /\.(jpg|png|gif)$/,
+        test: /\.(jpg|jpeg|png|gif)$/,
         use: [
           'file-loader',
           {
