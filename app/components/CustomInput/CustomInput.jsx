@@ -67,7 +67,7 @@ function CustomInput({ ...props }) {
           htmlFor={id}
           {...labelProps}
         >
-          {labelText }
+          {!error ? labelText : ''}
           {error && touched && ' [' + error + ']'}
         </InputLabel>
       ) : null}

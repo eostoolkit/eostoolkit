@@ -16,7 +16,7 @@ const selectCreateAccountDomain = (state) => state.get('createAccount');
 
 const makeSelectCreateAccount = () => createSelector(
   selectCreateAccountDomain,
-  (substate) => substate.toJS()
+  (substate) => substate.get('form')
 );
 
 export default makeSelectCreateAccount;

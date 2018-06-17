@@ -63,7 +63,7 @@ class HeaderLinks extends React.Component {
       //TODO: Or we add all our social media here
       <div className={wrapper}>
         <div className={classes.poweredBy}>
-          <span className={classes.logoNormal}>{"Powered by GenerEOS"}</span>
+          <span className={classes.logoNormal}>{"Vote for GenerEOS"}</span>
           <img src={logo} alt="logo" className={classes.logo} />
         </div>
       </div>

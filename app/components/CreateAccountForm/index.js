@@ -14,9 +14,11 @@ import * as Yup from 'yup';
 import withStyles from "@material-ui/core/styles/withStyles";
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Tooltip from '@material-ui/core/Tooltip';
 
 // @material-ui/icons
 import PersonAdd from "@material-ui/icons/PersonAdd";
+import AccountBalance from "@material-ui/icons/AccountBalance";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -28,13 +30,13 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardText from "components/Card/CardText.jsx";
 import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import Quote from "components/Typography/Quote.jsx";
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 import regularFormsStyle from "assets/jss/regularFormsStyle";
 import switchStyle from "assets/jss/customCheckboxRadioSwitch.jsx";
-
 
 const FormObject = props => {
   const {
@@ -48,6 +50,7 @@ const FormObject = props => {
     handleReset,
     dirty,
     eosAccount,
+    classes,
   } = props;
   return (
     <form>
@@ -180,29 +183,35 @@ const FormObject = props => {
           />
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
-          <FormControlLabel
-            control={
-              <Switch
-                id="transfer"
-                checked={values.transfer}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.transfer}
-                // classes={{
-                //   switchBase: switchStyle.switchBase,
-                //   checked: switchStyle.switchChecked,
-                //   icon: switchStyle.switchIcon,
-                //   iconChecked: switchStyle.switchIconChecked,
-                //   bar: switchStyle.switchBar
-                // }}
-              />
-            }
-            // classes={{
-            //   label: switchStyle.label
-            // }}
-            label="Transfer"
-          />
-
+          <Tooltip
+            id="tooltip-right"
+            title="Tranfer Off: Creator retains staking control and voting rights. Transfer On: New account gains staking control and voting rights."
+            placement="right"
+            classes={{ tooltip: classes.formTooltip }}
+          >
+            <FormControlLabel
+              control={
+                <Switch
+                  id="transfer"
+                  checked={values.transfer}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.transfer ? 'true' : 'false'}
+                  classes={{
+                    switchBase: classes.switchBase,
+                    checked: classes.switchChecked,
+                    icon: classes.switchIcon,
+                    iconChecked: classes.switchIconChecked,
+                    bar: classes.switchBar
+                  }}
+                />
+              }
+              classes={{
+                label: classes.label
+              }}
+              label="Transfer"
+            />
+          </Tooltip>
         </GridItem>
 
         <GridItem xs={12} sm={12} md={4}>
@@ -218,15 +227,29 @@ const FormObject = props => {
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
-    .required('Account name is required'),
-  net: Yup.number().moreThan(0,'You must stake a quantity')
+  .required('Account name is required')
+  .matches(/([a-z1-5]){12,}/, { excludeEmptyString: true, message: 'Invalid account name'}),
+  ownerKey: Yup.string()
+  .required('Owner key is required'),
+  activeKey: Yup.string()
+  .required('Active key is required'),
+  net: Yup.number()
+  .required('NET Stake is required')
+  .positive('You must stake a positive quantity'),
+  cpu: Yup.number()
+  .required('CPU Stake is required')
+  .positive('You must stake a positive quantity'),
+  ram: Yup.number()
+  .required('RAM purchase is required')
+  .positive('RAM must be a positive quantity')
+  .integer('RAM cannot be fractional'),
 })
 
 let CreateAccountForm = props => {
   const { classes, handleSubmit, eosAccount } = props
   return (
     <GridContainer>
-      <GridItem xs={12} sm={12} md={8}>
+      <GridItem xs={12} sm={12} lg={8}>
         <Card>
           <CardHeader color="warning" icon>
             <CardIcon color="warning">
@@ -249,9 +272,33 @@ let CreateAccountForm = props => {
                 onSubmit={handleSubmit}
                 eosAccount = {eosAccount}
                 render={formikProps =>
-                   <FormObject {...formikProps} eosAccount={eosAccount} />
+                   <FormObject {...formikProps} eosAccount={eosAccount} classes={classes}/>
                 }
             />
+          </CardBody>
+        </Card>
+      </GridItem>
+      <GridItem xs={12} sm={12} lg={4}>
+        <Card>
+          <CardHeader color="rose" icon>
+            <CardIcon color="rose">
+              <AccountBalance />
+            </CardIcon>
+            <h4 className={classes.cardIconTitle}>Ricardian</h4>
+          </CardHeader>
+          <CardBody>
+          <p>
+            The <i>newaccount</i> action creates a new account.
+            <br/><br/>
+            As an authorized party I <i>signer</i> wish to
+            exercise the authority of <i>creator</i> to create
+            a new account on this system named <i>name</i> such
+            that the new account's owner public key shall
+            be <i>owner key</i> and the active public key shall
+            be <i>active key</i>.
+          </p>
+
+
           </CardBody>
         </Card>
       </GridItem>

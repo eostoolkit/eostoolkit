@@ -28,6 +28,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
+import Notification from "containers/Notification/Loadable";
 
 import dashboardRoutes from "routes/dashboard.jsx";
 
@@ -126,6 +127,7 @@ class Dashboard extends React.Component {
             handleDrawerToggle={this.handleDrawerToggle}
             {...rest}
           />
+          <Notification/>
           {/* On the /maps/full-screen-maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {this.getRoute() ? (
             <div className={classes.content}>

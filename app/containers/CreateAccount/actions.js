@@ -8,8 +8,9 @@ import {
   DEFAULT_ACTION,
 } from './constants';
 
-export function defaultAction() {
+export default function defaultAction(form) {
   return {
     type: DEFAULT_ACTION,
+    form,
   };
 }

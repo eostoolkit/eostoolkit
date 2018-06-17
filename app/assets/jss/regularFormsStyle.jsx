@@ -3,10 +3,14 @@
 // #############################
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.jsx";
+import { tooltip } from "assets/jss/material-dashboard-pro-react.jsx";
 import customCheckboxRadioSwitch from "assets/jss/customCheckboxRadioSwitch.jsx";
 
 const regularFormsStyle = {
   ...customCheckboxRadioSwitch,
+  formTooltip: {
+    ...tooltip,
+  },
   cardIconTitle: {
     ...cardTitle,
     marginTop: "15px",

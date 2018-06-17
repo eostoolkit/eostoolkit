@@ -17,17 +17,15 @@ import makeSelectCreateAccount from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import submitAction from './actions';
 import CreateAccountForm from 'components/CreateAccountForm'
 import {makeSelectEosAccount} from 'containers/Scatter/selectors';
 
-const handleSubmit = values => {
-  console.log(values);
-}
 
 export class CreateAccount extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
-    const { eosAccount } = this.props;
+    const { eosAccount, handleSubmit } = this.props;
     return (
       <div>
         <CreateAccountForm handleSubmit={handleSubmit} eosAccount={eosAccount}/>
@@ -37,7 +35,7 @@ export class CreateAccount extends React.Component { // eslint-disable-line reac
 }
 
 CreateAccount.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  //dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -46,7 +44,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    handleSubmit: (form) => dispatch(submitAction(form)),
   };
 }
 
