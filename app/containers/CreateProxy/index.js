@@ -1,6 +1,6 @@
 /**
  *
- * CreateAccount
+ * CreateProxy
  *
  */
 
@@ -17,23 +17,23 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import submitAction from './actions';
-import CreateAccountForm from 'components/CreateAccountForm'
+import CreateProxyForm from 'components/CreateProxyForm'
 import {makeSelectEosAccount} from 'containers/Scatter/selectors';
 
 
-export class CreateAccount extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class CreateProxy extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
     const { eosAccount, handleSubmit } = this.props;
     return (
       <div>
-        <CreateAccountForm handleSubmit={handleSubmit} eosAccount={eosAccount}/>
+        <CreateProxyForm handleSubmit={handleSubmit} eosAccount={eosAccount}/>
       </div>
     );
   }
 }
 
-CreateAccount.propTypes = {
+CreateProxy.propTypes = {
   //dispatch: PropTypes.func.isRequired,
 };
 
@@ -49,11 +49,11 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'CreateAccount', reducer });
-const withSaga = injectSaga({ key: 'CreateAccount', saga });
+const withReducer = injectReducer({ key: 'CreateProxy', reducer });
+const withSaga = injectSaga({ key: 'CreateProxy', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(CreateAccount);
+)(CreateProxy);

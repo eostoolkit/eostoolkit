@@ -2,7 +2,13 @@
 import Home from "containers/HomePage/Loadable.js";
 import Scatter from "containers/Scatter/Loadable.js";
 import CreateAccount from "containers/CreateAccount/Loadable.js";
-
+import CreateProxy from "containers/CreateProxy/Loadable.js";
+import SetProxy from "containers/SetProxy/Loadable.js";
+import BuyRam from "containers/BuyRam/Loadable.js";
+import BuyRamBytes from "containers/BuyRamBytes/Loadable.js";
+import SellRam from "containers/SellRam/Loadable.js";
+import Delegate from "containers/Delegate/Loadable.js";
+import Undelegate from "containers/Undelegate/Loadable.js";
 // @material-ui/icons
 import {
   AccountBalance,
@@ -50,19 +56,31 @@ var dashRoutes = [
         path: "/account/delegate",
         name: "Delegate (Stake)",
         mini: "DG",
-        component: Home
+        component: Delegate
       },
       {
         path: "/account/undelegate",
         name: "Undelegate (Unstake)",
         mini: "UN",
-        component: Home
+        component: Undelegate
       },
       {
-        path: "/account/ram",
-        name: "Manage Ram",
-        mini: "R",
-        component: Home
+        path: "/account/buyram",
+        name: "Buy Ram (EOS)",
+        mini: "BR",
+        component: BuyRam
+      },
+      {
+        path: "/account/buybytes",
+        name: "Buy Ram (bytes)",
+        mini: "BR",
+        component: BuyRamBytes
+      },
+      {
+        path: "/account/sellram",
+        name: "Sell Ram (bytes)",
+        mini: "SR",
+        component: SellRam
       },
       {
         path: "/account/permissions",
@@ -89,13 +107,13 @@ var dashRoutes = [
         path: "/vote/beproxy",
         name: "Become Proxy",
         mini: "BP",
-        component: Home
+        component: CreateProxy
       },
       {
         path: "/vote/setproxy",
         name: "Set Proxy",
         mini: "SP",
-        component: Home
+        component: SetProxy
       },
     ]
   },

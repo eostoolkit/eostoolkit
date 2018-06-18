@@ -86,7 +86,7 @@ export class Notification extends React.Component { // eslint-disable-line react
             }
           >
             <h6>Transaction has failed</h6>
-            <h6>{message ? 'Details: ' + message : ''}</h6>
+            <h6>{message ? 'Details: ' + JSON.stringify(message) : ''}</h6>
         </SweetAlert>
       )
     }

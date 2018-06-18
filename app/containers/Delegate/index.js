@@ -1,6 +1,6 @@
 /**
  *
- * CreateAccount
+ * Delegate
  *
  */
 
@@ -17,23 +17,23 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import submitAction from './actions';
-import CreateAccountForm from 'components/CreateAccountForm'
+import DelegateForm from 'components/DelegateForm'
 import {makeSelectEosAccount} from 'containers/Scatter/selectors';
 
 
-export class CreateAccount extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class Delegate extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
     const { eosAccount, handleSubmit } = this.props;
     return (
       <div>
-        <CreateAccountForm handleSubmit={handleSubmit} eosAccount={eosAccount}/>
+        <DelegateForm handleSubmit={handleSubmit} eosAccount={eosAccount}/>
       </div>
     );
   }
 }
 
-CreateAccount.propTypes = {
+Delegate.propTypes = {
   //dispatch: PropTypes.func.isRequired,
 };
 
@@ -49,11 +49,11 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'CreateAccount', reducer });
-const withSaga = injectSaga({ key: 'CreateAccount', saga });
+const withReducer = injectReducer({ key: 'Delegate', reducer });
+const withSaga = injectSaga({ key: 'Delegate', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(CreateAccount);
+)(Delegate);
