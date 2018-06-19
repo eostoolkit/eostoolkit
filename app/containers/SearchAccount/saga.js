@@ -1,50 +1,59 @@
 import Eos from 'eosjs';
+import eosConfig from 'eosConfig.js';
 import { takeLatest, call, put, select, all } from 'redux-saga/effects';
-import EosClient from 'containers/Scatter/selectors.js';
-import { makeSelectEosAccount as EosAccount } from 'containers/Scatter/selectors.js';
-import Form from './selectors.js';
-import { DEFAULT_ACTION } from './constants';
-import { successNotification } from 'containers/Notification/actions';
-import { failureNotification } from 'containers/Notification/actions';
-import { loadingNotification } from 'containers/Notification/actions';
+import { makeSelectSearchName, makeSelectSearchPubkey } from './selectors.js';
+import { LOOKUP_ACCOUNT, LOOKUP_PUBKEY } from './constants';
+import { lookupLoading, lookupLoaded } from './actions';
+
+
+function* getAccountDetail(eosClient, name) {
+  const account = yield eosClient.getAccount(name);
+  const currency = yield eosClient.getCurrencyBalance('eosio.token',name);
+  account.currency = currency;
+  return(account);
+}
 
 //
-// Get the EOS Client once Scatter loads
+// Get the EOS all accounts by public key
 //
-function* performAction() {
-  const eosClient = yield select(EosClient());
-  const form = yield select(Form());
-  const eosAccount = yield select(EosAccount());
-  yield put(loadingNotification());
+function* performSearchPubkey() {
+  const eosClient = yield Eos(eosConfig);
+  const publicKey = yield select(makeSelectSearchPubkey());
+  const accounts = [];
+  yield put(lookupLoading());
   try {
-    const res = yield eosClient.transaction(tr => {
-      tr.newaccount({
-        creator: eosAccount,
-        name: form.name,
-        owner: form.ownerKey,
-        active: form.activeKey,
-      })
-      tr.buyrambytes({
-        payer: eosAccount,
-        receiver: form.name,
-        bytes: Number(form.ram)
-      })
-      tr.delegatebw({
-        from: eosAccount,
-        receiver: form.name,
-        stake_net_quantity: Number(form.net).toFixed(4).toString() + ' EOS',
-        stake_cpu_quantity: Number(form.cpu).toFixed(4).toString() + ' EOS',
-        transfer: form.transfer ? 1 : 0
-      })
-    });
-    yield put(successNotification(res.transaction_id));
+    const res = yield eosClient.getKeyAccounts(publicKey);
+    for(const accountName of res.account_names) {
+      const detail = yield call(getAccountDetail,eosClient,accountName);
+      accounts.push(detail);
+    }
+    yield put(lookupLoaded(accounts));
   } catch(err) {
-    yield put(failureNotification(err));
+    yield put(lookupLoaded([]));
   }
 }
 
-function* watchDefaultAction() {
-  yield takeLatest(DEFAULT_ACTION, performAction);
+function* watchSeachPubkey() {
+  yield takeLatest(LOOKUP_PUBKEY, performSearchPubkey);
+}
+
+//
+// Get the EOS single account
+//
+function* performSearchAccount() {
+  const eosClient = yield Eos(eosConfig);
+  const accountName = yield select(makeSelectSearchName());
+  yield put(lookupLoading());
+  try {
+    const account = yield call(getAccountDetail,eosClient,accountName);
+    yield put(lookupLoaded([account]));
+  } catch(err) {
+    yield put(lookupLoaded([]));
+  }
+}
+
+function* watchSeachAccount() {
+  yield takeLatest(LOOKUP_ACCOUNT, performSearchAccount);
 }
 
 //
@@ -53,6 +62,7 @@ function* watchDefaultAction() {
 
 export default function* rootSaga() {
   yield all([
-    watchDefaultAction(),
+    watchSeachAccount(),
+    watchSeachPubkey(),
   ])
 }

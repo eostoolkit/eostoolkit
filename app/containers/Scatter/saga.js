@@ -10,7 +10,7 @@ import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT } from './constants';
 //
 function* getEosClient() {
   const scatter = yield select(makeSelectScatter());
-  const eosClient = scatter.eos( scatterConfig, Eos, scatterEosOptions);
+  const eosClient = scatter.eos( scatterConfig, Eos, scatterEosOptions,'https');
   yield put(eosLoaded(eosClient));
 }
 

@@ -6,18 +6,34 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+  LOOKUP_ACCOUNT,
+  LOOKUP_PUBKEY,
+  LOOKUP_LOADING,
+  LOOKUP_LOADED,
 } from './constants';
 
 const initialState = fromJS({
-  form: null,
+  name: '',
+  pubkey: '',
+  loading: false,
+  accounts: [],
 });
 
 function SearchAccountReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
+    case LOOKUP_ACCOUNT:
       return state
-      .set('form',action.form);
+      .set('name',action.name);
+    case LOOKUP_PUBKEY:
+      return state
+      .set('pubkey',action.pubkey);
+    case LOOKUP_LOADING:
+      return state
+      .set('loading',true);
+    case LOOKUP_LOADED:
+      return state
+      .set('accounts',action.accounts)
+      .set('loading',false);
     default:
       return state;
   }

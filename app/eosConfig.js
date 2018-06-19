@@ -1,5 +1,5 @@
 // Are we on the testnet?
-const testnet = true;
+const testnet = false;
 
 //Configuration options for EOS and Scatter
 const scatterConfig = {
