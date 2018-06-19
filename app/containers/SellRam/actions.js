@@ -9,7 +9,7 @@ import {
 } from './constants';
 
 export default function defaultAction(form) {
-  console.log("Sell");
+  //console.log("Sell");
   return {
     type: DEFAULT_ACTION,
     form,

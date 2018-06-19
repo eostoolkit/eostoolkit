@@ -25,7 +25,7 @@ export class Scatter extends React.Component { // eslint-disable-line react/pref
 
   componentDidMount(){
     document.addEventListener('scatterLoaded', scatterExtension => {
-      console.log('Scatter connected')
+      //console.log('Scatter connected')
       this.props.onScatterLoaded(window.scatter);
       // Scatter will now be available from the window scope.
       // At this stage the connection to Scatter from the application is

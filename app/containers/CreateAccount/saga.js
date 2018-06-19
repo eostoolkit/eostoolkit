@@ -17,7 +17,7 @@ function* performAction() {
   const eosAccount = yield select(EosAccount());
   yield put(loadingNotification());
   try {
-    yield eosClient.transaction(tr => {
+    const res = yield eosClient.transaction(tr => {
       tr.newaccount({
         creator: eosAccount,
         name: form.name,
@@ -36,9 +36,8 @@ function* performAction() {
         stake_cpu_quantity: Number(form.cpu).toFixed(4).toString() + ' EOS',
         transfer: form.transfer ? 1 : 0
       })
-    }).then((result) => {
-      put(successNotification(result.transaction_id));
-    })
+    });
+    yield put(successNotification(res.transaction_id));
 
   } catch(err) {
     yield put(failureNotification(err));

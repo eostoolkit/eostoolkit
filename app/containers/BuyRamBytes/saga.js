@@ -17,15 +17,14 @@ function* performAction() {
   const eosAccount = yield select(EosAccount());
   yield put(loadingNotification());
   try {
-    yield eosClient.transaction(tr => {
+    const res = yield eosClient.transaction(tr => {
       tr.buyrambytes({
         payer: eosAccount,
         receiver: form.name,
         bytes: Number(form.ram),
       })
-    }).then((result) => {
-      put(successNotification(result.transaction_id));
-    })
+    });
+    yield put(successNotification(res.transaction_id));
 
   } catch(err) {
     yield put(failureNotification(err));

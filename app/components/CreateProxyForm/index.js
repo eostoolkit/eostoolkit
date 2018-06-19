@@ -55,7 +55,7 @@ const FormObject = props => {
   return (
     <form>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
+        <GridItem xs={12} sm={12} md={8}>
           <CustomInput
             labelText="Creator"
             id="creator"
@@ -73,6 +73,37 @@ const FormObject = props => {
               disabled: true
             }}
           />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={4}>
+          <Tooltip
+            id="tooltip-right"
+            title="Setting on: Become proxy. Setting off: No longer be a proxy."
+            placement="right"
+            classes={{ tooltip: classes.formTooltip }}
+          >
+            <FormControlLabel
+              control={
+                <Switch
+                  id="isProxy"
+                  checked={values.isProxy}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.isProxy ? 'true' : 'false'}
+                  classes={{
+                    switchBase: classes.switchBase,
+                    checked: classes.switchChecked,
+                    icon: classes.switchIcon,
+                    iconChecked: classes.switchIconChecked,
+                    bar: classes.switchBar
+                  }}
+                />
+              }
+              classes={{
+                label: classes.label
+              }}
+              label="Proxy Setting"
+            />
+          </Tooltip>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Button onClick={handleSubmit} color="rose">Create</Button>
@@ -104,6 +135,7 @@ let CreateProxyForm = props => {
             <Formik
                 initialValues={{
                   creator:'',
+                  isProxy:false,
                 }}
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}

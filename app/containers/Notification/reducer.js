@@ -22,31 +22,33 @@ const initialState = fromJS({
 function notificationReducer(state = initialState, action) {
   switch (action.type) {
     case NOTIFICATION_SUCCESS:
+      //console.log('Success reducer');
       return state
       .set('message',action.message)
       .set('loading',false)
       .set('success',true)
       .set('failure',false);
     case NOTIFICATION_FAILURE:
-      console.log('Failure reducer');
+      //console.log('Failure reducer');
       return state
       .set('message',action.message)
       .set('loading',false)
       .set('success',false)
       .set('failure',true);
     case NOTIFICATION_LOADING:
-      console.log('Loading reducer');
+      //console.log('Loading reducer');
       return state
       .set('loading',true)
       .set('success',false)
       .set('failure',false);
     case NOTIFICATION_CLOSE:
-      console.log('Loading reducer');
+      //console.log('Closing reducer');
       return state
       .set('loading',false)
       .set('success',false)
       .set('failure',false);
     default:
+      //console.log('Default reducer');
       return state;
   }
 }

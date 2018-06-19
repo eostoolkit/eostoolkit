@@ -12,14 +12,14 @@ import { loadingNotification } from 'containers/Notification/actions';
 // Get the EOS Client once Scatter loads
 //
 function* performAction() {
-  console.log('saga action');
+  //console.log('saga action');
   const eosClient = yield select(EosClient());
   const form = yield select(Form());
-  console.log(form);
+  //console.log(form);
   const eosAccount = yield select(EosAccount());
   yield put(loadingNotification());
   try {
-    yield eosClient.transaction(tr => {
+    const res = yield eosClient.transaction(tr => {
       tr.delegatebw({
         from: eosAccount,
         receiver: form.name,
@@ -27,9 +27,8 @@ function* performAction() {
         stake_cpu_quantity: Number(form.cpu).toFixed(4).toString() + ' EOS',
         transfer: form.transfer ? 1 : 0
       })
-    }).then((result) => {
-      put(successNotification(result.transaction_id));
-    })
+    });
+    yield put(successNotification(res.transaction_id));
 
   } catch(err) {
     yield put(failureNotification(err));

@@ -229,8 +229,8 @@ let DelegateForm = props => {
     <br/><br/>
           {'{if transfer }'}<br/>
           It is {'{ transfer }'} that I wish these tokens to become immediately owned by the delegatee.
-    <br/><br/>
-          {'{/if}'}<br/>
+    <br/>
+          {'{/if}'}<br/><br/>
           As signer I stipulate that, if I am not the beneficial owner of these tokens, I have proof that I’ve been authorized to take this action by their beneficial owner(s).
 
           </p>

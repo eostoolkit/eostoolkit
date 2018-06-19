@@ -17,17 +17,15 @@ function* performAction() {
   const eosAccount = yield select(EosAccount());
   yield put(loadingNotification());
   try {
-    yield eosClient.transaction(tr => {
+    const res = yield eosClient.transaction(tr => {
       tr.undelegatebw({
         from: eosAccount,
         receiver: form.name,
         unstake_net_quantity: Number(form.net).toFixed(4).toString() + ' EOS',
         unstake_cpu_quantity: Number(form.cpu).toFixed(4).toString() + ' EOS',
       })
-    }).then((result) => {
-      put(successNotification(result.transaction_id));
-    })
-
+    });
+    yield put(successNotification(res.transaction_id));
   } catch(err) {
     yield put(failureNotification(err));
   }

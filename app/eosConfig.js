@@ -19,6 +19,7 @@ const scatterEosOptions = {
 }
 
 const eosConfig = {
+    httpEndpoint: testnet ? 'http://dev.cryptolions.io:38888' : 'https://nodes.get-scatter.com:443', // ( or null if endorsed chainId )
     broadcast: true,
     sign: true,
     chainId: testnet ? '038f4b0fc8ff18a4f0842a8f0564611f6e96e8535901dd45e43ac8691a1c4dca'

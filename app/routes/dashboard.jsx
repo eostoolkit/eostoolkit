@@ -9,6 +9,9 @@ import BuyRamBytes from "containers/BuyRamBytes/Loadable.js";
 import SellRam from "containers/SellRam/Loadable.js";
 import Delegate from "containers/Delegate/Loadable.js";
 import Undelegate from "containers/Undelegate/Loadable.js";
+import Transfer from "containers/Transfer/Loadable.js";
+import Governance from "containers/Governance/Loadable.js";
+import SearchAccount from "containers/SearchAccount/Loadable.js";
 // @material-ui/icons
 import {
   AccountBalance,
@@ -25,13 +28,13 @@ var dashRoutes = [
     path: "/home",
     name: "Governance",
     icon: AccountBalance,
-    component: Home
+    component: Governance
   },
   {
     path: "/search",
     name: "Find Accounts",
     icon: Search,
-    component: Home
+    component: SearchAccount
   },
   {
     path: "/create",
@@ -43,7 +46,7 @@ var dashRoutes = [
     path: "/transfer",
     name: "Transfer EOS",
     icon: Payment,
-    component: Home
+    component: Transfer
   },
   {
     collapse: true,

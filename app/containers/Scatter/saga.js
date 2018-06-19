@@ -37,7 +37,7 @@ function* getEosAccount() {
            : '';
     yield put(attachedAccount(eosAccount,accountAuth));
   } catch(err) {
-    console.log(err);
+    //console.log(err);
   }
 }
 
@@ -57,7 +57,7 @@ function* removeEosAccount() {
     }
     yield put(detachedAccount());
   } catch(err) {
-    console.log(err);
+    //console.log(err);
   }
 }
 
