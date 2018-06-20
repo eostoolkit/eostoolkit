@@ -31,4 +31,5 @@ export {
   scatterConfig,
   scatterEosOptions,
   eosConfig,
+  testnet,
 }

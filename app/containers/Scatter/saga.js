@@ -1,7 +1,7 @@
 import Eos from 'eosjs'
 import { takeLatest, call, put, select, all } from 'redux-saga/effects';
 import { makeSelectScatter } from './selectors.js';
-import { scatterConfig, scatterEosOptions } from 'eosConfig.js';
+import { scatterConfig, scatterEosOptions, testnet } from 'eosConfig.js';
 import { eosLoaded, attachedAccount, detachedAccount } from './actions.js';
 import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT } from './constants';
 
@@ -10,7 +10,8 @@ import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT } from './constants';
 //
 function* getEosClient() {
   const scatter = yield select(makeSelectScatter());
-  const eosClient = scatter.eos( scatterConfig, Eos, scatterEosOptions,'https');
+
+  const eosClient = scatter.eos( scatterConfig, Eos, scatterEosOptions,testnet ? 'http' : 'https');
   yield put(eosLoaded(eosClient));
 }
 

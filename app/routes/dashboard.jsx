@@ -12,6 +12,7 @@ import Undelegate from "containers/Undelegate/Loadable.js";
 import Transfer from "containers/Transfer/Loadable.js";
 import Governance from "containers/Governance/Loadable.js";
 import SearchAccount from "containers/SearchAccount/Loadable.js";
+import SimplePermissions from "containers/SimplePermissions/Loadable.js";
 // @material-ui/icons
 import {
   AccountBalance,
@@ -89,7 +90,7 @@ var dashRoutes = [
         path: "/account/permissions",
         name: "Manage Permissions",
         mini: "P",
-        component: Home
+        component: SimplePermissions
       },
     ]
   },
