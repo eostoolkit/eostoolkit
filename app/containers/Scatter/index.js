@@ -25,6 +25,10 @@ import messages from './messages';
 export class Scatter extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount(){
+    if(window.scatter) {
+      this.props.onScatterLoaded(window.scatter);
+      window.scatter = null;
+    }
     document.addEventListener('scatterLoaded', scatterExtension => {
       //console.log('Scatter connected')
       this.props.onScatterLoaded(window.scatter);
@@ -34,7 +38,7 @@ export class Scatter extends React.Component { // eslint-disable-line react/pref
 
       // It is good practice to take this off the window once you have
       // a reference to it.
-      //window.scatter = null;
+      window.scatter = null;
     })
   }
 
