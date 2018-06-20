@@ -23,6 +23,8 @@ import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import logo from "assets/img/genereosWhite.png";
 
+import VoteUs from "containers/VoteUs/Loadable.js";
+
 import headerLinksStyle from "./headerLinksStyle";
 
 class HeaderLinks extends React.Component {
@@ -63,7 +65,7 @@ class HeaderLinks extends React.Component {
       //TODO: Or we add all our social media here
       <div className={wrapper}>
         <div className={classes.poweredBy}>
-          <span className={classes.logoNormal}>{"Vote for GenerEOS"}</span>
+          <span className={classes.logoNormal}><VoteUs/></span>
           <img src={logo} alt="logo" className={classes.logo} />
         </div>
       </div>

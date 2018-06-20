@@ -13,6 +13,7 @@ import Transfer from "containers/Transfer/Loadable.js";
 import Governance from "containers/Governance/Loadable.js";
 import SearchAccount from "containers/SearchAccount/Loadable.js";
 import SimplePermissions from "containers/SimplePermissions/Loadable.js";
+import VoteUs from "containers/VoteUs/Loadable.js";
 // @material-ui/icons
 import {
   AccountBalance,
