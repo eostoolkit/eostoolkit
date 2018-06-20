@@ -13,6 +13,7 @@ import Transfer from "containers/Transfer/Loadable.js";
 import Governance from "containers/Governance/Loadable.js";
 import SearchAccount from "containers/SearchAccount/Loadable.js";
 import SimplePermissions from "containers/SimplePermissions/Loadable.js";
+import ClaimRewards from "containers/ClaimRewards/Loadable.js";
 import VoteUs from "containers/VoteUs/Loadable.js";
 // @material-ui/icons
 import {
@@ -22,6 +23,7 @@ import {
   AssignmentInd,
   AssignmentTurnedIn,
   Payment,
+  DeveloperBoard,
   VpnKey,
 } from "@material-ui/icons";
 
@@ -120,6 +122,21 @@ var dashRoutes = [
         mini: "SP",
         component: SetProxy
       },
+    ]
+  },
+  {
+    collapse: true,
+    path: "/block-producer",
+    name: "Block Producer",
+    state: "openBlockProducer",
+    icon: DeveloperBoard,
+    views: [
+      {
+        path: "/block-producer/claim-rewards",
+        name: "Claim Producer Rewards",
+        mini: "C",
+        component: ClaimRewards
+      }
     ]
   },
 
