@@ -41,7 +41,7 @@ export class Scatter extends React.Component { // eslint-disable-line react/pref
   render() {
     if(this.props.scatter) {
       if(this.props.eosAccount)
-        return (<span>{this.props.eosAccount}<small>@{this.props.eosAuthority}</small></span>);
+        return (<span>{this.props.eosAccount}<small>{this.props.eosAuthority ? ('@' + this.props.eosAuthority) : ('') }</small></span>);
       else {
         return ('Attach an Account')
       }
