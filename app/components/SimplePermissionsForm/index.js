@@ -76,7 +76,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           <CustomInput
-            labelText="Active Public Key or Account"
+            labelText="Active Permision (Only complete if you want to change)"
             id="activeKey"
             error={errors.activeKey}
             touched={touched.activeKey}
@@ -85,8 +85,26 @@ const FormObject = props => {
             }}
             inputProps={{
               type: "text",
-              placeholder:"Enter public key or account",
+              placeholder:"Public key or account name",
               value: values.activeKey,
+              onChange: handleChange,
+              onBlur: handleBlur,
+            }}
+          />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={12}>
+          <CustomInput
+            labelText="Owner Permision (Only complete if you want to change)"
+            id="ownerKey"
+            error={errors.ownerKey}
+            touched={touched.ownerKey}
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              type: "text",
+              placeholder:"Public key or account name",
+              value: values.ownerKey,
               onChange: handleChange,
               onBlur: handleBlur,
             }}
@@ -104,8 +122,8 @@ const FormObject = props => {
 };
 
 const validationSchema = Yup.object().shape({
-  activeKey: Yup.string()
-  .required('Active key or account is required'),
+  activeKey: Yup.string(),
+  ownerKey: Yup.string(),
 })
 
 let SimplePermissionsForm = props => {
@@ -125,6 +143,7 @@ let SimplePermissionsForm = props => {
                 initialValues={{
                   creator:'',
                   activeKey:'',
+                  ownerKey:'',
                 }}
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
@@ -146,11 +165,16 @@ let SimplePermissionsForm = props => {
           </CardHeader>
           <CardBody>
               <h5><strong>This action has serious consequences.</strong></h5>
-              <h5>If you dont have the key pair you are changing the
+              <h5>You can change active or owner permission or both.</h5>
+              <h5>Leave blank any one permission you DONT want to change</h5>
+              <h6>To change only active permission you must select <i>"youraccount@active"</i> for your Scatter identity</h6>
+              <h6>To change only owner, or active+owner permission you must select <i>"youraccount@owner"</i> for your Scatter identity</h6>
+              <h5>If you change your active permission you have to update your scatter identity to use this new key pair.</h5>
+              <h5>If you dont have the key pairs you are changing the
               active permission to you will no longer be able send transactions.</h5>
               <h5>You can recover your active permission using your owner permission, however:</h5>
-              <h5>At this time Scatter only allows you to change your active permission and use your active permission.</h5>
-              <h5>If you change your active permission you have to update your scatter identity to use this new key pair.</h5>
+              <h3><strong>If you dont have either key pair you change to your account is <u>IRRECOVERABLE</u></strong></h3>
+
           </CardBody>
         </Card>
       </GridItem>

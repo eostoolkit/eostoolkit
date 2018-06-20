@@ -16,6 +16,7 @@ import injectReducer from 'utils/injectReducer';
 import {makeSelectScatter} from './selectors';
 import {makeSelectEosClient} from './selectors';
 import {makeSelectEosAccount} from './selectors';
+import {makeSelectEosAuthority} from './selectors';
 import {scatterLoaded} from './actions';
 import reducer from './reducer';
 import saga from './saga';
@@ -39,7 +40,11 @@ export class Scatter extends React.Component { // eslint-disable-line react/pref
 
   render() {
     if(this.props.scatter) {
-      return (this.props.eosAccount ? this.props.eosAccount : 'Attach an Account');
+      if(this.props.eosAccount)
+        return (<span>{this.props.eosAccount}<small>@{this.props.eosAuthority}</small></span>);
+      else {
+        return ('Attach an Account')
+      }
     } else {
       return ('Please install Scatter');
     }
@@ -55,6 +60,7 @@ const mapStateToProps = createStructuredSelector({
   scatter: makeSelectScatter(),
   eosClient: makeSelectEosClient(),
   eosAccount: makeSelectEosAccount(),
+  eosAuthority: makeSelectEosAuthority(),
 });
 
 function mapDispatchToProps(dispatch) {

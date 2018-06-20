@@ -18,12 +18,22 @@ function* performAction() {
   yield put(loadingNotification());
   try {
     const res = yield eosClient.transaction(tr => {
-      tr.updateauth({
-        account: eosAccount,
-        permission: 'active',
-        parent: 'owner',
-        auth: form.activeKey,
-      })
+      if(form.activeKey) {
+        tr.updateauth({
+          account: eosAccount,
+          permission: 'active',
+          parent: 'owner',
+          auth: form.ownerKey,
+        },{authorization: [{actor: eosAccount, permission: 'active'}]})
+      }
+      if(form.ownerKey) {
+        tr.updateauth({
+          account: eosAccount,
+          permission: 'owner',
+          parent: '',
+          auth: form.ownerKey,
+        },{authorization: [{actor: eosAccount, permission: 'owner'}]})
+      }
     });
     yield put(successNotification(res.transaction_id));
 
