@@ -4,9 +4,7 @@
  *
  */
 
-import {
-  DEFAULT_ACTION,
-} from './constants';
+import { DEFAULT_ACTION } from './constants';
 
 export default function defaultAction(form) {
   // console.log("ClaimRewards");

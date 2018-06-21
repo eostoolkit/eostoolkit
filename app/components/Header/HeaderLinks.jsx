@@ -1,35 +1,21 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import { Manager, Target, Popper } from "react-popper";
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+// import { Manager, Target, Popper } from 'react-popper';
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Paper from "@material-ui/core/Paper";
-import Grow from "@material-ui/core/Grow";
-import Hidden from "@material-ui/core/Hidden";
-
-// @material-ui/icons
-import Person from "@material-ui/icons/Person";
-import Notifications from "@material-ui/icons/Notifications";
-import Dashboard from "@material-ui/icons/Dashboard";
-import Search from "@material-ui/icons/Search";
+import withStyles from '@material-ui/core/styles/withStyles';
 
 // core components
-import CustomInput from "components/CustomInput/CustomInput.jsx";
-import Button from "components/CustomButtons/Button.jsx";
-import logo from "assets/img/genereosWhite.png";
+import logo from 'assets/img/genereosWhite.png';
 
-import VoteUs from "containers/VoteUs/Loadable.js";
+import VoteUs from 'containers/VoteUs/Loadable';
 
-import headerLinksStyle from "./headerLinksStyle";
+import headerLinksStyle from './headerLinksStyle';
 
 class HeaderLinks extends React.Component {
   state = {
-    open: false
+    open: false,
   };
   handleClick = () => {
     this.setState({ open: !this.state.open });
@@ -39,33 +25,27 @@ class HeaderLinks extends React.Component {
   };
   render() {
     const { classes, rtlActive } = this.props;
-    const { open } = this.state;
-    const searchButton =
-      classes.top +
-      " " +
-      classes.searchButton +
-      " " +
-      classNames({
-        [classes.searchRTL]: rtlActive
-      });
-    const dropdownItem =
-      classes.dropdownItem +
-      " " +
-      classNames({
-        [classes.dropdownItemRTL]: rtlActive
-      });
+    // const { open } = this.state;
+    // const searchButton = `${classes.top} ${classes.searchButton} ${classNames({
+    //   [classes.searchRTL]: rtlActive,
+    // })}`;
+    // const dropdownItem = `${classes.dropdownItem} ${classNames({
+    //   [classes.dropdownItemRTL]: rtlActive,
+    // })}`;
     const wrapper = classNames({
-      [classes.wrapperRTL]: rtlActive
+      [classes.wrapperRTL]: rtlActive,
     });
-    const managerClasses = classNames({
-      [classes.managerClasses]: true
-    });
+    // const managerClasses = classNames({
+    //   [classes.managerClasses]: true,
+    // });
     return (
-      //TODO: Lets add some alerts for transaction success failure
-      //TODO: Or we add all our social media here
+      // TODO: Lets add some alerts for transaction success failure
+      // TODO: Or we add all our social media here
       <div className={wrapper}>
         <div className={classes.poweredBy}>
-          <span className={classes.logoNormal}><VoteUs/></span>
+          <span className={classes.logoNormal}>
+            <VoteUs />
+          </span>
           <img src={logo} alt="logo" className={classes.logo} />
         </div>
       </div>
@@ -160,14 +140,13 @@ class HeaderLinks extends React.Component {
       //       </ClickAwayListener>
       //     </Popper>
       //   </Manager>
-
     );
   }
 }
 
 HeaderLinks.propTypes = {
   classes: PropTypes.object.isRequired,
-  rtlActive: PropTypes.bool
+  // rtlActive: PropTypes.bool,
 };
 
 export default withStyles(headerLinksStyle)(HeaderLinks);

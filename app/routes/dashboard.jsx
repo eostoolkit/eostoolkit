@@ -1,20 +1,18 @@
 // Primary components
-import Home from "containers/HomePage/Loadable.js";
-import Scatter from "containers/Scatter/Loadable.js";
-import CreateAccount from "containers/CreateAccount/Loadable.js";
-import CreateProxy from "containers/CreateProxy/Loadable.js";
-import SetProxy from "containers/SetProxy/Loadable.js";
-import BuyRam from "containers/BuyRam/Loadable.js";
-import BuyRamBytes from "containers/BuyRamBytes/Loadable.js";
-import SellRam from "containers/SellRam/Loadable.js";
-import Delegate from "containers/Delegate/Loadable.js";
-import Undelegate from "containers/Undelegate/Loadable.js";
-import Transfer from "containers/Transfer/Loadable.js";
-import Governance from "containers/Governance/Loadable.js";
-import SearchAccount from "containers/SearchAccount/Loadable.js";
-import SimplePermissions from "containers/SimplePermissions/Loadable.js";
-import ClaimRewards from "containers/ClaimRewards/Loadable.js";
-import VoteUs from "containers/VoteUs/Loadable.js";
+import Home from 'containers/HomePage/Loadable';
+import CreateAccount from 'containers/CreateAccount/Loadable';
+import CreateProxy from 'containers/CreateProxy/Loadable';
+import SetProxy from 'containers/SetProxy/Loadable';
+import BuyRam from 'containers/BuyRam/Loadable';
+import BuyRamBytes from 'containers/BuyRamBytes/Loadable';
+import SellRam from 'containers/SellRam/Loadable';
+import Delegate from 'containers/Delegate/Loadable';
+import Undelegate from 'containers/Undelegate/Loadable';
+import Transfer from 'containers/Transfer/Loadable';
+import Governance from 'containers/Governance/Loadable';
+import SearchAccount from 'containers/SearchAccount/Loadable';
+import SimplePermissions from 'containers/SimplePermissions/Loadable';
+import ClaimRewards from 'containers/ClaimRewards/Loadable';
 // @material-ui/icons
 import {
   AccountBalance,
@@ -24,120 +22,119 @@ import {
   AssignmentTurnedIn,
   Payment,
   DeveloperBoard,
-  VpnKey,
-} from "@material-ui/icons";
+} from '@material-ui/icons';
 
-var dashRoutes = [
+const dashRoutes = [
   {
-    path: "/home",
-    name: "Governance",
+    path: '/home',
+    name: 'Governance',
     icon: AccountBalance,
-    component: Governance
+    component: Governance,
   },
   {
-    path: "/search",
-    name: "Find Accounts",
+    path: '/search',
+    name: 'Find Accounts',
     icon: Search,
-    component: SearchAccount
+    component: SearchAccount,
   },
   {
-    path: "/create",
-    name: "Create Account",
+    path: '/create',
+    name: 'Create Account',
     icon: PersonAdd,
-    component: CreateAccount
+    component: CreateAccount,
   },
   {
-    path: "/transfer",
-    name: "Transfer EOS",
+    path: '/transfer',
+    name: 'Transfer EOS',
     icon: Payment,
-    component: Transfer
+    component: Transfer,
   },
   {
     collapse: true,
-    path: "/account",
-    name: "Manage Account",
-    state: "openAccount",
+    path: '/account',
+    name: 'Manage Account',
+    state: 'openAccount',
     icon: AssignmentInd,
     views: [
       {
-        path: "/account/delegate",
-        name: "Delegate (Stake)",
-        mini: "DG",
-        component: Delegate
+        path: '/account/delegate',
+        name: 'Delegate (Stake)',
+        mini: 'DG',
+        component: Delegate,
       },
       {
-        path: "/account/undelegate",
-        name: "Undelegate (Unstake)",
-        mini: "UN",
-        component: Undelegate
+        path: '/account/undelegate',
+        name: 'Undelegate (Unstake)',
+        mini: 'UN',
+        component: Undelegate,
       },
       {
-        path: "/account/buyram",
-        name: "Buy Ram (EOS)",
-        mini: "BR",
-        component: BuyRam
+        path: '/account/buyram',
+        name: 'Buy Ram (EOS)',
+        mini: 'BR',
+        component: BuyRam,
       },
       {
-        path: "/account/buybytes",
-        name: "Buy Ram (bytes)",
-        mini: "BR",
-        component: BuyRamBytes
+        path: '/account/buybytes',
+        name: 'Buy Ram (bytes)',
+        mini: 'BR',
+        component: BuyRamBytes,
       },
       {
-        path: "/account/sellram",
-        name: "Sell Ram (bytes)",
-        mini: "SR",
-        component: SellRam
+        path: '/account/sellram',
+        name: 'Sell Ram (bytes)',
+        mini: 'SR',
+        component: SellRam,
       },
       {
-        path: "/account/permissions",
-        name: "Manage Permissions",
-        mini: "P",
-        component: SimplePermissions
+        path: '/account/permissions',
+        name: 'Manage Permissions',
+        mini: 'P',
+        component: SimplePermissions,
       },
-    ]
+    ],
   },
   {
     collapse: true,
-    path: "/vote",
-    name: "Manage Voting",
-    state: "openVote",
+    path: '/vote',
+    name: 'Manage Voting',
+    state: 'openVote',
     icon: AssignmentTurnedIn,
     views: [
       {
-        path: "/vote/pick",
-        name: "Vote",
-        mini: "V",
-        component: Home
+        path: '/vote/pick',
+        name: 'Vote',
+        mini: 'V',
+        component: Home,
       },
       {
-        path: "/vote/beproxy",
-        name: "Become Proxy",
-        mini: "BP",
-        component: CreateProxy
+        path: '/vote/beproxy',
+        name: 'Become Proxy',
+        mini: 'BP',
+        component: CreateProxy,
       },
       {
-        path: "/vote/setproxy",
-        name: "Set Proxy",
-        mini: "SP",
-        component: SetProxy
+        path: '/vote/setproxy',
+        name: 'Set Proxy',
+        mini: 'SP',
+        component: SetProxy,
       },
-    ]
+    ],
   },
   {
     collapse: true,
-    path: "/block-producer",
-    name: "Block Producer",
-    state: "openBlockProducer",
+    path: '/block-producer',
+    name: 'Block Producer',
+    state: 'openBlockProducer',
     icon: DeveloperBoard,
     views: [
       {
-        path: "/block-producer/claim-rewards",
-        name: "Claim Producer Rewards",
-        mini: "C",
-        component: ClaimRewards
-      }
-    ]
+        path: '/block-producer/claim-rewards',
+        name: 'Claim Producer Rewards',
+        mini: 'C',
+        component: ClaimRewards,
+      },
+    ],
   },
 
   // {
@@ -233,6 +230,6 @@ var dashRoutes = [
   // { path: "/widgets", name: "Widgets", icon: WidgetsIcon, component: Widgets },
   // { path: "/charts", name: "Charts", icon: Timeline, component: Charts },
   // { path: "/calendar", name: "Calendar", icon: DateRange, component: Calendar },
-  { redirect: true, path: "/", pathTo: "/home", name: "Home" }
+  { redirect: true, path: '/', pathTo: '/home', name: 'Home' },
 ];
 export default dashRoutes;

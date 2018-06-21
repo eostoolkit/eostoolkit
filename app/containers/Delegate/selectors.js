@@ -3,24 +3,17 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the delegate state domain
  */
-const selectDomain = (state) => state.get('Delegate');
+const selectDomain = state => state.get('Delegate');
 
 /**
  * Other specific selectors
  */
 
-
 /**
  * Default selector used by Delegate
  */
 
-const makeSelectForm = () => createSelector(
-  selectDomain,
-  (substate) => substate.get('form')
-);
+const makeSelectForm = () => createSelector(selectDomain, substate => substate.get('form'));
 
 export default makeSelectForm;
-export {
-  selectDomain,
-  makeSelectForm,
-};
+export { selectDomain, makeSelectForm };

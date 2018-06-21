@@ -5,9 +5,7 @@
  */
 
 import { fromJS } from 'immutable';
-import {
-  DEFAULT_ACTION,
-} from './constants';
+import { DEFAULT_ACTION } from './constants';
 
 const initialState = fromJS({
   form: null,
@@ -16,9 +14,7 @@ const initialState = fromJS({
 function createAccountReducer(state = initialState, action) {
   switch (action.type) {
     case DEFAULT_ACTION:
-      //console.log(action);
-      return state
-      .set('form',action.form);
+      return state.set('form', action.form);
     default:
       return state;
   }

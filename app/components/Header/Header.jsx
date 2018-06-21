@@ -1,38 +1,39 @@
-import React from "react";
-import PropTypes from "prop-types";
-import cx from "classnames";
+import React from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Hidden from "@material-ui/core/Hidden";
+import withStyles from '@material-ui/core/styles/withStyles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Hidden from '@material-ui/core/Hidden';
 
 // material-ui icons
-import Menu from "@material-ui/icons/Menu";
-import MoreVert from "@material-ui/icons/MoreVert";
-import ViewList from "@material-ui/icons/ViewList";
+import Menu from '@material-ui/icons/Menu';
+import MoreVert from '@material-ui/icons/MoreVert';
+import ViewList from '@material-ui/icons/ViewList';
+
+import Button from 'components/CustomButtons/Button';
 
 // core components
-import HeaderLinks from "./HeaderLinks";
-import Button from "components/CustomButtons/Button.jsx";
+import HeaderLinks from './HeaderLinks';
 
-import headerStyle from "./headerStyle.jsx";
+import headerStyle from './headerStyle';
 
 function Header({ ...props }) {
   function makeBrand() {
-    var name;
-    props.routes.map((prop, key) => {
-      if (prop.collapse) {
-        prop.views.map((prop, key) => {
+    let name;
+    props.routes.map(({ collapse, path, name: routeName, views }) => {
+      if (collapse) {
+        views.map(prop => {
           if (prop.path === props.location.pathname) {
             name = prop.name;
           }
           return null;
         });
       }
-      if (prop.path === props.location.pathname) {
-        name = prop.name;
+      if (path === props.location.pathname) {
+        name = routeName;
       }
       return null;
     });
@@ -40,35 +41,22 @@ function Header({ ...props }) {
   }
   const { classes, color, rtlActive } = props;
   const appBarClasses = cx({
-    [" " + classes[color]]: color
+    [` ${classes[color]}`]: color,
   });
-  const sidebarMinimize =
-    classes.sidebarMinimize +
-    " " +
-    cx({
-      [classes.sidebarMinimizeRTL]: rtlActive
-    });
+  const sidebarMinimize = `${classes.sidebarMinimize} ${cx({
+    [classes.sidebarMinimizeRTL]: rtlActive,
+  })}`;
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
         <Hidden smDown>
           <div className={sidebarMinimize}>
             {props.miniActive ? (
-              <Button
-                justIcon
-                round
-                color="white"
-                onClick={props.sidebarMinimize}
-              >
+              <Button justIcon round color="white" onClick={props.sidebarMinimize}>
                 <ViewList className={classes.sidebarMiniIcon} />
               </Button>
             ) : (
-              <Button
-                justIcon
-                round
-                color="white"
-                onClick={props.sidebarMinimize}
-              >
+              <Button justIcon round color="white" onClick={props.sidebarMinimize}>
                 <MoreVert className={classes.sidebarMiniIcon} />
               </Button>
             )}
@@ -89,8 +77,7 @@ function Header({ ...props }) {
             color="transparent"
             justIcon
             aria-label="open drawer"
-            onClick={props.handleDrawerToggle}
-          >
+            onClick={props.handleDrawerToggle}>
             <Menu />
           </Button>
         </Hidden>
@@ -101,8 +88,8 @@ function Header({ ...props }) {
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
-  color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
-  rtlActive: PropTypes.bool
+  color: PropTypes.oneOf(['primary', 'info', 'success', 'warning', 'danger']),
+  rtlActive: PropTypes.bool,
 };
 
 export default withStyles(headerStyle)(Header);

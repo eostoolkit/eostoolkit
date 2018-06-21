@@ -175,7 +175,6 @@ Identify problems that occur and try to resolve them by rolling back the respect
  babel-loader                                6.4.1  →       7.0.0 
  circular-dependency-plugin                  2.0.0  →       3.0.0 
  eslint-config-airbnb                       14.1.0  →      15.0.1 
- eslint-plugin-jsx-a11y                      3.0.2  →       5.0.3 
  eslint-plugin-react                        6.10.3  →       7.0.1 
  image-webpack-loader                        2.0.0  →       3.3.1 
  jest-cli                    18.5.0-alpha.7da3df39  →      20.0.4 

@@ -1,8 +1,8 @@
 /**
-*
-* ClaimRewardsForm
-*
-*/
+ *
+ * ClaimRewardsForm
+ *
+ */
 
 import React from 'react';
 import { Formik } from 'formik';
@@ -11,32 +11,22 @@ import { Formik } from 'formik';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 // @material-ui/icons
-import {
-  AccountBalance,
-  AttachMoney,
-} from '@material-ui/icons';
+import { AccountBalance, AttachMoney } from '@material-ui/icons';
 
 // core components
-import GridContainer from 'components/Grid/GridContainer.jsx';
-import GridItem from 'components/Grid/GridItem.jsx';
-import CustomInput from 'components/CustomInput/CustomInput.jsx';
-import Button from 'components/CustomButtons/Button.jsx';
-import Card from 'components/Card/Card.jsx';
-import CardHeader from 'components/Card/CardHeader.jsx';
-import CardIcon from 'components/Card/CardIcon.jsx';
-import CardBody from 'components/Card/CardBody.jsx';
+import GridContainer from 'components/Grid/GridContainer';
+import GridItem from 'components/Grid/GridItem';
+import CustomInput from 'components/CustomInput/CustomInput';
+import Button from 'components/CustomButtons/Button';
+import Card from 'components/Card/Card';
+import CardHeader from 'components/Card/CardHeader';
+import CardIcon from 'components/Card/CardIcon';
+import CardBody from 'components/Card/CardBody';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 
 const FormObject = props => {
-  const {
-    touched,
-    errors,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    eosAccount,
-  } = props;
+  const { touched, errors, handleChange, handleBlur, handleSubmit, eosAccount } = props;
   return (
     <form>
       <GridContainer>
@@ -60,18 +50,23 @@ const FormObject = props => {
           />
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
-          <Button onClick={handleSubmit} color="rose">Claim</Button>
+          <Button onClick={handleSubmit} color="rose">
+            Claim
+          </Button>
         </GridItem>
         <GridItem xs={12} sm={12} md={8}>
-          <p>By executing this action you are agreeing to the EOS constitution and this actions associated ricardian contract.</p>
+          <p>
+            By executing this action you are agreeing to the EOS constitution and this actions associated ricardian
+            contract.
+          </p>
         </GridItem>
       </GridContainer>
     </form>
   );
 };
 
-let ClaimRewardsForm = props => {
-  const { classes, handleSubmit, eosAccount } = props
+const ClaimRewardsForm = props => {
+  const { classes, handleSubmit, eosAccount } = props;
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={8}>
@@ -89,9 +84,7 @@ let ClaimRewardsForm = props => {
               }}
               onSubmit={handleSubmit}
               eosAccount={eosAccount}
-              render={(formikProps) =>
-                <FormObject {...formikProps} eosAccount={eosAccount} classes={classes} />
-              }
+              render={formikProps => <FormObject {...formikProps} eosAccount={eosAccount} classes={classes} />}
             />
           </CardBody>
         </Card>
@@ -106,9 +99,12 @@ let ClaimRewardsForm = props => {
           </CardHeader>
           <CardBody>
             <p>
-            The {'{ claimrewards }'} action allows a block producer (active or standby) to claim the system rewards due them for producing blocks and receiving votes.
-            <br /><br />
-            As an authorized party I {'{ signer }'} wish to have the rewards earned by {'{ owner }'} deposited into the {'{ owner }'} account.
+              The {'{ claimrewards }'} action allows a block producer (active or standby) to claim the system rewards
+              due them for producing blocks and receiving votes.
+              <br />
+              <br />
+              As an authorized party I {'{ signer }'} wish to have the rewards earned by {'{ owner }'} deposited into
+              the {'{ owner }'} account.
             </p>
           </CardBody>
         </Card>

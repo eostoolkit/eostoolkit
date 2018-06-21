@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
+import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
 
 // core components
-import cardStyle from "./styles/cardStyle.jsx";
+import cardStyle from './styles/cardStyle';
 
 function Card({ ...props }) {
   const {
@@ -35,14 +35,13 @@ function Card({ ...props }) {
     [classes.cardBlog]: blog,
     [classes.cardRaised]: raised,
     [classes.cardBackground]: background,
-    [classes.cardPricingColor]:
-      (pricing && color !== undefined) || (pricing && background !== undefined),
+    [classes.cardPricingColor]: (pricing && color !== undefined) || (pricing && background !== undefined),
     [classes[color]]: color,
     [classes.cardPricing]: pricing,
     [classes.cardProduct]: product,
     [classes.cardChart]: chart,
     [classes.cardLogin]: login,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   return (
     <div className={cardClasses} {...rest}>
@@ -53,7 +52,6 @@ function Card({ ...props }) {
 
 Card.propTypes = {
   classes: PropTypes.object.isRequired,
-  className: PropTypes.string,
   plain: PropTypes.bool,
   profile: PropTypes.bool,
   blog: PropTypes.bool,
@@ -61,17 +59,10 @@ Card.propTypes = {
   background: PropTypes.bool,
   pricing: PropTypes.bool,
   testimonial: PropTypes.bool,
-  color: PropTypes.oneOf([
-    "primary",
-    "info",
-    "success",
-    "warning",
-    "danger",
-    "rose"
-  ]),
+  color: PropTypes.oneOf(['primary', 'info', 'success', 'warning', 'danger', 'rose']),
   product: PropTypes.bool,
   chart: PropTypes.bool,
-  login: PropTypes.bool
+  login: PropTypes.bool,
 };
 
 export default withStyles(cardStyle)(Card);

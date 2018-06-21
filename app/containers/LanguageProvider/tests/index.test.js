@@ -19,7 +19,7 @@ const messages = defineMessages({
 
 describe('<LanguageProvider />', () => {
   it('should render its children', () => {
-    const children = (<h1>Test</h1>);
+    const children = <h1>Test</h1>;
     const renderedComponent = shallow(
       <LanguageProvider messages={messages} locale="en">
         {children}

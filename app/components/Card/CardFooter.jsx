@@ -1,29 +1,17 @@
-import React from "react";
+import React from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
+import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
 
 // core components
-import cardFooterStyle from "./styles/cardFooterStyle.jsx";
+import cardFooterStyle from './styles/cardFooterStyle';
 
 function CardFooter({ ...props }) {
-  const {
-    classes,
-    className,
-    children,
-    plain,
-    profile,
-    pricing,
-    testimonial,
-    stats,
-    chart,
-    product,
-    ...rest
-  } = props;
+  const { classes, className, children, plain, profile, pricing, testimonial, stats, chart, product, ...rest } = props;
   const cardFooterClasses = classNames({
     [classes.cardFooter]: true,
     [classes.cardFooterPlain]: plain,
@@ -32,7 +20,7 @@ function CardFooter({ ...props }) {
     [classes.cardFooterTestimonial]: testimonial,
     [classes.cardFooterStats]: stats,
     [classes.cardFooterChart]: chart || product,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   return (
     <div className={cardFooterClasses} {...rest}>
@@ -50,7 +38,7 @@ CardFooter.propTypes = {
   testimonial: PropTypes.bool,
   stats: PropTypes.bool,
   chart: PropTypes.bool,
-  product: PropTypes.bool
+  product: PropTypes.bool,
 };
 
 export default withStyles(cardFooterStyle)(CardFooter);
