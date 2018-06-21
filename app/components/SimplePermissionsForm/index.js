@@ -168,7 +168,7 @@ let SimplePermissionsForm = props => {
               <h5>You can change active or owner permission or both</h5>
               <h5>Leave blank any permission you DON'T want to change</h5>
               <h6>To change only active permission select <i>"youraccount@active"</i> for your Scatter identity</h6>
-              <h6>To change only owner, or active+owner permission select <i>"youraccount@owner"</i> for your Scatter identity</h6>
+              <h6>To change any permission select <i>"youraccount@owner"</i> for your Scatter identity</h6>
               <h5>If you change your active permission you have to update your scatter identity to use this new key pair</h5>
               <h5>If you dont have the key pairs you assign to the
               active permission you will no longer be able send transactions.</h5>
