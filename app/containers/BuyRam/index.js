@@ -4,7 +4,6 @@
  *
  */
 
-import React from 'react';
 import BuyRamForm from 'components/BuyRamForm';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -16,18 +15,6 @@ import injectReducer from 'utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
 import submitAction from './actions';
-
-// eslint-disable-next-line react/prefer-stateless-function
-export class BuyRam extends React.Component {
-  render() {
-    const { eosAccount, handleSubmit } = this.props;
-    return (
-      <div>
-        <BuyRamForm handleSubmit={handleSubmit} eosAccount={eosAccount} />
-      </div>
-    );
-  }
-}
 
 const mapStateToProps = createStructuredSelector({
   eosAccount: makeSelectEosAccount(),
@@ -51,4 +38,4 @@ export default compose(
   withReducer,
   withSaga,
   withConnect
-)(BuyRam);
+)(BuyRamForm);

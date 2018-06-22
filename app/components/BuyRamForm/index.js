@@ -1,6 +1,6 @@
 /**
  *
- * CreateAccountForm
+ * BuyRamForm
  *
  */
 
@@ -111,7 +111,7 @@ const validationSchema = Yup.object().shape({
     .positive('You must pay a positive quantity'),
 });
 
-const CreateAccountForm = props => {
+const BuyRamForm = props => {
   const { classes, handleSubmit, eosAccount } = props;
   return (
     <GridContainer>
@@ -187,4 +187,4 @@ const CreateAccountForm = props => {
   );
 };
 
-export default withStyles(regularFormsStyle)(CreateAccountForm);
+export default withStyles(regularFormsStyle)(BuyRamForm);
