@@ -1,13 +1,13 @@
 /*
- * CreateAccount Messages
+ * CreateProxy Messages
  *
- * This contains all the text for the CreateAccount component.
+ * This contains all the text for the CreateProxy component.
  */
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   header: {
-    id: 'app.containers.CreateAccount.header',
-    defaultMessage: 'This is CreateAccount container !',
+    id: 'app.containers.CreateProxy.header',
+    defaultMessage: 'This is CreateProxy container !',
   },
 });

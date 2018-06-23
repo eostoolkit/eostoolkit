@@ -1,6 +1,6 @@
 /**
  *
- * CreateAccountForm
+ * SellRamForm
  *
  */
 
@@ -93,7 +93,7 @@ const validationSchema = Yup.object().shape({
     .integer('RAM cannot be fractional'),
 });
 
-const CreateAccountForm = props => {
+const SellRamForm = props => {
   const { classes, handleSubmit, eosAccount } = props;
   return (
     <GridContainer>
@@ -143,4 +143,4 @@ const CreateAccountForm = props => {
   );
 };
 
-export default withStyles(regularFormsStyle)(CreateAccountForm);
+export default withStyles(regularFormsStyle)(SellRamForm);

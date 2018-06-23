@@ -1,6 +1,6 @@
 /*
  *
- * CreateAccount actions
+ * Delegate actions
  *
  */
 
