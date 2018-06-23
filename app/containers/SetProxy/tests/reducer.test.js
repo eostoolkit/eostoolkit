@@ -1,8 +1,8 @@
 import { fromJS } from 'immutable';
-import createAccountReducer from '../reducer';
+import setProxyReducer from '../reducer';
 
-describe('createAccountReducer', () => {
+describe('setProxyReducer', () => {
   it('returns the initial state', () => {
-    expect(createAccountReducer(undefined, {})).toEqual(fromJS({}));
+    expect(setProxyReducer(undefined, {})).toEqual(fromJS({}));
   });
 });

@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 /**
- * Direct selector to the delegate state domain
+ * Direct selector to the VoteUs state domain
  */
 const selectDomain = state => state.get('VoteUs');
 
@@ -10,7 +10,7 @@ const selectDomain = state => state.get('VoteUs');
  */
 
 /**
- * Default selector used by Delegate
+ * Default selector used by VoteUs
  */
 
 const makeSelectForm = () => createSelector(selectDomain, substate => substate.get('form'));

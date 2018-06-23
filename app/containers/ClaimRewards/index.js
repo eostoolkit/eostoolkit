@@ -1,6 +1,6 @@
 /**
  *
- * SellRam
+ * ClaimRewards
  *
  */
 
