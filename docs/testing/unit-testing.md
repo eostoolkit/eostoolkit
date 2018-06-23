@@ -59,7 +59,7 @@ First, we `import` the function in our `add.test.js` file:
 ```javascript
 // add.test.js
 
-import { add } from './add.js';
+import { add } from './add';
 ```
 
 Second, we `describe` our function:

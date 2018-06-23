@@ -14,7 +14,7 @@ import {
 } from './constants';
 
 export function scatterLoaded(scatter) {
-  //console.log('Scatter action');
+  // console.log('Scatter action');
   return {
     type: SCATTER_LOADED,
     scatter,
@@ -22,7 +22,7 @@ export function scatterLoaded(scatter) {
 }
 
 export function eosLoaded(eosClient) {
-  //console.log('EOS Client');
+  // console.log('EOS Client');
   return {
     type: EOSCLIENT_LOADED,
     eosClient,
@@ -30,14 +30,14 @@ export function eosLoaded(eosClient) {
 }
 
 export function connectAccount() {
-  //console.log('Connect');
+  // console.log('Connect');
   return {
     type: CONNECT_ACCOUNT,
   };
 }
 
-export function attachedAccount(name,authority) {
-  //console.log('Attached');
+export function attachedAccount(name, authority) {
+  // console.log('Attached');
   return {
     type: ATTACHED_ACCOUNT,
     name,
@@ -46,14 +46,14 @@ export function attachedAccount(name,authority) {
 }
 
 export function removeAccount() {
-  //console.log('Remove');
+  // console.log('Remove');
   return {
     type: REMOVE_ACCOUNT,
   };
 }
 
 export function detachedAccount() {
-  //console.log('Detached');
+  // console.log('Detached');
   return {
     type: DETACHED_ACCOUNT,
   };

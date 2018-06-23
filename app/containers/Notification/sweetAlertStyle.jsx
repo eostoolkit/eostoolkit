@@ -2,25 +2,25 @@
 // // // SweetAlert view styles
 // #############################
 
-import buttonStyle from "components/CustomButtons/buttonStyle.jsx";
+import buttonStyle from 'components/CustomButtons/buttonStyle';
 
 const sweetAlertStyle = {
   cardTitle: {
-    marginTop: "0",
-    marginBottom: "3px",
-    color: "#3C4858",
-    fontSize: "18px"
+    marginTop: '0',
+    marginBottom: '3px',
+    color: '#3C4858',
+    fontSize: '18px',
   },
   center: {
-    textAlign: "center"
+    textAlign: 'center',
   },
   right: {
-    textAlign: "right"
+    textAlign: 'right',
   },
   left: {
-    textAlign: "left"
+    textAlign: 'left',
   },
-  ...buttonStyle
+  ...buttonStyle,
 };
 
 export default sweetAlertStyle;

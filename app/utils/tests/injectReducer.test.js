@@ -48,7 +48,9 @@ describe('injectReducer decorator', () => {
 
   it('should propagate props', () => {
     const props = { testProp: 'test' };
-    const renderedComponent = shallow(<ComponentWithReducer {...props} />, { context: { store } });
+    const renderedComponent = shallow(<ComponentWithReducer {...props} />, {
+      context: { store },
+    });
 
     expect(renderedComponent.prop('testProp')).toBe('test');
   });

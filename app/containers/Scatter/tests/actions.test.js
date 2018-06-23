@@ -1,10 +1,5 @@
-
-import {
-  defaultAction,
-} from '../actions';
-import {
-  DEFAULT_ACTION,
-} from '../constants';
+import { defaultAction } from '../actions';
+import { DEFAULT_ACTION } from '../constants';
 
 describe('Scatter actions', () => {
   describe('Default Action', () => {

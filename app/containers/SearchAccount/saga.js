@@ -1,16 +1,15 @@
 import Eos from 'eosjs';
-import eosConfig from 'eosConfig.js';
+import eosConfig from 'eosConfig';
 import { takeLatest, call, put, select, all } from 'redux-saga/effects';
-import { makeSelectSearchName, makeSelectSearchPubkey } from './selectors.js';
+import { makeSelectSearchName, makeSelectSearchPubkey } from './selectors';
 import { LOOKUP_ACCOUNT, LOOKUP_PUBKEY } from './constants';
 import { lookupLoading, lookupLoaded } from './actions';
 
-
 function* getAccountDetail(eosClient, name) {
   const account = yield eosClient.getAccount(name);
-  const currency = yield eosClient.getCurrencyBalance('eosio.token',name);
+  const currency = yield eosClient.getCurrencyBalance('eosio.token', name);
   account.currency = currency;
-  return(account);
+  return account;
 }
 
 //
@@ -23,12 +22,14 @@ function* performSearchPubkey() {
   yield put(lookupLoading());
   try {
     const res = yield eosClient.getKeyAccounts(publicKey);
-    for(const accountName of res.account_names) {
-      const detail = yield call(getAccountDetail,eosClient,accountName);
+    // TODO: fix the following rule quickly
+    // eslint-disable-next-line no-restricted-syntax
+    for (const accountName of res.account_names) {
+      const detail = yield call(getAccountDetail, eosClient, accountName);
       accounts.push(detail);
     }
     yield put(lookupLoaded(accounts));
-  } catch(err) {
+  } catch (err) {
     yield put(lookupLoaded([]));
   }
 }
@@ -45,9 +46,9 @@ function* performSearchAccount() {
   const accountName = yield select(makeSelectSearchName());
   yield put(lookupLoading());
   try {
-    const account = yield call(getAccountDetail,eosClient,accountName);
+    const account = yield call(getAccountDetail, eosClient, accountName);
     yield put(lookupLoaded([account]));
-  } catch(err) {
+  } catch (err) {
     yield put(lookupLoaded([]));
   }
 }
@@ -61,8 +62,5 @@ function* watchSeachAccount() {
 //
 
 export default function* rootSaga() {
-  yield all([
-    watchSeachAccount(),
-    watchSeachPubkey(),
-  ])
+  yield all([watchSeachAccount(), watchSeachPubkey()]);
 }
