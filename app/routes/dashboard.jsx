@@ -13,6 +13,7 @@ import Governance from 'containers/Governance/Loadable';
 import SearchAccount from 'containers/SearchAccount/Loadable';
 import SimplePermissions from 'containers/SimplePermissions/Loadable';
 import ClaimRewards from 'containers/ClaimRewards/Loadable';
+import Refund from 'containers/Refund/Loadable';
 // @material-ui/icons
 import {
   AccountBalance,
@@ -85,6 +86,12 @@ const dashRoutes = [
         name: 'Sell Ram (bytes)',
         mini: 'SR',
         component: SellRam,
+      },
+      {
+        path: '/account/refund',
+        name: 'Refund',
+        mini: 'R',
+        component: Refund,
       },
       {
         path: '/account/permissions',
