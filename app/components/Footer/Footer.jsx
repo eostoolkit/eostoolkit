@@ -1,29 +1,29 @@
-import React from "react";
-import PropTypes from "prop-types";
-import cx from "classnames";
+import React from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+import withStyles from '@material-ui/core/styles/withStyles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
-import footerStyle from "./footerStyle.jsx";
+import footerStyle from './footerStyle';
 
 function Footer({ ...props }) {
-  const { classes, fluid, white, rtlActive } = props;
-  var container = cx({
+  const { classes, fluid, white } = props;
+  const container = cx({
     [classes.container]: !fluid,
     [classes.containerFluid]: fluid,
-    [classes.whiteColor]: white
+    [classes.whiteColor]: white,
   });
-  var anchor =
+  const anchor =
     classes.a +
     cx({
-      [" " + classes.whiteColor]: white
+      [` ${classes.whiteColor}`]: white,
     });
-  var block = cx({
+  const block = cx({
     [classes.block]: true,
-    [classes.whiteColor]: white
+    [classes.whiteColor]: white,
   });
   return (
     <footer className={classes.footer}>
@@ -32,47 +32,47 @@ function Footer({ ...props }) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a href="https://github.com/generEOS" className={block}>
-                {"GitHub"}
+                {'GitHub'}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://steemit.com/@genereos" target="new" className={block}>
-                {"Steemit"}
+                {'Steemit'}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://www.facebook.com/generEOS" target="new" className={block}>
-                {"Facebook"}
+                {'Facebook'}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://www.reddit.com/r/GenerEOS/" target="new" className={block}>
-                {"Reddit"}
+                {'Reddit'}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://twitter.com/genereossydney" target="new" className={block}>
-                {"Twitter"}
+                {'Twitter'}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://www.youtube.com/channel/UCFHa6AJmcZBjXGILF2EZnHQ" target="new" className={block}>
-                {"YouTube"}
+                {'YouTube'}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://t.me/generEOS" target="new" className={block}>
-                {"Telegram"}
+                {'Telegram'}
               </a>
             </ListItem>
           </List>
         </div>
         <p className={classes.right}>
-          &copy; {1900 + new Date().getYear()}{" "}
+          &copy; {1900 + new Date().getYear()}{' '}
           <a href="https://www.genereos.io" target="new" className={anchor}>
-            {"GenerEOS"}
+            {'GenerEOS'}
           </a>
-          {", made with love for the EOS Community"}
+          {', made with love for the EOS Community'}
         </p>
       </div>
     </footer>
@@ -83,7 +83,7 @@ Footer.propTypes = {
   classes: PropTypes.object.isRequired,
   fluid: PropTypes.bool,
   white: PropTypes.bool,
-  rtlActive: PropTypes.bool
+  rtlActive: PropTypes.bool,
 };
 
 export default withStyles(footerStyle)(Footer);

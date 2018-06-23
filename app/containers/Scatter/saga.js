@@ -1,8 +1,8 @@
-import Eos from 'eosjs'
-import { takeLatest, call, put, select, all } from 'redux-saga/effects';
-import { makeSelectScatter } from './selectors.js';
-import { scatterConfig, scatterEosOptions, testnet } from 'eosConfig.js';
-import { eosLoaded, attachedAccount, detachedAccount } from './actions.js';
+import Eos from 'eosjs';
+import { takeLatest, put, select, all } from 'redux-saga/effects';
+import { scatterConfig, scatterEosOptions, testnet } from 'eosConfig';
+import { makeSelectScatter } from './selectors';
+import { eosLoaded, attachedAccount, detachedAccount } from './actions';
 import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT } from './constants';
 
 //
@@ -11,7 +11,7 @@ import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT } from './constants';
 function* getEosClient() {
   const scatter = yield select(makeSelectScatter());
 
-  const eosClient = scatter.eos( scatterConfig, Eos, scatterEosOptions,testnet ? 'http' : 'https');
+  const eosClient = scatter.eos(scatterConfig, Eos, scatterEosOptions, testnet ? 'http' : 'https');
   yield put(eosLoaded(eosClient));
 }
 
@@ -26,19 +26,28 @@ function* watchScatterLoaded() {
 function* getEosAccount() {
   const scatter = yield select(makeSelectScatter());
   try {
-    if(scatter.identity) {
+    if (scatter.identity) {
       yield scatter.forgetIdentity();
     }
-    const id = yield scatter.getIdentity({accounts:[{chainId:scatterConfig.chainId, blockchain:scatterConfig.blockchain}]});
-    const eosAccount = id && id.accounts.find(x => x.blockchain === 'eos')
-           ? id.accounts.find(x => x.blockchain === 'eos').name
-           : 'Attach an Account';
-    const accountAuth = id && id.accounts.find(x => x.blockchain === 'eos')
-           ? id.accounts.find(x => x.blockchain === 'eos').authority
-           : '';
-    yield put(attachedAccount(eosAccount,accountAuth));
-  } catch(err) {
-    //console.log(err);
+    const id = yield scatter.getIdentity({
+      accounts: [
+        {
+          chainId: scatterConfig.chainId,
+          blockchain: scatterConfig.blockchain,
+        },
+      ],
+    });
+    const eosAccount =
+      id && id.accounts.find(x => x.blockchain === 'eos')
+        ? id.accounts.find(x => x.blockchain === 'eos').name
+        : 'Attach an Account';
+    const accountAuth =
+      id && id.accounts.find(x => x.blockchain === 'eos')
+        ? id.accounts.find(x => x.blockchain === 'eos').authority
+        : '';
+    yield put(attachedAccount(eosAccount, accountAuth));
+  } catch (err) {
+    // console.log(err);
   }
 }
 
@@ -53,12 +62,12 @@ function* watchScatterConnect() {
 function* removeEosAccount() {
   const scatter = yield select(makeSelectScatter());
   try {
-    if(scatter.identity) {
+    if (scatter.identity) {
       yield scatter.forgetIdentity();
     }
     yield put(detachedAccount());
-  } catch(err) {
-    //console.log(err);
+  } catch (err) {
+    // console.log(err);
   }
 }
 
@@ -71,9 +80,5 @@ function* watchScatterRemove() {
 //
 
 export default function* rootSaga() {
-  yield all([
-    watchScatterLoaded(),
-    watchScatterConnect(),
-    watchScatterRemove(),
-  ])
+  yield all([watchScatterLoaded(), watchScatterConnect(), watchScatterRemove()]);
 }

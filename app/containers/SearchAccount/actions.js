@@ -4,12 +4,7 @@
  *
  */
 
-import {
-  LOOKUP_ACCOUNT,
-  LOOKUP_PUBKEY,
-  LOOKUP_LOADING,
-  LOOKUP_LOADED,
-} from './constants';
+import { LOOKUP_ACCOUNT, LOOKUP_PUBKEY, LOOKUP_LOADING, LOOKUP_LOADED } from './constants';
 
 export function lookupAccount(name) {
   return {

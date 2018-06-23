@@ -1,0 +1,4 @@
+**/package.json
+**/build/*.js
+**/node_modules/
+.git/

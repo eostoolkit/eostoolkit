@@ -1,4 +1,3 @@
-
 import { fromJS } from 'immutable';
 import notificationReducer from '../reducer';
 
