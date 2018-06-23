@@ -15,6 +15,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
 import AddCircle from '@material-ui/icons/AddCircle';
 import AccountBalance from '@material-ui/icons/AccountBalance';
+import Radio from '@material-ui/core/Radio';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 // core components
 import GridContainer from 'components/Grid/GridContainer';
@@ -29,7 +32,7 @@ import CardBody from 'components/Card/CardBody';
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit, eosAccount } = props;
+  const { eosAccount, errors, handleBlur, handleChange, handleSubmit, touched, values } = props;
   return (
     <form>
       <GridContainer>
@@ -71,6 +74,13 @@ const FormObject = props => {
           />
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
+          {/* <FormLabel component="legend">Buy RAM in...</FormLabel> */}
+          <FormGroup row>
+            <FormControlLabel value="eos" control={<Radio color="primary" />} label="EOS" />
+            <FormControlLabel value="bytes" control={<Radio color="primary" />} label="bytes" />
+          </FormGroup>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
           <CustomInput
             labelText="Ram purchase (in EOS)"
             id="quantity"
@@ -88,16 +98,16 @@ const FormObject = props => {
             }}
           />
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Button onClick={handleSubmit} color="rose">
-            Purchase
-          </Button>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12}>
           <p>
             By executing this action you are agreeing to the EOS constitution and this actions associated ricardian
             contract.
           </p>
+        </GridItem>
+        <GridItem xs={12}>
+          <Button onClick={handleSubmit} color="rose">
+            Purchase
+          </Button>
         </GridItem>
       </GridContainer>
     </form>
