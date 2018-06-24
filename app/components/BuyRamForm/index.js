@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { compose } from 'recompose';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 // import styled from 'styled-components';
@@ -16,7 +17,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import AddCircle from '@material-ui/icons/AddCircle';
 import AccountBalance from '@material-ui/icons/AccountBalance';
 import Radio from '@material-ui/core/Radio';
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 // core components
@@ -31,8 +31,36 @@ import CardBody from 'components/Card/CardBody';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 
+import BuyBytes from './Ricardian/BuyBytes';
+import BuyEOS from './Ricardian/BuyEOS';
+import { units } from './constants';
+
+import buyRamFormStyle from './buyRamFormStyle';
+
 const FormObject = props => {
-  const { eosAccount, errors, handleBlur, handleChange, handleSubmit, touched, values } = props;
+  const {
+    classes,
+    eosAccount,
+    errors,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    touched,
+    unit: { isEOS, handleByteUnitChange, handleEOSUnitChange },
+    values,
+  } = props;
+
+  const defaultUnitProps = {
+    formControlProps: {
+      fullWidth: true,
+    },
+    inputProps: {
+      type: 'text',
+      placeholder: 'Required to process transactions',
+      onChange: handleChange,
+      onBlur: handleBlur,
+    },
+  };
   return (
     <form>
       <GridContainer>
@@ -73,30 +101,45 @@ const FormObject = props => {
             }}
           />
         </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          {/* <FormLabel component="legend">Buy RAM in...</FormLabel> */}
-          <FormGroup row>
-            <FormControlLabel value="eos" control={<Radio color="primary" />} label="EOS" />
-            <FormControlLabel value="bytes" control={<Radio color="primary" />} label="bytes" />
-          </FormGroup>
+        <GridItem className={classes.radioContainer} xs={12} sm={12} md={6}>
+          <span className={classes.radioLabel}>Purchase unit:</span>
+          <FormControlLabel
+            value="eos"
+            control={<Radio checked={isEOS} color="primary" onChange={handleEOSUnitChange} />}
+            label="EOS"
+          />
+          <FormControlLabel
+            value="bytes"
+            control={<Radio checked={!isEOS} color="primary" onChange={handleByteUnitChange} />}
+            label="bytes"
+          />
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
-          <CustomInput
-            labelText="Ram purchase (in EOS)"
-            id="quantity"
-            error={errors.quantity}
-            touched={touched.quantity}
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'text',
-              placeholder: 'Required to process transactions',
-              value: values.quantity,
-              onChange: handleChange,
-              onBlur: handleBlur,
-            }}
-          />
+          {isEOS ? (
+            <CustomInput
+              {...defaultUnitProps}
+              labelText={`Ram purchase (in ${units.EOS})`}
+              id="eosQuantity"
+              error={errors.eosQuantity}
+              touched={touched.eosQuantity}
+              inputProps={{
+                ...defaultUnitProps.inputProps,
+                value: values.eosQuantity,
+              }}
+            />
+          ) : (
+            <CustomInput
+              {...defaultUnitProps}
+              labelText={`Ram purchase (in ${units.BYTE})`}
+              id="byteQuantity"
+              error={errors.byteQuantity}
+              touched={touched.byteQuantity}
+              inputProps={{
+                ...defaultUnitProps.inputProps,
+                value: values.byteQuantity,
+              }}
+            />
+          )}
         </GridItem>
         <GridItem xs={12}>
           <p>
@@ -122,7 +165,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const BuyRamForm = props => {
-  const { classes, handleSubmit, eosAccount } = props;
+  const { classes, handleSubmit, eosAccount, unit } = props;
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={8}>
@@ -138,12 +181,15 @@ const BuyRamForm = props => {
               initialValues={{
                 creator: '',
                 name: '',
-                quantity: '1',
+                eosQuantity: 1,
+                byteQuantity: 8192,
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
               eosAccount={eosAccount}
-              render={formikProps => <FormObject {...formikProps} eosAccount={eosAccount} classes={classes} />}
+              render={formikProps => (
+                <FormObject {...formikProps} eosAccount={eosAccount} classes={classes} unit={unit} />
+              )}
             />
           </CardBody>
         </Card>
@@ -156,45 +202,13 @@ const BuyRamForm = props => {
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Ricardian</h4>
           </CardHeader>
-          <CardBody>
-            <p>
-              This action will attempt to reserve about {'{ quant }'} worth of RAM on behalf of {'{ receiver }'}.
-              <br />
-              <br />
-              {'{ buyer }'} authorizes this contract to transfer {'{ quant }'} to buy RAM based upon the current price
-              as determined by the market maker algorithm.
-              <br />
-              <br />
-              {'{ buyer }'} accepts that a 0.5% fee will be charged on the amount spent and that the actual RAM received
-              may be slightly less than expected due to the approximations necessary to enable this service.
-              <br />
-              <br />
-              {'{ buyer }'} accepts that a 0.5% fee will be charged if and when they sell the RAM received.
-              <br />
-              <br />
-              {'{ buyer }'} accepts that rounding errors resulting from limits of computational precision may result in
-              less RAM being allocated.
-              <br />
-              <br />
-              {'{ buyer }'} acknowledges that the supply of RAM may be increased at any time up to the limits of
-              off-the-shelf computer equipment and that this may result in RAM selling for less than purchase price.
-              <br />
-              <br />
-              {'{ buyer }'} acknowledges that the price of RAM may increase or decrease over time according to supply
-              and demand.
-              <br />
-              <br />
-              {'{ buyer }'} acknowledges that RAM is non-transferrable.
-              <br />
-              <br />
-              {'{ buyer }'} acknowledges RAM currently in use by their account cannot be sold until it is freed and that
-              freeing RAM may be subject to terms of other contracts.
-            </p>
-          </CardBody>
+          <CardBody>{unit.isEOS ? <BuyEOS /> : <BuyBytes />}</CardBody>
         </Card>
       </GridItem>
     </GridContainer>
   );
 };
 
-export default withStyles(regularFormsStyle)(BuyRamForm);
+const enhance = compose(withStyles(buyRamFormStyle, regularFormsStyle));
+
+export default enhance(BuyRamForm);

@@ -7,8 +7,8 @@
 import BuyRamForm from 'components/BuyRamForm';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
 import { makeSelectEosAccount } from 'containers/Scatter/selectors';
+import { compose, mapProps, withStateHandlers } from 'recompose';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -34,8 +34,31 @@ const withConnect = connect(
 const withReducer = injectReducer({ key: 'BuyRam', reducer });
 const withSaga = injectSaga({ key: 'BuyRam', saga });
 
-export default compose(
+const enhance = compose(
   withReducer,
   withSaga,
-  withConnect
-)(BuyRamForm);
+  withConnect,
+  withStateHandlers(
+    {
+      isEOS: true,
+    },
+    {
+      handleByteUnitChange: () => () => ({
+        isEOS: false,
+      }),
+      handleEOSUnitChange: () => () => ({
+        isEOS: true,
+      }),
+    }
+  ),
+  mapProps(({ isEOS, handleByteUnitChange, handleEOSUnitChange, ...otherProps }) => ({
+    unit: {
+      isEOS,
+      handleByteUnitChange,
+      handleEOSUnitChange,
+    },
+    ...otherProps,
+  }))
+);
+
+export default enhance(BuyRamForm);
