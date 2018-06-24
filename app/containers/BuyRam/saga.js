@@ -13,19 +13,36 @@ function* performAction() {
   const eosAccount = yield select(EosAccount());
   yield put(loadingNotification());
   try {
-    const res = yield eosClient.transaction(tr => {
-      tr.buyram({
-        payer: eosAccount,
-        receiver: form.name,
-        quant: `${Number(form.quantity)
-          .toFixed(4)
-          .toString()} EOS`,
-      });
-    });
+    const res = form.isEOS
+      ? yield buyRAM({ eosClient, eosAccount, form })
+      : yield buyRAMBytes({ eosClient, eosAccount, form });
+
     yield put(successNotification(res.transaction_id));
   } catch (err) {
     yield put(failureNotification(err));
   }
+}
+
+function buyRAM({ eosClient, eosAccount, form: { name, eosQuantity } }) {
+  return eosClient.transaction(tr => {
+    tr.buyram({
+      payer: eosAccount,
+      receiver: name,
+      quant: `${Number(eosQuantity)
+        .toFixed(4)
+        .toString()} EOS`,
+    });
+  });
+}
+
+function buyRAMBytes({ eosClient, eosAccount, form: { name, byteQuantity } }) {
+  return eosClient.transaction(tr => {
+    tr.buyrambytes({
+      payer: eosAccount,
+      receiver: name,
+      bytes: Number(byteQuantity),
+    });
+  });
 }
 
 function* watchDefaultAction() {

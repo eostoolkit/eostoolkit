@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { compose } from 'recompose';
-import { Formik } from 'formik';
+import { withFormik } from 'formik';
 import * as Yup from 'yup';
 // import styled from 'styled-components';
 
@@ -44,7 +44,7 @@ const FormObject = props => {
     errors,
     handleBlur,
     handleChange,
-    handleSubmit,
+    submitForm,
     touched,
     unit: { isEOS, handleByteUnitChange, handleEOSUnitChange },
     values,
@@ -104,12 +104,10 @@ const FormObject = props => {
         <GridItem className={classes.radioContainer} xs={12} sm={12} md={6}>
           <span className={classes.radioLabel}>Purchase unit:</span>
           <FormControlLabel
-            value="eos"
             control={<Radio checked={isEOS} color="primary" onChange={handleEOSUnitChange} />}
             label="EOS"
           />
           <FormControlLabel
-            value="bytes"
             control={<Radio checked={!isEOS} color="primary" onChange={handleByteUnitChange} />}
             label="bytes"
           />
@@ -148,7 +146,7 @@ const FormObject = props => {
           </p>
         </GridItem>
         <GridItem xs={12}>
-          <Button onClick={handleSubmit} color="rose">
+          <Button color="rose" onClick={submitForm}>
             Purchase
           </Button>
         </GridItem>
@@ -157,15 +155,22 @@ const FormObject = props => {
   );
 };
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Account name is required'),
-  quantity: Yup.number()
-    .required('Quantity is required')
-    .positive('You must pay a positive quantity'),
-});
+const validationSchema = ({ unit: { isEOS } }) => {
+  const eosQuantity = Yup.number().positive('You must pay a positive quantity');
+  const byteQuantity = Yup.number()
+    .positive('RAM must be a positive quantity')
+    .integer('RAM cannot be fractional');
+
+  return Yup.object().shape({
+    name: Yup.string().required('Account name is required'),
+    byteQuantity: isEOS ? byteQuantity : byteQuantity.required('RAM purchase is required'),
+    eosQuantity: !isEOS ? eosQuantity : eosQuantity.required('RAM purchase is required'),
+  });
+};
 
 const BuyRamForm = props => {
-  const { classes, handleSubmit, eosAccount, unit } = props;
+  const { classes, eosAccount, handleSubmit, unit, ...formikProps } = props;
+  const { errors, handleBlur, handleChange, submitForm, touched, values } = formikProps;
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={8}>
@@ -177,19 +182,16 @@ const BuyRamForm = props => {
             <h4 className={classes.cardIconTitle}>Buy ram</h4>
           </CardHeader>
           <CardBody>
-            <Formik
-              initialValues={{
-                creator: '',
-                name: '',
-                eosQuantity: 1,
-                byteQuantity: 8192,
-              }}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
+            <FormObject
+              classes={classes}
               eosAccount={eosAccount}
-              render={formikProps => (
-                <FormObject {...formikProps} eosAccount={eosAccount} classes={classes} unit={unit} />
-              )}
+              errors={errors}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              submitForm={submitForm}
+              touched={touched}
+              unit={unit}
+              values={values}
             />
           </CardBody>
         </Card>
@@ -209,6 +211,26 @@ const BuyRamForm = props => {
   );
 };
 
-const enhance = compose(withStyles(buyRamFormStyle, regularFormsStyle));
+const enhance = compose(
+  withStyles(buyRamFormStyle, regularFormsStyle),
+  withFormik({
+    handleSubmit: (values, { props, setSubmitting }) => {
+      const {
+        handleSubmit,
+        unit: { isEOS },
+      } = props;
+      setSubmitting(false);
+      handleSubmit({ ...values, isEOS });
+    },
+    mapPropsToValues: props => ({
+      byteQuantity: 8192,
+      creator: '',
+      eosQuantity: 1,
+      isEOS: props.unit.isEOS,
+      name: '',
+    }),
+    validationSchema,
+  })
+);
 
 export default enhance(BuyRamForm);
