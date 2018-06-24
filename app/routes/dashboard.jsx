@@ -75,12 +75,6 @@ const dashRoutes = [
         component: BuyRam,
       },
       {
-        path: '/account/buybytes',
-        name: 'Buy Ram (bytes)',
-        mini: 'BR',
-        component: BuyRamBytes,
-      },
-      {
         path: '/account/sellram',
         name: 'Sell Ram (bytes)',
         mini: 'SR',
@@ -230,6 +224,7 @@ const dashRoutes = [
   // { path: "/widgets", name: "Widgets", icon: WidgetsIcon, component: Widgets },
   // { path: "/charts", name: "Charts", icon: Timeline, component: Charts },
   // { path: "/calendar", name: "Calendar", icon: DateRange, component: Calendar },
+  { redirect: true, path: '/account/buybytes', pathTo: '/account/buyram', name: 'Buy Ram (bytes)' },
   { redirect: true, path: '/', pathTo: '/home', name: 'Home' },
 ];
 export default dashRoutes;
