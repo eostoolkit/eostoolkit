@@ -17,7 +17,7 @@ function BalancesTable({ ...props }) {
       <Table className={classes.table}>
         <TableHead className={classes.successRow}>
           <TableRow className={classes.tableRow}>
-            <TableCell className={classes.tableHeadCell + ' ' + classes.tableHeadFontSize} colSpan={2}>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`} colSpan={2}>
               Token Balances
             </TableCell>
           </TableRow>
