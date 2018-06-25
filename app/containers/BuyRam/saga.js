@@ -17,20 +17,38 @@ function* performAction() {
   const eosAuth = yield select(EosAuthority());
   yield put(loadingNotification());
   try {
-    const res = yield eosClient.transaction(tr => {
-      tr.buyram({
-        payer: eosAccount,
-        receiver: form.name,
-        quant: `${Number(form.quantity)
-          .toFixed(4)
-          .toString()} EOS`,
-      },
-      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
-    });
+    const res = form.isEOS
+      ? yield buyRAM({ eosClient, eosAccount, eosAuth, form })
+      : yield buyRAMBytes({ eosClient, eosAccount, eosAuth, form });
+
     yield put(successNotification(res.transaction_id));
   } catch (err) {
     yield put(failureNotification(err));
   }
+}
+
+function buyRAM({ eosClient, eosAccount, eosAuth, form: { name, eosQuantity } }) {
+  return eosClient.transaction(tr => {
+    tr.buyram({
+      payer: eosAccount,
+      receiver: name,
+      quant: `${Number(eosQuantity)
+        .toFixed(4)
+        .toString()} EOS`,
+      },
+      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
+  });
+}
+
+function buyRAMBytes({ eosClient, eosAccount, eosAuth, form: { name, byteQuantity } }) {
+  return eosClient.transaction(tr => {
+    tr.buyrambytes({
+      payer: eosAccount,
+      receiver: name,
+      bytes: Number(byteQuantity),
+    },
+    { authorization: [{ actor: eosAccount, permission: eosAuth }] });
+  });
 }
 
 function* watchDefaultAction() {
