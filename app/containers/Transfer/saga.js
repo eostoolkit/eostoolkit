@@ -1,5 +1,8 @@
 import { takeLatest, put, select, all } from 'redux-saga/effects';
-import EosClient, { makeSelectEosAccount as EosAccount } from 'containers/Scatter/selectors';
+import EosClient, {
+  makeSelectEosAuthority as EosAuthority,
+  makeSelectEosAccount as EosAccount,
+} from 'containers/Scatter/selectors';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
 import Form from './selectors';
 import { DEFAULT_ACTION } from './constants';
@@ -11,6 +14,7 @@ function* performAction() {
   const eosClient = yield select(EosClient());
   const form = yield select(Form());
   const eosAccount = yield select(EosAccount());
+  const eosAuth = yield select(EosAuthority());
   yield put(loadingNotification());
   try {
     const res = yield eosClient.transfer({
@@ -21,7 +25,8 @@ function* performAction() {
         .toFixed(4)
         .toString()} EOS`,
       memo: form.memo,
-    });
+    },
+    { authorization: [{ actor: eosAccount, permission: eosAuth }] });
     yield put(successNotification(res.transaction_id));
   } catch (err) {
     yield put(failureNotification(err));
