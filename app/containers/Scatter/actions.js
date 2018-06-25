@@ -11,6 +11,8 @@ import {
   ATTACHED_ACCOUNT,
   REMOVE_ACCOUNT,
   DETACHED_ACCOUNT,
+  REFRESH_DATA,
+  REFRESHED_DATA,
 } from './constants';
 
 export function scatterLoaded(scatter) {
@@ -56,5 +58,18 @@ export function detachedAccount() {
   // console.log('Detached');
   return {
     type: DETACHED_ACCOUNT,
+  };
+}
+
+export function refreshAccountData() {
+  return {
+    type: REFRESH_DATA,
+  };
+}
+
+export function refreshedAccountData(data) {
+  return {
+    type: REFRESHED_DATA,
+    data,
   };
 }

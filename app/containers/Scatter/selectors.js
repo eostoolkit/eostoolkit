@@ -17,10 +17,19 @@ const makeSelectEosAccount = () => createSelector(selectScatter, substate => sub
 
 const makeSelectEosAuthority = () => createSelector(selectScatter, substate => substate.get('eosAuthority'));
 
+const makeSelectEosAccountData = () => createSelector(selectScatter, substate => substate.get('eosAccountData'));
+
 /**
  * Default selector used by Scatter
  */
 
 export default makeSelectEosClient;
 
-export { selectScatter, makeSelectScatter, makeSelectEosClient, makeSelectEosAccount, makeSelectEosAuthority };
+export {
+  selectScatter,
+  makeSelectScatter,
+  makeSelectEosClient,
+  makeSelectEosAccount,
+  makeSelectEosAuthority,
+  makeSelectEosAccountData,
+};

@@ -6,10 +6,18 @@ import { LOOKUP_ACCOUNT, LOOKUP_PUBKEY } from './constants';
 import { lookupLoading, lookupLoaded } from './actions';
 
 function* getAccountDetail(eosClient, name) {
-  const account = yield eosClient.getAccount(name);
   const currency = yield eosClient.getCurrencyBalance('eosio.token', name);
-  account.currency = currency;
-  return account;
+  // TODO: This is some prep work for airdrop token support.
+  const currencies = currency.map(c => {
+    return {
+      account: 'eosio.token',
+      balance: c,
+    };
+  });
+  return {
+    ...(yield eosClient.getAccount(name)),
+    currencies,
+  };
 }
 
 //
