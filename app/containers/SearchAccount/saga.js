@@ -63,11 +63,10 @@ function* watchSeachPubkey() {
 // Get the EOS single account
 //
 function* performSearchAccount() {
-  const eosClient = yield Eos(eosConfig);
   const accountName = yield select(makeSelectSearchName());
   yield put(lookupLoading());
   try {
-    const account = yield call(getAccountDetail, eosClient, accountName);
+    const account = yield call(getAccountDetail, accountName);
     yield put(lookupLoaded([account]));
   } catch (err) {
     yield put(lookupLoaded([]));
