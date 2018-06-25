@@ -22,8 +22,12 @@ function SearchAccountReducer(state = initialState, action) {
       return state.set('pubkey', action.pubkey);
     case LOOKUP_LOADING:
       return state.set('loading', true);
-    case LOOKUP_LOADED:
-      return state.set('accounts', action.accounts).set('loading', false);
+    case LOOKUP_LOADED: {
+      const { accounts } = action;
+      // casting account in an array if API returned an object
+      const accountState = Array.isArray(accounts) ? accounts : [accounts];
+      return state.set('accounts', accountState).set('loading', false);
+    }
     default:
       return state;
   }

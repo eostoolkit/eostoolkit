@@ -17,7 +17,7 @@ function ResourcesTable({ ...props }) {
       <Table className={classes.table}>
         <TableHead className={classes.infoRow}>
           <TableRow className={classes.tableRow}>
-            <TableCell className={classes.tableHeadCell + ' ' + classes.tableHeadFontSize} colSpan={2}>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`} colSpan={2}>
               Resources
             </TableCell>
           </TableRow>
