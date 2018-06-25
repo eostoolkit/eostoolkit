@@ -14,15 +14,17 @@ function* performAction() {
   const eosClient = yield select(EosClient());
   const form = yield select(Form());
   const eosAccount = yield select(EosAccount());
-    const eosAuth = yield select(EosAuthority());
+  const eosAuth = yield select(EosAuthority());
   yield put(loadingNotification());
   try {
     const res = yield eosClient.transaction(tr => {
-      tr.sellram({
-        account: eosAccount,
-        bytes: Number(form.ram),
-      },
-      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
+      tr.sellram(
+        {
+          account: eosAccount,
+          bytes: Number(form.ram),
+        },
+        { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+      );
     });
     yield put(successNotification(res.transaction_id));
   } catch (err) {

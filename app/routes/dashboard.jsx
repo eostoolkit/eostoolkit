@@ -4,7 +4,6 @@ import CreateAccount from 'containers/CreateAccount/Loadable';
 import CreateProxy from 'containers/CreateProxy/Loadable';
 import SetProxy from 'containers/SetProxy/Loadable';
 import BuyRam from 'containers/BuyRam/Loadable';
-import BuyRamBytes from 'containers/BuyRamBytes/Loadable';
 import SellRam from 'containers/SellRam/Loadable';
 import Delegate from 'containers/Delegate/Loadable';
 import Undelegate from 'containers/Undelegate/Loadable';
@@ -74,12 +73,6 @@ const dashRoutes = [
         name: 'Buy Ram (EOS)',
         mini: 'BR',
         component: BuyRam,
-      },
-      {
-        path: '/account/buybytes',
-        name: 'Buy Ram (bytes)',
-        mini: 'BR',
-        component: BuyRamBytes,
       },
       {
         path: '/account/sellram',
@@ -237,6 +230,7 @@ const dashRoutes = [
   // { path: "/widgets", name: "Widgets", icon: WidgetsIcon, component: Widgets },
   // { path: "/charts", name: "Charts", icon: Timeline, component: Charts },
   // { path: "/calendar", name: "Calendar", icon: DateRange, component: Calendar },
+  { redirect: true, path: '/account/buybytes', pathTo: '/account/buyram', name: 'Buy Ram (bytes)' },
   { redirect: true, path: '/', pathTo: '/home', name: 'Home' },
 ];
 export default dashRoutes;
