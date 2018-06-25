@@ -1,7 +1,8 @@
 import Eos from 'eosjs';
-import { takeLatest, put, select, all } from 'redux-saga/effects';
-import { scatterConfig, scatterEosOptions, testnet } from 'eosConfig';
-import EosClient, { makeSelectEosAccount, makeSelectScatter } from 'containers/Scatter/selectors';
+import eosTokens from 'eosTokens';
+import { takeLatest, put, select, all, call, fork, join } from 'redux-saga/effects';
+import eosConfig, { scatterConfig, scatterEosOptions, testnet } from 'eosConfig';
+import { makeSelectEosAccount, makeSelectScatter } from 'containers/Scatter/selectors';
 import { eosLoaded, attachedAccount, detachedAccount, refreshAccountData, refreshedAccountData } from './actions';
 import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT, REFRESH_DATA } from './constants';
 
@@ -60,23 +61,40 @@ function* watchScatterConnect() {
 // Refresh account data
 //
 
+// TODO: Dry this out with SearchAccount
+function* getCurrency(token, name) {
+  const eosClient = yield Eos(eosConfig);
+  const currency = yield eosClient.getCurrencyBalance(token, name);
+  // TODO: This is some prep work for airdrop token support.
+  const currencies = currency.map(c => {
+    return {
+      account: token,
+      balance: c,
+    };
+  });
+  return currencies;
+}
+
+function* getAccountDetail(name) {
+  const eosClient = yield Eos(eosConfig);
+  const tokens = yield all(
+    eosTokens.map(token => {
+      return fork(getCurrency, token, name);
+    })
+  );
+  const currencies = yield join(...tokens);
+  const balances = currencies.reduce((a, b) => a.concat(b), []);
+  return {
+    ...(yield eosClient.getAccount(name)),
+    balances,
+  };
+}
+
 function* refreshEosAccountData() {
   const accountName = yield select(makeSelectEosAccount());
-  const eosClient = yield select(EosClient());
   try {
     if (accountName && accountName !== 'Attach an Account') {
-      const currency = yield eosClient.getCurrencyBalance('eosio.token', accountName);
-      // TODO: This is some prep work for airdrop token support.
-      const currencies = currency.map(c => {
-        return {
-          account: 'eosio.token',
-          balance: c,
-        };
-      });
-      const account = {
-        ...(yield eosClient.getAccount(accountName)),
-        currencies,
-      };
+      const account = yield call(getAccountDetail, accountName);
       yield put(refreshedAccountData(account));
     } else {
       yield put(refreshedAccountData(null));
