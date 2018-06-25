@@ -16,20 +16,11 @@ import saga from './saga';
 import submitAction from './actions';
 
 // eslint-disable-next-line react/prefer-stateless-function
-export class VoteUs extends React.Component {
-  render() {
-    const { handleSubmit } = this.props;
-    return (
-      <a href="#" onClick={handleSubmit}>
-        Vote for GenerEOS
-      </a>
-    );
-  }
-}
-
-VoteUs.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
-};
+const VoteUs = ({handleSubmit}) => (
+  <a href="#" onClick={handleSubmit}>
+    Vote for GenerEOS
+  </a>
+)
 
 const mapStateToProps = createStructuredSelector({});
 
