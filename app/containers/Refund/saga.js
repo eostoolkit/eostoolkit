@@ -18,10 +18,12 @@ function* performAction() {
   yield put(loadingNotification());
   try {
     const res = yield eosClient.transaction(tr => {
-      tr.refund({
-        owner: eosAccount,
-      },
-      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
+      tr.refund(
+        {
+          owner: eosAccount,
+        },
+        { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+      );
     });
     yield put(successNotification(res.transaction_id));
   } catch (err) {

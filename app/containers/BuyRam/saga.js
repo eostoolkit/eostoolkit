@@ -18,14 +18,16 @@ function* performAction() {
   yield put(loadingNotification());
   try {
     const res = yield eosClient.transaction(tr => {
-      tr.buyram({
-        payer: eosAccount,
-        receiver: form.name,
-        quant: `${Number(form.quantity)
-          .toFixed(4)
-          .toString()} EOS`,
-      },
-      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
+      tr.buyram(
+        {
+          payer: eosAccount,
+          receiver: form.name,
+          quant: `${Number(form.quantity)
+            .toFixed(4)
+            .toString()} EOS`,
+        },
+        { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+      );
     });
     yield put(successNotification(res.transaction_id));
   } catch (err) {

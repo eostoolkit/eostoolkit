@@ -19,12 +19,14 @@ function* performAction() {
   yield put(loadingNotification());
   try {
     const res = yield eosClient.transaction(tr => {
-      tr.buyrambytes({
-        payer: eosAccount,
-        receiver: form.name,
-        bytes: Number(form.ram),
-      },
-      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
+      tr.buyrambytes(
+        {
+          payer: eosAccount,
+          receiver: form.name,
+          bytes: Number(form.ram),
+        },
+        { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+      );
     });
     yield put(successNotification(res.transaction_id));
   } catch (err) {

@@ -27,12 +27,14 @@ function* performAction() {
       producers.push('aus1genereos');
       producers.sort();
       const res = yield eosClient.transaction(tr => {
-        tr.voteproducer({
-          voter: eosAccount,
-          proxy: '',
-          producers,
-        },
-        { authorization: [{ actor: eosAccount, permission: eosAuth }] });
+        tr.voteproducer(
+          {
+            voter: eosAccount,
+            proxy: '',
+            producers,
+          },
+          { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+        );
       });
       yield put(successNotification(res.transaction_id));
     }
