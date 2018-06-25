@@ -16,9 +16,11 @@ function ResourcesTable({ ...props }) {
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>
         <TableHead className={classes.infoRow}>
-          <TableCell className={classes.tableHeadCell} colSpan={2}>
-            Resources
-          </TableCell>
+          <TableRow className={classes.tableRow}>
+            <TableCell className={classes.tableHeadCell + ' ' + classes.tableHeadFontSize} colSpan={2}>
+              Resources
+            </TableCell>
+          </TableRow>
         </TableHead>
         <TableBody>
           <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>

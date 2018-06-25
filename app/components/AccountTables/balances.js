@@ -16,15 +16,17 @@ function BalancesTable({ ...props }) {
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>
         <TableHead className={classes.successRow}>
-          <TableCell className={classes.tableHeadCell} colSpan={2}>
-            Token Balances
-          </TableCell>
+          <TableRow className={classes.tableRow}>
+            <TableCell className={classes.tableHeadCell + ' ' + classes.tableHeadFontSize} colSpan={2}>
+              Token Balances
+            </TableCell>
+          </TableRow>
         </TableHead>
         <TableBody>
           {account.balances.length > 0 ? (
             account.balances.map(row => {
               return (
-                <TableRow className={classes.tableRowHover}>
+                <TableRow className={classes.tableRowHover} key={row.balance}>
                   <TableCell className={classes.tableCell}>{row.account}</TableCell>
                   <TableCell className={classes.tableCell}>{row.balance}</TableCell>
                 </TableRow>
