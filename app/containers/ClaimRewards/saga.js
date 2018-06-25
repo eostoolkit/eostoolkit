@@ -16,10 +16,12 @@ function* performAction() {
   yield put(loadingNotification());
   try {
     const res = yield eosClient.transaction(tr => {
-      tr.claimrewards({
-        owner: eosAccount,
-      },
-      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
+      tr.claimrewards(
+        {
+          owner: eosAccount,
+        },
+        { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+      );
     });
     yield put(successNotification(res.transaction_id));
   } catch (err) {

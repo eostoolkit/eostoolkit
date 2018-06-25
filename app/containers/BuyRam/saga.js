@@ -29,25 +29,29 @@ function* performAction() {
 
 function buyRAM({ eosClient, eosAccount, eosAuth, form: { name, eosQuantity } }) {
   return eosClient.transaction(tr => {
-    tr.buyram({
-      payer: eosAccount,
-      receiver: name,
-      quant: `${Number(eosQuantity)
-        .toFixed(4)
-        .toString()} EOS`,
+    tr.buyram(
+      {
+        payer: eosAccount,
+        receiver: name,
+        quant: `${Number(eosQuantity)
+          .toFixed(4)
+          .toString()} EOS`,
       },
-      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
+      { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+    );
   });
 }
 
 function buyRAMBytes({ eosClient, eosAccount, eosAuth, form: { name, byteQuantity } }) {
   return eosClient.transaction(tr => {
-    tr.buyrambytes({
-      payer: eosAccount,
-      receiver: name,
-      bytes: Number(byteQuantity),
-    },
-    { authorization: [{ actor: eosAccount, permission: eosAuth }] });
+    tr.buyrambytes(
+      {
+        payer: eosAccount,
+        receiver: name,
+        bytes: Number(byteQuantity),
+      },
+      { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+    );
   });
 }
 

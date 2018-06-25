@@ -18,11 +18,13 @@ function* performAction() {
   yield put(loadingNotification());
   try {
     const res = yield eosClient.transaction(tr => {
-      tr.regproxy({
-        proxy: eosAccount,
-        isproxy: form.isProxy ? 1 : 0,
-      },
-      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
+      tr.regproxy(
+        {
+          proxy: eosAccount,
+          isproxy: form.isProxy ? 1 : 0,
+        },
+        { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+      );
     });
     yield put(successNotification(res.transaction_id));
   } catch (err) {

@@ -18,11 +18,13 @@ function* performAction() {
   yield put(loadingNotification());
   try {
     const res = yield eosClient.transaction(tr => {
-      tr.voteproducer({
-        voter: eosAccount,
-        proxy: form.name,
-      },
-      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
+      tr.voteproducer(
+        {
+          voter: eosAccount,
+          proxy: form.name,
+        },
+        { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+      );
     });
     yield put(successNotification(res.transaction_id));
   } catch (err) {
