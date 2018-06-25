@@ -1,5 +1,8 @@
 import { takeLatest, put, select, all } from 'redux-saga/effects';
-import EosClient, { makeSelectEosAccount as EosAccount } from 'containers/Scatter/selectors';
+import EosClient, {
+  makeSelectEosAuthority as EosAuthority,
+  makeSelectEosAccount as EosAccount,
+} from 'containers/Scatter/selectors';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
 
 import Form from './selectors';
@@ -12,6 +15,7 @@ function* performAction() {
   const eosClient = yield select(EosClient());
   const form = yield select(Form());
   const eosAccount = yield select(EosAccount());
+  const eosAuth = yield select(EosAuthority());
   yield put(loadingNotification());
   try {
     const res = yield eosClient.transaction(tr => {
@@ -20,12 +24,14 @@ function* performAction() {
         name: form.name,
         owner: form.ownerKey,
         active: form.activeKey,
-      });
+      },
+      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
       tr.buyrambytes({
         payer: eosAccount,
         receiver: form.name,
         bytes: Number(form.ram),
-      });
+      },
+      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
       tr.delegatebw({
         from: eosAccount,
         receiver: form.name,
@@ -36,7 +42,8 @@ function* performAction() {
           .toFixed(4)
           .toString()} EOS`,
         transfer: form.transfer ? 1 : 0,
-      });
+      },
+      { authorization: [{ actor: eosAccount, permission: eosAuth }] });
     });
     yield put(successNotification(res.transaction_id));
   } catch (err) {
