@@ -25,7 +25,7 @@ import regularFormsStyle from 'assets/jss/regularFormsStyle';
 const Account = props => {
   const { classes, account } = props;
   return (
-    <GridItem xs={12} sm={12} lg={6} key={account.account_name}>
+    <GridItem xs={12} sm={12} lg={6}>
       <Card>
         <CardHeader color="rose" icon>
           <CardIcon color="rose">

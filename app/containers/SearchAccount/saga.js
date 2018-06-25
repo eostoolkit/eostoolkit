@@ -1,11 +1,13 @@
 import Eos from 'eosjs';
 import eosConfig from 'eosConfig';
-import { takeLatest, call, put, select, all } from 'redux-saga/effects';
+import { takeLatest, call, put, select, all, fork, join } from 'redux-saga/effects';
 import { makeSelectSearchName, makeSelectSearchPubkey } from './selectors';
 import { LOOKUP_ACCOUNT, LOOKUP_PUBKEY } from './constants';
 import { lookupLoading, lookupLoaded } from './actions';
 
-function* getAccountDetail(eosClient, name) {
+function* getAccountDetail(name) {
+  console.log(name);
+  const eosClient = yield Eos(eosConfig);
   const currency = yield eosClient.getCurrencyBalance('eosio.token', name);
   // TODO: This is some prep work for airdrop token support.
   const currencies = currency.map(c => {
@@ -26,16 +28,18 @@ function* getAccountDetail(eosClient, name) {
 function* performSearchPubkey() {
   const eosClient = yield Eos(eosConfig);
   const publicKey = yield select(makeSelectSearchPubkey());
-  const accounts = [];
+  const details = [];
   yield put(lookupLoading());
   try {
     const res = yield eosClient.getKeyAccounts(publicKey);
     // TODO: fix the following rule quickly
     // eslint-disable-next-line no-restricted-syntax
+    console.log(res.account_names);
     for (const accountName of res.account_names) {
-      const detail = yield call(getAccountDetail, eosClient, accountName);
-      accounts.push(detail);
+      const detail = yield fork(getAccountDetail, accountName);
+      details.push(detail);
     }
+    const accounts = yield join(...details);
     yield put(lookupLoaded(accounts));
   } catch (err) {
     yield put(lookupLoaded([]));
