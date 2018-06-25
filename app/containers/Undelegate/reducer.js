@@ -1,6 +1,6 @@
 /*
  *
- * CreateAccount reducer
+ * undelegate reducer
  *
  */
 
@@ -11,7 +11,7 @@ const initialState = fromJS({
   form: null,
 });
 
-function createAccountReducer(state = initialState, action) {
+function undelegateReducer(state = initialState, action) {
   switch (action.type) {
     case DEFAULT_ACTION:
       return state.set('form', action.form);
@@ -20,4 +20,4 @@ function createAccountReducer(state = initialState, action) {
   }
 }
 
-export default createAccountReducer;
+export default undelegateReducer;

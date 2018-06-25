@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 /**
- * Direct selector to the delegate state domain
+ * Direct selector to the Undelegate state domain
  */
 const selectDomain = state => state.get('Undelegate');
 
@@ -10,7 +10,7 @@ const selectDomain = state => state.get('Undelegate');
  */
 
 /**
- * Default selector used by Delegate
+ * Default selector used by Undelegate
  */
 
 const makeSelectForm = () => createSelector(selectDomain, substate => substate.get('form'));

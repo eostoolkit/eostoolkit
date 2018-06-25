@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the delegate state domain
  */
-const selectDomain = state => state.get('BuyRamBytes');
+const selectDomain = state => state.get('Refund');
 
 /**
  * Other specific selectors

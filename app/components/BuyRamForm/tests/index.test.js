@@ -1,9 +1,9 @@
 // import React from 'react';
 // import { shallow } from 'enzyme';
 
-// import CreateAccountForm from '../index';
+// import BuyRamForm from '../index';
 
-describe('<CreateAccountForm />', () => {
+describe('<BuyRamForm />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });

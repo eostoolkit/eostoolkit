@@ -1,9 +1,9 @@
 // import React from 'react';
 // import { shallow } from 'enzyme';
 
-// import { CreateAccount } from '../index';
+// import { Undelegate } from '../index';
 
-describe('<CreateAccount />', () => {
+describe('<Undelegate />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });

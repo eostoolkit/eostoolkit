@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 /**
- * Direct selector to the delegate state domain
+ * Direct selector to the Transfer state domain
  */
 const selectDomain = state => state.get('Transfer');
 
@@ -10,7 +10,7 @@ const selectDomain = state => state.get('Transfer');
  */
 
 /**
- * Default selector used by Delegate
+ * Default selector used by Transfer
  */
 
 const makeSelectForm = () => createSelector(selectDomain, substate => substate.get('form'));

@@ -1,8 +1,8 @@
 import { fromJS } from 'immutable';
-import createAccountReducer from '../reducer';
+import voteUsReducer from '../reducer';
 
-describe('createAccountReducer', () => {
+describe('voteUsReducer', () => {
   it('returns the initial state', () => {
-    expect(createAccountReducer(undefined, {})).toEqual(fromJS({}));
+    expect(voteUsReducer(undefined, {})).toEqual(fromJS({}));
   });
 });
