@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 /**
- * Direct selector to the delegate state domain
+ * Direct selector to the CreateProxy state domain
  */
 const selectDomain = state => state.get('CreateProxy');
 
@@ -10,7 +10,7 @@ const selectDomain = state => state.get('CreateProxy');
  */
 
 /**
- * Default selector used by Delegate
+ * Default selector used by CreateProxy
  */
 
 const makeSelectForm = () => createSelector(selectDomain, substate => substate.get('form'));

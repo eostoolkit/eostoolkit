@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for CreateAccount
+ * Asynchronously loads the component for Delegate
  *
  */
 

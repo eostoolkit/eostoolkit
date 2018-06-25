@@ -1,13 +1,13 @@
 /*
- * CreateAccount Messages
+ * BuyRam Messages
  *
- * This contains all the text for the CreateAccount component.
+ * This contains all the text for the BuyRam component.
  */
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   header: {
-    id: 'app.containers.CreateAccount.header',
-    defaultMessage: 'This is CreateAccount container !',
+    id: 'app.containers.BuyRam.header',
+    defaultMessage: 'This is BuyRam container !',
   },
 });

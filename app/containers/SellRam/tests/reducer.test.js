@@ -1,8 +1,8 @@
 import { fromJS } from 'immutable';
-import createAccountReducer from '../reducer';
+import sellRamReducer from '../reducer';
 
-describe('createAccountReducer', () => {
+describe('sellRamReducer', () => {
   it('returns the initial state', () => {
-    expect(createAccountReducer(undefined, {})).toEqual(fromJS({}));
+    expect(sellRamReducer(undefined, {})).toEqual(fromJS({}));
   });
 });

@@ -27,22 +27,19 @@ function LoadingSpinner(props) {
   return '';
 }
 
-// eslint-disable-next-line react/prefer-stateless-function
-export class SearchAccount extends React.Component {
-  render() {
-    // const { handleAccountName, handlePublicKey } = this.props;
-    return (
-      <div>
-        <SearchAccountForm {...this.props} />
-        <LoadingSpinner {...this.props} />
-        <GridContainer>
-          {this.props.accounts.map(account => {
-            return <Account account={account} />;
-          })}
-        </GridContainer>
-      </div>
-    );
-  }
+const SearchAccount = props => {
+  // const { handleAccountName, handlePublicKey } = this.props;
+  return (
+    <div>
+      <SearchAccountForm {...props} />
+      <LoadingSpinner {...props} />
+      <GridContainer>
+        {props.accounts.map(account => {
+          return <Account account={account} />;
+        })}
+      </GridContainer>
+    </div>
+  );
 }
 
 const mapStateToProps = createStructuredSelector({
