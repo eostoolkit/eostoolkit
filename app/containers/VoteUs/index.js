@@ -16,11 +16,11 @@ import saga from './saga';
 import submitAction from './actions';
 
 // eslint-disable-next-line react/prefer-stateless-function
-const VoteUs = ({handleSubmit}) => (
+const VoteUs = ({ handleSubmit }) => (
   <a href="#" onClick={handleSubmit}>
     Vote for GenerEOS
   </a>
-)
+);
 
 const mapStateToProps = createStructuredSelector({});
 

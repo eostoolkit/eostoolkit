@@ -6,7 +6,6 @@ import { makeSelectSearchName, makeSelectSearchPubkey } from './selectors';
 import { LOOKUP_ACCOUNT, LOOKUP_PUBKEY } from './constants';
 import { lookupLoading, lookupLoaded } from './actions';
 
-<<<<<<< HEAD
 function* getCurrency(token, name) {
   const eosClient = yield Eos(eosConfig);
   const currency = yield eosClient.getCurrencyBalance(token, name);
@@ -32,20 +31,6 @@ function* getAccountDetail(name) {
   return {
     ...(yield eosClient.getAccount(name)),
     balances,
-=======
-function* getAccountDetail(eosClient, name) {
-  const currency = yield eosClient.getCurrencyBalance('eosio.token', name);
-  // TODO: This is some prep work for airdrop token support.
-  const currencies = currency.map(c => {
-    return {
-      account: 'eosio.token',
-      balance: c,
-    };
-  });
-  return {
-    ...(yield eosClient.getAccount(name)),
-    currencies,
->>>>>>> 6080b9755ddab52bca3ed9f53c7727d8412c7ca1
   };
 }
 
