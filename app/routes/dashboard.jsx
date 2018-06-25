@@ -4,7 +4,6 @@ import CreateAccount from 'containers/CreateAccount/Loadable';
 import CreateProxy from 'containers/CreateProxy/Loadable';
 import SetProxy from 'containers/SetProxy/Loadable';
 import BuyRam from 'containers/BuyRam/Loadable';
-import BuyRamBytes from 'containers/BuyRamBytes/Loadable';
 import SellRam from 'containers/SellRam/Loadable';
 import Delegate from 'containers/Delegate/Loadable';
 import Undelegate from 'containers/Undelegate/Loadable';
