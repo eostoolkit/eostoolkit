@@ -4,7 +4,6 @@
  *
  */
 
-import React from 'react';
 import SetProxyForm from 'components/SetProxyForm';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -16,22 +15,6 @@ import injectReducer from 'utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
 import submitAction from './actions';
-
-// eslint-disable-next-line react/prefer-stateless-function
-export class SetProxy extends React.Component {
-  render() {
-    const { eosAccount, handleSubmit } = this.props;
-    return (
-      <div>
-        <SetProxyForm handleSubmit={handleSubmit} eosAccount={eosAccount} />
-      </div>
-    );
-  }
-}
-
-SetProxy.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = createStructuredSelector({
   eosAccount: makeSelectEosAccount(),
@@ -55,4 +38,4 @@ export default compose(
   withReducer,
   withSaga,
   withConnect
-)(SetProxy);
+)(SetProxyForm);

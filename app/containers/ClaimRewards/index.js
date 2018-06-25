@@ -4,7 +4,6 @@
  *
  */
 
-import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -16,18 +15,6 @@ import injectReducer from 'utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
 import submitAction from './actions';
-
-// eslint-disable-next-line react/prefer-stateless-function
-export class ClaimRewards extends React.Component {
-  render() {
-    const { eosAccount, handleSubmit } = this.props;
-    return (
-      <div>
-        <ClaimRewardsForm handleSubmit={handleSubmit} eosAccount={eosAccount} />
-      </div>
-    );
-  }
-}
 
 const mapStateToProps = createStructuredSelector({
   eosAccount: makeSelectEosAccount(),
@@ -51,4 +38,4 @@ export default compose(
   withReducer,
   withSaga,
   withConnect
-)(ClaimRewards);
+)(ClaimRewardsForm);
