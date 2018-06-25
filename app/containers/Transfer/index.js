@@ -16,7 +16,6 @@ import reducer from './reducer';
 import saga from './saga';
 import submitAction from './actions';
 
-
 const mapStateToProps = createStructuredSelector({
   eosAccount: makeSelectEosAccount(),
 });

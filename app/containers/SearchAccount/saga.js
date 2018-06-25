@@ -1,22 +1,36 @@
 import Eos from 'eosjs';
 import eosConfig from 'eosConfig';
-import { takeLatest, call, put, select, all } from 'redux-saga/effects';
+import eosTokens from 'eosTokens';
+import { takeLatest, call, put, select, all, fork, join } from 'redux-saga/effects';
 import { makeSelectSearchName, makeSelectSearchPubkey } from './selectors';
 import { LOOKUP_ACCOUNT, LOOKUP_PUBKEY } from './constants';
 import { lookupLoading, lookupLoaded } from './actions';
 
-function* getAccountDetail(eosClient, name) {
-  const currency = yield eosClient.getCurrencyBalance('eosio.token', name);
+function* getCurrency(token, name) {
+  const eosClient = yield Eos(eosConfig);
+  const currency = yield eosClient.getCurrencyBalance(token, name);
   // TODO: This is some prep work for airdrop token support.
   const currencies = currency.map(c => {
     return {
-      account: 'eosio.token',
+      account: token,
       balance: c,
     };
   });
+  return currencies;
+}
+
+function* getAccountDetail(name) {
+  const eosClient = yield Eos(eosConfig);
+  const tokens = yield all(
+    eosTokens.map(token => {
+      return fork(getCurrency, token, name);
+    })
+  );
+  const currencies = yield join(...tokens);
+  const balances = currencies.reduce((a, b) => a.concat(b), []);
   return {
     ...(yield eosClient.getAccount(name)),
-    currencies,
+    balances,
   };
 }
 
@@ -26,16 +40,15 @@ function* getAccountDetail(eosClient, name) {
 function* performSearchPubkey() {
   const eosClient = yield Eos(eosConfig);
   const publicKey = yield select(makeSelectSearchPubkey());
-  const accounts = [];
   yield put(lookupLoading());
   try {
     const res = yield eosClient.getKeyAccounts(publicKey);
-    // TODO: fix the following rule quickly
-    // eslint-disable-next-line no-restricted-syntax
-    for (const accountName of res.account_names) {
-      const detail = yield call(getAccountDetail, eosClient, accountName);
-      accounts.push(detail);
-    }
+    const details = yield all(
+      res.account_names.map(accountName => {
+        return fork(getAccountDetail, accountName);
+      })
+    );
+    const accounts = yield join(...details);
     yield put(lookupLoaded(accounts));
   } catch (err) {
     yield put(lookupLoaded([]));
