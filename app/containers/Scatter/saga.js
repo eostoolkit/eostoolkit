@@ -65,9 +65,18 @@ function* refreshEosAccountData() {
   const eosClient = yield select(EosClient());
   try {
     if (accountName && accountName !== 'Attach an Account') {
-      const account = yield eosClient.getAccount(accountName);
       const currency = yield eosClient.getCurrencyBalance('eosio.token', accountName);
-      account.currency = currency;
+      // TODO: This is some prep work for airdrop token support.
+      const currencies = currency.map(c => {
+        return {
+          account: 'eosio.token',
+          balance: c,
+        };
+      });
+      const account = {
+        ...(yield eosClient.getAccount(accountName)),
+        currencies,
+      };
       yield put(refreshedAccountData(account));
     } else {
       yield put(refreshedAccountData(null));
