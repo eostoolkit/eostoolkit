@@ -26,8 +26,8 @@ function ResourcesTable({ ...props }) {
           <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
             <TableCell className={classes.tableCell}>RAM</TableCell>
             <TableCell className={classes.tableCell}>
-              {account.ram_usage} kB used<br />
-              {account.ram_quota} kB owned
+              {account.ram_usage} bytes used<br />
+              {account.ram_quota} bytes owned
             </TableCell>
           </TableRow>
           <TableRow className={classes.tableRowHover}>
