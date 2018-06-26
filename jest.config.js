@@ -1,5 +1,5 @@
 const config = {
-  testEnvironment: 'jsdom',
+  testEnvironment: 'node',
   collectCoverageFrom: [
     'app/**/*.{js,jsx}',
     '!app/**/*.test.{js,jsx}',

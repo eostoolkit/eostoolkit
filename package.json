@@ -16,7 +16,7 @@
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
     "analyze": "node ./internals/scripts/analyze.js",
-    "extract-intl": "babel-node --presets env,stage-0-- ./internals/scripts/extract-intl.js",
+    "extract-intl": "babel-node ./internals/scripts/extract-intl.js",
     "npmcheckversion": "node ./internals/scripts/npmcheckversion.js",
     "preinstall": "npm run npmcheckversion",
     "postinstall": "npm run build:dll",
@@ -39,7 +39,6 @@
     "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts --ext js,jsx",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
-    "pretest": "npm run test:clean && npm run lint",
     "test:clean": "rimraf ./coverage",
     "test": "cross-env NODE_ENV=test ./node_modules/.bin/babel-node ./node_modules/.bin/jest",
     "test:coverage": "yarn run test --coverage",
@@ -49,7 +48,7 @@
   "lint-staged": {
     "*.js": "lint:eslint"
   },
-  "pre-commit": "lint:staged",
+  "pre-commit": "lint:staged, test",
   "dllPlugin": {
     "path": "node_modules/react-boilerplate-dlls",
     "exclude": [
