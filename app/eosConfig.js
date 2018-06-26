@@ -4,7 +4,7 @@ const testnet = false;
 // Configuration options for EOS and Scatter
 const scatterConfig = {
   blockchain: 'eos',
-  host: testnet ? 'dev.cryptolions.io' : 'nodes.get-scatter.com', // ( or null if endorsed chainId )
+  host: testnet ? 'dev.cryptolions.io' : 'mainnet.genereos.io:443',//'nodes.get-scatter.com', // ( or null if endorsed chainId )
   port: testnet ? '38888' : '443', // ( or null if defaulting to 80 )
   chainId: testnet
     ? '038f4b0fc8ff18a4f0842a8f0564611f6e96e8535901dd45e43ac8691a1c4dca'
@@ -20,7 +20,7 @@ const scatterEosOptions = {
 };
 
 const eosConfig = {
-  httpEndpoint: testnet ? 'http://dev.cryptolions.io:38888' : 'https://nodes.get-scatter.com:443', // ( or null if endorsed chainId )
+  httpEndpoint: testnet ? 'http://dev.cryptolions.io:38888' : 'https://mainnet.genereos.io:443',//'https://nodes.get-scatter.com:443', // ( or null if endorsed chainId )
   broadcast: true,
   sign: true,
   chainId: testnet
