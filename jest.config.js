@@ -1,5 +1,5 @@
 const config = {
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   collectCoverageFrom: [
     'app/**/*.{js,jsx}',
     '!app/**/*.test.{js,jsx}',
@@ -18,11 +18,12 @@ const config = {
   },
   moduleDirectories: ['node_modules', 'app'],
   moduleNameMapper: {
-    '.*\\.(css|less|styl|scss|sass)$': '../mocks/cssModule.js',
-    '.*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '../mocks/image.js',
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/internals/mocks/file.js',
+    '\\.(css|scss)$': 'identity-obj-proxy', // http://facebook.github.io/jest/docs/en/webpack.html#mocking-css-modules
   },
   setupFiles: ['./jest.setup.js'],
   testMatch: ['**/tests/**/*.test.js'],
 };
 
-export default config;
+module.exports = config;

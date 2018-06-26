@@ -5,6 +5,7 @@
  */
 
 import {
+  DEFAULT_ACTION,
   SCATTER_LOADED,
   EOSCLIENT_LOADED,
   CONNECT_ACCOUNT,
@@ -61,6 +62,7 @@ export function detachedAccount() {
   };
 }
 
+<<<<<<< HEAD
 export function refreshAccountData() {
   return {
     type: REFRESH_DATA,
@@ -71,5 +73,11 @@ export function refreshedAccountData(data) {
   return {
     type: REFRESHED_DATA,
     data,
+=======
+export default function defaultAction(form) {
+  return {
+    type: DEFAULT_ACTION,
+    form,
+>>>>>>> Updated .babelrc and Jest config for the unit tests.
   };
 }

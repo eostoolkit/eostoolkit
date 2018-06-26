@@ -4,7 +4,7 @@
  *
  */
 
-import { LOOKUP_ACCOUNT, LOOKUP_PUBKEY, LOOKUP_LOADING, LOOKUP_LOADED } from './constants';
+import { DEFAULT_ACTION, LOOKUP_ACCOUNT, LOOKUP_PUBKEY, LOOKUP_LOADING, LOOKUP_LOADED } from './constants';
 
 export function lookupAccount(name) {
   return {
@@ -30,5 +30,12 @@ export function lookupLoaded(accounts) {
   return {
     type: LOOKUP_LOADED,
     accounts,
+  };
+}
+
+export default function defaultAction(form) {
+  return {
+    type: DEFAULT_ACTION,
+    form,
   };
 }
