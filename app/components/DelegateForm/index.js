@@ -32,7 +32,7 @@ import CardBody from 'components/Card/CardBody';
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit, eosAccount, classes } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, classes } = props;
   return (
     <form>
       <GridContainer>
@@ -57,19 +57,18 @@ const FormObject = props => {
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
             labelText="Stake Owner"
-            id="creator"
-            error={errors.creator}
-            touched={touched.creator}
+            id="owner"
+            error={errors.owner}
+            touched={touched.owner}
             formControlProps={{
               fullWidth: true,
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Scatter account',
-              value: eosAccount,
+              placeholder: 'Account that controls the stake',
+              value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
-              disabled: true,
             }}
           />
         </GridItem>
@@ -112,7 +111,7 @@ const FormObject = props => {
         <GridItem xs={12} sm={12} md={6}>
           <Tooltip
             id="tooltip-right"
-            title="Tranfer Off: Creator retains staking control and voting rights. Transfer On: New account gains staking control and voting rights."
+            title="Tranfer Off: owner retains staking control and voting rights. Transfer On: New account gains staking control and voting rights."
             placement="right"
             classes={{ tooltip: classes.formTooltip }}>
             <FormControlLabel
@@ -157,6 +156,7 @@ const FormObject = props => {
 };
 
 const validationSchema = Yup.object().shape({
+  owner: Yup.string().required('Owner name is required'),
   name: Yup.string().required('Account name is required'),
   net: Yup.number()
     .required('NET Stake is required')
@@ -183,15 +183,14 @@ const DelegateForm = props => {
           <CardBody>
             <Formik
               initialValues={{
-                creator: '',
+                owner: eosAccount,
                 name: '',
                 net: '0',
                 cpu: '0',
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
-              eosAccount={eosAccount}
-              render={formikProps => <FormObject {...formikProps} eosAccount={eosAccount} classes={classes} />}
+              render={formikProps => <FormObject {...formikProps} classes={classes} />}
             />
           </CardBody>
         </Card>

@@ -21,7 +21,7 @@ function* performAction() {
       if (form.activeKey) {
         tr.updateauth(
           {
-            account: eosAccount,
+            account: form.owner,
             permission: 'active',
             parent: 'owner',
             auth: form.activeKey,
@@ -32,7 +32,7 @@ function* performAction() {
       if (form.ownerKey) {
         tr.updateauth(
           {
-            account: eosAccount,
+            account: form.owner,
             permission: 'owner',
             parent: '',
             auth: form.ownerKey,

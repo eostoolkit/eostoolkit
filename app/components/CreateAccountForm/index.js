@@ -32,7 +32,7 @@ import CardBody from 'components/Card/CardBody';
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit, eosAccount, classes } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, classes } = props;
   return (
     <form>
       <GridContainer>
@@ -56,20 +56,19 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Creator"
-            id="creator"
-            error={errors.creator}
-            touched={touched.creator}
+            labelText="owner"
+            id="owner"
+            error={errors.owner}
+            touched={touched.owner}
             formControlProps={{
               fullWidth: true,
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Scatter account',
-              value: eosAccount,
+              placeholder: 'Account that performs action',
+              value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
-              disabled: true,
             }}
           />
         </GridItem>
@@ -166,7 +165,7 @@ const FormObject = props => {
         <GridItem xs={12} sm={12} md={6}>
           <Tooltip
             id="tooltip-right"
-            title="Tranfer Off: Creator retains staking control and voting rights. Transfer On: New account gains staking control and voting rights."
+            title="Tranfer Off: owner retains staking control and voting rights. Transfer On: New account gains staking control and voting rights."
             placement="right"
             classes={{ tooltip: classes.formTooltip }}>
             <FormControlLabel
@@ -211,6 +210,7 @@ const FormObject = props => {
 };
 
 const validationSchema = Yup.object().shape({
+  owner: Yup.string().required('Creator name is required'),
   name: Yup.string()
     .required('Account name is required')
     .matches(/([a-z1-5]){12,}/, {
@@ -246,7 +246,7 @@ const CreateAccountForm = props => {
           <CardBody>
             <Formik
               initialValues={{
-                creator: '',
+                owner: eosAccount,
                 name: '',
                 ownerKey: '',
                 activeKey: '',
@@ -256,8 +256,7 @@ const CreateAccountForm = props => {
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
-              eosAccount={eosAccount}
-              render={formikProps => <FormObject {...formikProps} eosAccount={eosAccount} classes={classes} />}
+              render={formikProps => <FormObject {...formikProps} classes={classes} />}
             />
           </CardBody>
         </Card>
@@ -275,7 +274,7 @@ const CreateAccountForm = props => {
               The <i>newaccount</i> action creates a new account.
               <br />
               <br />
-              As an authorized party I <i>signer</i> wish to exercise the authority of <i>creator</i> to create a new
+              As an authorized party I <i>signer</i> wish to exercise the authority of <i>owner</i> to create a new
               account on this system named <i>name</i> such that the new account&apos;s owner public key shall be{' '}
               <i>owner key</i> and the active public key shall be <i>active key</i>.
             </p>

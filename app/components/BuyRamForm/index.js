@@ -40,7 +40,6 @@ import buyRamFormStyle from './buyRamFormStyle';
 const FormObject = props => {
   const {
     classes,
-    eosAccount,
     errors,
     handleBlur,
     handleChange,
@@ -85,19 +84,18 @@ const FormObject = props => {
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
             labelText="Payer"
-            id="creator"
-            error={errors.creator}
-            touched={touched.creator}
+            id="owner"
+            error={errors.owner}
+            touched={touched.owner}
             formControlProps={{
               fullWidth: true,
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Scatter account',
-              value: eosAccount,
+              placeholder: 'Account that pays for ram',
+              value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
-              disabled: true,
             }}
           />
         </GridItem>
@@ -162,6 +160,7 @@ const validationSchema = ({ unit: { isEOS } }) => {
     .integer('RAM cannot be fractional');
 
   return Yup.object().shape({
+    owner: Yup.string().required('Payer name is required'),
     name: Yup.string().required('Account name is required'),
     byteQuantity: isEOS ? byteQuantity : byteQuantity.required('RAM purchase is required'),
     eosQuantity: !isEOS ? eosQuantity : eosQuantity.required('RAM purchase is required'),
@@ -169,7 +168,7 @@ const validationSchema = ({ unit: { isEOS } }) => {
 };
 
 const BuyRamForm = props => {
-  const { classes, eosAccount, handleSubmit, unit, ...formikProps } = props;
+  const { classes, handleSubmit, unit, ...formikProps } = props;
   const { errors, handleBlur, handleChange, submitForm, touched, values } = formikProps;
   return (
     <GridContainer>
@@ -184,7 +183,6 @@ const BuyRamForm = props => {
           <CardBody>
             <FormObject
               classes={classes}
-              eosAccount={eosAccount}
               errors={errors}
               handleBlur={handleBlur}
               handleChange={handleChange}
@@ -224,7 +222,7 @@ const enhance = compose(
     },
     mapPropsToValues: props => ({
       byteQuantity: 8192,
-      creator: '',
+      owner: props.eosAccount,
       eosQuantity: 1,
       isEOS: props.unit.isEOS,
       name: '',

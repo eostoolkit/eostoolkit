@@ -26,7 +26,7 @@ import CardBody from 'components/Card/CardBody';
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 
 const FormObject = props => {
-  const { touched, errors, handleChange, handleBlur, handleSubmit, eosAccount } = props;
+  const { touched, errors, handleChange, handleBlur, handleSubmit, values } = props;
   return (
     <form>
       <GridContainer>
@@ -41,11 +41,10 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Scatter account',
-              value: eosAccount,
+              placeholder: 'Account that claims',
+              value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
-              disabled: true,
             }}
           />
         </GridItem>
@@ -80,11 +79,10 @@ const ClaimRewardsForm = props => {
           <CardBody>
             <Formik
               initialValues={{
-                owner: '',
+                owner: eosAccount,
               }}
               onSubmit={handleSubmit}
-              eosAccount={eosAccount}
-              render={formikProps => <FormObject {...formikProps} eosAccount={eosAccount} classes={classes} />}
+              render={formikProps => <FormObject {...formikProps} classes={classes} />}
             />
           </CardBody>
         </Card>

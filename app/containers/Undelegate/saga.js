@@ -20,7 +20,7 @@ function* performAction() {
     const res = yield eosClient.transaction(tr => {
       tr.undelegatebw(
         {
-          from: eosAccount,
+          from: form.owner,
           receiver: form.name,
           unstake_net_quantity: `${Number(form.net)
             .toFixed(4)

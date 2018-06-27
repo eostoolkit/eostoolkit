@@ -20,7 +20,7 @@ function* performAction() {
     const res = yield eosClient.transaction(tr => {
       tr.regproxy(
         {
-          proxy: eosAccount,
+          proxy: form.owner,
           isproxy: form.isProxy ? 1 : 0,
         },
         { authorization: [{ actor: eosAccount, permission: eosAuth }] }
