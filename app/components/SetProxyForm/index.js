@@ -29,7 +29,7 @@ import CardBody from 'components/Card/CardBody';
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit, eosAccount } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
   return (
     <form>
       <GridContainer>
@@ -53,20 +53,19 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Creator"
-            id="creator"
-            error={errors.creator}
-            touched={touched.creator}
+            labelText="Proxied Account Name"
+            id="owner"
+            error={errors.owner}
+            touched={touched.owner}
             formControlProps={{
               fullWidth: true,
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Scatter account',
-              value: eosAccount,
+              placeholder: 'Account that will be proxied',
+              value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
-              disabled: true,
             }}
           />
         </GridItem>
@@ -88,6 +87,7 @@ const FormObject = props => {
 };
 
 const validationSchema = Yup.object().shape({
+  owner: Yup.string().required('Proxied name is required'),
   name: Yup.string().required('Account name is required'),
 });
 
@@ -108,13 +108,12 @@ const SetProxyForm = props => {
           <CardBody>
             <Formik
               initialValues={{
-                creator: '',
+                owner: eosAccount,
                 name: '',
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
-              eosAccount={eosAccount}
-              render={formikProps => <FormObject {...formikProps} eosAccount={eosAccount} classes={classes} />}
+              render={formikProps => <FormObject {...formikProps} classes={classes} />}
             />
           </CardBody>
         </Card>

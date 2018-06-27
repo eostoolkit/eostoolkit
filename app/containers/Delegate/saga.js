@@ -23,7 +23,7 @@ function* performAction() {
     const res = yield eosClient.transaction(tr => {
       tr.delegatebw(
         {
-          from: eosAccount,
+          from: form.owner,
           receiver: form.name,
           stake_net_quantity: `${Number(form.net)
             .toFixed(4)

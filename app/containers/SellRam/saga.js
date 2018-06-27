@@ -20,7 +20,7 @@ function* performAction() {
     const res = yield eosClient.transaction(tr => {
       tr.sellram(
         {
-          account: eosAccount,
+          account: form.owner,
           bytes: Number(form.ram),
         },
         { authorization: [{ actor: eosAccount, permission: eosAuth }] }

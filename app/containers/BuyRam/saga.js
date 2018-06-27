@@ -27,11 +27,11 @@ function* performAction() {
   }
 }
 
-function buyRAM({ eosClient, eosAccount, eosAuth, form: { name, eosQuantity } }) {
+function buyRAM({ eosClient, eosAccount, eosAuth, form: { owner, name, eosQuantity } }) {
   return eosClient.transaction(tr => {
     tr.buyram(
       {
-        payer: eosAccount,
+        payer: owner,
         receiver: name,
         quant: `${Number(eosQuantity)
           .toFixed(4)
@@ -42,11 +42,11 @@ function buyRAM({ eosClient, eosAccount, eosAuth, form: { name, eosQuantity } })
   });
 }
 
-function buyRAMBytes({ eosClient, eosAccount, eosAuth, form: { name, byteQuantity } }) {
+function buyRAMBytes({ eosClient, eosAccount, eosAuth, form: { owner, name, byteQuantity } }) {
   return eosClient.transaction(tr => {
     tr.buyrambytes(
       {
-        payer: eosAccount,
+        payer: owner,
         receiver: name,
         bytes: Number(byteQuantity),
       },

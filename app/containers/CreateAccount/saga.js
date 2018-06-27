@@ -21,7 +21,7 @@ function* performAction() {
     const res = yield eosClient.transaction(tr => {
       tr.newaccount(
         {
-          creator: eosAccount,
+          creator: form.owner,
           name: form.name,
           owner: form.ownerKey,
           active: form.activeKey,
@@ -30,7 +30,7 @@ function* performAction() {
       );
       tr.buyrambytes(
         {
-          payer: eosAccount,
+          payer: form.creator,
           receiver: form.name,
           bytes: Number(form.ram),
         },
@@ -38,7 +38,7 @@ function* performAction() {
       );
       tr.delegatebw(
         {
-          from: eosAccount,
+          from: form.creator,
           receiver: form.name,
           stake_net_quantity: `${Number(form.net)
             .toFixed(4)

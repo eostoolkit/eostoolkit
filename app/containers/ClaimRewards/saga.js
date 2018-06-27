@@ -5,7 +5,7 @@ import EosClient, {
 } from 'containers/Scatter/selectors';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
 import { DEFAULT_ACTION } from './constants';
-
+import Form from './selectors';
 //
 // Get the EOS Client once Scatter loads
 //
@@ -13,12 +13,13 @@ function* performAction() {
   const eosClient = yield select(EosClient());
   const eosAccount = yield select(EosAccount());
   const eosAuth = yield select(EosAuthority());
+  const form = yield select(Form());
   yield put(loadingNotification());
   try {
     const res = yield eosClient.transaction(tr => {
       tr.claimrewards(
         {
-          owner: eosAccount,
+          owner: form.owner,
         },
         { authorization: [{ actor: eosAccount, permission: eosAuth }] }
       );

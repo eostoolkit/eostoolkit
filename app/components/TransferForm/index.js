@@ -29,7 +29,7 @@ import CardBody from 'components/Card/CardBody';
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit, eosAccount } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
   return (
     <form>
       <GridContainer>
@@ -44,7 +44,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'The account that receives the EOS',
+              placeholder: 'Account that receives the Token',
               value: values.name,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -54,25 +54,24 @@ const FormObject = props => {
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
             labelText="Sender"
-            id="creator"
-            error={errors.creator}
-            touched={touched.creator}
+            id="owner"
+            error={errors.owner}
+            touched={touched.owner}
             formControlProps={{
               fullWidth: true,
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Scatter account',
-              value: eosAccount,
+              placeholder: 'Account that sends the Token',
+              value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
-              disabled: true,
             }}
           />
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Quantity (in EOS)"
+            labelText="Quantity (in Tokens)"
             id="quantity"
             error={errors.quantity}
             touched={touched.quantity}
@@ -81,7 +80,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'How much EOS to send',
+              placeholder: 'How many Tokens to send',
               value: values.quantity,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -123,6 +122,7 @@ const FormObject = props => {
 };
 
 const validationSchema = Yup.object().shape({
+  owner: Yup.string().required('Sender name is required'),
   name: Yup.string().required('Account name is required'),
   memo: Yup.string(),
   quantity: Yup.number()
@@ -145,15 +145,14 @@ const TransferForm = props => {
           <CardBody>
             <Formik
               initialValues={{
-                creator: '',
+                owner: eosAccount,
                 name: '',
                 quantity: '0',
                 memo: '',
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
-              eosAccount={eosAccount}
-              render={formikProps => <FormObject {...formikProps} eosAccount={eosAccount} classes={classes} />}
+              render={formikProps => <FormObject {...formikProps} classes={classes} />}
             />
           </CardBody>
         </Card>

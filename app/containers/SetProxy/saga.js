@@ -20,7 +20,7 @@ function* performAction() {
     const res = yield eosClient.transaction(tr => {
       tr.voteproducer(
         {
-          voter: eosAccount,
+          voter: form.owner,
           proxy: form.name,
         },
         { authorization: [{ actor: eosAccount, permission: eosAuth }] }

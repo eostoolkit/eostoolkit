@@ -20,7 +20,7 @@ function* performAction() {
     const res = yield eosClient.transfer(
       {
         account: 'eosio.token',
-        from: eosAccount,
+        from: form.owner,
         to: form.name,
         quantity: `${Number(form.quantity)
           .toFixed(4)
