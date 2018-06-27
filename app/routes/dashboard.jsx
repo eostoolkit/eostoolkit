@@ -13,6 +13,7 @@ import SearchAccount from 'containers/SearchAccount/Loadable';
 import SimplePermissions from 'containers/SimplePermissions/Loadable';
 import ClaimRewards from 'containers/ClaimRewards/Loadable';
 import Refund from 'containers/Refund/Loadable';
+import BidName from 'containers/BidName/Loadable';
 // @material-ui/icons
 import {
   AccountBalance,
@@ -22,6 +23,7 @@ import {
   AssignmentTurnedIn,
   Payment,
   DeveloperBoard,
+  Gavel,
 } from '@material-ui/icons';
 
 const dashRoutes = [
@@ -122,6 +124,12 @@ const dashRoutes = [
     ],
   },
   {
+    path: '/bidname',
+    name: 'Premium Names',
+    icon: Gavel,
+    component: BidName,
+  },
+  {
     collapse: true,
     path: '/block-producer',
     name: 'Block Producer',
@@ -136,100 +144,6 @@ const dashRoutes = [
       },
     ],
   },
-
-  // {
-  //   collapse: true,
-  //   path: "-page",
-  //   name: "Pages",
-  //   state: "openPages",
-  //   icon: Image,
-  //   views: pages
-  // },
-  // {
-  //   collapse: true,
-  //   path: "/forms",
-  //   name: "Forms",
-  //   state: "openForms",
-  //   icon: ContentPaste,
-  //   views: [
-  //     {
-  //       path: "/forms/regular-forms",
-  //       name: "Regular Forms",
-  //       mini: "RF",
-  //       component: RegularForms
-  //     },
-  //     {
-  //       path: "/forms/extended-forms",
-  //       name: "Extended Forms",
-  //       mini: "EF",
-  //       component: ExtendedForms
-  //     },
-  //     {
-  //       path: "/forms/validation-forms",
-  //       name: "Validation Forms",
-  //       mini: "VF",
-  //       component: ValidationForms
-  //     },
-  //     { path: "/forms/wizard", name: "Wizard", mini: "W", component: Wizard }
-  //   ]
-  // },
-  // {
-  //   collapse: true,
-  //   path: "/tables",
-  //   name: "Tables",
-  //   state: "openTables",
-  //   icon: GridOn,
-  //   views: [
-  //     {
-  //       path: "/tables/regular-tables",
-  //       name: "Regular Tables",
-  //       mini: "RT",
-  //       component: RegularTables
-  //     },
-  //     {
-  //       path: "/tables/extended-tables",
-  //       name: "Extended Tables",
-  //       mini: "ET",
-  //       component: ExtendedTables
-  //     },
-  //     {
-  //       path: "/tables/react-tables",
-  //       name: "React Tables",
-  //       mini: "RT",
-  //       component: ReactTables
-  //     }
-  //   ]
-  // },
-  // {
-  //   collapse: true,
-  //   path: "/maps",
-  //   name: "Maps",
-  //   state: "openMaps",
-  //   icon: Place,
-  //   views: [
-  //     {
-  //       path: "/maps/google-maps",
-  //       name: "Google Maps",
-  //       mini: "GM",
-  //       component: GoogleMaps
-  //     },
-  //     {
-  //       path: "/maps/full-screen-maps",
-  //       name: "Full Screen Map",
-  //       mini: "FSM",
-  //       component: FullScreenMap
-  //     },
-  //     {
-  //       path: "/maps/vector-maps",
-  //       name: "Vector Map",
-  //       mini: "VM",
-  //       component: VectorMap
-  //     }
-  //   ]
-  // },
-  // { path: "/widgets", name: "Widgets", icon: WidgetsIcon, component: Widgets },
-  // { path: "/charts", name: "Charts", icon: Timeline, component: Charts },
-  // { path: "/calendar", name: "Calendar", icon: DateRange, component: Calendar },
   { redirect: true, path: '/account/buybytes', pathTo: '/account/buyram', name: 'Buy Ram (bytes)' },
   { redirect: true, path: '/', pathTo: '/home', name: 'Home' },
 ];
