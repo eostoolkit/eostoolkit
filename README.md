@@ -8,7 +8,3 @@
 5.  Run `npm run build` to build the deployable package.
 
 Now you're ready to rumble!
-
-## License
-
-This project has a custom license, Copyright (c) 2018 Nathan Rempel. For more information see `LICENSE.md`.
