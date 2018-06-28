@@ -15,6 +15,7 @@ import ClaimRewards from 'containers/ClaimRewards/Loadable';
 import Refund from 'containers/Refund/Loadable';
 import BidName from 'containers/BidName/Loadable';
 import ForumPost from 'containers/ForumPost/Loadable';
+import Blockone from 'containers/Blockone/Loadable';
 // @material-ui/icons
 import {
   AccountBalance,
@@ -26,11 +27,18 @@ import {
   DeveloperBoard,
   Gavel,
   Forum,
+  Favorite,
 } from '@material-ui/icons';
 
 const dashRoutes = [
   {
     path: '/home',
+    name: 'Support',
+    icon: Favorite,
+    component: Blockone,
+  },
+  {
+    path: '/governance',
     name: 'Governance',
     icon: AccountBalance,
     component: Governance,
