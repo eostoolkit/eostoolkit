@@ -30,7 +30,7 @@ function* performAction() {
       );
       tr.buyrambytes(
         {
-          payer: form.creator,
+          payer: form.owner,
           receiver: form.name,
           bytes: Number(form.ram),
         },
@@ -38,7 +38,7 @@ function* performAction() {
       );
       tr.delegatebw(
         {
-          from: form.creator,
+          from: form.owner,
           receiver: form.name,
           stake_net_quantity: `${Number(form.net)
             .toFixed(4)
