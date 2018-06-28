@@ -4,8 +4,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 
 import indexRoutes from 'routes/index';
 
-// eslint-disable-next-line import/extensions
-import './material-dashboard-pro-react.css?v=1.2.0';
+import './material-dashboard-pro-react.css';
 
 const hist = createBrowserHistory();
 

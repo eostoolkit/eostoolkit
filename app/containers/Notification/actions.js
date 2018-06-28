@@ -4,7 +4,13 @@
  *
  */
 
-import { NOTIFICATION_SUCCESS, NOTIFICATION_FAILURE, NOTIFICATION_LOADING, NOTIFICATION_CLOSE } from './constants';
+import {
+  DEFAULT_ACTION,
+  NOTIFICATION_SUCCESS,
+  NOTIFICATION_FAILURE,
+  NOTIFICATION_LOADING,
+  NOTIFICATION_CLOSE,
+} from './constants';
 
 export function successNotification(message) {
   return {
@@ -29,5 +35,12 @@ export function loadingNotification() {
 export function closeNotification() {
   return {
     type: NOTIFICATION_CLOSE,
+  };
+}
+
+export default function defaultAction(form) {
+  return {
+    type: DEFAULT_ACTION,
+    form,
   };
 }

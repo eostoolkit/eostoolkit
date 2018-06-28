@@ -1,13 +1,8 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import { FormattedMessage, defineMessages } from 'react-intl';
-import { Provider } from 'react-redux';
-import { browserHistory } from 'react-router-dom';
+import { shallow } from 'enzyme';
+import { defineMessages } from 'react-intl';
 
-import ConnectedLanguageProvider, { LanguageProvider } from '../index';
-import configureStore from '../../../configureStore';
-
-import { translationMessages } from '../../../i18n';
+import { LanguageProvider } from '../index';
 
 const messages = defineMessages({
   someMessage: {
@@ -26,24 +21,5 @@ describe('<LanguageProvider />', () => {
       </LanguageProvider>
     );
     expect(renderedComponent.contains(children)).toBe(true);
-  });
-});
-
-describe('<ConnectedLanguageProvider />', () => {
-  let store;
-
-  beforeAll(() => {
-    store = configureStore({}, browserHistory);
-  });
-
-  it('should render the default language messages', () => {
-    const renderedComponent = mount(
-      <Provider store={store}>
-        <ConnectedLanguageProvider messages={translationMessages}>
-          <FormattedMessage {...messages.someMessage} />
-        </ConnectedLanguageProvider>
-      </Provider>
-    );
-    expect(renderedComponent.contains(<FormattedMessage {...messages.someMessage} />)).toBe(true);
   });
 });
