@@ -14,6 +14,7 @@ import SimplePermissions from 'containers/SimplePermissions/Loadable';
 import ClaimRewards from 'containers/ClaimRewards/Loadable';
 import Refund from 'containers/Refund/Loadable';
 import BidName from 'containers/BidName/Loadable';
+import ForumPost from 'containers/ForumPost/Loadable';
 // @material-ui/icons
 import {
   AccountBalance,
@@ -24,6 +25,7 @@ import {
   Payment,
   DeveloperBoard,
   Gavel,
+  Forum,
 } from '@material-ui/icons';
 
 const dashRoutes = [
@@ -122,6 +124,12 @@ const dashRoutes = [
         component: SetProxy,
       },
     ],
+  },
+  {
+    path: '/forumpost',
+    name: 'Eosio Forum Post',
+    icon: Forum,
+    component: ForumPost,
   },
   {
     path: '/bidname',
