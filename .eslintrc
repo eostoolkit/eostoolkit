@@ -1,10 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react"
-  ],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "env": {
     "browser": true,
     "node": true,
@@ -16,12 +12,7 @@
     "exec": true,
     "mkdir": true
   },
-  "plugins": [
-    "prettier",
-    "redux-saga",
-    "react",
-    "jsx-a11y"
-  ],
+  "plugins": ["prettier", "redux-saga", "react", "jsx-a11y"],
   "parserOptions": {
     "allowImportExportEverywhere": true,
     "ecmaVersion": 6,
@@ -34,10 +25,7 @@
     "arrow-parens": 0,
     "arrow-body-style": 0,
     "class-methods-use-this": 0,
-    "comma-dangle": [
-      2,
-      "always-multiline"
-    ],
+    "comma-dangle": [2, "always-multiline"],
     "import/imports-first": 0,
     "import/newline-after-import": 0,
     "import/no-dynamic-require": 0,
@@ -67,7 +55,8 @@
     "no-use-before-define": 0,
     "prefer-template": 2,
     "prettier/prettier": [
-      "error", {
+      "error",
+      {
         "bracketSpacing": true,
         "jsxBracketSameLine": true,
         "printWidth": 120,
@@ -76,10 +65,7 @@
       }
     ],
     "react/forbid-prop-types": 0,
-    "react/jsx-first-prop-new-line": [
-      2,
-      "multiline"
-    ],
+    "react/jsx-first-prop-new-line": [2, "multiline"],
     "react/jsx-filename-extension": 0,
     "react/jsx-no-target-blank": 0,
     "react/prop-types": 0,
