@@ -1,25 +1,18 @@
 {
   "plugins": [
-    "styled-components",
-    "transform-object-rest-spread",
-    "transform-class-properties",
-    "transform-runtime"
+    "styled-components"
   ],
   "presets": [
     [
       "env",
       {
-        "targets": {
-          "browsers": ["last 2 versions"]
-        }
+        "modules": false
       }
     ],
-    "react"
+    "react",
+    "stage-0"
   ],
   "env": {
-    "development": {
-      "presets": ["stage-0"]
-    },
     "production": {
       "only": [
         "app"

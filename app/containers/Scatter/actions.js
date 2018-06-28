@@ -5,13 +5,13 @@
  */
 
 import {
-  DEFAULT_ACTION,
   SCATTER_LOADED,
   EOSCLIENT_LOADED,
   CONNECT_ACCOUNT,
   ATTACHED_ACCOUNT,
   REMOVE_ACCOUNT,
   DETACHED_ACCOUNT,
+  REFRESH_DATA,
   REFRESHED_DATA,
 } from './constants';
 
@@ -61,16 +61,15 @@ export function detachedAccount() {
   };
 }
 
+export function refreshAccountData() {
+  return {
+    type: REFRESH_DATA,
+  };
+}
+
 export function refreshedAccountData(data) {
   return {
     type: REFRESHED_DATA,
     data,
-  };
-}
-
-export default function defaultAction(form) {
-  return {
-    type: DEFAULT_ACTION,
-    form,
   };
 }
