@@ -1,7 +1,6 @@
-//Internationalization
+// Internationalization
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 
 // Primary components
 import Home from 'containers/HomePage/Loadable';
@@ -34,6 +33,9 @@ import {
   Forum,
   Favorite,
 } from '@material-ui/icons';
+
+// Messages
+import messages from './messages';
 
 const dashRoutes = [
   {
