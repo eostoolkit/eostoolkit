@@ -1,3 +1,8 @@
+//Internationalization
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
+
 // Primary components
 import Home from 'containers/HomePage/Loadable';
 import CreateAccount from 'containers/CreateAccount/Loadable';
@@ -33,74 +38,74 @@ import {
 const dashRoutes = [
   {
     path: '/home',
-    name: 'Support',
+    name: <FormattedMessage {...messages.support} />,
     icon: Favorite,
     component: Blockone,
   },
   {
     path: '/governance',
-    name: 'Governance',
+    name: <FormattedMessage {...messages.governance} />,
     icon: AccountBalance,
     component: Governance,
   },
   {
     path: '/search',
-    name: 'Find Accounts',
+    name: <FormattedMessage {...messages.search} />,
     icon: Search,
     component: SearchAccount,
   },
   {
     path: '/create',
-    name: 'Create Account',
+    name: <FormattedMessage {...messages.create} />,
     icon: PersonAdd,
     component: CreateAccount,
   },
   {
     path: '/transfer',
-    name: 'Transfer EOS',
+    name: <FormattedMessage {...messages.transfer} />,
     icon: Payment,
     component: Transfer,
   },
   {
     collapse: true,
     path: '/account',
-    name: 'Manage Account',
+    name: <FormattedMessage {...messages.manage} />,
     state: 'openAccount',
     icon: AssignmentInd,
     views: [
       {
         path: '/account/delegate',
-        name: 'Delegate (Stake)',
+        name: <FormattedMessage {...messages.manageDelegate} />,
         mini: 'DG',
         component: Delegate,
       },
       {
         path: '/account/undelegate',
-        name: 'Undelegate (Unstake)',
+        name: <FormattedMessage {...messages.manageUndelegate} />,
         mini: 'UN',
         component: Undelegate,
       },
       {
         path: '/account/buyram',
-        name: 'Buy Ram (EOS)',
+        name: <FormattedMessage {...messages.manageBuyram} />,
         mini: 'BR',
         component: BuyRam,
       },
       {
         path: '/account/sellram',
-        name: 'Sell Ram (bytes)',
+        name: <FormattedMessage {...messages.manageSellram} />,
         mini: 'SR',
         component: SellRam,
       },
       {
         path: '/account/refund',
-        name: 'Refund',
+        name: <FormattedMessage {...messages.manageRefund} />,
         mini: 'R',
         component: Refund,
       },
       {
         path: '/account/permissions',
-        name: 'Manage Permissions',
+        name: <FormattedMessage {...messages.managePermissions} />,
         mini: 'P',
         component: SimplePermissions,
       },
@@ -109,25 +114,25 @@ const dashRoutes = [
   {
     collapse: true,
     path: '/vote',
-    name: 'Manage Voting',
+    name: <FormattedMessage {...messages.voting} />,
     state: 'openVote',
     icon: AssignmentTurnedIn,
     views: [
       {
         path: '/vote/pick',
-        name: 'Vote',
+        name: <FormattedMessage {...messages.votingProducer} />,
         mini: 'V',
         component: Home,
       },
       {
         path: '/vote/beproxy',
-        name: 'Become Proxy',
+        name: <FormattedMessage {...messages.votingAssignProxy} />,
         mini: 'BP',
         component: CreateProxy,
       },
       {
         path: '/vote/setproxy',
-        name: 'Set Proxy',
+        name: <FormattedMessage {...messages.votingSetProxy} />,
         mini: 'SP',
         component: SetProxy,
       },
@@ -135,26 +140,26 @@ const dashRoutes = [
   },
   {
     path: '/forumpost',
-    name: 'Eosio Forum Post',
+    name: <FormattedMessage {...messages.forumPost} />,
     icon: Forum,
     component: ForumPost,
   },
   {
     path: '/bidname',
-    name: 'Premium Names',
+    name: <FormattedMessage {...messages.bidName} />,
     icon: Gavel,
     component: BidName,
   },
   {
     collapse: true,
     path: '/block-producer',
-    name: 'Block Producer',
+    name: <FormattedMessage {...messages.producer} />,
     state: 'openBlockProducer',
     icon: DeveloperBoard,
     views: [
       {
         path: '/block-producer/claim-rewards',
-        name: 'Claim Producer Rewards',
+        name: <FormattedMessage {...messages.producerClaim} />,
         mini: 'C',
         component: ClaimRewards,
       },
