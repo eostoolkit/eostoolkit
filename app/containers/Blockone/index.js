@@ -10,6 +10,7 @@
  */
 
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -25,6 +26,7 @@ import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import CardIcon from 'components/Card/CardIcon';
 
+import messages from './messages';
 import userProfileStyles from './comingSoon';
 
 function Blockone(props) {
@@ -38,32 +40,33 @@ function Blockone(props) {
               <CardIcon color="rose">
                 <Favorite />
               </CardIcon>
-              <h4 className={classes.cardIconTitle}>Help Support Us</h4>
+              <h4 className={classes.cardIconTitle}>
+                <FormattedMessage {...messages.header} />
+              </h4>
             </CardHeader>
             <CardBody>
-              <h3>Dear GenerEOS and eostoolkit.io supporters,</h3>
+              <h3>
+                <FormattedMessage {...messages.intro} />
+              </h3>
               <h5>
-                Block One recently announced that that they will be voting for Block Producers that share the core
-                values necessary to maximize the integrity and potential of the EOS public blockchain network.
+                <FormattedMessage {...messages.line1} />
               </h5>
 
               <h5>
-                They have provided an email for BP&apos;s and token holders to campaign for the Block Producers they
-                believe in.
+                <FormattedMessage {...messages.line2} />
               </h5>
 
               <h5>
-                We would love if you could rally behind us showing your support by sending a passionate email to Block
-                One explaining why they should vote for GenerEOS.
+                <FormattedMessage {...messages.line3} />
               </h5>
 
               <h5>
-                Send your email to - <a href="mailto:bp@eos.io?Subject=I%20Support%20GenerEOS">bp@eos.io</a>
+                <FormattedMessage {...messages.line4} />
+                <a href="mailto:bp@eos.io?Subject=I%20Support%20GenerEOS">bp@eos.io</a>
               </h5>
 
               <h5>
-                This support would mean the world to us and help us keep creating great tools and contributions for the
-                community.
+                <FormattedMessage {...messages.line5} />
               </h5>
 
               <h5>
