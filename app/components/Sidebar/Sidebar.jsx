@@ -20,7 +20,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { connectAccount, removeAccount } from 'containers/Scatter/actions';
 import Scatter from 'containers/Scatter/Loadable';
-
+import messages from 'containers/Scatter/messages';
 // core components
 import HeaderLinks from 'components/Header/HeaderLinks';
 
@@ -28,7 +28,6 @@ import avatar from 'assets/img/scatter.png';
 
 import SidebarWrapper from './SidebarWrapper';
 import sidebarStyle from './sidebarStyle';
-import messages from 'containers/Scatter/messages';
 
 class Sidebar extends React.Component {
   constructor(props) {

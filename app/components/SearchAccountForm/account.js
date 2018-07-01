@@ -5,12 +5,13 @@
  */
 
 import React from 'react';
-
+import { FormattedMessage } from 'react-intl';
 // core components
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import CustomInput from 'components/CustomInput/CustomInput';
 import Button from 'components/CustomButtons/Button';
+import messages from './messages';
 
 const FormObject = props => {
   const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
@@ -19,7 +20,7 @@ const FormObject = props => {
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <CustomInput
-            labelText="Account Name"
+            labelText={<FormattedMessage {...messages.accountName} />}
             id="name"
             error={errors.name}
             touched={touched.name}
@@ -28,7 +29,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Search for this account',
+              placeholder: <FormattedMessage {...messages.accountText} />,
               value: values.name,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -37,7 +38,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Button onClick={handleSubmit} color="rose">
-            Search
+            <FormattedMessage {...messages.searchButton} />
           </Button>
         </GridItem>
       </GridContainer>

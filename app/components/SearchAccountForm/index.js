@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Formik } from 'formik';
 // import styled from 'styled-components';
 
@@ -25,6 +26,7 @@ import CardBody from 'components/Card/CardBody';
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 import Account from './account';
 import PubicKey from './publicKey';
+import messages from './messages';
 
 const SearchAccountForm = props => {
   const { classes, handleAccountName, handlePublicKey } = props;
@@ -36,7 +38,9 @@ const SearchAccountForm = props => {
             <CardIcon color="warning">
               <Search />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Search Account</h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...messages.searchAccount} />
+            </h4>
           </CardHeader>
           <CardBody>
             <Formik
@@ -55,7 +59,9 @@ const SearchAccountForm = props => {
             <CardIcon color="warning">
               <Search />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Search Public Key</h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...messages.searchPubkey} />
+            </h4>
           </CardHeader>
           <CardBody>
             <Formik
