@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { FormattedMessage } from 'react-intl';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Table from '@material-ui/core/Table';
@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 import tableStyle from 'assets/jss/tableStyle';
+import messages from './messages';
 
 function BalancesTable({ ...props }) {
   const { classes, account } = props;
@@ -18,7 +19,7 @@ function BalancesTable({ ...props }) {
         <TableHead className={classes.successRow}>
           <TableRow className={classes.tableRow}>
             <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`} colSpan={2}>
-              Token Balances
+              <FormattedMessage {...messages.tokenBalance} />
             </TableCell>
           </TableRow>
         </TableHead>
@@ -35,7 +36,7 @@ function BalancesTable({ ...props }) {
           ) : (
             <TableRow className={classes.tableRowHover}>
               <TableCell className={classes.tableCell} colSpan={2}>
-                No balances
+                <FormattedMessage {...messages.noTokenBalance} />
               </TableCell>
             </TableRow>
           )}
