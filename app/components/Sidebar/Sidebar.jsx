@@ -1,5 +1,6 @@
 /* eslint-disable react/no-string-refs */
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 // javascript plugin used to create scrollbars on windows
 import { NavLink } from 'react-router-dom';
@@ -27,6 +28,7 @@ import avatar from 'assets/img/scatter.png';
 
 import SidebarWrapper from './SidebarWrapper';
 import sidebarStyle from './sidebarStyle';
+import messages from 'containers/Scatter/messages';
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -98,7 +100,7 @@ class Sidebar extends React.Component {
                       <AddBox />
                     </ListItemIcon>
                     <ListItemText
-                      primary="Connect Account" // TODO: Make this international
+                      primary={<FormattedMessage {...messages.connect} />}
                       disableTypography
                       className={collapseItemText}
                     />
@@ -110,7 +112,7 @@ class Sidebar extends React.Component {
                       <ExitToApp />
                     </ListItemIcon>
                     <ListItemText
-                      primary="Sign Out" // TODO: Make this international
+                      primary={<FormattedMessage {...messages.signout} />}
                       disableTypography
                       className={collapseItemText}
                     />

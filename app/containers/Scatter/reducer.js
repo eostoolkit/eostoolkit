@@ -10,7 +10,7 @@ import { SCATTER_LOADED, EOSCLIENT_LOADED, ATTACHED_ACCOUNT, DETACHED_ACCOUNT, R
 const initialState = fromJS({
   scatter: null,
   eosClient: null,
-  eosAccount: 'Attach an Account',
+  eosAccount: '',
   eosAuthority: '',
   eosAccountData: null,
 });
@@ -24,7 +24,7 @@ function scatterReducer(state = initialState, action) {
     case ATTACHED_ACCOUNT:
       return state.set('eosAccount', action.name).set('eosAuthority', action.authority);
     case DETACHED_ACCOUNT:
-      return state.set('eosAccount', 'Attach an Account').set('eosAuthority', '');
+      return state.set('eosAccount', '').set('eosAuthority', '');
     case REFRESHED_DATA:
       return state.set('eosAccountData', action.data);
     default:

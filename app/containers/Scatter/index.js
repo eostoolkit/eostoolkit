@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -15,6 +16,7 @@ import { makeSelectEosClient, makeSelectScatter, makeSelectEosAccount, makeSelec
 import { scatterLoaded } from './actions';
 import reducer from './reducer';
 import saga from './saga';
+import messages from './messages';
 
 export class Scatter extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -47,9 +49,9 @@ export class Scatter extends React.Component {
           </span>
         );
       }
-      return 'Attach an Account';
+      return <FormattedMessage {...messages.attach} />;
     }
-    return 'Please install Scatter';
+    return <FormattedMessage {...messages.install} />;
   }
 }
 
