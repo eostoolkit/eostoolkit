@@ -202,8 +202,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={8}>
           <p>
-            By executing this action you are agreeing to the EOS constitution and this actions associated ricardian
-            contract.
+            <FormattedMessage {...messages.disclaimer} />
           </p>
         </GridItem>
       </GridContainer>
@@ -245,7 +244,9 @@ const CreateAccountForm = props => {
             <CardIcon color="warning">
               <PersonAdd />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Create Account</h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...messages.header} />
+            </h4>
           </CardHeader>
           <CardBody>
             <Formik

@@ -6,6 +6,10 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
+  header: {
+    id: 'app.components.CreateAccountForm.header',
+    defaultMessage: 'Create Account',
+  },
   accountName: {
     id: 'app.components.CreateAccountForm.accountName',
     defaultMessage: 'New Account Name',
@@ -66,6 +70,11 @@ export default defineMessages({
     id: 'app.components.CreateAccountForm.transferDesc',
     defaultMessage:
       'Tranfer Off: owner retains staking control and voting rights. Transfer On: New account gains staking control and voting rights.',
+  },
+  disclaimer: {
+    id: 'app.common.disclaimer',
+    defaultMessage:
+      'By executing this action you are agreeing to the EOS constitution and this actions associated ricardian contract.',
   },
   create: {
     id: 'app.common.create',

@@ -93,7 +93,7 @@ function* getAccountDetail(name) {
 function* refreshEosAccountData() {
   const accountName = yield select(makeSelectEosAccount());
   try {
-    if (accountName && accountName !== '') {
+    if (accountName) {
       const account = yield call(getAccountDetail, accountName);
       yield put(refreshedAccountData(account));
     } else {
