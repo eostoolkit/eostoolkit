@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { Formik } from 'formik';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import * as Yup from 'yup';
 // import styled from 'styled-components';
 
@@ -27,15 +28,16 @@ import CardIcon from 'components/Card/CardIcon';
 import CardBody from 'components/Card/CardBody';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
+import messages from './messages';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, intl } = props;
   return (
     <form>
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Stake Holder"
+            labelText={intl.formatMessage(messages.recepient)}
             id="name"
             error={errors.name}
             touched={touched.name}
@@ -44,7 +46,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Who currently holds the stake',
+              placeholder: intl.formatMessage(messages.recepientText),
               value: values.name,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -53,7 +55,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Stake Owner"
+            labelText={intl.formatMessage(messages.ownerName)}
             id="owner"
             error={errors.owner}
             touched={touched.owner}
@@ -62,7 +64,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Account that controls the stake',
+              placeholder: intl.formatMessage(messages.ownerText),
               value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -71,7 +73,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Net Unstake (in EOS)"
+            labelText={intl.formatMessage(messages.netStake)}
             id="net"
             error={errors.net}
             touched={touched.net}
@@ -80,7 +82,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'How much EOS to unstake',
+              placeholder: intl.formatMessage(messages.netText),
               value: values.net,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -89,7 +91,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="CPU Unstake (in EOS)"
+            labelText={intl.formatMessage(messages.cpuStake)}
             id="cpu"
             error={errors.cpu}
             touched={touched.cpu}
@@ -98,7 +100,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'How much EOS to unstake',
+              placeholder: intl.formatMessage(messages.cpuText),
               value: values.cpu,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -107,13 +109,12 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Button onClick={handleSubmit} color="rose">
-            Undelegate
+            <FormattedMessage {...messages.undelegate} />
           </Button>
         </GridItem>
         <GridItem xs={12} sm={12} md={8}>
           <p>
-            By executing this action you are agreeing to the EOS constitution and this actions associated ricardian
-            contract.
+            <FormattedMessage {...messages.disclaimer} />
           </p>
         </GridItem>
       </GridContainer>
@@ -121,19 +122,20 @@ const FormObject = props => {
   );
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Owner name is required'),
-  name: Yup.string().required('Account name is required'),
-  net: Yup.number()
-    .required('NET Stake is required')
-    .positive('You must unstake a positive quantity'),
-  cpu: Yup.number()
-    .required('CPU Stake is required')
-    .positive('You must unstake a positive quantity'),
-});
-
 const UndelegateForm = props => {
-  const { classes, handleSubmit, eosAccount } = props;
+  const { classes, handleSubmit, eosAccount, intl } = props;
+  const validationSchema = Yup.object().shape({
+    owner: Yup.string().required(intl.formatMessage(messages.validateRequired)),
+    name: Yup.string().required(intl.formatMessage(messages.validateRequired)),
+    net: Yup.number()
+      .typeError(intl.formatMessage(messages.validateNumber))
+      .required(intl.formatMessage(messages.validateRequired))
+      .positive(intl.formatMessage(messages.validatePositive)),
+    cpu: Yup.number()
+      .typeError(intl.formatMessage(messages.validateNumber))
+      .required(intl.formatMessage(messages.validateRequired))
+      .positive(intl.formatMessage(messages.validatePositive)),
+  });
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={8}>
@@ -143,11 +145,13 @@ const UndelegateForm = props => {
               <Undo />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>
-              Undelegate Bandwidth <small>- Unstake</small>
+              <FormattedMessage {...messages.header} />
             </h4>
           </CardHeader>
           <CardBody>
-            <h5>Unstaking takes three days. Unstaking lowers your vote weight immediately</h5>
+            <h5>
+              <FormattedMessage {...messages.warning} />
+            </h5>
             <Formik
               initialValues={{
                 owner: eosAccount,
@@ -157,7 +161,7 @@ const UndelegateForm = props => {
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
-              render={formikProps => <FormObject {...formikProps} classes={classes} />}
+              render={formikProps => <FormObject {...formikProps} classes={classes} intl={intl} />}
             />
           </CardBody>
         </Card>
@@ -190,4 +194,4 @@ const UndelegateForm = props => {
   );
 };
 
-export default withStyles(regularFormsStyle)(UndelegateForm);
+export default withStyles(regularFormsStyle)(injectIntl(UndelegateForm));

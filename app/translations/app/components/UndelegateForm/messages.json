@@ -1,6 +1,74 @@
 [
   {
-    "id": "app.components.CreateAccountForm.header",
-    "defaultMessage": "This is the CreateAccountForm component !"
+    "id": "app.components.UndelegateForm.header",
+    "defaultMessage": "Undelegate Bandwidth (Unstake)"
+  },
+  {
+    "id": "app.components.UndelegateForm.warning",
+    "defaultMessage": "Unstaking takes three days. Unstaking lowers your vote weight immediately"
+  },
+  {
+    "id": "app.components.DelegateForm.ownerName",
+    "defaultMessage": "Stake Owner"
+  },
+  {
+    "id": "app.components.DelegateForm.ownerText",
+    "defaultMessage": "Account that controls the stake"
+  },
+  {
+    "id": "app.components.UndelegateForm.netStake",
+    "defaultMessage": "Net Unstake (in EOS)"
+  },
+  {
+    "id": "app.components.UndelegateForm.cpuStake",
+    "defaultMessage": "CPU Unstake (in EOS)"
+  },
+  {
+    "id": "app.components.UndelegateForm.netText",
+    "defaultMessage": "How much EOS to remove from NET"
+  },
+  {
+    "id": "app.components.UndelegateForm.cpuText",
+    "defaultMessage": "How much EOS to remove from CPU"
+  },
+  {
+    "id": "app.common.transfer",
+    "defaultMessage": "Transfer"
+  },
+  {
+    "id": "app.common.undelegate",
+    "defaultMessage": "Undelegate"
+  },
+  {
+    "id": "app.components.UndelegateForm.transferDesc",
+    "defaultMessage": "Tranfer Off: owner retains staking control and voting rights. Transfer On: New account gains staking control and voting rights."
+  },
+  {
+    "id": "app.common.disclaimer",
+    "defaultMessage": "By executing this action you are agreeing to the EOS constitution and this actions associated ricardian contract."
+  },
+  {
+    "id": "app.common.recepient",
+    "defaultMessage": "Recepient"
+  },
+  {
+    "id": "app.common.undelegateRecepientText",
+    "defaultMessage": "Account that currently holds the Stake"
+  },
+  {
+    "id": "app.common.validateRequired",
+    "defaultMessage": "Required"
+  },
+  {
+    "id": "app.common.validateInvalid",
+    "defaultMessage": "Invalid"
+  },
+  {
+    "id": "app.common.validateNumber",
+    "defaultMessage": "Must be a number"
+  },
+  {
+    "id": "app.common.validatePositive",
+    "defaultMessage": "Must be positive"
   }
 ]
