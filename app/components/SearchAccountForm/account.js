@@ -14,13 +14,13 @@ import Button from 'components/CustomButtons/Button';
 import messages from './messages';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, intl } = props;
   return (
     <form>
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <CustomInput
-            labelText={<FormattedMessage {...messages.accountName} />}
+            labelText={intl.formatMessage(messages.accountName)}
             id="name"
             error={errors.name}
             touched={touched.name}
@@ -29,7 +29,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: <FormattedMessage {...messages.accountText} />,
+              placeholder: intl.formatMessage(messages.accountText),
               value: values.name,
               onChange: handleChange,
               onBlur: handleBlur,

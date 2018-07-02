@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 // import styled from 'styled-components';
@@ -30,15 +31,16 @@ import CardIcon from 'components/Card/CardIcon';
 import CardBody from 'components/Card/CardBody';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
+import messages from './messages';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit, classes } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, classes, intl } = props;
   return (
     <form>
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="New Account Name"
+            labelText={intl.formatMessage(messages.accountName)}
             id="name"
             error={errors.name}
             touched={touched.name}
@@ -47,7 +49,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: '12 characters, a-z, 1-5',
+              placeholder: intl.formatMessage(messages.accountText),
               value: values.name,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -56,7 +58,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="owner"
+            labelText={intl.formatMessage(messages.ownerName)}
             id="owner"
             error={errors.owner}
             touched={touched.owner}
@@ -65,7 +67,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Account that performs action',
+              placeholder: intl.formatMessage(messages.ownerText),
               value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -74,7 +76,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Owner Public Key"
+            labelText={intl.formatMessage(messages.ownerPermission)}
             id="ownerKey"
             error={errors.ownerKey}
             touched={touched.ownerKey}
@@ -83,7 +85,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Enter public key',
+              placeholder: intl.formatMessage(messages.permissionText),
               value: values.ownerKey,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -92,7 +94,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Active Public Key"
+            labelText={intl.formatMessage(messages.activePermission)}
             id="activeKey"
             error={errors.activeKey}
             touched={touched.activeKey}
@@ -101,7 +103,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Enter public key',
+              placeholder: intl.formatMessage(messages.permissionText),
               value: values.activeKey,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -110,7 +112,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Net Stake (in EOS)"
+            labelText={intl.formatMessage(messages.netStake)}
             id="net"
             error={errors.net}
             touched={touched.net}
@@ -119,7 +121,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Required to use network',
+              placeholder: intl.formatMessage(messages.netText),
               value: values.net,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -128,7 +130,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="CPU Stake (in EOS)"
+            labelText={intl.formatMessage(messages.cpuStake)}
             id="cpu"
             error={errors.cpu}
             touched={touched.cpu}
@@ -137,7 +139,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Required to process transactions',
+              placeholder: intl.formatMessage(messages.cpuText),
               value: values.cpu,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -146,7 +148,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Ram Purchase (in bytes)"
+            labelText={intl.formatMessage(messages.ramBuyBytes)}
             id="ram"
             error={errors.ram}
             touched={touched.ram}
@@ -155,7 +157,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Required to store account',
+              placeholder: intl.formatMessage(messages.ramBuyText),
               value: values.ram,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -165,7 +167,7 @@ const FormObject = props => {
         <GridItem xs={12} sm={12} md={6}>
           <Tooltip
             id="tooltip-right"
-            title="Tranfer Off: owner retains staking control and voting rights. Transfer On: New account gains staking control and voting rights."
+            title={intl.formatMessage(messages.transferDesc)}
             placement="right"
             classes={{ tooltip: classes.formTooltip }}>
             <FormControlLabel
@@ -188,14 +190,14 @@ const FormObject = props => {
               classes={{
                 label: classes.label,
               }}
-              label="Transfer"
+              label={intl.formatMessage(messages.transfer)}
             />
           </Tooltip>
         </GridItem>
 
         <GridItem xs={12} sm={12} md={4}>
           <Button onClick={handleSubmit} color="rose">
-            Create
+            <FormattedMessage {...messages.create} />
           </Button>
         </GridItem>
         <GridItem xs={12} sm={12} md={8}>
@@ -209,30 +211,32 @@ const FormObject = props => {
   );
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Creator name is required'),
-  name: Yup.string()
-    .required('Account name is required')
-    .matches(/([a-z1-5]){12,}/, {
-      excludeEmptyString: true,
-      message: 'Invalid account name',
-    }),
-  ownerKey: Yup.string().required('Owner key is required'),
-  activeKey: Yup.string().required('Active key is required'),
-  net: Yup.number()
-    .required('NET Stake is required')
-    .positive('You must stake a positive quantity'),
-  cpu: Yup.number()
-    .required('CPU Stake is required')
-    .positive('You must stake a positive quantity'),
-  ram: Yup.number()
-    .required('RAM purchase is required')
-    .positive('RAM must be a positive quantity')
-    .integer('RAM cannot be fractional'),
-});
-
 const CreateAccountForm = props => {
-  const { classes, handleSubmit, eosAccount } = props;
+  const { classes, handleSubmit, eosAccount, intl } = props;
+  const validationSchema = Yup.object().shape({
+    owner: Yup.string().required(intl.formatMessage(messages.validateRequired)),
+    name: Yup.string()
+      .required(intl.formatMessage(messages.validateRequired))
+      .matches(/([a-z1-5]){12,}/, {
+        excludeEmptyString: true,
+        message: intl.formatMessage(messages.validateInvalid),
+      }),
+    ownerKey: Yup.string().required(intl.formatMessage(messages.validateRequired)),
+    activeKey: Yup.string().required(intl.formatMessage(messages.validateRequired)),
+    net: Yup.number()
+      .typeError(intl.formatMessage(messages.validateNumber))
+      .required(intl.formatMessage(messages.validateRequired))
+      .positive(intl.formatMessage(messages.validatePositive)),
+    cpu: Yup.number()
+      .typeError(intl.formatMessage(messages.validateNumber))
+      .required(intl.formatMessage(messages.validateRequired))
+      .positive(intl.formatMessage(messages.validatePositive)),
+    ram: Yup.number()
+      .typeError(intl.formatMessage(messages.validateNumber))
+      .required(intl.formatMessage(messages.validateRequired))
+      .positive(intl.formatMessage(messages.validatePositive))
+      .integer(intl.formatMessage(messages.validateInteger)),
+  });
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={8}>
@@ -256,7 +260,7 @@ const CreateAccountForm = props => {
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
-              render={formikProps => <FormObject {...formikProps} classes={classes} />}
+              render={formikProps => <FormObject {...formikProps} classes={classes} intl={intl} />}
             />
           </CardBody>
         </Card>
@@ -284,5 +288,6 @@ const CreateAccountForm = props => {
     </GridContainer>
   );
 };
+// (withStyles(regularFormsStyle)(
 
-export default withStyles(regularFormsStyle)(CreateAccountForm);
+export default withStyles(regularFormsStyle)(injectIntl(CreateAccountForm));

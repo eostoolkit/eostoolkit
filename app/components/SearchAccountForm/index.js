@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { Formik } from 'formik';
 // import styled from 'styled-components';
 
@@ -29,7 +29,7 @@ import PubicKey from './publicKey';
 import messages from './messages';
 
 const SearchAccountForm = props => {
-  const { classes, handleAccountName, handlePublicKey } = props;
+  const { classes, handleAccountName, handlePublicKey, intl } = props;
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={6}>
@@ -48,7 +48,7 @@ const SearchAccountForm = props => {
                 name: '',
               }}
               onSubmit={handleAccountName}
-              render={formikProps => <Account {...formikProps} classes={classes} />}
+              render={formikProps => <Account {...formikProps} classes={classes} intl={intl} />}
             />
           </CardBody>
         </Card>
@@ -69,7 +69,7 @@ const SearchAccountForm = props => {
                 publicKey: '',
               }}
               onSubmit={handlePublicKey}
-              render={formikProps => <PubicKey {...formikProps} classes={classes} />}
+              render={formikProps => <PubicKey {...formikProps} classes={classes} intl={intl} />}
             />
           </CardBody>
         </Card>
@@ -78,4 +78,4 @@ const SearchAccountForm = props => {
   );
 };
 
-export default withStyles(regularFormsStyle)(SearchAccountForm);
+export default withStyles(regularFormsStyle)(injectIntl(SearchAccountForm));

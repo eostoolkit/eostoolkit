@@ -6,7 +6,6 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-
 // core components
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
@@ -15,13 +14,13 @@ import Button from 'components/CustomButtons/Button';
 import messages from './messages';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, intl } = props;
   return (
     <form>
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <CustomInput
-            labelText={<FormattedMessage {...messages.publicKey} />}
+            labelText={intl.formatMessage(messages.publicKey)}
             id="publicKey"
             error={errors.publicKey}
             touched={touched.publicKey}
@@ -30,7 +29,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: <FormattedMessage {...messages.pubkeyText} />,
+              placeholder: intl.formatMessage(messages.pubkeyText),
               value: values.publicKey,
               onChange: handleChange,
               onBlur: handleBlur,

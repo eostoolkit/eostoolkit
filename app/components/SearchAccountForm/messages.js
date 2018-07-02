@@ -1,25 +1,25 @@
 /*
- * CreateAccountForm Messages
+ * SearchAccountForm Messages
  *
- * This contains all the text for the CreateAccountForm component.
+ * This contains all the text for the SearchAccountForm component.
  */
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   searchAccount: {
-    id: 'app.components.CreateAccountForm.searchAccount',
+    id: 'app.components.SearchAccountForm.searchAccount',
     defaultMessage: 'Search Account',
   },
   searchPubkey: {
-    id: 'app.components.CreateAccountForm.searchPubkey',
+    id: 'app.components.SearchAccountForm.searchPubkey',
     defaultMessage: 'Search Public Key',
   },
   accountText: {
-    id: 'app.components.CreateAccountForm.accountText',
+    id: 'app.components.SearchAccountForm.accountText',
     defaultMessage: 'Search for this account',
   },
   pubkeyText: {
-    id: 'app.components.CreateAccountForm.pubkeyText',
+    id: 'app.components.SearchAccountForm.pubkeyText',
     defaultMessage: 'Search for this public key',
   },
   accountName: {
