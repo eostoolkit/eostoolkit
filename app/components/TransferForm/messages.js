@@ -32,7 +32,7 @@ export default defineMessages({
     defaultMessage: 'Memo',
   },
   recepientText: {
-    id: 'app.common.recepientText',
+    id: 'app.common.transferRecepientText',
     defaultMessage: 'Account that receives the Tokens',
   },
   senderText: {

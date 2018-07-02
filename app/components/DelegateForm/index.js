@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { Formik } from 'formik';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import * as Yup from 'yup';
 // import styled from 'styled-components';
 
@@ -30,15 +31,16 @@ import CardIcon from 'components/Card/CardIcon';
 import CardBody from 'components/Card/CardBody';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
+import messages from './messages';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit, classes } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, classes, intl } = props;
   return (
     <form>
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Recepient"
+            labelText={intl.formatMessage(messages.recepient)}
             id="name"
             error={errors.name}
             touched={touched.name}
@@ -47,7 +49,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Who will receive the stake',
+              placeholder: intl.formatMessage(messages.recepientText),
               value: values.name,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -56,7 +58,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Stake Owner"
+            labelText={intl.formatMessage(messages.ownerName)}
             id="owner"
             error={errors.owner}
             touched={touched.owner}
@@ -65,7 +67,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Account that controls the stake',
+              placeholder: intl.formatMessage(messages.ownerText),
               value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -74,7 +76,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Net Stake (in EOS)"
+            labelText={intl.formatMessage(messages.netStake)}
             id="net"
             error={errors.net}
             touched={touched.net}
@@ -83,7 +85,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'How much EOS to stake',
+              placeholder: intl.formatMessage(messages.netText),
               value: values.net,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -92,7 +94,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="CPU Stake (in EOS)"
+            labelText={intl.formatMessage(messages.cpuStake)}
             id="cpu"
             error={errors.cpu}
             touched={touched.cpu}
@@ -101,7 +103,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'How much EOS to stake',
+              placeholder: intl.formatMessage(messages.cpuText),
               value: values.cpu,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -111,7 +113,7 @@ const FormObject = props => {
         <GridItem xs={12} sm={12} md={6}>
           <Tooltip
             id="tooltip-right"
-            title="Tranfer Off: owner retains staking control and voting rights. Transfer On: New account gains staking control and voting rights."
+            title={intl.formatMessage(messages.transferDesc)}
             placement="right"
             classes={{ tooltip: classes.formTooltip }}>
             <FormControlLabel
@@ -134,20 +136,19 @@ const FormObject = props => {
               classes={{
                 label: classes.label,
               }}
-              label="Transfer"
+              label={intl.formatMessage(messages.transfer)}
             />
           </Tooltip>
         </GridItem>
         <GridItem xs={12} sm={12} md={6} />
         <GridItem xs={12} sm={12} md={4}>
           <Button onClick={handleSubmit} color="rose">
-            Delegate
+            <FormattedMessage {...messages.delegate} />
           </Button>
         </GridItem>
         <GridItem xs={12} sm={12} md={8}>
           <p>
-            By executing this action you are agreeing to the EOS constitution and this actions associated ricardian
-            contract.
+            <FormattedMessage {...messages.disclaimer} />
           </p>
         </GridItem>
       </GridContainer>
@@ -155,19 +156,20 @@ const FormObject = props => {
   );
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Owner name is required'),
-  name: Yup.string().required('Account name is required'),
-  net: Yup.number()
-    .required('NET Stake is required')
-    .positive('You must stake a positive quantity'),
-  cpu: Yup.number()
-    .required('CPU Stake is required')
-    .positive('You must stake a positive quantity'),
-});
-
 const DelegateForm = props => {
-  const { classes, handleSubmit, eosAccount } = props;
+  const { classes, handleSubmit, eosAccount, intl } = props;
+  const validationSchema = Yup.object().shape({
+    owner: Yup.string().required(intl.formatMessage(messages.validateRequired)),
+    name: Yup.string().required(intl.formatMessage(messages.validateRequired)),
+    net: Yup.number()
+      .typeError(intl.formatMessage(messages.validateNumber))
+      .required(intl.formatMessage(messages.validateRequired))
+      .positive(intl.formatMessage(messages.validatePositive)),
+    cpu: Yup.number()
+      .typeError(intl.formatMessage(messages.validateNumber))
+      .required(intl.formatMessage(messages.validateRequired))
+      .positive(intl.formatMessage(messages.validatePositive)),
+  });
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={8}>
@@ -177,7 +179,7 @@ const DelegateForm = props => {
               <Redo />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>
-              Delegate Bandwidth <small>- Stake</small>
+              <FormattedMessage {...messages.header} />
             </h4>
           </CardHeader>
           <CardBody>
@@ -190,7 +192,7 @@ const DelegateForm = props => {
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
-              render={formikProps => <FormObject {...formikProps} classes={classes} />}
+              render={formikProps => <FormObject {...formikProps} classes={classes} intl={intl} />}
             />
           </CardBody>
         </Card>
@@ -231,4 +233,4 @@ const DelegateForm = props => {
   );
 };
 
-export default withStyles(regularFormsStyle)(DelegateForm);
+export default withStyles(regularFormsStyle)(injectIntl(DelegateForm));

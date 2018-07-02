@@ -1,6 +1,70 @@
 [
   {
     "id": "app.components.DelegateForm.header",
-    "defaultMessage": "This is the DelegateForm component !"
+    "defaultMessage": "Delegate Bandwidth (Stake)"
+  },
+  {
+    "id": "app.components.DelegateForm.ownerName",
+    "defaultMessage": "Stake Owner"
+  },
+  {
+    "id": "app.components.DelegateForm.ownerText",
+    "defaultMessage": "Account that controls the stake"
+  },
+  {
+    "id": "app.common.netStake",
+    "defaultMessage": "Net Stake (in EOS)"
+  },
+  {
+    "id": "app.common.cpuStake",
+    "defaultMessage": "CPU Stake (in EOS)"
+  },
+  {
+    "id": "app.common.netText",
+    "defaultMessage": "Required for network traffic"
+  },
+  {
+    "id": "app.common.cpuText",
+    "defaultMessage": "Required for processing power"
+  },
+  {
+    "id": "app.common.transfer",
+    "defaultMessage": "Transfer"
+  },
+  {
+    "id": "app.common.delegate",
+    "defaultMessage": "Delegate"
+  },
+  {
+    "id": "app.components.CreateAccountForm.transferDesc",
+    "defaultMessage": "Tranfer Off: owner retains staking control and voting rights. Transfer On: New account gains staking control and voting rights."
+  },
+  {
+    "id": "app.common.disclaimer",
+    "defaultMessage": "By executing this action you are agreeing to the EOS constitution and this actions associated ricardian contract."
+  },
+  {
+    "id": "app.common.recepient",
+    "defaultMessage": "Recepient"
+  },
+  {
+    "id": "app.common.delegateRecepientText",
+    "defaultMessage": "Account that receives the Stake"
+  },
+  {
+    "id": "app.common.validateRequired",
+    "defaultMessage": "Required"
+  },
+  {
+    "id": "app.common.validateInvalid",
+    "defaultMessage": "Invalid"
+  },
+  {
+    "id": "app.common.validateNumber",
+    "defaultMessage": "Must be a number"
+  },
+  {
+    "id": "app.common.validatePositive",
+    "defaultMessage": "Must be positive"
   }
 ]

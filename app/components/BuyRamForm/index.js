@@ -29,8 +29,6 @@ import CardHeader from 'components/Card/CardHeader';
 import CardIcon from 'components/Card/CardIcon';
 import CardBody from 'components/Card/CardBody';
 
-import regularFormsStyle from 'assets/jss/regularFormsStyle';
-
 import BuyBytes from './Ricardian/BuyBytes';
 import BuyEOS from './Ricardian/BuyEOS';
 import { units } from './constants';
@@ -178,7 +176,7 @@ const BuyRamForm = props => {
             <CardIcon color="warning">
               <AddCircle />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Buy ram</h4>
+            <h4 className={classes.cardIconTitle}>Hello</h4>
           </CardHeader>
           <CardBody>
             <FormObject
@@ -210,7 +208,7 @@ const BuyRamForm = props => {
 };
 
 const enhance = compose(
-  withStyles(buyRamFormStyle, regularFormsStyle),
+  withStyles(buyRamFormStyle),
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
       const {
