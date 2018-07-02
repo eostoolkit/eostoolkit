@@ -15,7 +15,7 @@ import ClaimRewards from 'containers/ClaimRewards/Loadable';
 import Refund from 'containers/Refund/Loadable';
 import BidName from 'containers/BidName/Loadable';
 import ForumPost from 'containers/ForumPost/Loadable';
-import Blockone from 'containers/Blockone/Loadable';
+import Blockone from 'components/Blockone/Loadable';
 // @material-ui/icons
 import {
   AccountBalance,
