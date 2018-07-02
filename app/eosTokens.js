@@ -12,6 +12,8 @@ const eosTokens = [
   'eosatidiumio',
   'horustokenio',
   'ednazztokens',
+  'irespotokens',
+  'therealkarma',
 ];
 
 export default eosTokens;
