@@ -15,7 +15,7 @@ import headerLinksStyle from './headerLinksStyle';
 
 class HeaderLinks extends React.Component {
   state = {
-    open: false,
+    open: false
   };
   handleClick = () => {
     this.setState({ open: !this.state.open });
@@ -33,7 +33,7 @@ class HeaderLinks extends React.Component {
     //   [classes.dropdownItemRTL]: rtlActive,
     // })}`;
     const wrapper = classNames({
-      [classes.wrapperRTL]: rtlActive,
+      [classes.wrapperRTL]: rtlActive
     });
     // const managerClasses = classNames({
     //   [classes.managerClasses]: true,
@@ -145,7 +145,7 @@ class HeaderLinks extends React.Component {
 }
 
 HeaderLinks.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
   // rtlActive: PropTypes.bool,
 };
 
