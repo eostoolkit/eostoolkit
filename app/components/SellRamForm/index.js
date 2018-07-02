@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { Formik } from 'formik';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import * as Yup from 'yup';
 // import styled from 'styled-components';
 
@@ -27,15 +28,16 @@ import CardIcon from 'components/Card/CardIcon';
 import CardBody from 'components/Card/CardBody';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
+import messages from './messages';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, intl } = props;
   return (
     <form>
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Seller"
+            labelText={intl.formatMessage(messages.ownerName)}
             id="owner"
             error={errors.owner}
             touched={touched.owner}
@@ -44,7 +46,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Account that sells the Ram',
+              placeholder: intl.formatMessage(messages.ownerText),
               value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -53,7 +55,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Ram to Sell (in bytes)"
+            labelText={intl.formatMessage(messages.ram)}
             id="ram"
             error={errors.ram}
             touched={touched.ram}
@@ -62,7 +64,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'How many bytes to sell',
+              placeholder: intl.formatMessage(messages.ramText),
               value: values.ram,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -71,13 +73,12 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Button onClick={handleSubmit} color="rose">
-            Sell
+            <FormattedMessage {...messages.sell} />
           </Button>
         </GridItem>
         <GridItem xs={12} sm={12} md={8}>
           <p>
-            By executing this action you are agreeing to the EOS constitution and this actions associated ricardian
-            contract.
+            <FormattedMessage {...messages.disclaimer} />
           </p>
         </GridItem>
       </GridContainer>
@@ -85,16 +86,16 @@ const FormObject = props => {
   );
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Buyer name is required'),
-  ram: Yup.number()
-    .required('RAM quantity is required')
-    .positive('RAM must be a positive quantity')
-    .integer('RAM cannot be fractional'),
-});
-
 const SellRamForm = props => {
-  const { classes, handleSubmit, eosAccount } = props;
+  const { classes, handleSubmit, eosAccount, intl } = props;
+  const validationSchema = Yup.object().shape({
+    owner: Yup.string().required(intl.formatMessage(messages.validateRequired)),
+    ram: Yup.number()
+      .typeError(intl.formatMessage(messages.validateNumber))
+      .required(intl.formatMessage(messages.validateRequired))
+      .positive(intl.formatMessage(messages.validatePositive))
+      .integer(intl.formatMessage(messages.validateInteger)),
+  });
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={8}>
@@ -103,7 +104,9 @@ const SellRamForm = props => {
             <CardIcon color="warning">
               <RemoveCircle />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Sell ram bytes</h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...messages.header} />
+            </h4>
           </CardHeader>
           <CardBody>
             <Formik
@@ -114,7 +117,7 @@ const SellRamForm = props => {
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
-              render={formikProps => <FormObject {...formikProps} classes={classes} />}
+              render={formikProps => <FormObject {...formikProps} classes={classes} intl={intl} />}
             />
           </CardBody>
         </Card>
@@ -142,4 +145,4 @@ const SellRamForm = props => {
   );
 };
 
-export default withStyles(regularFormsStyle)(SellRamForm);
+export default withStyles(regularFormsStyle)(injectIntl(SellRamForm));

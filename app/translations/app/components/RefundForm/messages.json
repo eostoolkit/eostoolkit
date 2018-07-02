@@ -1,6 +1,26 @@
 [
   {
     "id": "app.components.RefundForm.header",
-    "defaultMessage": "This is the RefundForm component !"
+    "defaultMessage": "Refund Stake"
+  },
+  {
+    "id": "app.common.validateRequired",
+    "defaultMessage": "Required"
+  },
+  {
+    "id": "app.common.disclaimer",
+    "defaultMessage": "By executing this action you are agreeing to the EOS constitution and this actions associated ricardian contract."
+  },
+  {
+    "id": "app.common.refund",
+    "defaultMessage": "Refund"
+  },
+  {
+    "id": "app.components.DelegateForm.ownerName",
+    "defaultMessage": "Stake Owner"
+  },
+  {
+    "id": "app.components.DelegateForm.ownerText",
+    "defaultMessage": "Account that controls the stake"
   }
 ]

@@ -80,4 +80,8 @@ export default defineMessages({
     id: 'app.common.validatePositive',
     defaultMessage: 'Must be positive',
   },
+  validateInteger: {
+    id: 'app.common.validateInteger',
+    defaultMessage: 'Must be integer',
+  },
 });

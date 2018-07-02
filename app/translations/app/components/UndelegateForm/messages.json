@@ -70,5 +70,9 @@
   {
     "id": "app.common.validatePositive",
     "defaultMessage": "Must be positive"
+  },
+  {
+    "id": "app.common.validateInteger",
+    "defaultMessage": "Must be integer"
   }
 ]
