@@ -1,0 +1,62 @@
+[
+  {
+    "id": "app.components.TransferForm.header",
+    "defaultMessage": "Transfer"
+  },
+  {
+    "id": "app.common.disclaimer",
+    "defaultMessage": "By executing this action you are agreeing to the EOS constitution and this actions associated ricardian contract."
+  },
+  {
+    "id": "app.common.recepient",
+    "defaultMessage": "Recepient"
+  },
+  {
+    "id": "app.common.sender",
+    "defaultMessage": "Sender"
+  },
+  {
+    "id": "app.common.quantity",
+    "defaultMessage": "Quantity (in Tokens)"
+  },
+  {
+    "id": "app.common.memo",
+    "defaultMessage": "Memo"
+  },
+  {
+    "id": "app.common.recepientText",
+    "defaultMessage": "Account that receives the Tokens"
+  },
+  {
+    "id": "app.common.senderText",
+    "defaultMessage": "Account that sends the Tokens"
+  },
+  {
+    "id": "app.common.quantityText",
+    "defaultMessage": "How many Tokens to send"
+  },
+  {
+    "id": "app.common.memoText",
+    "defaultMessage": "A memo to attach to transfer"
+  },
+  {
+    "id": "app.common.validateRequired",
+    "defaultMessage": "Required"
+  },
+  {
+    "id": "app.common.validateInvalid",
+    "defaultMessage": "Invalid"
+  },
+  {
+    "id": "app.common.validateNumber",
+    "defaultMessage": "Must be a number"
+  },
+  {
+    "id": "app.common.validatePositive",
+    "defaultMessage": "Must be positive"
+  },
+  {
+    "id": "app.common.send",
+    "defaultMessage": "Send"
+  }
+]

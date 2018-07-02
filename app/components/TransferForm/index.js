@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 // import styled from 'styled-components';
@@ -27,15 +28,16 @@ import CardIcon from 'components/Card/CardIcon';
 import CardBody from 'components/Card/CardBody';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
+import messages from './messages';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, intl } = props;
   return (
     <form>
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Recepient"
+            labelText={intl.formatMessage(messages.recepient)}
             id="name"
             error={errors.name}
             touched={touched.name}
@@ -44,7 +46,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Account that receives the Token',
+              placeholder: intl.formatMessage(messages.recepientText),
               value: values.name,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -53,7 +55,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Sender"
+            labelText={intl.formatMessage(messages.sender)}
             id="owner"
             error={errors.owner}
             touched={touched.owner}
@@ -62,7 +64,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Account that sends the Token',
+              placeholder: intl.formatMessage(messages.senderText),
               value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -71,7 +73,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Quantity (in Tokens)"
+            labelText={intl.formatMessage(messages.quantity)}
             id="quantity"
             error={errors.quantity}
             touched={touched.quantity}
@@ -80,7 +82,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'How many Tokens to send',
+              placeholder: intl.formatMessage(messages.quantityText),
               value: values.quantity,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -89,7 +91,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Memo"
+            labelText={intl.formatMessage(messages.memo)}
             id="memo"
             error={errors.memo}
             touched={touched.memo}
@@ -98,7 +100,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'A memo to attach to transfer',
+              placeholder: intl.formatMessage(messages.memoText),
               value: values.memo,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -107,13 +109,12 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Button onClick={handleSubmit} color="rose">
-            Send
+            <FormattedMessage {...messages.send} />
           </Button>
         </GridItem>
         <GridItem xs={12} sm={12} md={8}>
           <p>
-            By executing this action you are agreeing to the EOS constitution and this actions associated ricardian
-            contract.
+            <FormattedMessage {...messages.disclaimer} />
           </p>
         </GridItem>
       </GridContainer>
@@ -121,17 +122,17 @@ const FormObject = props => {
   );
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Sender name is required'),
-  name: Yup.string().required('Account name is required'),
-  memo: Yup.string(),
-  quantity: Yup.number()
-    .required('Quantity is required')
-    .positive('You must send a positive quantity'),
-});
-
 const TransferForm = props => {
-  const { classes, handleSubmit, eosAccount } = props;
+  const { classes, handleSubmit, eosAccount, intl } = props;
+  const validationSchema = Yup.object().shape({
+    owner: Yup.string().required(intl.formatMessage(messages.validateRequired)),
+    name: Yup.string().required(intl.formatMessage(messages.validateRequired)),
+    memo: Yup.string(),
+    quantity: Yup.number()
+      .typeError(intl.formatMessage(messages.validateNumber))
+      .required(intl.formatMessage(messages.validateRequired))
+      .positive(intl.formatMessage(messages.validatePositive)),
+  });
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={8}>
@@ -140,7 +141,9 @@ const TransferForm = props => {
             <CardIcon color="warning">
               <Payment />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Transfer</h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...messages.header} />
+            </h4>
           </CardHeader>
           <CardBody>
             <Formik
@@ -152,7 +155,7 @@ const TransferForm = props => {
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
-              render={formikProps => <FormObject {...formikProps} classes={classes} />}
+              render={formikProps => <FormObject {...formikProps} classes={classes} intl={intl} />}
             />
           </CardBody>
         </Card>
@@ -191,4 +194,4 @@ const TransferForm = props => {
   );
 };
 
-export default withStyles(regularFormsStyle)(TransferForm);
+export default withStyles(regularFormsStyle)(injectIntl(TransferForm));

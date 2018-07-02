@@ -35,11 +35,11 @@ export default defineMessages({
     defaultMessage: 'bytes',
   },
   used: {
-    id: 'app.common.bytes',
+    id: 'app.common.used',
     defaultMessage: 'used',
   },
   maximum: {
-    id: 'app.common.bytes',
+    id: 'app.common.maximum',
     defaultMessage: 'maximum',
   },
 });

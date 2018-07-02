@@ -1,6 +1,10 @@
 {
   "plugins": [
-    "styled-components"
+    "styled-components",
+    ["react-intl", {
+      "messagesDir": "./app/translations",
+      "enforceDescriptions": false
+    }]
   ],
   "presets": [
     [

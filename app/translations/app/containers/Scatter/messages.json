@@ -1,0 +1,18 @@
+[
+  {
+    "id": "app.containers.scatter.install",
+    "defaultMessage": "Please install Scatter"
+  },
+  {
+    "id": "app.containers.scatter.attach",
+    "defaultMessage": "Attach an Account"
+  },
+  {
+    "id": "app.containers.scatter.signout",
+    "defaultMessage": "Sign Out"
+  },
+  {
+    "id": "app.containers.scatter.connect",
+    "defaultMessage": "Connect Account"
+  }
+]

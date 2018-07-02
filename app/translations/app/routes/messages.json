@@ -1,0 +1,82 @@
+[
+  {
+    "id": "app.routes.support",
+    "defaultMessage": "Support"
+  },
+  {
+    "id": "app.routes.governance",
+    "defaultMessage": "Governance"
+  },
+  {
+    "id": "app.routes.search",
+    "defaultMessage": "Find Accounts"
+  },
+  {
+    "id": "app.routes.create",
+    "defaultMessage": "Create Account"
+  },
+  {
+    "id": "app.routes.transfer",
+    "defaultMessage": "Transfer"
+  },
+  {
+    "id": "app.routes.manage",
+    "defaultMessage": "Manage Account"
+  },
+  {
+    "id": "app.routes.manage.delegate",
+    "defaultMessage": "Delegate (Stake)"
+  },
+  {
+    "id": "app.routes.manage.undelegate",
+    "defaultMessage": "Undelegate (Unstake)"
+  },
+  {
+    "id": "app.routes.manage.buyram",
+    "defaultMessage": "Buy Ram"
+  },
+  {
+    "id": "app.routes.manage.sellram",
+    "defaultMessage": "Sell Ram"
+  },
+  {
+    "id": "app.routes.manage.refund",
+    "defaultMessage": "Refund"
+  },
+  {
+    "id": "app.routes.manage.permission",
+    "defaultMessage": "Manage Permissions"
+  },
+  {
+    "id": "app.routes.voting",
+    "defaultMessage": "Manage Voting"
+  },
+  {
+    "id": "app.routes.voting.producer",
+    "defaultMessage": "Block Producers"
+  },
+  {
+    "id": "app.routes.voting.assignProxy",
+    "defaultMessage": "Become Proxy"
+  },
+  {
+    "id": "app.routes.voting.setProxy",
+    "defaultMessage": "Set Proxy"
+  },
+  {
+    "id": "app.routes.forum.post",
+    "defaultMessage": "Eosio Forum Post"
+  },
+  {
+    "id": "app.routes.names.bid",
+    "defaultMessage": "Premium Names"
+  },
+  {
+    "id": "app.routes.producer",
+    "defaultMessage": "Manage Producer"
+  },
+  {
+    "id": "app.routes.producer.claim",
+    "defaultMessage": "Claim Rewards"
+  }
+]

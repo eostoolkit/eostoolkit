@@ -43,7 +43,8 @@
     "test": "cross-env NODE_ENV=test ./node_modules/.bin/babel-node ./node_modules/.bin/jest",
     "test:coverage": "yarn run test --coverage",
     "test:watch": "yarn run test --watch",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "translate": "cross-env NODE_ENV=production babel ./app >/dev/null"
   },
   "lint-staged": {
     "*.js": "lint:eslint"

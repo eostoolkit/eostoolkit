@@ -1,0 +1,94 @@
+[
+  {
+    "id": "app.components.CreateAccountForm.header",
+    "defaultMessage": "Create Account"
+  },
+  {
+    "id": "app.components.CreateAccountForm.accountName",
+    "defaultMessage": "New Account Name"
+  },
+  {
+    "id": "app.components.CreateAccountForm.accountText",
+    "defaultMessage": "12 characters, a-z, 1-5"
+  },
+  {
+    "id": "app.components.CreateAccountForm.ownerName",
+    "defaultMessage": "Creator Account"
+  },
+  {
+    "id": "app.components.CreateAccountForm.ownerText",
+    "defaultMessage": "Account creating the new account"
+  },
+  {
+    "id": "app.common.ownerPermission",
+    "defaultMessage": "Owner Public Key"
+  },
+  {
+    "id": "app.common.activePermission",
+    "defaultMessage": "Active Public Key"
+  },
+  {
+    "id": "app.common.permissionText",
+    "defaultMessage": "Enter public key, account, or json"
+  },
+  {
+    "id": "app.common.netStake",
+    "defaultMessage": "Net Stake (in EOS)"
+  },
+  {
+    "id": "app.common.cpuStake",
+    "defaultMessage": "CPU Stake (in EOS)"
+  },
+  {
+    "id": "app.common.netText",
+    "defaultMessage": "Required for network traffic"
+  },
+  {
+    "id": "app.common.cpuText",
+    "defaultMessage": "Required for processing power"
+  },
+  {
+    "id": "app.common.ramBuyBytes",
+    "defaultMessage": "Ram Purchase (in bytes)"
+  },
+  {
+    "id": "app.common.ramBuyText",
+    "defaultMessage": "Required to store account data"
+  },
+  {
+    "id": "app.common.transfer",
+    "defaultMessage": "Transfer"
+  },
+  {
+    "id": "app.components.CreateAccountForm.transferDesc",
+    "defaultMessage": "Tranfer Off: owner retains staking control and voting rights. Transfer On: New account gains staking control and voting rights."
+  },
+  {
+    "id": "app.common.disclaimer",
+    "defaultMessage": "By executing this action you are agreeing to the EOS constitution and this actions associated ricardian contract."
+  },
+  {
+    "id": "app.common.create",
+    "defaultMessage": "Create"
+  },
+  {
+    "id": "app.common.validateRequired",
+    "defaultMessage": "Required"
+  },
+  {
+    "id": "app.common.validateInvalid",
+    "defaultMessage": "Invalid"
+  },
+  {
+    "id": "app.common.validateNumber",
+    "defaultMessage": "Must be a number"
+  },
+  {
+    "id": "app.common.validatePositive",
+    "defaultMessage": "Must be positive"
+  },
+  {
+    "id": "app.common.validateInteger",
+    "defaultMessage": "Must be integer"
+  }
+]

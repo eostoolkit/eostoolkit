@@ -1,0 +1,30 @@
+[
+  {
+    "id": "app.components.SearchAccountForm.searchAccount",
+    "defaultMessage": "Search Account"
+  },
+  {
+    "id": "app.components.SearchAccountForm.searchPubkey",
+    "defaultMessage": "Search Public Key"
+  },
+  {
+    "id": "app.components.SearchAccountForm.accountText",
+    "defaultMessage": "Search for this account"
+  },
+  {
+    "id": "app.components.SearchAccountForm.pubkeyText",
+    "defaultMessage": "Search for this public key"
+  },
+  {
+    "id": "app.common.accountName",
+    "defaultMessage": "Account Name"
+  },
+  {
+    "id": "app.common.publicKey",
+    "defaultMessage": "Public Key"
+  },
+  {
+    "id": "app.common.search",
+    "defaultMessage": "Search"
+  }
+]

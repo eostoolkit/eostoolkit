@@ -1,0 +1,38 @@
+[
+  {
+    "id": "app.common.tokenBalance",
+    "defaultMessage": "Token Balances"
+  },
+  {
+    "id": "app.common.noTokenBalance",
+    "defaultMessage": "No Balances"
+  },
+  {
+    "id": "app.common.resources",
+    "defaultMessage": "Resources"
+  },
+  {
+    "id": "app.common.ram",
+    "defaultMessage": "RAM"
+  },
+  {
+    "id": "app.common.net",
+    "defaultMessage": "NET"
+  },
+  {
+    "id": "app.common.cpu",
+    "defaultMessage": "CPU"
+  },
+  {
+    "id": "app.common.bytes",
+    "defaultMessage": "bytes"
+  },
+  {
+    "id": "app.common.used",
+    "defaultMessage": "used"
+  },
+  {
+    "id": "app.common.maximum",
+    "defaultMessage": "maximum"
+  }
+]
