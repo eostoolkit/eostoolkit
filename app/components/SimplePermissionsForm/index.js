@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { Formik } from 'formik';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import * as Yup from 'yup';
 // import styled from 'styled-components';
 
@@ -27,15 +28,16 @@ import CardIcon from 'components/Card/CardIcon';
 import CardBody from 'components/Card/CardBody';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
+import messages from './messages';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, intl } = props;
   return (
     <form>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <CustomInput
-            labelText="Change permission on"
+            labelText={intl.formatMessage(messages.ownerName)}
             id="owner"
             error={errors.owner}
             touched={touched.owner}
@@ -44,7 +46,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Account whose permissions will change',
+              placeholder: intl.formatMessage(messages.ownerText),
               value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -53,7 +55,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           <CustomInput
-            labelText="Active Permision (Only complete if you want to change)"
+            labelText={intl.formatMessage(messages.activePermission)}
             id="activeKey"
             error={errors.activeKey}
             touched={touched.activeKey}
@@ -62,7 +64,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Public key or account name',
+              placeholder: intl.formatMessage(messages.permissionText),
               value: values.activeKey,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -71,7 +73,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           <CustomInput
-            labelText="Owner Permision (Only complete if you want to change)"
+            labelText={intl.formatMessage(messages.ownerPermission)}
             id="ownerKey"
             error={errors.ownerKey}
             touched={touched.ownerKey}
@@ -80,7 +82,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Public key or account name',
+              placeholder: intl.formatMessage(messages.permissionText),
               value: values.ownerKey,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -89,13 +91,12 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Button onClick={handleSubmit} color="rose">
-            Update
+            <FormattedMessage {...messages.update} />
           </Button>
         </GridItem>
         <GridItem xs={12} sm={12} md={8}>
           <p>
-            By executing this action you are agreeing to the EOS constitution and this actions associated ricardian
-            contract.
+            <FormattedMessage {...messages.disclaimer} />
           </p>
         </GridItem>
       </GridContainer>
@@ -103,14 +104,13 @@ const FormObject = props => {
   );
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Owner name is required'),
-  activeKey: Yup.string(),
-  ownerKey: Yup.string(),
-});
-
 const SimplePermissionsForm = props => {
-  const { classes, handleSubmit, eosAccount } = props;
+  const { classes, handleSubmit, eosAccount, intl } = props;
+  const validationSchema = Yup.object().shape({
+    owner: Yup.string().required(intl.formatMessage(messages.validateRequired)),
+    activeKey: Yup.string(),
+    ownerKey: Yup.string(),
+  });
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={8}>
@@ -119,7 +119,9 @@ const SimplePermissionsForm = props => {
             <CardIcon color="warning">
               <PersonAdd />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Change Permissions (Simple)</h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...messages.header} />
+            </h4>
           </CardHeader>
           <CardBody>
             <Formik
@@ -130,7 +132,7 @@ const SimplePermissionsForm = props => {
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
-              render={formikProps => <FormObject {...formikProps} classes={classes} />}
+              render={formikProps => <FormObject {...formikProps} classes={classes} intl={intl} />}
             />
           </CardBody>
         </Card>
@@ -141,33 +143,38 @@ const SimplePermissionsForm = props => {
             <CardIcon color="danger">
               <HelpOutline />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Important</h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...messages.warningHeader} />
+            </h4>
           </CardHeader>
           <CardBody>
             <h5>
-              <strong>This action has serious consequences</strong>
-            </h5>
-            <h5>You can change active or owner permission or both</h5>
-            <h5>Leave blank any permission you DON&pos;T want to change</h5>
-            <h6>
-              To change only active permission select <i>&quot;youraccount@active&quot;</i> for your Scatter identity
-            </h6>
-            <h6>
-              To change any permission select <i>&quot;youraccount@owner&quot;</i> for your Scatter identity
-            </h6>
-            <h5>
-              If you change your active permission you have to update your scatter identity to use this new key pair
+              <FormattedMessage {...messages.warning1} />
             </h5>
             <h5>
-              If you dont have the key pairs you assign to the active permission you will no longer be able send
-              transactions.
+              <FormattedMessage {...messages.warning9} />
             </h5>
-            <h5>You can recover your active permission using your owner permission, however:</h5>
-            <h3>
-              <strong>
-                If you dont have either key pair you assign your account becomes <u>IRRECOVERABLE</u>
-              </strong>
-            </h3>
+            <p>
+              <FormattedMessage {...messages.warning2} />
+            </p>
+            <p>
+              <FormattedMessage {...messages.warning3} />
+            </p>
+            <p>
+              <FormattedMessage {...messages.warning4} />
+            </p>
+            <p>
+              <FormattedMessage {...messages.warning5} />
+            </p>
+            <p>
+              <FormattedMessage {...messages.warning6} />
+            </p>
+            <p>
+              <FormattedMessage {...messages.warning7} />
+            </p>
+            <p>
+              <FormattedMessage {...messages.warning8} />
+            </p>
           </CardBody>
         </Card>
       </GridItem>
@@ -175,4 +182,4 @@ const SimplePermissionsForm = props => {
   );
 };
 
-export default withStyles(regularFormsStyle)(SimplePermissionsForm);
+export default withStyles(regularFormsStyle)(injectIntl(SimplePermissionsForm));
