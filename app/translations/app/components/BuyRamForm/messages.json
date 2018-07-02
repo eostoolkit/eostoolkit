@@ -1,6 +1,50 @@
 [
   {
     "id": "app.components.BuyRamForm.header",
-    "defaultMessage": "This is the BuyRamForm component !"
+    "defaultMessage": "Buy Ram"
+  },
+  {
+    "id": "app.components.BuyRamForm.ownerName",
+    "defaultMessage": "Payer"
+  },
+  {
+    "id": "app.components.BuyRamForm.ownerText",
+    "defaultMessage": "Account paying for the Ram"
+  },
+  {
+    "id": "app.common.recepient",
+    "defaultMessage": "Recepient"
+  },
+  {
+    "id": "app.common.disclaimer",
+    "defaultMessage": "By executing this action you are agreeing to the EOS constitution and this actions associated ricardian contract."
+  },
+  {
+    "id": "app.common.purchase",
+    "defaultMessage": "Purchase"
+  },
+  {
+    "id": "app.common.ramRecepientText",
+    "defaultMessage": "Account that receives the Ram"
+  },
+  {
+    "id": "app.common.bytes",
+    "defaultMessage": "bytes"
+  },
+  {
+    "id": "app.common.eos",
+    "defaultMessage": "EOS"
+  },
+  {
+    "id": "app.components.BuyRamForm.ramBytes",
+    "defaultMessage": "Ram Quantity (in bytes)"
+  },
+  {
+    "id": "app.components.BuyRamForm.ramEos",
+    "defaultMessage": "Ram Quantity (in EOS)"
+  },
+  {
+    "id": "app.components.BuyRamForm.ramText",
+    "defaultMessage": "How much to purchase"
   }
 ]

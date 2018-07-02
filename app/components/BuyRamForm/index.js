@@ -7,6 +7,7 @@
 import React from 'react';
 import { compose } from 'recompose';
 import { withFormik } from 'formik';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import * as Yup from 'yup';
 // import styled from 'styled-components';
 
@@ -31,9 +32,10 @@ import CardBody from 'components/Card/CardBody';
 
 import BuyBytes from './Ricardian/BuyBytes';
 import BuyEOS from './Ricardian/BuyEOS';
-import { units } from './constants';
+// import { units } from './constants';
 
 import buyRamFormStyle from './buyRamFormStyle';
+import messages from './messages';
 
 const FormObject = props => {
   const {
@@ -45,6 +47,7 @@ const FormObject = props => {
     touched,
     unit: { isEOS, handleByteUnitChange, handleEOSUnitChange },
     values,
+    intl,
   } = props;
 
   const defaultUnitProps = {
@@ -53,7 +56,7 @@ const FormObject = props => {
     },
     inputProps: {
       type: 'text',
-      placeholder: 'Required to process transactions',
+      placeholder: intl.formatMessage(messages.ramText),
       onChange: handleChange,
       onBlur: handleBlur,
     },
@@ -63,7 +66,7 @@ const FormObject = props => {
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Receiver Account Name"
+            labelText={intl.formatMessage(messages.recepient)}
             id="name"
             error={errors.name}
             touched={touched.name}
@@ -72,7 +75,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'The account that receives the RAM',
+              placeholder: intl.formatMessage(messages.recepientText),
               value: values.name,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -81,7 +84,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Payer"
+            labelText={intl.formatMessage(messages.ownerName)}
             id="owner"
             error={errors.owner}
             touched={touched.owner}
@@ -90,7 +93,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Account that pays for ram',
+              placeholder: intl.formatMessage(messages.ownerText),
               value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -101,18 +104,18 @@ const FormObject = props => {
           <span className={classes.radioLabel}>Purchase unit:</span>
           <FormControlLabel
             control={<Radio checked={isEOS} color="primary" onChange={handleEOSUnitChange} />}
-            label="EOS"
+            label={intl.formatMessage(messages.eos)}
           />
           <FormControlLabel
             control={<Radio checked={!isEOS} color="primary" onChange={handleByteUnitChange} />}
-            label="bytes"
+            label={intl.formatMessage(messages.bytes)}
           />
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           {isEOS ? (
             <CustomInput
               {...defaultUnitProps}
-              labelText={`Ram purchase (in ${units.EOS})`}
+              labelText={intl.formatMessage(messages.ramEos)}
               id="eosQuantity"
               error={errors.eosQuantity}
               touched={touched.eosQuantity}
@@ -124,7 +127,7 @@ const FormObject = props => {
           ) : (
             <CustomInput
               {...defaultUnitProps}
-              labelText={`Ram purchase (in ${units.BYTE})`}
+              labelText={intl.formatMessage(messages.ramBytes)}
               id="byteQuantity"
               error={errors.byteQuantity}
               touched={touched.byteQuantity}
@@ -137,13 +140,12 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12}>
           <p>
-            By executing this action you are agreeing to the EOS constitution and this actions associated ricardian
-            contract.
+            <FormattedMessage {...messages.disclaimer} />
           </p>
         </GridItem>
         <GridItem xs={12}>
           <Button color="rose" onClick={submitForm}>
-            Purchase
+            <FormattedMessage {...messages.purchase} />
           </Button>
         </GridItem>
       </GridContainer>
@@ -166,7 +168,7 @@ const validationSchema = ({ unit: { isEOS } }) => {
 };
 
 const BuyRamForm = props => {
-  const { classes, handleSubmit, unit, ...formikProps } = props;
+  const { classes, handleSubmit, unit, intl, ...formikProps } = props;
   const { errors, handleBlur, handleChange, submitForm, touched, values } = formikProps;
   return (
     <GridContainer>
@@ -176,7 +178,9 @@ const BuyRamForm = props => {
             <CardIcon color="warning">
               <AddCircle />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Hello</h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...messages.header} />
+            </h4>
           </CardHeader>
           <CardBody>
             <FormObject
@@ -188,6 +192,7 @@ const BuyRamForm = props => {
               touched={touched}
               unit={unit}
               values={values}
+              intl={intl}
             />
           </CardBody>
         </Card>
@@ -229,4 +234,4 @@ const enhance = compose(
   })
 );
 
-export default enhance(BuyRamForm);
+export default enhance(injectIntl(BuyRamForm));
