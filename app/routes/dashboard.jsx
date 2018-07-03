@@ -16,6 +16,7 @@ import Refund from 'containers/Refund/Loadable';
 import BidName from 'containers/BidName/Loadable';
 import ForumPost from 'containers/ForumPost/Loadable';
 import Blockone from 'components/Blockone/Loadable';
+import Airgrab from 'containers/Airgrab/Loadable';
 // @material-ui/icons
 import {
   AccountBalance,
@@ -28,6 +29,7 @@ import {
   Gavel,
   Forum,
   Favorite,
+  CloudDownload
 } from '@material-ui/icons';
 
 const dashRoutes = [
@@ -42,6 +44,12 @@ const dashRoutes = [
     name: 'Governance',
     icon: AccountBalance,
     component: Governance,
+  },
+  {
+    path: '/airgrab',
+    name: 'Airgrab Tokens',
+    icon: CloudDownload,
+    component: Airgrab,
   },
   {
     path: '/search',
