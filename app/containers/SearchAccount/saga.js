@@ -19,9 +19,9 @@ function* getCurrency(token, name) {
     });
     return currencies;
   } catch (c) {
-    return {account: token, balance: 'NOT FOUND'};
+    return [];
   }
-  return {account: token, balance: 'NOT FOUND'};
+  return [];
 }
 
 function* getAccountDetail(name) {

@@ -64,15 +64,19 @@ function* watchScatterConnect() {
 // TODO: Dry this out with SearchAccount
 function* getCurrency(token, name) {
   const eosClient = yield Eos(eosConfig);
-  const currency = yield eosClient.getCurrencyBalance(token, name);
-  // TODO: This is some prep work for airdrop token support.
-  const currencies = currency.map(c => {
-    return {
-      account: token,
-      balance: c,
-    };
-  });
-  return currencies;
+  try {
+    const currency = yield eosClient.getCurrencyBalance(token, name);
+    const currencies = currency.map(c => {
+      return {
+        account: token,
+        balance: c,
+      };
+    });
+    return currencies;
+  } catch (c) {
+    return [];
+  }
+  return [];
 }
 
 function* getAccountDetail(name) {
