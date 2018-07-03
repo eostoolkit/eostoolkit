@@ -8,15 +8,20 @@ import { lookupLoading, lookupLoaded } from './actions';
 
 function* getCurrency(token, name) {
   const eosClient = yield Eos(eosConfig);
-  const currency = yield eosClient.getCurrencyBalance(token, name);
-  // TODO: This is some prep work for airdrop token support.
-  const currencies = currency.map(c => {
-    return {
-      account: token,
-      balance: c,
-    };
-  });
-  return currencies;
+  try {
+    const currency = yield eosClient.getCurrencyBalance(token, name);
+    // TODO: This is some prep work for airdrop token support.
+    const currencies = currency.map(c => {
+      return {
+        account: token,
+        balance: c,
+      };
+    });
+    return currencies;
+  } catch (c) {
+    return {account: token, balance: 'NOT FOUND'};
+  }
+  return {account: token, balance: 'NOT FOUND'};
 }
 
 function* getAccountDetail(name) {
