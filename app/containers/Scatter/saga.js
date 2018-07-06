@@ -76,7 +76,6 @@ function* getCurrency(token, name) {
   } catch (c) {
     return [];
   }
-  return [];
 }
 
 function* getAccountDetail(name) {

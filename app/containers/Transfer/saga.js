@@ -17,18 +17,19 @@ function* performAction() {
   const eosAuth = yield select(EosAuthority());
   yield put(loadingNotification());
   try {
-    const res = yield eosClient.transfer(
-      {
-        account: 'eosio.token',
-        from: form.owner,
-        to: form.name,
-        quantity: `${Number(form.quantity)
-          .toFixed(4)
-          .toString()} EOS`,
-        memo: form.memo,
-      },
-      { authorization: [{ actor: eosAccount, permission: eosAuth }] }
-    );
+    const res = yield eosClient.transaction(form.contract, tr => {
+      tr.transfer(
+        {
+          from: form.owner,
+          to: form.name,
+          quantity: `${Number(form.quantity)
+            .toFixed(4)
+            .toString()} ${form.symbol}`,
+          memo: form.memo,
+        },
+        { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+      );
+    });
     yield put(successNotification(res.transaction_id));
   } catch (err) {
     yield put(failureNotification(err));

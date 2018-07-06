@@ -29,7 +29,7 @@ import {
   Gavel,
   Forum,
   Favorite,
-  CloudDownload
+  CloudDownload,
 } from '@material-ui/icons';
 
 const dashRoutes = [
@@ -65,7 +65,7 @@ const dashRoutes = [
   },
   {
     path: '/transfer',
-    name: 'Transfer EOS',
+    name: 'Transfer Tokens',
     icon: Payment,
     component: Transfer,
   },

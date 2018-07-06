@@ -1,5 +1,4 @@
 import { takeLatest, put, select, all } from 'redux-saga/effects';
-import { v4 as uuidv4 } from 'uuid';
 import EosClient, {
   makeSelectEosAuthority as EosAuthority,
   makeSelectEosAccount as EosAccount,

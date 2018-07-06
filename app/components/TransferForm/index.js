@@ -71,6 +71,42 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
+            labelText="Contract"
+            id="contract"
+            error={errors.contract}
+            touched={touched.contract}
+            formControlProps={{
+              fullWidth: true,
+            }}
+            inputProps={{
+              type: 'text',
+              placeholder: 'Contract that hosts the Token',
+              value: values.contract,
+              onChange: handleChange,
+              onBlur: handleBlur,
+            }}
+          />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <CustomInput
+            labelText="Symbol"
+            id="symbol"
+            error={errors.symbol}
+            touched={touched.symbol}
+            formControlProps={{
+              fullWidth: true,
+            }}
+            inputProps={{
+              type: 'text',
+              placeholder: 'Symbol of the Token',
+              value: values.symbol,
+              onChange: handleChange,
+              onBlur: handleBlur,
+            }}
+          />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <CustomInput
             labelText="Quantity (in Tokens)"
             id="quantity"
             error={errors.quantity}
@@ -124,6 +160,8 @@ const FormObject = props => {
 const validationSchema = Yup.object().shape({
   owner: Yup.string().required('Sender name is required'),
   name: Yup.string().required('Account name is required'),
+  contract: Yup.string().required('Contract name is required'),
+  symbol: Yup.string().required('Symbol is required'),
   memo: Yup.string(),
   quantity: Yup.number()
     .required('Quantity is required')
@@ -147,6 +185,8 @@ const TransferForm = props => {
               initialValues={{
                 owner: eosAccount,
                 name: '',
+                contract: 'eosio.token',
+                symbol: 'EOS',
                 quantity: '0',
                 memo: '',
               }}

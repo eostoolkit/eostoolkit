@@ -10,7 +10,6 @@ function* getCurrency(token, name) {
   const eosClient = yield Eos(eosConfig);
   try {
     const currency = yield eosClient.getCurrencyBalance(token, name);
-    // TODO: This is some prep work for airdrop token support.
     const currencies = currency.map(c => {
       return {
         account: token,
@@ -21,7 +20,6 @@ function* getCurrency(token, name) {
   } catch (c) {
     return [];
   }
-  return [];
 }
 
 function* getAccountDetail(name) {
