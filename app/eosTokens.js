@@ -14,6 +14,9 @@ const eosTokens = [
   'ednazztokens',
   'irespotokens',
   'therealkarma',
+  'esbcointoken',
+  'eosvrtokenss',
+  'wizznetwork1',
   'poormantoken',
 ];
 
