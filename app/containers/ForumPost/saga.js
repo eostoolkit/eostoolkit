@@ -22,12 +22,12 @@ function* performAction() {
       tr.post(
         {
           account: form.owner,
-          post_uuid: uuidv4(),
+          post_uuid: form.uuid || uuidv4(),
           title: form.title,
           content: form.content,
           reply_to_account: '',
           reply_to_post_uuid: '',
-          certify: 1,
+          certify: 0,
           json_metadata: '',
         },
         { authorization: [{ actor: eosAccount, permission: eosAuth }] }

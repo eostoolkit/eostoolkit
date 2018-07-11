@@ -53,6 +53,24 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
+            labelText="Post UUID"
+            id="uuid"
+            error={errors.uuid}
+            touched={touched.uuid}
+            formControlProps={{
+              fullWidth: true,
+            }}
+            inputProps={{
+              type: 'text',
+              placeholder: 'Optional UUID',
+              value: values.uuid,
+              onChange: handleChange,
+              onBlur: handleBlur,
+            }}
+          />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <CustomInput
             labelText="Title"
             id="title"
             error={errors.title}
@@ -69,7 +87,7 @@ const FormObject = props => {
             }}
           />
         </GridItem>
-        <GridItem xs={12} sm={12} md={12}>
+        <GridItem xs={12} sm={12} md={6}>
           <CustomInput
             labelText="Content"
             id="content"
@@ -127,6 +145,7 @@ const ForumPostForm = props => {
                 owner: eosAccount,
                 title: '',
                 content: '',
+                uuid: '',
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
