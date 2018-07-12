@@ -18,6 +18,7 @@ const eosTokens = [
   'eosvrtokenss',
   'wizznetwork1',
   'poormantoken',
+  'cptblackbill',
 ];
 
 export default eosTokens;
