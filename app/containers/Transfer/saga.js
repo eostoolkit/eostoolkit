@@ -23,7 +23,6 @@ function* performAction() {
           from: form.owner,
           to: form.name,
           quantity: `${Number(form.quantity)
-            .toFixed(4)
             .toString()} ${form.symbol}`,
           memo: form.memo,
         },

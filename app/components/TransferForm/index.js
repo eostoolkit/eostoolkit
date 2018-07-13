@@ -107,7 +107,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Quantity (in Tokens)"
+            labelText="Quantity (in Tokens) You must match precision (1.0000)"
             id="quantity"
             error={errors.quantity}
             touched={touched.quantity}
