@@ -22,8 +22,7 @@ function* performAction() {
         {
           from: form.owner,
           to: form.name,
-          quantity: `${Number(form.quantity)
-            .toString()} ${form.symbol}`,
+          quantity: `${form.quantity} ${form.symbol}`,
           memo: form.memo,
         },
         { authorization: [{ actor: eosAccount, permission: eosAuth }] }
