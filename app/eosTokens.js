@@ -21,6 +21,7 @@ const eosTokens = [
   'cptblackbill',
   'everipediaiq',
   'octtothemoon',
+  'challengedac',
 ];
 
 export default eosTokens;
