@@ -3,6 +3,7 @@ import EosClient, {
   makeSelectEosAuthority as EosAuthority,
   makeSelectEosAccount as EosAccount,
 } from 'containers/Scatter/selectors';
+import selectTokens from 'containers/Tokens/selectors';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
 import Form from './selectors';
 import { DEFAULT_ACTION } from './constants';
@@ -15,14 +16,18 @@ function* performAction() {
   const form = yield select(Form());
   const eosAccount = yield select(EosAccount());
   const eosAuth = yield select(EosAuthority());
+  const eosTokens = yield select(selectTokens());
   yield put(loadingNotification());
   try {
-    const res = yield eosClient.transaction(form.contract, tr => {
+    const token = eosTokens.find(tk => tk.symbol === form.symbol);
+    const res = yield eosClient.transaction(token.account, tr => {
       tr.transfer(
         {
           from: form.owner,
           to: form.name,
-          quantity: `${form.quantity} ${form.symbol}`,
+          quantity: `${Number(form.quantity)
+            .toFixed(token.precision)
+            .toString()} ${form.symbol}`,
           memo: form.memo,
         },
         { authorization: [{ actor: eosAccount, permission: eosAuth }] }

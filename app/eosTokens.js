@@ -2,26 +2,6 @@
 // Provide a list of EOS tokens that are available
 //
 
-const eosTokens = [
-  'eosio.token',
-  'eosadddddddd',
-  'eosdactokens',
-  'gyztomjugage',
-  'eoxeoxeoxeox',
-  'eosiochaince',
-  'eosatidiumio',
-  'horustokenio',
-  'ednazztokens',
-  'irespotokens',
-  'therealkarma',
-  'esbcointoken',
-  'eosvrtokenss',
-  'wizznetwork1',
-  'poormantoken',
-  'cptblackbill',
-  'everipediaiq',
-  'octtothemoon',
-  'challengedac',
-];
+const listUrl = 'https://raw.githubusercontent.com/eostoolkit/eos-airdrops/master/tokens.json';
 
-export default eosTokens;
+export default listUrl;

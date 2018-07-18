@@ -1,6 +1,6 @@
 import Eos from 'eosjs';
 import eosConfig from 'eosConfig';
-import eosTokens from 'eosTokens';
+import selectTokens from 'containers/Tokens/selectors';
 import { takeLatest, call, put, select, all, fork, join } from 'redux-saga/effects';
 import { makeSelectSearchName, makeSelectSearchPubkey } from './selectors';
 import { LOOKUP_ACCOUNT, LOOKUP_PUBKEY } from './constants';
@@ -24,9 +24,10 @@ function* getCurrency(token, name) {
 
 function* getAccountDetail(name) {
   const eosClient = yield Eos(eosConfig);
+  const eosTokens = yield select(selectTokens());
   const tokens = yield all(
     eosTokens.map(token => {
-      return fork(getCurrency, token, name);
+      return fork(getCurrency, token.account, name);
     })
   );
   const currencies = yield join(...tokens);

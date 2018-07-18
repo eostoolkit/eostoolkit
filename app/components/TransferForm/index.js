@@ -71,17 +71,17 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Contract"
-            id="contract"
-            error={errors.contract}
-            touched={touched.contract}
+            labelText="Quantity (in Tokens)"
+            id="quantity"
+            error={errors.quantity}
+            touched={touched.quantity}
             formControlProps={{
               fullWidth: true,
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Contract that hosts the Token',
-              value: values.contract,
+              placeholder: 'How many Tokens to send',
+              value: values.quantity,
               onChange: handleChange,
               onBlur: handleBlur,
             }}
@@ -105,25 +105,7 @@ const FormObject = props => {
             }}
           />
         </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <CustomInput
-            labelText="Quantity (in Tokens) You must match precision (1.0000)"
-            id="quantity"
-            error={errors.quantity}
-            touched={touched.quantity}
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'text',
-              placeholder: 'How many Tokens to send',
-              value: values.quantity,
-              onChange: handleChange,
-              onBlur: handleBlur,
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
+        <GridItem xs={12} sm={12} md={12}>
           <CustomInput
             labelText="Memo"
             id="memo"
@@ -185,7 +167,6 @@ const TransferForm = props => {
               initialValues={{
                 owner: eosAccount,
                 name: '',
-                contract: 'eosio.token',
                 symbol: 'EOS',
                 quantity: '0',
                 memo: '',

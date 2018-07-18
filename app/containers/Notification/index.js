@@ -13,6 +13,7 @@ import injectReducer from 'utils/injectReducer';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import withStyles from '@material-ui/core/styles/withStyles';
 import VoteUs from 'containers/VoteUs/Loadable';
+import { makeSelectEosAccount } from 'containers/Scatter/selectors';
 
 import {
   makeSelectNotificationFailure,
@@ -29,8 +30,7 @@ import sweetAlertStyle from './sweetAlertStyle';
 // eslint-disable-next-line react/prefer-stateless-function
 export class Notification extends React.Component {
   render() {
-    const { loading, failure, success, message, closeAll } = this.props;
-
+    const { loading, failure, success, message, closeAll, eosAccount } = this.props;
     if (loading) {
       return (
         <SweetAlert
@@ -54,11 +54,10 @@ export class Notification extends React.Component {
           title="Success"
           onConfirm={() => closeAll()}
           confirmBtnText="Thanks"
-          // onCancel={() => closeAll()} TODO: Add vote button
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.success}`}>
           <h6>
             {message ? (
-              <a href={`https://eospark.com/MainNet/tx/${message}`} target="new">
+              <a href={`https://eosflare.io/tx/${message}`} target="new">
                 TxId: {message}
               </a>
             ) : (
@@ -73,7 +72,21 @@ export class Notification extends React.Component {
         </SweetAlert>
       );
     }
-    if (failure) {
+    if (failure && eosAccount !== '') {
+      return (
+        <SweetAlert
+          danger
+          style={{ display: 'block', marginTop: '-100px' }}
+          title="Failure"
+          onConfirm={() => closeAll()}
+          confirmBtnText="Close"
+          confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.danger}`}>
+          <h6>Transaction has failed</h6>
+          <h6>{message ? `Details: ${JSON.stringify(message)}` : ''}</h6>
+        </SweetAlert>
+      );
+    }
+    if (failure && eosAccount === '') {
       return (
         <SweetAlert
           danger
@@ -83,8 +96,12 @@ export class Notification extends React.Component {
           confirmBtnText="Close"
           // onCancel={() => closeAll()}
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.danger}`}>
-          <h6>Transaction has failed</h6>
-          <h6>{message ? `Details: ${JSON.stringify(message)}` : ''}</h6>
+          <h5>You must install and connect Scatter</h5>
+          <h5>
+            <a href={`https://get-scatter.com/`} target="new">
+              Get Scatter
+            </a>
+          </h5>
         </SweetAlert>
       );
     }
@@ -101,6 +118,7 @@ const mapStateToProps = createStructuredSelector({
   failure: makeSelectNotificationFailure(),
   loading: makeSelectNotificationLoading(),
   message: makeSelectNotificationMessage(),
+  eosAccount: makeSelectEosAccount(),
 });
 
 function mapDispatchToProps(dispatch) {
