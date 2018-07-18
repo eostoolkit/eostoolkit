@@ -17,14 +17,26 @@ function* performAction() {
   const eosAuth = yield select(EosAuthority());
   yield put(loadingNotification());
   try {
-    const res = yield eosClient.transaction('poormantoken', tr => {
-      tr.signup(
-        {
-          owner: form.owner,
-          quantity: '0.0000 POOR',
-        },
-        { authorization: [{ actor: eosAccount, permission: eosAuth }] }
-      );
+    const res = yield eosClient.transaction(form.account, tr => {
+      if (form.method === 'signup') {
+        tr.signup(
+          {
+            owner: eosAccount,
+            quantity: `0.0000 ${form.symbol}`,
+          },
+          { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+        );
+      }
+
+      if (form.method === 'claim') {
+        tr.claim(
+          {
+            claimer: eosAccount,
+            quantity: `0.0000 ${form.symbol}`,
+          },
+          { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+        );
+      }
     });
     yield put(successNotification(res.transaction_id));
   } catch (err) {
