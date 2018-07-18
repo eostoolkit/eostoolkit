@@ -142,7 +142,6 @@ const FormObject = props => {
 const validationSchema = Yup.object().shape({
   owner: Yup.string().required('Sender name is required'),
   name: Yup.string().required('Account name is required'),
-  contract: Yup.string().required('Contract name is required'),
   symbol: Yup.string().required('Symbol is required'),
   memo: Yup.string(),
   quantity: Yup.number()
