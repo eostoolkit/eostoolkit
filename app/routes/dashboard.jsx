@@ -15,7 +15,6 @@ import ClaimRewards from 'containers/ClaimRewards/Loadable';
 import Refund from 'containers/Refund/Loadable';
 import BidName from 'containers/BidName/Loadable';
 import ForumPost from 'containers/ForumPost/Loadable';
-import Blockone from 'components/Blockone/Loadable';
 import Airgrab from 'containers/Airgrab/Loadable';
 import Donate from 'containers/Donate/Loadable';
 // @material-ui/icons

@@ -71,24 +71,6 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Net Unstake (in EOS)"
-            id="net"
-            error={errors.net}
-            touched={touched.net}
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: 'text',
-              placeholder: 'How much EOS to unstake',
-              value: values.net,
-              onChange: handleChange,
-              onBlur: handleBlur,
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <CustomInput
             labelText="CPU Unstake (in EOS)"
             id="cpu"
             error={errors.cpu}
@@ -100,6 +82,24 @@ const FormObject = props => {
               type: 'text',
               placeholder: 'How much EOS to unstake',
               value: values.cpu,
+              onChange: handleChange,
+              onBlur: handleBlur,
+            }}
+          />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <CustomInput
+            labelText="Net Unstake (in EOS)"
+            id="net"
+            error={errors.net}
+            touched={touched.net}
+            formControlProps={{
+              fullWidth: true,
+            }}
+            inputProps={{
+              type: 'text',
+              placeholder: 'How much EOS to unstake',
+              value: values.net,
               onChange: handleChange,
               onBlur: handleBlur,
             }}

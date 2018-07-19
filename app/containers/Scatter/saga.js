@@ -1,8 +1,9 @@
 import Eos from 'eosjs';
-import eosTokens from 'eosTokens';
 import { takeLatest, put, select, all, call, fork, join } from 'redux-saga/effects';
 import eosConfig, { scatterConfig, scatterEosOptions, testnet } from 'eosConfig';
+import selectTokens from 'containers/Tokens/selectors';
 import { makeSelectEosAccount, makeSelectScatter } from 'containers/Scatter/selectors';
+import { NOTIFICATION_SUCCESS } from 'containers/Notification/constants';
 import { eosLoaded, attachedAccount, detachedAccount, refreshAccountData, refreshedAccountData } from './actions';
 import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT, REFRESH_DATA } from './constants';
 
@@ -80,9 +81,10 @@ function* getCurrency(token, name) {
 
 function* getAccountDetail(name) {
   const eosClient = yield Eos(eosConfig);
+  const eosTokens = yield select(selectTokens());
   const tokens = yield all(
     eosTokens.map(token => {
-      return fork(getCurrency, token, name);
+      return fork(getCurrency, token.account, name);
     })
   );
   const currencies = yield join(...tokens);
@@ -111,6 +113,10 @@ function* watchEosRefreshData() {
   yield takeLatest(REFRESH_DATA, refreshEosAccountData);
 }
 
+function* watchEosSuccess() {
+  yield takeLatest(NOTIFICATION_SUCCESS, refreshEosAccountData);
+}
+
 //
 // Remove an account
 //
@@ -137,5 +143,11 @@ function* watchScatterRemove() {
 //
 
 export default function* rootSaga() {
-  yield all([watchScatterLoaded(), watchScatterConnect(), watchScatterRemove(), watchEosRefreshData()]);
+  yield all([
+    watchScatterLoaded(),
+    watchScatterConnect(),
+    watchScatterRemove(),
+    watchEosRefreshData(),
+    watchEosSuccess(),
+  ]);
 }

@@ -31,6 +31,7 @@ import Footer from 'components/Footer/Footer';
 import Sidebar from 'components/Sidebar/Sidebar';
 import Notification from 'containers/Notification/Loadable';
 import Tokens from 'containers/Tokens/Loadable';
+import Summary from 'components/Summary/Loadable';
 
 import dashboardRoutes from 'routes/dashboard';
 import logo from 'assets/img/logo.png';
@@ -130,10 +131,14 @@ class Dashboard extends React.Component {
             {...rest}
           />
           <Notification />
+
           {/* On the /maps/full-screen-maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {this.getRoute() ? (
             <div className={classes.content}>
-              <div className={classes.container}>{switchRoutes}</div>
+              <div className={classes.container}>
+                <Summary />
+                {switchRoutes}
+              </div>
             </div>
           ) : (
             <div className={classes.map}>{switchRoutes}</div>

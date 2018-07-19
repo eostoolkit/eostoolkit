@@ -45,7 +45,9 @@ const AirgrabForm = props => {
               contract.
             </p>
             <AirgrabTable handleSubmit={handleSubmit} />
-            <p>Have an Airgrab you want here? Email us: <a href="mailto:contact@genereos.io">contact@genereos.io</a></p>
+            <p>
+              Have an Airgrab you want here? Email us: <a href="mailto:contact@genereos.io">contact@genereos.io</a>
+            </p>
           </CardBody>
         </Card>
       </GridItem>
