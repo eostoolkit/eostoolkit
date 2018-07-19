@@ -34,6 +34,7 @@ const FormObject = props => {
     <form>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
+          <h5>This function can BREAK your account. Please be sure you understand what your doing.</h5>
           <CustomInput
             labelText="Change permission on"
             id="owner"
@@ -144,30 +145,15 @@ const SimplePermissionsForm = props => {
             <h4 className={classes.cardIconTitle}>Important</h4>
           </CardHeader>
           <CardBody>
-            <h5>
-              <strong>This action has serious consequences</strong>
-            </h5>
-            <h5>You can change active or owner permission or both</h5>
-            <h5>Leave blank any permission you DON&pos;T want to change</h5>
-            <h6>
-              To change only active permission select <i>&quot;youraccount@active&quot;</i> for your Scatter identity
-            </h6>
-            <h6>
-              To change any permission select <i>&quot;youraccount@owner&quot;</i> for your Scatter identity
-            </h6>
-            <h5>
-              If you change your active permission you have to update your scatter identity to use this new key pair
-            </h5>
-            <h5>
-              If you dont have the key pairs you assign to the active permission you will no longer be able send
-              transactions.
-            </h5>
-            <h5>You can recover your active permission using your owner permission, however:</h5>
-            <h3>
-              <strong>
-                If you dont have either key pair you assign your account becomes <u>IRRECOVERABLE</u>
-              </strong>
-            </h3>
+            <h5><strong>This action has serious consequences</strong></h5>
+            <h5>If you don{'\''}t control the permissions you assign - your account becomes IRRECOVERABLE</h5>
+            <h5>If you assign an ACCOUNT instead of a KEY as a permission you risk breaking your account - be 100% SURE</h5>
+            <p>You can change active or owner permission or both</p>
+            <p>Leave blank any permission you DON{'\''}T want to change</p>
+            <p>To change only active permission select youraccount@active for your Scatter identity</p>
+            <p>To change any permission select youraccount@owner for your Scatter identity</p>
+            <p>If you change your active permission you have to update your scatter identity to use this new key pair</p>
+            <p>If you dont have the key pairs you assign to the active permission you will no longer be able send transactions</p>
           </CardBody>
         </Card>
       </GridItem>
