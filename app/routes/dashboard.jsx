@@ -17,6 +17,7 @@ import BidName from 'containers/BidName/Loadable';
 import ForumPost from 'containers/ForumPost/Loadable';
 import Blockone from 'components/Blockone/Loadable';
 import Airgrab from 'containers/Airgrab/Loadable';
+import Donate from 'containers/Donate/Loadable';
 // @material-ui/icons
 import {
   AccountBalance,
@@ -37,7 +38,7 @@ const dashRoutes = [
     path: '/home',
     name: 'Support',
     icon: Favorite,
-    component: Blockone,
+    component: Donate,
   },
   {
     path: '/governance',
