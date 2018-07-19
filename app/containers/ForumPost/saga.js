@@ -21,11 +21,11 @@ function* performAction() {
     const res = yield eosClient.transaction('eosforumtest', tr => {
       tr.post(
         {
-          account: form.owner,
+          poster: form.owner,
           post_uuid: form.uuid || uuidv4(),
           title: form.title,
           content: form.content,
-          reply_to_account: '',
+          reply_to_poster: '',
           reply_to_post_uuid: '',
           certify: 0,
           json_metadata: '',
