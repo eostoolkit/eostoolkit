@@ -19,7 +19,9 @@ function ResourcesTable({ ...props }) {
             <TableCell className={classes.tableCell}>
               <h6>EOS</h6>
             </TableCell>
-            <TableCell className={classes.tableCell}>{account.core_liquid_balance}</TableCell>
+            <TableCell className={classes.tableCell}>
+              {account.core_liquid_balance ? account.core_liquid_balance : '0.0000 EOS'}
+            </TableCell>
             <TableCell className={classes.tableCell}>
               <h6>RAM</h6>
             </TableCell>
