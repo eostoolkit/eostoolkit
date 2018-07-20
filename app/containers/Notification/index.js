@@ -57,7 +57,7 @@ export class Notification extends React.Component {
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.success}`}>
           <h6>
             {message ? (
-              <a href={`https://eosflare.io/tx/${message}`} target="new">
+              <a href={`https://bloks.io/transaction/${message}`} target="new">
                 TxId: {message}
               </a>
             ) : (
