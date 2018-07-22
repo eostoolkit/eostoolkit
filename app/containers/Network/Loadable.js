@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for Tokens
+ * Asynchronously loads the component for Airgrab
  *
  */
 

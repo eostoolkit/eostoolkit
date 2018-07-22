@@ -14,7 +14,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Hidden from '@material-ui/core/Hidden';
 import Collapse from '@material-ui/core/Collapse';
-import { AddBox, ExitToApp } from '@material-ui/icons';
+import { AddBox, ExitToApp, SettingsApplications } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { connectAccount, removeAccount } from 'containers/Scatter/actions';
@@ -104,6 +104,18 @@ class Sidebar extends React.Component {
                     />
                   </NavLink>
                 </ListItem>
+                <ListItem className={classes.collapseItem}>
+                  <NavLink to="networks" className={`${classes.itemLink} ${classes.userCollapseLinks}`}>
+                    <ListItemIcon className={classes.itemIconMini}>
+                      <SettingsApplications />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Change Network" // TODO: Make this international
+                      disableTypography
+                      className={collapseItemText}
+                    />
+                  </NavLink>
+                </ListItem>
                 <ListItem className={classes.collapseItem} onClick={this.props.onScatterRemove}>
                   <NavLink to="#" className={`${classes.itemLink} ${classes.userCollapseLinks}`}>
                     <ListItemIcon className={classes.itemIconMini}>
@@ -125,6 +137,9 @@ class Sidebar extends React.Component {
     const links = (
       <List className={classes.list}>
         {routes.map(prop => {
+          if (prop.hide) {
+            return null;
+          }
           if (prop.redirect) {
             return null;
           }

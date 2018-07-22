@@ -12,7 +12,7 @@ import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import { makeSelectEosClient, makeSelectScatter, makeSelectEosAccount, makeSelectEosAuthority } from './selectors';
-import { scatterLoaded } from './actions';
+import { scatterLoaded, fetchNetworks } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -27,6 +27,7 @@ export class Scatter extends React.Component {
     document.addEventListener('scatterLoaded', () => {
       // console.log('Scatter connected')
       this.props.onScatterLoaded(window.scatter);
+
       // Scatter will now be available from the window scope.
       // At this stage the connection to Scatter from the application is
       // already encrypted.
@@ -53,11 +54,6 @@ export class Scatter extends React.Component {
   }
 }
 
-// TODO: Add prop types
-Scatter.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
-};
-
 const mapStateToProps = createStructuredSelector({
   scatter: makeSelectScatter(),
   eosClient: makeSelectEosClient(),
@@ -68,6 +64,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onScatterLoaded: scatter => dispatch(scatterLoaded(scatter)),
+    loadNetworks: () => dispatch(fetchNetworks()),
   };
 }
 

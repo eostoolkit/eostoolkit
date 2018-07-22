@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectEosAccountData } from 'containers/Scatter/selectors';
+import { makeSelectActiveNetwork } from 'containers/Remote/selectors';
 
 // core components
 import GridContainer from 'components/Grid/GridContainer';
@@ -29,7 +30,7 @@ import ResourceTable from './resources';
 import userProfileStyles from './comingSoon';
 
 function Summary(props) {
-  const { classes, eosAccountData } = props;
+  const { classes, eosAccountData, network } = props;
   if (eosAccountData) {
     return (
       <div>
@@ -40,6 +41,9 @@ function Summary(props) {
                 <h5 className={classes.cardIconTitle}>{eosAccountData.account_name}</h5>
               </CardHeader>
               <CardBody>
+                <h6>
+                  Connected to: [{network.network.name}] -- Chain ID: [{network.network.chainId}]
+                </h6>
                 <ResourceTable account={eosAccountData} />
               </CardBody>
             </Card>
@@ -53,6 +57,7 @@ function Summary(props) {
 
 const mapStateToProps = createStructuredSelector({
   eosAccountData: makeSelectEosAccountData(),
+  network: makeSelectActiveNetwork(),
 });
 
 function mapDispatchToProps() {

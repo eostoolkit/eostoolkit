@@ -1,7 +1,10 @@
 import Eos from 'eosjs';
 import { takeLatest, put, select, all, call, fork, join } from 'redux-saga/effects';
-import eosConfig, { scatterConfig, scatterEosOptions, testnet } from 'eosConfig';
-import selectTokens from 'containers/Tokens/selectors';
+import {
+  makeSelectTokens as selectTokens,
+  makeSelectActiveNetwork,
+  makeSelectEosClient,
+} from 'containers/Remote/selectors';
 import { makeSelectEosAccount, makeSelectScatter } from 'containers/Scatter/selectors';
 import { NOTIFICATION_SUCCESS } from 'containers/Notification/constants';
 import { eosLoaded, attachedAccount, detachedAccount, refreshAccountData, refreshedAccountData } from './actions';
@@ -11,10 +14,29 @@ import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT, REFRESH_DATA } from '.
 // Get the EOS Client once Scatter loads
 //
 function* getEosClient() {
-  const scatter = yield select(makeSelectScatter());
-  yield getEosAccount(false);
-  const eosClient = scatter.eos(scatterConfig, Eos, scatterEosOptions, testnet ? 'http' : 'https');
-  yield put(eosLoaded(eosClient));
+  try {
+    const active = yield select(makeSelectActiveNetwork());
+    const scatter = yield select(makeSelectScatter());
+    const scatterConfig = {
+      protocol: active.endpoint.protocol,
+      blockchain: active.network.network,
+      host: active.endpoint.url,
+      port: active.endpoint.port,
+      chainId: active.network.chainId,
+    };
+
+    const eosOptions = {
+      broadcast: true,
+      sign: true,
+      chainId: active.network.chainId,
+    };
+
+    const protocol = active.endpoint.protocol;
+    const eosClient = scatter.eos(scatterConfig, Eos, eosOptions, protocol);
+
+    yield getEosAccount(false);
+    yield put(eosLoaded(eosClient));
+  } catch (err) {}
 }
 
 function* watchScatterLoaded() {
@@ -26,7 +48,16 @@ function* watchScatterLoaded() {
 //
 
 function* getEosAccount(signout = true) {
+  const active = yield select(makeSelectActiveNetwork());
   const scatter = yield select(makeSelectScatter());
+  const scatterConfig = {
+    protocol: active.endpoint.protocol,
+    blockchain: active.network.network,
+    host: active.endpoint.url,
+    port: active.endpoint.port,
+    chainId: active.network.chainId,
+  };
+  yield scatter.suggestNetwork(scatterConfig);
   try {
     if (scatter.identity && signout) {
       yield scatter.forgetIdentity();
@@ -34,18 +65,18 @@ function* getEosAccount(signout = true) {
     const id = yield scatter.getIdentity({
       accounts: [
         {
-          chainId: scatterConfig.chainId,
-          blockchain: scatterConfig.blockchain,
+          chainId: active.network.chainId,
+          blockchain: active.network.network,
         },
       ],
     });
     const eosAccount =
-      id && id.accounts.find(x => x.blockchain === 'eos')
-        ? id.accounts.find(x => x.blockchain === 'eos').name
-        : 'Attach an Account';
+      id && id.accounts.find(x => x.blockchain === active.network.network)
+        ? id.accounts.find(x => x.blockchain === active.network.network).name
+        : '';
     const accountAuth =
-      id && id.accounts.find(x => x.blockchain === 'eos')
-        ? id.accounts.find(x => x.blockchain === 'eos').authority
+      id && id.accounts.find(x => x.blockchain === active.network.network)
+        ? id.accounts.find(x => x.blockchain === active.network.network).authority
         : '';
     yield put(attachedAccount(eosAccount, accountAuth));
     yield put(refreshAccountData());
@@ -64,7 +95,7 @@ function* watchScatterConnect() {
 
 // TODO: Dry this out with SearchAccount
 function* getCurrency(token, name) {
-  const eosClient = yield Eos(eosConfig);
+  const eosClient = yield select(makeSelectEosClient());
   try {
     const currency = yield eosClient.getCurrencyBalance(token, name);
     const currencies = currency.map(c => {
@@ -80,7 +111,7 @@ function* getCurrency(token, name) {
 }
 
 function* getAccountDetail(name) {
-  const eosClient = yield Eos(eosConfig);
+  const eosClient = yield select(makeSelectEosClient());
   const eosTokens = yield select(selectTokens());
   const tokens = yield all(
     eosTokens.map(token => {

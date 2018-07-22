@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from 'components/CustomButtons/Button';
 
-import { airgrabs } from 'eosTokens';
+import { airgrabs } from 'remoteConfig';
 import tableStyle from 'assets/jss/tableStyle';
 
 function TokensTable({ ...props }) {

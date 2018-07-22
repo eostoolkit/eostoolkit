@@ -13,11 +13,10 @@ function* performAction() {
   const eosClient = yield select(EosClient());
   const eosAccount = yield select(EosAccount());
   const eosAuth = yield select(EosAuthority());
-
   yield put(loadingNotification());
   try {
     const details = yield eosClient.getAccount(eosAccount);
-    const producers = details.voter_info.producers;
+    const producers = details.voter_info ? details.voter_info.producers : [];
     if (producers.includes('aus1genereos')) {
       yield put(successNotification('You already voted for us! Thank you!'));
     } else {
