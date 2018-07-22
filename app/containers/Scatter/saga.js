@@ -12,7 +12,7 @@ import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT, REFRESH_DATA } from '.
 //
 function* getEosClient() {
   const scatter = yield select(makeSelectScatter());
-
+  yield getEosAccount(false);
   const eosClient = scatter.eos(scatterConfig, Eos, scatterEosOptions, testnet ? 'http' : 'https');
   yield put(eosLoaded(eosClient));
 }
@@ -25,10 +25,10 @@ function* watchScatterLoaded() {
 // Make the request to connect an account
 //
 
-function* getEosAccount() {
+function* getEosAccount(signout = true) {
   const scatter = yield select(makeSelectScatter());
   try {
-    if (scatter.identity) {
+    if (scatter.identity && signout) {
       yield scatter.forgetIdentity();
     }
     const id = yield scatter.getIdentity({
