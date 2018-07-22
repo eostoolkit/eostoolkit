@@ -38,7 +38,7 @@ const FormObject = props => {
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Recepient"
+            labelText="Recipient"
             id="name"
             error={errors.name}
             touched={touched.name}
