@@ -3,7 +3,7 @@ import EosClient, {
   makeSelectEosAuthority as EosAuthority,
   makeSelectEosAccount as EosAccount,
 } from 'containers/Scatter/selectors';
-import selectTokens from 'containers/Tokens/selectors';
+import { makeSelectTokens as selectTokens } from 'containers/Remote/selectors';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
 import Form from './selectors';
 import { DEFAULT_ACTION } from './constants';

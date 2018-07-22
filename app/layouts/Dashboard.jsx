@@ -30,7 +30,7 @@ import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 import Sidebar from 'components/Sidebar/Sidebar';
 import Notification from 'containers/Notification/Loadable';
-import Tokens from 'containers/Tokens/Loadable';
+import Remote from 'containers/Remote/Loadable';
 import Summary from 'components/Summary/Loadable';
 
 import dashboardRoutes from 'routes/dashboard';
@@ -109,7 +109,7 @@ class Dashboard extends React.Component {
     })}`;
     return (
       <div className={classes.wrapper}>
-        <Tokens />
+        <Remote />
         <Sidebar
           routes={dashboardRoutes}
           logoText={'EOSTOOLKIT.IO'}

@@ -17,6 +17,7 @@ import BidName from 'containers/BidName/Loadable';
 import ForumPost from 'containers/ForumPost/Loadable';
 import Airgrab from 'containers/Airgrab/Loadable';
 import Donate from 'containers/Donate/Loadable';
+import Network from 'containers/Network/Loadable';
 // @material-ui/icons
 import {
   AccountBalance,
@@ -30,6 +31,7 @@ import {
   Forum,
   Favorite,
   CloudDownload,
+  Settings,
 } from '@material-ui/icons';
 
 const dashRoutes = [
@@ -38,6 +40,13 @@ const dashRoutes = [
     name: 'Support',
     icon: Favorite,
     component: Donate,
+  },
+  {
+    path: '/networks',
+    name: 'Network',
+    icon: Settings,
+    component: Network,
+    hide: true,
   },
   {
     path: '/governance',
