@@ -17,9 +17,9 @@ function* performRegProxy() {
   yield put(loadingNotification());
   try {
     const res = yield eosClient.transaction('regproxyinfo', tr => {
-      tr.set(
+      tr.remove(
         {
-          ...form,
+          proxy: form.proxy,
         },
         { authorization: [{ actor: eosAccount, permission: eosAuth }] }
       );
@@ -47,7 +47,7 @@ function* performAction() {
       tr.regproxy(
         {
           proxy: form.owner,
-          isproxy: 1,
+          isproxy: 0,
         },
         { authorization: [{ actor: eosAccount, permission: eosAuth }] }
       );

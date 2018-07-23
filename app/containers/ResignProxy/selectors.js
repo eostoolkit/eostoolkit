@@ -1,16 +1,16 @@
 import { createSelector } from 'reselect';
 
 /**
- * Direct selector to the CreateProxy state domain
+ * Direct selector to the ResignProxy state domain
  */
-const selectDomain = state => state.get('CreateProxy');
+const selectDomain = state => state.get('ResignProxy');
 
 /**
  * Other specific selectors
  */
 
 /**
- * Default selector used by CreateProxy
+ * Default selector used by ResignProxy
  */
 
 const makeSelectForm = () => createSelector(selectDomain, substate => substate.get('form'));

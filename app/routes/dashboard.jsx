@@ -1,6 +1,7 @@
 // Primary components
 import CreateAccount from 'containers/CreateAccount/Loadable';
 import CreateProxy from 'containers/CreateProxy/Loadable';
+import ResignProxy from 'containers/ResignProxy/Loadable';
 import SetProxy from 'containers/SetProxy/Loadable';
 import BuyRam from 'containers/BuyRam/Loadable';
 import SellRam from 'containers/SellRam/Loadable';
@@ -129,16 +130,22 @@ const dashRoutes = [
     icon: AssignmentTurnedIn,
     views: [
       {
-        path: '/vote/beproxy',
-        name: 'Become Proxy',
-        mini: 'BP',
-        component: CreateProxy,
-      },
-      {
         path: '/vote/setproxy',
         name: 'Set Proxy',
         mini: 'SP',
         component: SetProxy,
+      },
+      {
+        path: '/vote/createproxy',
+        name: 'Create Proxy',
+        mini: 'CP',
+        component: CreateProxy,
+      },
+      {
+        path: '/vote/resignproxy',
+        name: 'Resign Proxy',
+        mini: 'RP',
+        component: ResignProxy,
       },
     ],
   },
@@ -178,6 +185,7 @@ const dashRoutes = [
       },
     ],
   },
+  { redirect: true, path: '/vote/beproxy', pathTo: '/vote/createproxy', name: 'Create Proxy' },
   { redirect: true, path: '/bidname', pathTo: '/community/bidname', name: 'Bid Names' },
   { redirect: true, path: '/forumpost', pathTo: '/community/forumpost', name: 'Forum Post' },
   { redirect: true, path: '/account/buybytes', pathTo: '/account/buyram', name: 'Buy Ram (bytes)' },
