@@ -36,7 +36,9 @@ function* getEosClient() {
 
     yield getEosAccount(false);
     yield put(eosLoaded(eosClient));
-  } catch (err) {}
+  } catch (err) {
+    // catch
+  }
 }
 
 function* watchScatterLoaded() {

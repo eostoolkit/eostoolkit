@@ -33,22 +33,6 @@ const validationCreate = Yup.object().shape({
 });
 const validationInfo = Yup.object().shape({
   proxy: Yup.string().required('Proxy account is required'),
-  name: Yup.string()
-    .required('Name is required')
-    .max(64),
-  slogan: Yup.string().max(64),
-  philosophy: Yup.string().max(1024),
-  background: Yup.string().max(1024),
-  website: Yup.string()
-    .url()
-    .max(256),
-  logo_256: Yup.string()
-    .url()
-    .max(256),
-  telegram: Yup.string().max(64),
-  steemit: Yup.string().max(64),
-  twitter: Yup.string().max(64),
-  wechat: Yup.string().max(64),
 });
 
 const CreateProxyForm = props => {
@@ -62,7 +46,7 @@ const CreateProxyForm = props => {
               <SupervisorAccount />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>
-              Create Proxy <small>- You will vote on behalf of others</small>
+              Resign Proxy <small>- You no longer vote on behalf of others</small>
             </h4>
           </CardHeader>
           <CardBody>
@@ -82,23 +66,13 @@ const CreateProxyForm = props => {
               <SupervisorAccount />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>
-              Register Proxy Info<small>- Provide details about your proxy to the world</small>
+              Unregister Proxy Info<small>- Remove details about your proxy</small>
             </h4>
           </CardHeader>
           <CardBody>
             <Formik
               initialValues={{
                 proxy: eosAccount,
-                name: '',
-                slogan: '',
-                philosophy: '',
-                background: '',
-                website: '',
-                logo_256: '',
-                telegram: '',
-                steemit: '',
-                twitter: '',
-                wechat: '',
               }}
               validationSchema={validationInfo}
               onSubmit={handleInfo}
@@ -116,16 +90,14 @@ const CreateProxyForm = props => {
             <h4 className={classes.cardIconTitle}>Information</h4>
           </CardHeader>
           <CardBody>
-            <h5>Create Proxy</h5>
+            <h5>Resign Proxy</h5>
             <p>
-              By becoming a proxy you can vote on behalf of others who set you as their proxy. This can be as simple as
-              managing voting for your own accounts, or as complex as becoming a world wide proxy.
+              By resigning as proxy you will no longer vote on behalf of others who set you as their proxy. Vote weight
+              changes immediately. All accounts that had you set as a proxy will no longer have any votes.
             </p>
-            <p>
-              If you do wish to use your proxy powers for the community, we suggest you participate in the Register
-              Proxy Info project:
-            </p>
-            <h5>Register Proxy Info</h5>
+            <p>As a courtesy please attempt to notify these accounts.</p>
+            <h5>Unregister Proxy Info</h5>
+            <p>If you had previously registered your Proxy Info, please unregister to keep the proxy database clean.</p>
             <p>
               This is an on-chain EOS contract (or dApp) that allows EOS proxy accounts to register additional
               information about themselves, such as name and website. This information is published on the EOS
@@ -143,10 +115,6 @@ const CreateProxyForm = props => {
               <a href="https://github.com/AlohaEOS/eos-proxyinfo" target="new">
                 GitHub
               </a>
-            </p>
-            <p>
-              This action will use your Proxy Account RAM allocation. Depending on how much detail you provide, this
-              could be as large as 1kB
             </p>
           </CardBody>
         </Card>

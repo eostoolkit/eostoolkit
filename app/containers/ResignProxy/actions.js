@@ -1,6 +1,6 @@
 /*
  *
- * CreateProxy actions
+ * ResignProxy actions
  *
  */
 

@@ -1,13 +1,13 @@
 /**
  *
- * CreateProxy
+ * ResignProxy
  *
  */
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import CreateProxyForm from 'components/CreateProxyForm';
+import ResignProxyForm from 'components/ResignProxyForm';
 import { makeSelectEosAccount } from 'containers/Scatter/selectors';
 
 import injectSaga from 'utils/injectSaga';
@@ -33,11 +33,11 @@ const withConnect = connect(
 );
 
 const withReducer = injectReducer({
-  key: 'CreateProxy',
+  key: 'ResignProxy',
   reducer,
 });
 const withSaga = injectSaga({
-  key: 'CreateProxy',
+  key: 'ResignProxy',
   saga,
 });
 
@@ -45,4 +45,4 @@ export default compose(
   withReducer,
   withSaga,
   withConnect
-)(CreateProxyForm);
+)(ResignProxyForm);
