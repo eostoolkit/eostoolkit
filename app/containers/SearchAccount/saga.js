@@ -1,13 +1,11 @@
-import Eos from 'eosjs';
-import eosConfig from 'eosConfig';
-import selectTokens from 'containers/Tokens/selectors';
+import { makeSelectTokens as selectTokens, makeSelectEosClient } from 'containers/Remote/selectors';
 import { takeLatest, call, put, select, all, fork, join } from 'redux-saga/effects';
 import { makeSelectSearchName, makeSelectSearchPubkey } from './selectors';
 import { LOOKUP_ACCOUNT, LOOKUP_PUBKEY } from './constants';
 import { lookupLoading, lookupLoaded } from './actions';
 
 function* getCurrency(token, name) {
-  const eosClient = yield Eos(eosConfig);
+  const eosClient = yield select(makeSelectEosClient());
   try {
     const currency = yield eosClient.getCurrencyBalance(token, name);
     const currencies = currency.map(c => {
@@ -23,7 +21,7 @@ function* getCurrency(token, name) {
 }
 
 function* getAccountDetail(name) {
-  const eosClient = yield Eos(eosConfig);
+  const eosClient = yield select(makeSelectEosClient());
   const eosTokens = yield select(selectTokens());
   const tokens = yield all(
     eosTokens.map(token => {
@@ -42,7 +40,7 @@ function* getAccountDetail(name) {
 // Get the EOS all accounts by public key
 //
 function* performSearchPubkey() {
-  const eosClient = yield Eos(eosConfig);
+  const eosClient = yield select(makeSelectEosClient());
   const publicKey = yield select(makeSelectSearchPubkey());
   yield put(lookupLoading());
   try {

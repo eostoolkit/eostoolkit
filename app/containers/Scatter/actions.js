@@ -16,7 +16,6 @@ import {
 } from './constants';
 
 export function scatterLoaded(scatter) {
-  // console.log('Scatter action');
   return {
     type: SCATTER_LOADED,
     scatter,

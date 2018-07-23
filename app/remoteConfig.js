@@ -26,7 +26,7 @@ const airgrabs = [
   // }
 ];
 
-const listUrl = 'https://raw.githubusercontent.com/eostoolkit/eos-airdrops/master/tokens.json';
+const tokensUrl = 'https://raw.githubusercontent.com/eostoolkit/eos-airdrops/master/tokens.json';
+const networksUrl = 'https://raw.githubusercontent.com/eostoolkit/eos-networks/master/networks.json';
 
-export default listUrl;
-export { listUrl, airgrabs };
+export { tokensUrl, networksUrl, airgrabs };
