@@ -35,6 +35,8 @@ class Sidebar extends React.Component {
       openAvatar: false,
       openAccount: this.activeRoute('/account'),
       openVote: this.activeRoute('/vote'),
+      openCommunity: this.activeRoute('/community'),
+      openBlockProducer: this.activeRoute('/block-producer'),
       miniActive: true,
     };
     this.activeRoute.bind(this);

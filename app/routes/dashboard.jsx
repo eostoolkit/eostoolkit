@@ -1,5 +1,4 @@
 // Primary components
-import Home from 'containers/HomePage/Loadable';
 import CreateAccount from 'containers/CreateAccount/Loadable';
 import CreateProxy from 'containers/CreateProxy/Loadable';
 import SetProxy from 'containers/SetProxy/Loadable';
@@ -27,7 +26,6 @@ import {
   AssignmentTurnedIn,
   Payment,
   DeveloperBoard,
-  Gavel,
   Forum,
   Favorite,
   CloudDownload,
@@ -98,6 +96,12 @@ const dashRoutes = [
         component: Undelegate,
       },
       {
+        path: '/account/permissions',
+        name: 'Manage Permissions',
+        mini: 'P',
+        component: SimplePermissions,
+      },
+      {
         path: '/account/buyram',
         name: 'Buy Ram (EOS)',
         mini: 'BR',
@@ -111,15 +115,9 @@ const dashRoutes = [
       },
       {
         path: '/account/refund',
-        name: 'Refund',
+        name: 'Refund Stake',
         mini: 'R',
         component: Refund,
-      },
-      {
-        path: '/account/permissions',
-        name: 'Manage Permissions',
-        mini: 'P',
-        component: SimplePermissions,
       },
     ],
   },
@@ -130,12 +128,6 @@ const dashRoutes = [
     state: 'openVote',
     icon: AssignmentTurnedIn,
     views: [
-      {
-        path: '/vote/pick',
-        name: 'Vote',
-        mini: 'V',
-        component: Home,
-      },
       {
         path: '/vote/beproxy',
         name: 'Become Proxy',
@@ -151,16 +143,25 @@ const dashRoutes = [
     ],
   },
   {
-    path: '/forumpost',
-    name: 'Eosio Forum Post',
+    collapse: true,
+    path: '/community',
+    name: 'Community Features',
+    state: 'openCommunity',
     icon: Forum,
-    component: ForumPost,
-  },
-  {
-    path: '/bidname',
-    name: 'Premium Names',
-    icon: Gavel,
-    component: BidName,
+    views: [
+      {
+        path: '/community/forumpost',
+        name: 'Eosio Forum Post',
+        mini: 'FP',
+        component: ForumPost,
+      },
+      {
+        path: '/community/bidname',
+        name: 'Premium Names',
+        mini: 'PN',
+        component: BidName,
+      },
+    ],
   },
   {
     collapse: true,
@@ -171,12 +172,14 @@ const dashRoutes = [
     views: [
       {
         path: '/block-producer/claim-rewards',
-        name: 'Claim Producer Rewards',
-        mini: 'C',
+        name: 'Claim Rewards',
+        mini: 'CR',
         component: ClaimRewards,
       },
     ],
   },
+  { redirect: true, path: '/bidname', pathTo: '/community/bidname', name: 'Bid Names' },
+  { redirect: true, path: '/forumpost', pathTo: '/community/forumpost', name: 'Forum Post' },
   { redirect: true, path: '/account/buybytes', pathTo: '/account/buyram', name: 'Buy Ram (bytes)' },
   { redirect: true, path: '/', pathTo: '/home', name: 'Home' },
 ];
