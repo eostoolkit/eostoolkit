@@ -1,6 +1,6 @@
 /*
  *
- * createProxy reducer
+ * ResignProxy reducer
  *
  */
 
@@ -12,7 +12,7 @@ const initialState = fromJS({
   regProxy: null,
 });
 
-function createProxyReducer(state = initialState, action) {
+function ResignProxyReducer(state = initialState, action) {
   switch (action.type) {
     case DEFAULT_ACTION:
       return state.set('form', action.form);
@@ -23,4 +23,4 @@ function createProxyReducer(state = initialState, action) {
   }
 }
 
-export default createProxyReducer;
+export default ResignProxyReducer;
