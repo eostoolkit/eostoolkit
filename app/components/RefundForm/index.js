@@ -27,7 +27,7 @@ import regularFormsStyle from 'assets/jss/regularFormsStyle';
 const FormObject = props => {
   const { touched, errors, handleChange, handleBlur, handleSubmit, values } = props;
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
@@ -48,7 +48,7 @@ const FormObject = props => {
           />
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
-          <Button onClick={handleSubmit} color="rose">
+          <Button type="submit" color="rose">
             Refund
           </Button>
         </GridItem>
