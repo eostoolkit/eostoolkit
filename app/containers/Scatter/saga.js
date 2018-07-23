@@ -39,6 +39,7 @@ function* getEosClient() {
   } catch (err) {
     // catch
   }
+
 }
 
 function* watchScatterLoaded() {
