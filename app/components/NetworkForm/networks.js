@@ -37,13 +37,13 @@ function NetworksTable({ ...props }) {
                     <TableCell className={classes.tableCell}>{network.type.toUpperCase()}</TableCell>
                     <TableCell className={classes.tableCell}>{endpoint.name}</TableCell>
                     <TableCell className={classes.tableCell}>
-                      {endpoint.protocol}://{endpoint.url}:{endpoint.port}
+                      {endpoint.protocol}{'://'}{endpoint.url}:{endpoint.port}
                     </TableCell>
                     <TableCell className={classes.tableCell}>
                       {active && active.network === network && active.endpoint === endpoint ? (
                         'Current Network'
                       ) : (
-                        <Button onClick={() => selectNetwork(network, endpoint)} color="rose">
+                        <Button onClick={() => selectNetwork(network, endpoint)} color="info">
                           Select
                         </Button>
                       )}
@@ -54,7 +54,7 @@ function NetworksTable({ ...props }) {
             })
           ) : (
             <TableRow className={classes.tableRowHover}>
-              <TableCell className={classes.tableCell} colSpan={3}>
+              <TableCell className={classes.tableCell} colSpan={6}>
                 Loading...
               </TableCell>
             </TableRow>
