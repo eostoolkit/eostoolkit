@@ -44,11 +44,15 @@ function ResourcesTable({ ...props }) {
               <br />({Number((account.net_limit.used / account.net_limit.max) * 100).toFixed(2)} % used)
             </TableCell>
             <TableCell className={classes.tableCell}>
-              <h6>REFUND</h6>
+              <h6>REFUNDING</h6>
             </TableCell>
             <TableCell className={classes.tableCell}>
-              CPU: {account.refund_request ? account.refund_request.cpu_amount : '0.0000 EOS'}
-              <br />NET: {account.refund_request ? account.refund_request.net_amount : '0.0000 EOS'}
+              {account && account.refund_request ? (
+                <span>CPU: {account.refund_request.cpu_amount}
+                <br />NET: {account.refund_request.net_amount}</span>
+              ) : (
+                <span>None</span>
+              )}
             </TableCell>
           </TableRow>
           <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
