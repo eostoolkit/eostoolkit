@@ -32,7 +32,6 @@ function* performAction() {
         tr.claim(
           {
             claimer: eosAccount,
-            quantity: `0.0000 ${form.symbol}`,
           },
           { authorization: [{ actor: eosAccount, permission: eosAuth }] }
         );
