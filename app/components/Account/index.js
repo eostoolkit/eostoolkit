@@ -27,6 +27,23 @@ import ResourceTable from 'components/AccountTables/resources';
 import BalancesTable from 'components/AccountTables/balances';
 const Account = props => {
   const { classes, account, showJson, toggleVisibility } = props;
+  if(!account){
+    return (
+      <GridItem xs={12} sm={12} lg={6}>
+        <Card>
+          <CardHeader color="rose" icon>
+            <CardIcon color="rose">
+              <Person />
+            </CardIcon>
+            <h4 className={classes.cardIconTitle}>Invalid or Not found</h4>
+          </CardHeader>
+          <CardBody>
+            <h5>Please review your search terms</h5>
+          </CardBody>
+        </Card>
+      </GridItem>
+    )
+  }
   return (
     <GridItem xs={12} sm={12} lg={6}>
       <Card>

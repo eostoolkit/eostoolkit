@@ -12,6 +12,11 @@ import tableStyle from 'assets/jss/tableStyle';
 
 function ResourcesTable({ ...props }) {
   const { classes, account } = props;
+  if(!account) {
+    return (
+      <div>Invalid name or not found</div>
+    );
+  }
   return (
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>

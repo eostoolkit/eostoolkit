@@ -37,6 +37,7 @@ export class SearchAccount extends React.Component {
         <LoadingSpinner {...this.props} />
         <GridContainer>
           {this.props.accounts.map(account => {
+            if(!account) return <Account account={account} key='invalid' />;
             return <Account account={account} key={account.account_name} />;
           })}
         </GridContainer>

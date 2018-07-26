@@ -26,6 +26,7 @@ function* getAccountDetail(name) {
   try {
     const eosClient = yield select(makeSelectEosClient());
     const eosTokens = yield select(selectTokens());
+    const account = yield eosClient.getAccount(name);
     const tokens = yield all(
       eosTokens.map(token => {
         return fork(getCurrency, token.account, name);
@@ -34,13 +35,12 @@ function* getAccountDetail(name) {
     const currencies = yield join(...tokens);
     const balances = currencies.reduce((a, b) => a.concat(b), []);
     return {
-      ...(yield eosClient.getAccount(name)),
+      ...account,
       balances,
     };
   } catch(err) {
     console.error("An EOSToolkit error occured - see details below:");
     console.error(err);
-    return {};
   }
 
 }
