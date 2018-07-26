@@ -61,7 +61,8 @@ function* getEosAccount(signout = true) {
     port: active.endpoint.port,
     chainId: active.network.chainId,
   };
-  yield scatter.suggestNetwork(scatterConfig);
+  //TODO: we need this for multi-network support - why doesn't it work?
+  //yield scatter.suggestNetwork(scatterConfig);
   try {
     if (scatter.identity && signout) {
       yield scatter.forgetIdentity();

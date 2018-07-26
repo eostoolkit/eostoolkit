@@ -44,6 +44,7 @@ const NetworkForm = props => {
                 GitHub
               </a>
             </h6>
+            <h6>You may have to manually add this network to Scatter due to a Scatter bug</h6>
             <NetworkTable {...tableProps} />
           </CardBody>
         </Card>
