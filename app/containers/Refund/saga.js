@@ -26,7 +26,9 @@ function* performAction() {
     });
     yield put(successNotification(res.transaction_id));
   } catch (err) {
-    yield put(failureNotification(err));
+    console.error("An EOSToolkit error occured - see details below:");
+    console.error(err);
+    yield put(failureNotification(JSON.stringify(err)));
   }
 }
 

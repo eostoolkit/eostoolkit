@@ -10,9 +10,9 @@ import { FETCHED_TOKENS, FETCHED_NETWORKS, SELECT_NETWORK, SELECTED_NETWORK } fr
 const initialState = fromJS({
   tokens: [
     {
-      contract: 'eosio.token',
-      symbol: 'EOS',
-      precision: 4,
+      "account": "eosio.token",
+      "precision": 4,
+      "symbol": "EOS",
     },
   ],
   networks: null,

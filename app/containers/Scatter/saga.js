@@ -37,7 +37,8 @@ function* getEosClient() {
     yield getEosAccount(false);
     yield put(eosLoaded(eosClient));
   } catch (err) {
-    // catch
+    console.error("An EOSToolkit error occured - see details below:");
+    console.error(err);
   }
 
 }
@@ -84,7 +85,8 @@ function* getEosAccount(signout = true) {
     yield put(attachedAccount(eosAccount, accountAuth));
     yield put(refreshAccountData());
   } catch (err) {
-    // console.log(err);
+    console.error("An EOSToolkit error occured - see details below:");
+    console.error(err);
   }
 }
 
@@ -98,8 +100,8 @@ function* watchScatterConnect() {
 
 // TODO: Dry this out with SearchAccount
 function* getCurrency(token, name) {
-  const eosClient = yield select(makeSelectEosClient());
   try {
+    const eosClient = yield select(makeSelectEosClient());
     const currency = yield eosClient.getCurrencyBalance(token, name);
     const currencies = currency.map(c => {
       return {
@@ -139,7 +141,8 @@ function* refreshEosAccountData() {
       yield put(refreshedAccountData(null));
     }
   } catch (err) {
-    // console.log(err);
+    console.error("An EOSToolkit error occured - see details below:");
+    console.error(err);
   }
 }
 
@@ -164,7 +167,8 @@ function* removeEosAccount() {
     yield put(detachedAccount());
     yield put(refreshAccountData());
   } catch (err) {
-    // console.log(err);
+    console.error("An EOSToolkit error occured - see details below:");
+    console.error(err);
   }
 }
 
