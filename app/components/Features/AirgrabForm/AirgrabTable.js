@@ -12,7 +12,7 @@ import Button from 'components/CustomButtons/Button';
 import { airgrabs } from 'remoteConfig';
 import tableStyle from 'assets/jss/tableStyle';
 
-function TokensTable({ ...props }) {
+function AirgrabTable({ ...props }) {
   const { classes, handleSubmit } = props;
   return (
     <div className={classes.tableResponsive}>
@@ -56,4 +56,4 @@ function TokensTable({ ...props }) {
   );
 }
 
-export default withStyles(tableStyle)(TokensTable);
+export default withStyles(tableStyle)(AirgrabTable);

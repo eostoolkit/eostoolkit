@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { makeSelectEosAccount } from 'containers/Scatter/selectors';
-import DonateForm from 'components/DonateForm';
+import DonateForm from 'components/Features/DonateForm';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';

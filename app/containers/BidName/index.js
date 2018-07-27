@@ -4,7 +4,7 @@
  *
  */
 
-import BidNameForm from 'components/BidNameForm';
+import BidNameForm from 'components/Features/BidNameForm';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';

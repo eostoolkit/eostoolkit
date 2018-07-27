@@ -1,4 +1,4 @@
-// Primary components
+// Primary containers
 import CreateAccount from 'containers/CreateAccount/Loadable';
 import CreateProxy from 'containers/CreateProxy/Loadable';
 import ResignProxy from 'containers/ResignProxy/Loadable';
@@ -8,7 +8,6 @@ import SellRam from 'containers/SellRam/Loadable';
 import Delegate from 'containers/Delegate/Loadable';
 import Undelegate from 'containers/Undelegate/Loadable';
 import Transfer from 'containers/Transfer/Loadable';
-import Governance from 'containers/Governance/Loadable';
 import SearchAccount from 'containers/SearchAccount/Loadable';
 import SimplePermissions from 'containers/SimplePermissions/Loadable';
 import ClaimRewards from 'containers/ClaimRewards/Loadable';
@@ -18,6 +17,10 @@ import ForumPost from 'containers/ForumPost/Loadable';
 import Airgrab from 'containers/Airgrab/Loadable';
 import Donate from 'containers/Donate/Loadable';
 import Network from 'containers/Network/Loadable';
+
+// Primary components
+import GovernancePage from 'components/Pages/GovernancePage/Loadable';
+
 // @material-ui/icons
 import {
   AccountBalance,
@@ -51,7 +54,7 @@ const dashRoutes = [
     path: '/governance',
     name: 'Governance',
     icon: AccountBalance,
-    component: Governance,
+    component: GovernancePage,
   },
   {
     path: '/airgrab',
