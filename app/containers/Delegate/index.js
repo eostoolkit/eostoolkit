@@ -4,7 +4,7 @@
  *
  */
 
-import DelegateForm from 'components/DelegateForm';
+import DelegateForm from 'components/Features/DelegateForm';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';

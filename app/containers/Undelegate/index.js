@@ -4,7 +4,7 @@
  *
  */
 
-import UndelegateForm from 'components/UndelegateForm';
+import UndelegateForm from 'components/Features/UndelegateForm';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';

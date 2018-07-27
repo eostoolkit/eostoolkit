@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { makeSelectEosAccount } from 'containers/Scatter/selectors';
-import SimplePermissionsForm from 'components/SimplePermissionsForm';
+import SimplePermissionsForm from 'components/Features/SimplePermissionsForm';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';

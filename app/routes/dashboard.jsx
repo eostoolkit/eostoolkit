@@ -11,7 +11,6 @@ import Transfer from 'containers/Transfer/Loadable';
 import SearchAccount from 'containers/SearchAccount/Loadable';
 import SimplePermissions from 'containers/SimplePermissions/Loadable';
 import ClaimRewards from 'containers/ClaimRewards/Loadable';
-import Refund from 'containers/Refund/Loadable';
 import BidName from 'containers/BidName/Loadable';
 import ForumPost from 'containers/ForumPost/Loadable';
 import Airgrab from 'containers/Airgrab/Loadable';
@@ -116,12 +115,6 @@ const dashRoutes = [
         name: 'Sell Ram (bytes)',
         mini: 'SR',
         component: SellRam,
-      },
-      {
-        path: '/account/refund',
-        name: 'Refund Stake',
-        mini: 'R',
-        component: Refund,
       },
     ],
   },
