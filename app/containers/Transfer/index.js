@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { makeSelectEosAccount } from 'containers/Scatter/selectors';
-import TransferForm from 'components/TransferForm';
+import TransferForm from 'components/Features/TransferForm';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
