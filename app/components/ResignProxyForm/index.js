@@ -7,6 +7,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { isMobile } from 'react-device-detect';
 // import styled from 'styled-components';
 
 // @material-ui/core components
@@ -23,6 +24,7 @@ import Card from 'components/Card/Card';
 import CardHeader from 'components/Card/CardHeader';
 import CardIcon from 'components/Card/CardIcon';
 import CardBody from 'components/Card/CardBody';
+import MobileDetectedAlert from 'components/MobileDetectedAlert';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 import ProxyForm from './proxyForm';
@@ -50,14 +52,18 @@ const CreateProxyForm = props => {
             </h4>
           </CardHeader>
           <CardBody>
-            <Formik
-              initialValues={{
-                owner: eosAccount,
-              }}
-              validationSchema={validationCreate}
-              onSubmit={handleCreate}
-              render={formikProps => <ProxyForm {...formikProps} classes={classes} />}
-            />
+            {isMobile ? (
+              <MobileDetectedAlert />
+            ) : (
+              <Formik
+                initialValues={{
+                  owner: eosAccount,
+                }}
+                validationSchema={validationCreate}
+                onSubmit={handleCreate}
+                render={formikProps => <ProxyForm {...formikProps} classes={classes} />}
+              />
+            )}
           </CardBody>
         </Card>
         <Card>
@@ -70,14 +76,18 @@ const CreateProxyForm = props => {
             </h4>
           </CardHeader>
           <CardBody>
-            <Formik
-              initialValues={{
-                proxy: eosAccount,
-              }}
-              validationSchema={validationInfo}
-              onSubmit={handleInfo}
-              render={formikProps => <InfoForm {...formikProps} classes={classes} />}
-            />
+            {isMobile ? (
+              <MobileDetectedAlert />
+            ) : (
+              <Formik
+                initialValues={{
+                  proxy: eosAccount,
+                }}
+                validationSchema={validationInfo}
+                onSubmit={handleInfo}
+                render={formikProps => <InfoForm {...formikProps} classes={classes} />}
+              />
+            )}
           </CardBody>
         </Card>
       </GridItem>

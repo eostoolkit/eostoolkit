@@ -8,6 +8,7 @@ import React from 'react';
 import { compose } from 'recompose';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
+import { isMobile } from 'react-device-detect';
 // import styled from 'styled-components';
 
 // @material-ui/core components
@@ -28,6 +29,7 @@ import Card from 'components/Card/Card';
 import CardHeader from 'components/Card/CardHeader';
 import CardIcon from 'components/Card/CardIcon';
 import CardBody from 'components/Card/CardBody';
+import MobileDetectedAlert from 'components/MobileDetectedAlert';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 
@@ -181,16 +183,20 @@ const BuyRamForm = props => {
             <h4 className={classes.cardIconTitle}>Buy ram</h4>
           </CardHeader>
           <CardBody>
-            <FormObject
-              classes={classes}
-              errors={errors}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-              submitForm={submitForm}
-              touched={touched}
-              unit={unit}
-              values={values}
-            />
+            {isMobile ? (
+              <MobileDetectedAlert />
+            ) : (
+              <FormObject
+                classes={classes}
+                errors={errors}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                submitForm={submitForm}
+                touched={touched}
+                unit={unit}
+                values={values}
+              />
+            )}
           </CardBody>
         </Card>
       </GridItem>
