@@ -4,7 +4,7 @@
  *
  */
 
-import SellRamForm from 'components/SellRamForm';
+import SellRamForm from 'components/Features/SellRamForm';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';

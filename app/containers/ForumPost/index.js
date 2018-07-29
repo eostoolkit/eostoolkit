@@ -7,7 +7,7 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import ForumPostForm from 'components/ForumPostForm';
+import ForumPostForm from 'components/ForumPostForm/index';
 import { makeSelectEosAccount } from 'containers/Scatter/selectors';
 
 import injectSaga from 'utils/injectSaga';

@@ -1,6 +1,6 @@
 /**
  *
- * SellRamForm
+ * ForumPostForm
  *
  */
 
@@ -13,8 +13,8 @@ import * as Yup from 'yup';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 // @material-ui/icons
-import RemoveCircle from '@material-ui/icons/RemoveCircle';
-import AccountBalance from '@material-ui/icons/AccountBalance';
+import PersonAdd from '@material-ui/icons/PersonAdd';
+import HelpOutline from '@material-ui/icons/HelpOutline';
 
 // core components
 import GridContainer from 'components/Grid/GridContainer';
@@ -35,7 +35,7 @@ const FormObject = props => {
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Seller"
+            labelText="Submitter"
             id="owner"
             error={errors.owner}
             touched={touched.owner}
@@ -44,7 +44,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Account that sells the Ram',
+              placeholder: 'Account that submits the forum post',
               value: values.owner,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -53,17 +53,53 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
           <CustomInput
-            labelText="Ram to Sell (in bytes)"
-            id="ram"
-            error={errors.ram}
-            touched={touched.ram}
+            labelText="Post UUID"
+            id="uuid"
+            error={errors.uuid}
+            touched={touched.uuid}
             formControlProps={{
               fullWidth: true,
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'How many bytes to sell',
-              value: values.ram,
+              placeholder: 'Optional UUID',
+              value: values.uuid,
+              onChange: handleChange,
+              onBlur: handleBlur,
+            }}
+          />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <CustomInput
+            labelText="Title"
+            id="title"
+            error={errors.title}
+            touched={touched.title}
+            formControlProps={{
+              fullWidth: true,
+            }}
+            inputProps={{
+              type: 'text',
+              placeholder: 'Enter title for forum post',
+              value: values.title,
+              onChange: handleChange,
+              onBlur: handleBlur,
+            }}
+          />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <CustomInput
+            labelText="Content"
+            id="content"
+            error={errors.content}
+            touched={touched.content}
+            formControlProps={{
+              fullWidth: true,
+            }}
+            inputProps={{
+              type: 'text',
+              placeholder: 'Enter forum post content',
+              value: values.content,
               onChange: handleChange,
               onBlur: handleBlur,
             }}
@@ -71,7 +107,7 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Button type="submit" color="rose">
-            Sell
+            Create
           </Button>
         </GridItem>
         <GridItem xs={12} sm={12} md={8}>
@@ -86,14 +122,13 @@ const FormObject = props => {
 };
 
 const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Buyer name is required'),
-  ram: Yup.number()
-    .required('RAM quantity is required')
-    .positive('RAM must be a positive quantity')
-    .integer('RAM cannot be fractional'),
+  owner: Yup.string().required('Submitter name is required'),
+  title: Yup.string().required('Title is required'),
+  content: Yup.string().required('Content is required'),
 });
 
-const SellRamForm = props => {
+const ForumPostForm = props => {
+  console.log(props);
   const { classes, handleSubmit, eosAccount } = props;
   return (
     <GridContainer>
@@ -101,16 +136,17 @@ const SellRamForm = props => {
         <Card>
           <CardHeader color="warning" icon>
             <CardIcon color="warning">
-              <RemoveCircle />
+              <PersonAdd />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Sell ram bytes</h4>
+            <h4 className={classes.cardIconTitle}>Post to EOSIO Forum</h4>
           </CardHeader>
           <CardBody>
             <Formik
               initialValues={{
                 owner: eosAccount,
-                name: '',
-                ram: '8192',
+                title: '',
+                content: '',
+                uuid: '',
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
@@ -121,19 +157,25 @@ const SellRamForm = props => {
       </GridItem>
       <GridItem xs={12} sm={12} lg={4}>
         <Card>
-          <CardHeader color="rose" icon>
-            <CardIcon color="rose">
-              <AccountBalance />
+          <CardHeader color="info" icon>
+            <CardIcon color="info">
+              <HelpOutline />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Ricardian</h4>
+            <h4 className={classes.cardIconTitle}>EOSIO FORUM TESTING</h4>
           </CardHeader>
           <CardBody>
+            <h5>The EOSIO Forum Test is a prototype by EOS Canada</h5>
+            <p>The intention is to provide a flexible framework for on-chain governance voting and communication.</p>
+            <p>You can participate in this test by creating arbitrary forum posts to this smart contract.</p>
             <p>
-              The {'{ sellram }'} action sells unused RAM for tokens.
-              <br />
-              <br />
-              As an authorized party I {'{ signer }'} wish to sell {'{ bytes }'} of unused RAM from account{' '}
-              {'{ account }'}.
+              In the future this smart contract may be used to run a RAM-zero on-chain forum, proposition, and voting
+              mechanism.
+            </p>
+            <p>
+              To read more about this initiative check out the{' '}
+              <a href="https://github.com/eoscanada/eosio.forum" target="new">
+                eosio.forum Github
+              </a>
             </p>
           </CardBody>
         </Card>
@@ -142,4 +184,4 @@ const SellRamForm = props => {
   );
 };
 
-export default withStyles(regularFormsStyle)(SellRamForm);
+export default withStyles(regularFormsStyle)(ForumPostForm);

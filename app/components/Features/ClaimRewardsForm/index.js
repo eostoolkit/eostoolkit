@@ -1,15 +1,15 @@
 /**
-*
-* TransferForm
-*
-*/
+ *
+ * DelegateForm
+ *
+ */
 
 import React from 'react';
 import { compose } from 'recompose';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
-import Payment from '@material-ui/icons/Payment';
+import AttachMoney  from '@material-ui/icons/AttachMoney';
 
 import Tool from 'components/Tool/Tool';
 import ToolSection from 'components/Tool/ToolSection';
@@ -18,20 +18,21 @@ import ToolBody from 'components/Tool/ToolBody';
 import FormObject from './FormObject';
 
 const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Sender name is required'),
+  owner: Yup.string().required('Owner name is required'),
   name: Yup.string().required('Account name is required'),
-  symbol: Yup.string().required('Symbol is required'),
-  memo: Yup.string(),
-  quantity: Yup.number()
-    .required('Quantity is required')
-    .positive('You must send a positive quantity'),
+  net: Yup.number()
+    .required('NET Stake is required')
+    .positive('You must stake a positive quantity'),
+  cpu: Yup.number()
+    .required('CPU Stake is required')
+    .positive('You must stake a positive quantity'),
 });
 
-const TransferForm = props => {
+const ClaimRewardsForm = props => {
   return (
     <Tool>
       <ToolSection lg={8}>
-        <ToolBody color="warning" icon={Payment} header="Transfer">
+        <ToolBody color="warning" icon={AttachMoney} header="Claim Rewards" subheader=" - Block producers only">
           <FormObject {...props}/>
         </ToolBody>
       </ToolSection>
@@ -53,13 +54,9 @@ const enhance = compose(
     },
     mapPropsToValues: props => ({
       owner: props.eosAccount,
-      name: '',
-      symbol: 'EOS',
-      quantity: '0',
-      memo: '',
     }),
     validationSchema,
   })
 );
 
-export default enhance(TransferForm);
+export default enhance(ClaimRewardsForm);

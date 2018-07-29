@@ -1,15 +1,15 @@
 /**
-*
-* TransferForm
-*
-*/
+ *
+ * SetProxyForm
+ *
+ */
 
-import React from 'react';
-import { compose } from 'recompose';
-import { withFormik } from 'formik';
-import * as Yup from 'yup';
+ import React from 'react';
+ import { compose } from 'recompose';
+ import { withFormik } from 'formik';
+ import * as Yup from 'yup';
 
-import Payment from '@material-ui/icons/Payment';
+import SupervisorAccount from '@material-ui/icons/SupervisorAccount';
 
 import Tool from 'components/Tool/Tool';
 import ToolSection from 'components/Tool/ToolSection';
@@ -18,20 +18,15 @@ import ToolBody from 'components/Tool/ToolBody';
 import FormObject from './FormObject';
 
 const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Sender name is required'),
+  owner: Yup.string().required('Proxied name is required'),
   name: Yup.string().required('Account name is required'),
-  symbol: Yup.string().required('Symbol is required'),
-  memo: Yup.string(),
-  quantity: Yup.number()
-    .required('Quantity is required')
-    .positive('You must send a positive quantity'),
 });
 
-const TransferForm = props => {
+const SetProxyForm = props => {
   return (
     <Tool>
       <ToolSection lg={8}>
-        <ToolBody color="warning" icon={Payment} header="Transfer">
+        <ToolBody color="warning" icon={SupervisorAccount} header="Set Proxy" subheader=" - They will vote on your behalf">
           <FormObject {...props}/>
         </ToolBody>
       </ToolSection>
@@ -54,12 +49,9 @@ const enhance = compose(
     mapPropsToValues: props => ({
       owner: props.eosAccount,
       name: '',
-      symbol: 'EOS',
-      quantity: '0',
-      memo: '',
     }),
     validationSchema,
   })
 );
 
-export default enhance(TransferForm);
+export default enhance(SetProxyForm);

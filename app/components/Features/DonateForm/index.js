@@ -31,13 +31,12 @@ const validationSchema = Yup.object().shape({
 });
 
 const DonateForm = props => {
-  const { handleSubmit, ...formikProps } = props;
   return (
     <Tool>
       <ToolSection lg={6}>
         <ToolBody color="warning" icon={CardGiftcard} header="Donate">
           <Donate />
-          <FormObject {...formikProps}/>
+          <FormObject {...props}/>
         </ToolBody>
       </ToolSection>
       <ToolSection lg={6}>

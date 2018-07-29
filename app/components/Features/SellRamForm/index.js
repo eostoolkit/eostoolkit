@@ -1,15 +1,15 @@
 /**
-*
-* TransferForm
-*
-*/
+ *
+ * SellRamForm
+ *
+ */
 
 import React from 'react';
 import { compose } from 'recompose';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
-import Payment from '@material-ui/icons/Payment';
+import RemoveCircle from '@material-ui/icons/RemoveCircle';
 
 import Tool from 'components/Tool/Tool';
 import ToolSection from 'components/Tool/ToolSection';
@@ -18,20 +18,18 @@ import ToolBody from 'components/Tool/ToolBody';
 import FormObject from './FormObject';
 
 const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Sender name is required'),
-  name: Yup.string().required('Account name is required'),
-  symbol: Yup.string().required('Symbol is required'),
-  memo: Yup.string(),
-  quantity: Yup.number()
-    .required('Quantity is required')
-    .positive('You must send a positive quantity'),
+  owner: Yup.string().required('Buyer name is required'),
+  ram: Yup.number()
+    .required('RAM quantity is required')
+    .positive('RAM must be a positive quantity')
+    .integer('RAM cannot be fractional'),
 });
 
-const TransferForm = props => {
+const SellRamForm = props => {
   return (
     <Tool>
       <ToolSection lg={8}>
-        <ToolBody color="warning" icon={Payment} header="Transfer">
+        <ToolBody color="warning" icon={RemoveCircle} header="Sell RAM">
           <FormObject {...props}/>
         </ToolBody>
       </ToolSection>
@@ -53,13 +51,10 @@ const enhance = compose(
     },
     mapPropsToValues: props => ({
       owner: props.eosAccount,
-      name: '',
-      symbol: 'EOS',
-      quantity: '0',
-      memo: '',
+      ram: '8192',
     }),
     validationSchema,
   })
 );
 
-export default enhance(TransferForm);
+export default enhance(SellRamForm);

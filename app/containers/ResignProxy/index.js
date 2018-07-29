@@ -7,7 +7,7 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import ResignProxyForm from 'components/ResignProxyForm';
+import ResignProxyForm from 'components/Features/ResignProxyForm';
 import { makeSelectEosAccount } from 'containers/Scatter/selectors';
 
 import injectSaga from 'utils/injectSaga';
@@ -22,7 +22,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleCreate: form => dispatch(submitAction(form)),
+    handleResign: form => dispatch(submitAction(form)),
     handleInfo: form => dispatch(regProxy(form)),
   };
 }

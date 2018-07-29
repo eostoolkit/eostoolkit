@@ -26,12 +26,11 @@ const validationSchema = Yup.object().shape({
 });
 
 const BidNameForm = props => {
-  const { handleSubmit, eosAccount, ...formikProps } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
         <ToolBody color="warning" icon={Gavel} header="Bid for Premium Name">
-          <FormObject {...formikProps}/>
+          <FormObject {...props}/>
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>

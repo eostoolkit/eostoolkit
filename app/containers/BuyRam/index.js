@@ -4,7 +4,7 @@
  *
  */
 
-import BuyRamForm from 'components/BuyRamForm';
+import BuyRamForm from 'components/Features/BuyRamForm';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectEosAccount } from 'containers/Scatter/selectors';

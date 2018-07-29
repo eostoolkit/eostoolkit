@@ -7,7 +7,7 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import CreateProxyForm from 'components/CreateProxyForm';
+import CreateProxyForm from 'components/Features/CreateProxyForm';
 import { makeSelectEosAccount } from 'containers/Scatter/selectors';
 
 import injectSaga from 'utils/injectSaga';

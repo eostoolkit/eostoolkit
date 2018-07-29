@@ -4,7 +4,7 @@
  *
  */
 
-import SetProxyForm from 'components/SetProxyForm';
+import SetProxyForm from 'components/Features/SetProxyForm';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';

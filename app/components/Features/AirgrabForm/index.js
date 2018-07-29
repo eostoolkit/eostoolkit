@@ -12,7 +12,7 @@ import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 
 import PoormanInfo from 'components/Information/PoormanInfo'
-import Disclaimer from 'components/Disclaimer'
+import Disclaimer from 'components/Information/Disclaimer'
 
 import AirgrabTable from './AirgrabTable';
 

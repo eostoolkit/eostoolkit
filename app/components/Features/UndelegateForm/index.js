@@ -24,12 +24,11 @@ const validationSchema = Yup.object().shape({
 });
 
 const DelegateForm = props => {
-  const { handleSubmit, eosAccount, ...formikProps } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
         <ToolBody color="warning" icon={Undo} header="Undelegate" subheader=" - Unstake">
-          <FormObject {...formikProps}/>
+          <FormObject {...props}/>
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
