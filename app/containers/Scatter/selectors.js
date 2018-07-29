@@ -16,7 +16,7 @@ const makeSelectEosClient = () => createSelector(selectScatter, substate => subs
 const makeSelectEosAccount = () =>
   createSelector(selectScatter, substate => (substate ? substate.get('eosAccount') : ''));
 
-const makeSelectEosAuthority = () => createSelector(selectScatter, substate => substate.get('eosAuthority'));
+const makeSelectEosAuthority = () => createSelector(selectScatter, substate => substate ? substate.get('eosAuthority') : '');
 
 const makeSelectEosAccountData = () =>
   createSelector(selectScatter, substate => (substate ? substate.get('eosAccountData') : null));
@@ -26,6 +26,12 @@ const makeSelectNetworksData = () =>
 
 const makeSelectActiveNetworkData = () =>
   createSelector(selectScatter, substate => (substate ? substate.get('activeNetwork') : null));
+
+const makeSelectTransaction = () =>
+  createSelector(selectScatter, substate => (substate ? substate.get('transaction') : null));
+
+const makeSelectTransactionResult = () =>
+  createSelector(selectScatter, substate => (substate ? substate.get('transactionResult') : null));
 
 /**
  * Default selector used by Scatter
@@ -42,4 +48,6 @@ export {
   makeSelectEosAccountData,
   makeSelectNetworksData,
   makeSelectActiveNetworkData,
+  makeSelectTransaction,
+  makeSelectTransactionResult,
 };

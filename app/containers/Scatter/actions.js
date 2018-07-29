@@ -13,6 +13,8 @@ import {
   DETACHED_ACCOUNT,
   REFRESH_DATA,
   REFRESHED_DATA,
+  PUSH_TRANSACTION,
+  PUSHED_TRANSACTION,
 } from './constants';
 
 export function scatterLoaded(scatter) {
@@ -70,5 +72,20 @@ export function refreshedAccountData(data) {
   return {
     type: REFRESHED_DATA,
     data,
+  };
+}
+
+export function pushTransaction(transaction) {
+  console.log("Push transaction");
+  return {
+    type: PUSH_TRANSACTION,
+    transaction,
+  };
+}
+
+export function pushedTransaction(result) {
+  return {
+    type: PUSHED_TRANSACTION,
+    result,
   };
 }

@@ -14,7 +14,7 @@ import ClaimRewards from 'containers/ClaimRewards/Loadable';
 import BidName from 'containers/BidName/Loadable';
 import ForumPost from 'containers/ForumPost/Loadable';
 import Airgrab from 'containers/Airgrab/Loadable';
-import Donate from 'containers/Donate/Loadable';
+import Donate from 'components/Features/DonateForm/Loadable';
 import Network from 'containers/Network/Loadable';
 
 // Primary components
@@ -182,7 +182,7 @@ const dashRoutes = [
     ],
   },
   { redirect: true, path: '/vote/beproxy', pathTo: '/vote/createproxy', name: 'Create Proxy' },
-  { redirect: true, path: '/bidname', pathTo: '/community/bidname', name: 'Bid Names' },
+  //{ redirect: true, path: '/bidname', pathTo: '/community/bidname', name: 'Bid Names' },
   { redirect: true, path: '/forumpost', pathTo: '/community/forumpost', name: 'Forum Post' },
   { redirect: true, path: '/account/buybytes', pathTo: '/account/buyram', name: 'Buy Ram (bytes)' },
   { redirect: true, path: '/', pathTo: '/home', name: 'Home' },

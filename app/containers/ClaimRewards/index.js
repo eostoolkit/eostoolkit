@@ -7,7 +7,7 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import ClaimRewardsForm from 'components/ClaimRewardsForm';
+import ClaimRewardsForm from 'components/Features/ClaimRewardsForm';
 import { makeSelectEosAccount } from 'containers/Scatter/selectors';
 
 import injectSaga from 'utils/injectSaga';

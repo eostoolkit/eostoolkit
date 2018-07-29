@@ -43,7 +43,7 @@ const CreateAccountForm = props => {
   return (
     <Tool>
       <ToolSection lg={8}>
-        <ToolBody color="warning" icon={PersonAdd} header="Bid for Premium Name">
+        <ToolBody color="warning" icon={PersonAdd} header="Create Account">
           <FormObject {...props}/>
         </ToolBody>
       </ToolSection>

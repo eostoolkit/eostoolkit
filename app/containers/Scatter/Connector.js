@@ -19,19 +19,28 @@ import saga from './saga';
 export class Scatter extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
 
-  render() {
-    if (this.props.scatter) {
-      if (this.props.eosAccount) {
-        return (
-          <span>
-            {this.props.eosAccount}
-            <small>{this.props.eosAuthority ? `@${this.props.eosAuthority}` : ''}</small>
-          </span>
-        );
-      }
-      return 'Attach an Account';
+  componentDidMount() {
+    console.log('Connector mounted');
+    if (window.scatter) {
+      this.props.onScatterLoaded(window.scatter);
+      window.scatter = null;
     }
-    return 'Please install Scatter';
+    document.addEventListener('scatterLoaded', () => {
+      // console.log('Scatter connected')
+      this.props.onScatterLoaded(window.scatter);
+
+      // Scatter will now be available from the window scope.
+      // At this stage the connection to Scatter from the application is
+      // already encrypted.
+
+      // It is good practice to take this off the window once you have
+      // a reference to it.
+      window.scatter = null;
+    });
+  }
+
+  render() {
+    return ('');
   }
 }
 

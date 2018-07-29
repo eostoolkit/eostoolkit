@@ -22,6 +22,25 @@ import BlockOneLetter from 'components/Information/BlockOneLetter';
 
 import FormObject from './FormObject';
 
+const makeTransaction = (values) => {
+  const transaction = [
+    {
+      account: 'eosio.token',
+      name: 'transfer',
+      data: {
+        from: values.from,
+        to: 'myeostoolkit',
+        memo: values.memo,
+        quantity: `${Number(values.quantity)
+          .toFixed(4)
+          .toString()} EOS`,
+      },
+    }
+  ];
+  console.log(transaction);
+  return transaction;
+}
+
 
 const validationSchema = Yup.object().shape({
   memo: Yup.string(),
@@ -52,9 +71,10 @@ const DonateForm = props => {
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { handleSubmit } = props;
+      const { pushTransaction } = props;
+      const transaction = makeTransaction(values);
       setSubmitting(false);
-      handleSubmit({ ...values});
+      pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
       quantity: '1',

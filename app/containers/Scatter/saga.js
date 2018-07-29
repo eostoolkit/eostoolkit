@@ -5,10 +5,44 @@ import {
   makeSelectActiveNetwork,
   makeSelectEosClient,
 } from 'containers/Remote/selectors';
-import { makeSelectEosAccount, makeSelectScatter } from 'containers/Scatter/selectors';
+import { makeSelectEosAccount, makeSelectScatter, makeSelectEosClient as scatterClient, makeSelectEosAuthority, makeSelectTransaction } from 'containers/Scatter/selectors';
 import { NOTIFICATION_SUCCESS } from 'containers/Notification/constants';
-import { eosLoaded, attachedAccount, detachedAccount, refreshAccountData, refreshedAccountData } from './actions';
-import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT, REFRESH_DATA } from './constants';
+import { eosLoaded, attachedAccount, detachedAccount, refreshAccountData, refreshedAccountData, pushedTransaction } from './actions';
+import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
+import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT, REFRESH_DATA, PUSH_TRANSACTION } from './constants';
+
+
+//
+// Get the EOS Client once Scatter loads
+//
+function* pushTransaction() {
+  try {
+    const eosAccount = yield select(makeSelectEosAccount());
+    const eosAuthority = yield select(makeSelectEosAuthority());
+    const transaction = yield select(makeSelectTransaction());
+    const eosClient = yield select(scatterClient());
+    const authTransaction = transaction.map(tx => {
+      return {
+        ...tx,
+        authorization: [{ actor: eosAccount, permission: eosAuthority }]
+      }
+    })
+    console.log(authTransaction);
+    const res = yield eosClient.transaction(authTransaction);
+    yield put(successNotification(res.transaction_id));
+    yield put(pushedTransaction(res));
+  } catch (err) {
+    console.error("An EOSToolkit error occured - see details below:");
+    console.error(err);
+    yield put(failureNotification(JSON.stringify(err)));
+    yield put(pushedTransaction(err));
+  }
+
+}
+
+function* watchPushTransaction() {
+  yield takeLatest(PUSH_TRANSACTION, pushTransaction);
+}
 
 //
 // Get the EOS Client once Scatter loads
@@ -61,8 +95,7 @@ function* getEosAccount(signout = true) {
     port: active.endpoint.port,
     chainId: active.network.chainId,
   };
-  //TODO: we need this for multi-network support - why doesn't it work?
-  //yield scatter.suggestNetwork(scatterConfig);
+  yield scatter.suggestNetwork(scatterConfig);
   try {
     if (scatter.identity && signout) {
       yield scatter.forgetIdentity();
@@ -188,5 +221,6 @@ export default function* rootSaga() {
     watchScatterRemove(),
     watchEosRefreshData(),
     watchEosSuccess(),
+    watchPushTransaction(),
   ]);
 }
