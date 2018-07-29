@@ -5,6 +5,7 @@
  */
 import React from 'react';
 import { Formik } from 'formik';
+import { isMobile } from 'react-device-detect';
 
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -21,6 +22,7 @@ import Card from 'components/Card/Card';
 import CardHeader from 'components/Card/CardHeader';
 import CardIcon from 'components/Card/CardIcon';
 import CardBody from 'components/Card/CardBody';
+import MobileDetectedAlert from 'components/MobileDetectedAlert';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 
@@ -70,13 +72,17 @@ const RefundForm = props => {
       <GridItem xs={12} sm={12} lg={8}>
         <Card>
           <CardBody>
-            <Formik
-              initialValues={{
-                owner: eosAccount,
-              }}
-              onSubmit={handleSubmit}
-              render={formikProps => <FormObject {...formikProps} classes={classes} />}
-            />
+            {isMobile ? (
+              <MobileDetectedAlert />
+            ) : (
+              <Formik
+                initialValues={{
+                  owner: eosAccount,
+                }}
+                onSubmit={handleSubmit}
+                render={formikProps => <FormObject {...formikProps} classes={classes} />}
+              />
+            )}
           </CardBody>
         </Card>
       </GridItem>

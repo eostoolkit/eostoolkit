@@ -7,6 +7,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { isMobile } from 'react-device-detect';
 // import styled from 'styled-components';
 
 // @material-ui/core components
@@ -25,6 +26,7 @@ import Card from 'components/Card/Card';
 import CardHeader from 'components/Card/CardHeader';
 import CardIcon from 'components/Card/CardIcon';
 import CardBody from 'components/Card/CardBody';
+import MobileDetectedAlert from 'components/MobileDetectedAlert';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 
@@ -106,16 +108,20 @@ const SellRamForm = props => {
             <h4 className={classes.cardIconTitle}>Sell ram bytes</h4>
           </CardHeader>
           <CardBody>
-            <Formik
-              initialValues={{
-                owner: eosAccount,
-                name: '',
-                ram: '8192',
-              }}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
-              render={formikProps => <FormObject {...formikProps} classes={classes} />}
-            />
+            {isMobile ? (
+              <MobileDetectedAlert />
+            ) : (
+              <Formik
+                initialValues={{
+                  owner: eosAccount,
+                  name: '',
+                  ram: '8192',
+                }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+                render={formikProps => <FormObject {...formikProps} classes={classes} />}
+              />
+            )}
           </CardBody>
         </Card>
       </GridItem>
