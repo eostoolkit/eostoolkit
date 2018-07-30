@@ -27,7 +27,7 @@ function* setNetwork() {
     }
     yield put(removeAccount());
   } catch (err) {
-    console.error("An EOSToolkit error occured - see details below:");
+    console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
   }
 }
@@ -68,7 +68,7 @@ function* getNetworks() {
       yield put(scatterLoaded(scatter));
     }
   } catch (err) {
-    console.error("An EOSToolkit error occured - see details below:");
+    console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
   }
 }
@@ -84,7 +84,7 @@ function* watchFetchNetworks() {
 function* getStats(account, symbol) {
   const eosClient = yield select(makeSelectEosClient());
   try {
-    if(symbol==='OCT') throw ("OCT has no STATS table - please fix!");
+    if (symbol === 'OCT') throw { message: 'OCT has no STATS table - please fix!' };
     const stats = yield eosClient.getCurrencyStats(account, symbol);
     const precision = stats[symbol].max_supply.split(' ')[0].split('.')[1].length;
     return {
@@ -113,7 +113,7 @@ function* getTokens() {
     const tokens = yield join(...stats);
     yield put(fetchedTokens(tokens));
   } catch (err) {
-    console.error("An EOSToolkit error occured - see details below:");
+    console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
   }
 }

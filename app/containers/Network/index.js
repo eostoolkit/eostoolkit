@@ -7,7 +7,7 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import NetworkForm from 'components/NetworkForm';
+import NetworkForm from 'components/Features/NetworkForm';
 import { makeSelectNetworks, makeSelectActiveNetwork } from 'containers/Remote/selectors';
 import { selectNetwork } from 'containers/Remote/actions';
 

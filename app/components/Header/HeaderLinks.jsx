@@ -9,7 +9,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import logo from 'assets/img/genereosWhite.png';
 
-import VoteUs from 'containers/VoteUs/Loadable';
+import VoteUs from 'components/Features/VoteUs';
 
 import headerLinksStyle from './headerLinksStyle';
 

@@ -12,7 +12,7 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import withStyles from '@material-ui/core/styles/withStyles';
-import VoteUs from 'containers/VoteUs/Loadable';
+import VoteUs from 'components/Features/VoteUs';
 import { makeSelectEosAccount } from 'containers/Scatter/selectors';
 
 import {
@@ -30,6 +30,20 @@ import sweetAlertStyle from './sweetAlertStyle';
 // eslint-disable-next-line react/prefer-stateless-function
 export class Notification extends React.Component {
   render() {
+    function replaceErrors(key, value) {
+      if (value instanceof Error) {
+        const error = {};
+
+        Object.getOwnPropertyNames(value).forEach(valueKey => {
+          error[valueKey] = value[valueKey];
+        });
+
+        return error;
+      }
+
+      return value;
+    }
+
     const { loading, failure, success, message, closeAll, eosAccount } = this.props;
     if (loading) {
       return (
@@ -73,19 +87,6 @@ export class Notification extends React.Component {
       );
     }
     if (failure && eosAccount !== '') {
-      function replaceErrors(key, value) {
-        if (value instanceof Error) {
-            var error = {};
-
-            Object.getOwnPropertyNames(value).forEach(function (key) {
-                error[key] = value[key];
-            });
-
-            return error;
-        }
-
-        return value;
-      }
       const error = typeof message === 'string' ? JSON.parse(message) : message;
 
       return (
@@ -97,7 +98,9 @@ export class Notification extends React.Component {
           confirmBtnText="Close"
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.danger}`}>
           <h6>Transaction has failed</h6>
-          <pre className={this.props.classes.preXYScrollable}>{message ? `Details:\n${JSON.stringify(error, replaceErrors, 2)}`: ''}</pre>
+          <pre className={this.props.classes.preXYScrollable}>
+            {message ? `Details:\n${JSON.stringify(error, replaceErrors, 2)}` : ''}
+          </pre>
         </SweetAlert>
       );
     }

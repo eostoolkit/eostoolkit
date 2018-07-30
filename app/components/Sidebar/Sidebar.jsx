@@ -107,7 +107,7 @@ class Sidebar extends React.Component {
                   </NavLink>
                 </ListItem>
                 <ListItem className={classes.collapseItem}>
-                  <NavLink to="networks" className={`${classes.itemLink} ${classes.userCollapseLinks}`}>
+                  <NavLink to="/networks" className={`${classes.itemLink} ${classes.userCollapseLinks}`}>
                     <ListItemIcon className={classes.itemIconMini}>
                       <SettingsApplications />
                     </ListItemIcon>

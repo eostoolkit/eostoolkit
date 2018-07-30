@@ -1,53 +1,48 @@
 import React from 'react';
 
-// core components
-import GridItem from 'components/Grid/GridItem';
-import Button from 'components/CustomButtons/Button';
-
-
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
 const FormData = [
   {
-    id: "name",
-    label: "Recipient",
-    placeholder: "Account that receives the Token",
+    id: 'name',
+    label: 'Recipient',
+    placeholder: 'Account that receives the Token',
   },
   {
-    id: "owner",
-    label: "Sender",
-    placeholder: "Account that sends the Token",
+    id: 'owner',
+    label: 'Sender',
+    placeholder: 'Account that sends the Token',
   },
   {
-    id: "quantity",
-    label: "Quantity (in Tokens)",
-    placeholder: "How many Tokens to send",
+    id: 'quantity',
+    label: 'Quantity (in Tokens)',
+    placeholder: 'How many Tokens to send',
   },
   {
-    id: "symbol",
-    label: "Symbol",
-    placeholder: "Symbol of the Token",
+    id: 'symbol',
+    label: 'Symbol',
+    placeholder: 'Symbol of the Token',
   },
   {
-    id: "memo",
-    label: "Memo",
-    placeholder: "A memo to attach to transfer",
+    id: 'memo',
+    label: 'Memo',
+    placeholder: 'A memo to attach to transfer',
     md: 12,
   },
 ];
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
+  const { handleSubmit } = props;
   const formProps = {
-    handleSubmit: handleSubmit,
-    submitColor: "rose",
-    submitText: "Send",
-  }
+    handleSubmit,
+    submitColor: 'rose',
+    submitText: 'Send',
+  };
   return (
     <ToolForm {...formProps}>
       {FormData.map(form => {
-        return (<ToolInput key={form.id} {...form} {...props}/>)
+        return <ToolInput key={form.id} {...form} {...props} />;
       })}
     </ToolForm>
   );

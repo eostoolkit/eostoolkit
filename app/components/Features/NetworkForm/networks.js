@@ -37,7 +37,9 @@ function NetworksTable({ ...props }) {
                     <TableCell className={classes.tableCell}>{network.type.toUpperCase()}</TableCell>
                     <TableCell className={classes.tableCell}>{endpoint.name}</TableCell>
                     <TableCell className={classes.tableCell}>
-                      {endpoint.protocol}{'://'}{endpoint.url}:{endpoint.port}
+                      {endpoint.protocol}
+                      {'://'}
+                      {endpoint.url}:{endpoint.port}
                     </TableCell>
                     <TableCell className={classes.tableCell}>
                       {active && active.network === network && active.endpoint === endpoint ? (

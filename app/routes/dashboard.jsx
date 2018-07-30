@@ -1,23 +1,24 @@
-// Primary containers
-import CreateAccount from 'containers/CreateAccount/Loadable';
-import CreateProxy from 'containers/CreateProxy/Loadable';
-import ResignProxy from 'containers/ResignProxy/Loadable';
-import SetProxy from 'containers/SetProxy/Loadable';
-import BuyRam from 'containers/BuyRam/Loadable';
-import SellRam from 'containers/SellRam/Loadable';
-import Delegate from 'containers/Delegate/Loadable';
-import Undelegate from 'containers/Undelegate/Loadable';
-import Transfer from 'containers/Transfer/Loadable';
-import SearchAccount from 'containers/SearchAccount/Loadable';
-import SimplePermissions from 'containers/SimplePermissions/Loadable';
-import ClaimRewards from 'containers/ClaimRewards/Loadable';
-import BidName from 'containers/BidName/Loadable';
-import ForumPost from 'containers/ForumPost/Loadable';
-import Airgrab from 'containers/Airgrab/Loadable';
-import Donate from 'components/Features/DonateForm';
-import Network from 'containers/Network/Loadable';
-
 // Primary components
+import CreateAccount from 'components/Features/CreateAccountForm';
+import CreateProxy from 'components/Features/CreateProxyForm';
+import ResignProxy from 'components/Features/ResignProxyForm';
+import SetProxy from 'components/Features/SetProxyForm';
+import BuyRam from 'components/Features/BuyRamForm';
+import SellRam from 'components/Features/SellRamForm';
+import Delegate from 'components/Features/DelegateForm';
+import Undelegate from 'components/Features/UndelegateForm';
+import Transfer from 'components/Features/TransferForm';
+import SimplePermissions from 'components/Features/SimplePermissionsForm';
+import ClaimRewards from 'components/Features/ClaimRewardsForm';
+import BidName from 'components/Features/BidNameForm';
+import Airgrab from 'components/Features/AirgrabForm';
+import Donate from 'components/Features/DonateForm';
+
+// containers
+import Network from 'containers/Network/Loadable';
+import SearchAccount from 'containers/SearchAccount/Loadable';
+
+// Pages
 import GovernancePage from 'components/Pages/GovernancePage/Loadable';
 
 // @material-ui/icons
@@ -68,7 +69,7 @@ const dashRoutes = [
     component: SearchAccount,
   },
   {
-    path: '/create',
+    path: '/account/create',
     name: 'Create Account',
     icon: PersonAdd,
     component: CreateAccount,
@@ -153,12 +154,6 @@ const dashRoutes = [
     icon: Forum,
     views: [
       {
-        path: '/community/forumpost',
-        name: 'Eosio Forum Post',
-        mini: 'FP',
-        component: ForumPost,
-      },
-      {
         path: '/community/bidname',
         name: 'Premium Names',
         mini: 'PN',
@@ -182,9 +177,10 @@ const dashRoutes = [
     ],
   },
   { redirect: true, path: '/vote/beproxy', pathTo: '/vote/createproxy', name: 'Create Proxy' },
-  //{ redirect: true, path: '/bidname', pathTo: '/community/bidname', name: 'Bid Names' },
-  { redirect: true, path: '/forumpost', pathTo: '/community/forumpost', name: 'Forum Post' },
+  { redirect: true, path: '/bidname', pathTo: '/community/bidname', name: 'Bid Names' },
+  // { redirect: true, path: '/forumpost', pathTo: '/community/forumpost', name: 'Forum Post' },
   { redirect: true, path: '/account/buybytes', pathTo: '/account/buyram', name: 'Buy Ram (bytes)' },
+  { redirect: true, path: '/create', pathTo: '/account/create', name: 'Create Account' },
   { redirect: true, path: '/', pathTo: '/home', name: 'Home' },
 ];
 export default dashRoutes;

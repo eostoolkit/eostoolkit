@@ -17,6 +17,20 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
 
+const makeTransaction = values => {
+  const transaction = [
+    {
+      account: 'eosio',
+      name: 'sellram',
+      data: {
+        account: values.owner,
+        bytes: Number(values.ram),
+      },
+    },
+  ];
+  return transaction;
+};
+
 const validationSchema = Yup.object().shape({
   owner: Yup.string().required('Buyer name is required'),
   ram: Yup.number()
@@ -30,7 +44,7 @@ const SellRamForm = props => {
     <Tool>
       <ToolSection lg={8}>
         <ToolBody color="warning" icon={RemoveCircle} header="Sell RAM">
-          <FormObject {...props}/>
+          <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
@@ -45,9 +59,10 @@ const SellRamForm = props => {
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { handleSubmit } = props;
+      const { pushTransaction } = props;
+      const transaction = makeTransaction(values);
       setSubmitting(false);
-      handleSubmit({ ...values});
+      pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
       owner: props.eosAccount,

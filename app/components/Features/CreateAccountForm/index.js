@@ -1,8 +1,8 @@
 /**
-*
-* CreateAccountForm
-*
-*/
+ *
+ * CreateAccountForm
+ *
+ */
 
 import React from 'react';
 import { compose } from 'recompose';
@@ -16,6 +16,46 @@ import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
+
+const makeTransaction = values => {
+  const transaction = [
+    {
+      account: 'eosio',
+      name: 'newaccount',
+      data: {
+        creator: values.owner,
+        name: values.name,
+        owner: values.ownerKey,
+        active: values.activeKey,
+      },
+    },
+    {
+      account: 'eosio',
+      name: 'buyrambytes',
+      data: {
+        payer: values.owner,
+        receiver: values.name,
+        bytes: Number(values.ram),
+      },
+    },
+    {
+      account: 'eosio',
+      name: 'delegatebw',
+      data: {
+        from: values.owner,
+        receiver: values.name,
+        stake_net_quantity: `${Number(values.net)
+          .toFixed(4)
+          .toString()} EOS`,
+        stake_cpu_quantity: `${Number(values.cpu)
+          .toFixed(4)
+          .toString()} EOS`,
+        transfer: values.transfer ? 1 : 0,
+      },
+    },
+  ];
+  return transaction;
+};
 
 const validationSchema = Yup.object().shape({
   owner: Yup.string().required('Creator name is required'),
@@ -44,7 +84,7 @@ const CreateAccountForm = props => {
     <Tool>
       <ToolSection lg={8}>
         <ToolBody color="warning" icon={PersonAdd} header="Create Account">
-          <FormObject {...props}/>
+          <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
@@ -59,9 +99,10 @@ const CreateAccountForm = props => {
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { handleSubmit } = props;
+      const { pushTransaction } = props;
+      const transaction = makeTransaction(values);
       setSubmitting(false);
-      handleSubmit({ ...values});
+      pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
       owner: props.eosAccount,

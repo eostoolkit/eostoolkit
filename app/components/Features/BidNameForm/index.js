@@ -17,6 +17,23 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
 
+const makeTransaction = values => {
+  const transaction = [
+    {
+      account: 'eosio',
+      name: 'bidname',
+      data: {
+        bidder: values.owner,
+        newname: values.name,
+        bid: `${Number(values.bid)
+          .toFixed(4)
+          .toString()} EOS`,
+      },
+    },
+  ];
+  return transaction;
+};
+
 const validationSchema = Yup.object().shape({
   owner: Yup.string().required('Bidder name is required'),
   name: Yup.string().required('Premium name is required'),
@@ -30,7 +47,7 @@ const BidNameForm = props => {
     <Tool>
       <ToolSection lg={8}>
         <ToolBody color="warning" icon={Gavel} header="Bid for Premium Name">
-          <FormObject {...props}/>
+          <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
@@ -49,14 +66,15 @@ const BidNameForm = props => {
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { handleSubmit } = props;
+      const { pushTransaction } = props;
+      const transaction = makeTransaction(values);
       setSubmitting(false);
-      handleSubmit({ ...values});
+      pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
       owner: props.eosAccount,
       name: '',
-      bid: '',
+      bid: 0,
     }),
     validationSchema,
   })

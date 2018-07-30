@@ -16,7 +16,8 @@ const makeSelectEosClient = () => createSelector(selectScatter, substate => subs
 const makeSelectEosAccount = () =>
   createSelector(selectScatter, substate => (substate ? substate.get('eosAccount') : ''));
 
-const makeSelectEosAuthority = () => createSelector(selectScatter, substate => substate ? substate.get('eosAuthority') : '');
+const makeSelectEosAuthority = () =>
+  createSelector(selectScatter, substate => (substate ? substate.get('eosAuthority') : ''));
 
 const makeSelectEosAccountData = () =>
   createSelector(selectScatter, substate => (substate ? substate.get('eosAccountData') : null));

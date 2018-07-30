@@ -1,5 +1,5 @@
 import React from 'react';
-//Poorman token info
+// Poorman token info
 const PoormanInfo = () => {
   return (
     <div>
@@ -15,7 +15,7 @@ const PoormanInfo = () => {
         </a>
       </p>
     </div>
-  )
-}
+  );
+};
 
 export default PoormanInfo;

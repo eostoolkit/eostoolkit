@@ -39,12 +39,11 @@ import logo from 'assets/img/logo.png';
 import appStyle from './dashboardStyle';
 
 import image from '../assets/img/bg.jpg';
-//import SwitchRoutes from './SwitchRoutes';
+// import SwitchRoutes from './SwitchRoutes';
 import ScatterConnector from 'containers/Scatter/LoadableConnector';
+// import SearchAccount from 'containers/SearchAccount/Loadable';
 // import HomePage from 'containers/HomePage/Loadable';
 // import NotFoundPage from 'containers/NotFoundPage/Loadable';
-
-
 
 let ps;
 
@@ -94,13 +93,22 @@ class Dashboard extends React.Component {
   switchRoutes = (
     <Switch>
       {dashboardRoutes.map(({ collapse, component, path, pathTo, redirect, views }) => {
+        if (path === '/search') return <Route path="/search/:name?" component={component} key={`route-${path}`} />;
         if (redirect) return <Redirect from={path} to={pathTo} key={`route-redirect-${path}`} />;
         if (collapse)
           return views.map(({ component: viewComponent, path: viewPath }) => {
-            return <Route path={viewPath} component={viewComponent} key={`route-${viewPath}`} />;
+            return (
+              <Route
+                path={viewPath}
+                render={() => <ScatterConnector renderComponent={viewComponent} />}
+                key={`route-${viewPath}`}
+              />
+            );
           });
-        //return <Route path={path} component={component} key={`route-${path}`} />;
-        return <Route path={path} render={() => <ScatterConnector renderComponent={component}/>} key={`route-${path}`} />;
+        // return <Route path={path} component={component} key={`route-${path}`} />;
+        return (
+          <Route path={path} render={() => <ScatterConnector renderComponent={component} />} key={`route-${path}`} />
+        );
       })}
     </Switch>
   );
@@ -145,9 +153,7 @@ class Dashboard extends React.Component {
               </div>
             </div>
           ) : (
-            <div className={classes.map}>
-              {this.switchRoutes}
-            </div>
+            <div className={classes.map}>{this.switchRoutes}</div>
           )}
           {this.getRoute() ? <Footer fluid /> : null}
         </div>

@@ -18,12 +18,12 @@ const airgrabs = [
     url: 'https://ridl.get-scatter.com',
   },
   {
-    symbol:'WIZZ',
-    account:'wizznetwork1',
-    method:'signup',
-    description:'A crypto-asset wallet and purchasing tool',
-    url:'https://wizz.network'
-  }
+    symbol: 'WIZZ',
+    account: 'wizznetwork1',
+    method: 'signup',
+    description: 'A crypto-asset wallet and purchasing tool',
+    url: 'https://wizz.network',
+  },
 ];
 
 const tokensUrl = 'https://raw.githubusercontent.com/eostoolkit/eos-airdrops/master/tokens.json';

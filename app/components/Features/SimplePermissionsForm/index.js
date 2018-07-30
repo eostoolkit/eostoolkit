@@ -18,6 +18,40 @@ import ToolBody from 'components/Tool/ToolBody';
 import ChangePermissions from 'components/Information/ChangePermissions';
 import FormObject from './FormObject';
 
+const makeTransaction = values => {
+  const transaction = [];
+  if (values.activeKey === values.owner || values.ownerKey === values.owner) {
+    return { error: 'This will break your account' };
+  }
+
+  if (values.activeKey) {
+    transaction.push({
+      account: 'eosio',
+      name: 'updateauth',
+      data: {
+        account: values.owner,
+        permission: 'active',
+        parent: 'owner',
+        auth: values.activeKey,
+      },
+    });
+  }
+
+  if (values.ownerKey) {
+    transaction.push({
+      account: 'eosio',
+      name: 'updateauth',
+      data: {
+        account: values.owner,
+        permission: 'owner',
+        parent: '',
+        auth: values.activeKey,
+      },
+    });
+  }
+  return transaction;
+};
+
 const validationSchema = Yup.object().shape({
   owner: Yup.string().required('Owner name is required'),
   activeKey: Yup.string(),
@@ -29,7 +63,7 @@ const SimplePermissionsForm = props => {
     <Tool>
       <ToolSection lg={8}>
         <ToolBody color="warning" icon={PersonAdd} header="Change Permissions" subheader=" Simple active / owner">
-          <FormObject {...props}/>
+          <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
@@ -44,9 +78,10 @@ const SimplePermissionsForm = props => {
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { handleSubmit } = props;
+      const { pushTransaction } = props;
+      const transaction = makeTransaction(values);
       setSubmitting(false);
-      handleSubmit({ ...values});
+      pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
       owner: props.eosAccount,

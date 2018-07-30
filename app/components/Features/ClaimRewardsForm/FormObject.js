@@ -5,26 +5,25 @@ import ToolInput from 'components/Tool/ToolInput';
 
 const FormData = [
   {
-    id: "owner",
-    label: "Claimer",
-    placeholder: "Account that claims production rewards",
+    id: 'owner',
+    label: 'Claimer',
+    placeholder: 'Account that claims production rewards',
     md: 12,
-  }
+  },
 ];
 
-
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
+  const { handleSubmit } = props;
   const formProps = {
-    handleSubmit: handleSubmit,
-    submitColor: "rose",
-    submitText: "Claim",
-  }
+    handleSubmit,
+    submitColor: 'rose',
+    submitText: 'Claim',
+  };
   return (
     <ToolForm {...formProps}>
-        {FormData.map(form => {
-          return (<ToolInput key={form.id} {...form} {...props}/>)
-        })}
+      {FormData.map(form => {
+        return <ToolInput key={form.id} {...form} {...props} />;
+      })}
     </ToolForm>
   );
 };

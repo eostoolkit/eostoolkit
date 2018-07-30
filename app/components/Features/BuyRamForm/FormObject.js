@@ -13,42 +13,45 @@ import { units } from './constants';
 
 const FormData = [
   {
-    id: "name",
-    label: "Receiver",
-    placeholder: "Account that receives the RAM",
+    id: 'name',
+    label: 'Receiver',
+    placeholder: 'Account that receives the RAM',
   },
   {
-    id: "owner",
-    label: "Payer",
-    placeholder: "Account that pays for the RAM",
-  }
+    id: 'owner',
+    label: 'Payer',
+    placeholder: 'Account that pays for the RAM',
+  },
 ];
 
 const eosInput = {
-  id: "eosQuantity",
+  id: 'eosQuantity',
   label: `Ram purchase (in ${units.EOS})`,
-  placeholder: "How much RAM to puchase"
-}
+  placeholder: 'How much RAM to puchase',
+};
 
 const byteInput = {
-  id: "byteQuantity",
+  id: 'byteQuantity',
   label: `Ram purchase (in ${units.BYTE})`,
-  placeholder: "How much RAM to puchase"
-}
+  placeholder: 'How much RAM to puchase',
+};
 
 const FormObject = props => {
   const { values, touched, errors, handleChange, handleBlur, handleSubmit, ...toggleProps } = props;
-  const { unit: { isEOS, handleByteUnitChange, handleEOSUnitChange }, classes } = toggleProps;
+  const {
+    unit: { isEOS, handleByteUnitChange, handleEOSUnitChange },
+    classes,
+  } = toggleProps;
 
   const formProps = {
-    handleSubmit: handleSubmit,
-    submitColor: "rose",
-    submitText: "Purchase",
-  }
+    handleSubmit,
+    submitColor: 'rose',
+    submitText: 'Purchase',
+  };
   return (
     <ToolForm {...formProps}>
       {FormData.map(form => {
-        return (<ToolInput key={form.id} {...form} {...props}/>)
+        return <ToolInput key={form.id} {...form} {...props} />;
       })}
       <GridItem className={classes.radioContainer} xs={12} sm={12} md={6}>
         <span className={classes.radioLabel}>Purchase unit:</span>
@@ -61,11 +64,7 @@ const FormObject = props => {
           label="bytes"
         />
       </GridItem>
-      {isEOS ? (
-        <ToolInput {...eosInput} {...props}/>
-      ) : (
-        <ToolInput {...byteInput} {...props}/>
-      )}
+      {isEOS ? <ToolInput {...eosInput} {...props} /> : <ToolInput {...byteInput} {...props} />}
     </ToolForm>
   );
 };

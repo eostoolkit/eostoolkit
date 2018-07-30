@@ -4,24 +4,24 @@ import ToolInput from 'components/Tool/ToolInput';
 
 const FormData = [
   {
-    id: "owner",
-    label: "Proxy Account",
-    placeholder: "Account that becomes proxy",
+    id: 'owner',
+    label: 'Proxy Account',
+    placeholder: 'Account that becomes proxy',
     md: 12,
   },
 ];
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
+  const { handleSubmit } = props;
   const formProps = {
-    handleSubmit: handleSubmit,
-    submitColor: "rose",
-    submitText: "Create",
-  }
+    handleSubmit,
+    submitColor: 'rose',
+    submitText: 'Create',
+  };
   return (
     <ToolForm {...formProps}>
       {FormData.map(form => {
-        return (<ToolInput key={form.id} {...form} {...props}/>)
+        return <ToolInput key={form.id} {...form} {...props} />;
       })}
     </ToolForm>
   );

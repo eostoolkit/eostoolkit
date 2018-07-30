@@ -16,7 +16,7 @@ function* getCurrency(token, name) {
     });
     return currencies;
   } catch (err) {
-    console.error("An EOSToolkit error occured - see details below:");
+    console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
     return [];
   }
@@ -38,11 +38,11 @@ function* getAccountDetail(name) {
       ...account,
       balances,
     };
-  } catch(err) {
-    console.error("An EOSToolkit error occured - see details below:");
+  } catch (err) {
+    console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
+    return {};
   }
-
 }
 
 //
@@ -62,7 +62,7 @@ function* performSearchPubkey() {
     const accounts = yield join(...details);
     yield put(lookupLoaded(accounts));
   } catch (err) {
-    console.error("An EOSToolkit error occured - see details below:");
+    console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
     yield put(lookupLoaded([]));
   }
@@ -82,7 +82,7 @@ function* performSearchAccount() {
     const account = yield call(getAccountDetail, accountName);
     yield put(lookupLoaded([account]));
   } catch (err) {
-    console.error("An EOSToolkit error occured - see details below:");
+    console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
     yield put(lookupLoaded([]));
   }

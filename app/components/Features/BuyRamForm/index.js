@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { compose } from 'recompose';
+import { compose, withStateHandlers, mapProps } from 'recompose';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -16,6 +16,29 @@ import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
+
+const makeTransaction = (values, isEOS) => {
+  const type = isEOS
+    ? {
+      quant: `${Number(values.eosQuantity)
+          .toFixed(4)
+          .toString()} EOS`,
+    }
+    : { bytes: Number(values.byteQuantity) };
+
+  const transaction = [
+    {
+      account: 'eosio',
+      name: isEOS ? 'buyram' : 'buyrambytes',
+      data: {
+        payer: values.owner,
+        receiver: values.name,
+        ...type,
+      },
+    },
+  ];
+  return transaction;
+};
 
 const validationSchema = ({ unit: { isEOS } }) => {
   const eosQuantity = Yup.number().positive('You must pay a positive quantity');
@@ -36,7 +59,7 @@ const BuyRamForm = props => {
     <Tool>
       <ToolSection lg={8}>
         <ToolBody color="warning" icon={AddCircle} header="Buy RAM">
-          <FormObject {...props}/>
+          <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
@@ -49,14 +72,37 @@ const BuyRamForm = props => {
 };
 
 const enhance = compose(
+  withStateHandlers(
+    {
+      isEOS: true,
+    },
+    {
+      handleByteUnitChange: () => () => ({
+        isEOS: false,
+      }),
+      handleEOSUnitChange: () => () => ({
+        isEOS: true,
+      }),
+    }
+  ),
+  mapProps(({ isEOS, handleByteUnitChange, handleEOSUnitChange, ...otherProps }) => ({
+    unit: {
+      isEOS,
+      handleByteUnitChange,
+      handleEOSUnitChange,
+    },
+    ...otherProps,
+  })),
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
       const {
-        handleSubmit,
+        pushTransaction,
         unit: { isEOS },
       } = props;
       setSubmitting(false);
-      handleSubmit({ ...values, isEOS });
+      const transaction = makeTransaction(values, isEOS);
+      setSubmitting(false);
+      pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
       byteQuantity: 8192,

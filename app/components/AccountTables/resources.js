@@ -12,10 +12,8 @@ import tableStyle from 'assets/jss/tableStyle';
 
 function ResourcesTable({ ...props }) {
   const { classes, account } = props;
-  if(!account) {
-    return (
-      <div>Invalid name or not found</div>
-    );
+  if (!account) {
+    return <div>Invalid name or not found</div>;
   }
   return (
     <div className={classes.tableResponsive}>
@@ -45,8 +43,10 @@ function ResourcesTable({ ...props }) {
             <TableCell className={classes.tableCell}>CPU</TableCell>
             <TableCell className={classes.tableCell}>
               {account && account.total_resources ? (
-                <span>{account.total_resources.cpu_weight}
-                <br />({Number((account.cpu_limit.used / account.cpu_limit.max) * 100).toFixed(2)} % used)</span>
+                <span>
+                  {account.total_resources.cpu_weight}
+                  <br />({Number((account.cpu_limit.used / account.cpu_limit.max) * 100).toFixed(2)} % used)
+                </span>
               ) : (
                 <span>Unlimited</span>
               )}
@@ -56,8 +56,10 @@ function ResourcesTable({ ...props }) {
             <TableCell className={classes.tableCell}>NET</TableCell>
             <TableCell className={classes.tableCell}>
               {account && account.total_resources ? (
-                <span>{account.total_resources.net_weight}
-                <br />({Number((account.net_limit.used / account.net_limit.max) * 100).toFixed(2)} % used)</span>
+                <span>
+                  {account.total_resources.net_weight}
+                  <br />({Number((account.net_limit.used / account.net_limit.max) * 100).toFixed(2)} % used)
+                </span>
               ) : (
                 <span>Unlimited</span>
               )}
@@ -67,8 +69,10 @@ function ResourcesTable({ ...props }) {
             <TableCell className={classes.tableCell}>REFUNDING</TableCell>
             <TableCell className={classes.tableCell}>
               {account && account.refund_request ? (
-                <span>CPU: {account.refund_request.cpu_amount}
-                <br />NET: {account.refund_request.net_amount}</span>
+                <span>
+                  CPU: {account.refund_request.cpu_amount}
+                  <br />NET: {account.refund_request.net_amount}
+                </span>
               ) : (
                 <span>None</span>
               )}

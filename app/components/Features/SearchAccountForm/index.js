@@ -27,7 +27,14 @@ import Account from './account';
 import PubicKey from './publicKey';
 
 const SearchAccountForm = props => {
-  const { classes, handleAccountName, handlePublicKey } = props;
+  const {
+    classes,
+    handleAccountName,
+    handlePublicKey,
+    match: {
+      params: { name },
+    },
+  } = props;
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={6}>
@@ -41,7 +48,7 @@ const SearchAccountForm = props => {
           <CardBody>
             <Formik
               initialValues={{
-                name: '',
+                name: name || '',
               }}
               onSubmit={handleAccountName}
               render={formikProps => <Account {...formikProps} classes={classes} />}

@@ -12,9 +12,9 @@ const RegProxy = () => {
       <h5>Unregister Proxy Info</h5>
       <p>If you had previously registered your Proxy Info, please unregister to keep the proxy database clean.</p>
       <p>
-        This is an on-chain EOS contract (or dApp) that allows EOS proxy accounts to register additional
-        information about themselves, such as name and website. This information is published on the EOS
-        blockchain and freely available to be republished. An example website that uses this information is the{' '}
+        This is an on-chain EOS contract (or dApp) that allows EOS proxy accounts to register additional information
+        about themselves, such as name and website. This information is published on the EOS blockchain and freely
+        available to be republished. An example website that uses this information is the{' '}
         <a href="https://www.alohaeos.com/vote/proxy" target="new">
           Aloha EOS Proxy Research Portal
         </a>.
@@ -30,7 +30,7 @@ const RegProxy = () => {
         </a>
       </p>
     </div>
-  )
-}
+  );
+};
 
 export default RegProxy;

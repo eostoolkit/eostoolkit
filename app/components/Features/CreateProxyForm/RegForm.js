@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { compose } from 'recompose';
 import { withFormik } from 'formik';
@@ -8,6 +7,19 @@ import SupervisorAccount from '@material-ui/icons/SupervisorAccount';
 import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './RegFormObject';
+
+const makeTransaction = values => {
+  const transaction = [
+    {
+      account: 'regproxyinfo',
+      name: 'set',
+      data: {
+        ...values,
+      },
+    },
+  ];
+  return transaction;
+};
 
 const validationSchema = Yup.object().shape({
   proxy: Yup.string().required('Proxy account is required'),
@@ -29,22 +41,25 @@ const validationSchema = Yup.object().shape({
   wechat: Yup.string().max(64),
 });
 
-
 const RegForm = props => {
   return (
-    <ToolBody color="warning" icon={SupervisorAccount} header="Register Proxy Info" subheader=" - Provide details about your proxy to the world">
-      <FormObject {...props}/>
+    <ToolBody
+      color="warning"
+      icon={SupervisorAccount}
+      header="Register Proxy Info"
+      subheader=" - Provide details about your proxy to the world">
+      <FormObject {...props} />
     </ToolBody>
   );
 };
 
-
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { handleSubmit } = props;
+      const { pushTransaction } = props;
+      const transaction = makeTransaction(values);
       setSubmitting(false);
-      handleSubmit({ ...values});
+      pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
       proxy: props.eosAccount,

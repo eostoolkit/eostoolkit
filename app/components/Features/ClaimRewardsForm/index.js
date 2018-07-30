@@ -9,7 +9,7 @@ import { compose } from 'recompose';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
-import AttachMoney  from '@material-ui/icons/AttachMoney';
+import AttachMoney from '@material-ui/icons/AttachMoney';
 
 import Tool from 'components/Tool/Tool';
 import ToolSection from 'components/Tool/ToolSection';
@@ -17,15 +17,19 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
 
+const makeTransaction = values => {
+  const transaction = [
+    {
+      account: 'eosio',
+      name: 'claimrewards',
+      data: { owner: values.owner },
+    },
+  ];
+  return transaction;
+};
+
 const validationSchema = Yup.object().shape({
   owner: Yup.string().required('Owner name is required'),
-  name: Yup.string().required('Account name is required'),
-  net: Yup.number()
-    .required('NET Stake is required')
-    .positive('You must stake a positive quantity'),
-  cpu: Yup.number()
-    .required('CPU Stake is required')
-    .positive('You must stake a positive quantity'),
 });
 
 const ClaimRewardsForm = props => {
@@ -33,7 +37,7 @@ const ClaimRewardsForm = props => {
     <Tool>
       <ToolSection lg={8}>
         <ToolBody color="warning" icon={AttachMoney} header="Claim Rewards" subheader=" - Block producers only">
-          <FormObject {...props}/>
+          <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
@@ -48,9 +52,10 @@ const ClaimRewardsForm = props => {
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { handleSubmit } = props;
+      const { pushTransaction } = props;
+      const transaction = makeTransaction(values);
       setSubmitting(false);
-      handleSubmit({ ...values});
+      pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
       owner: props.eosAccount,

@@ -17,6 +17,27 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
 
+const makeTransaction = values => {
+  const transaction = [
+    {
+      account: 'eosio',
+      name: 'delegatebw',
+      data: {
+        from: values.owner,
+        receiver: values.name,
+        stake_net_quantity: `${Number(values.net)
+          .toFixed(4)
+          .toString()} EOS`,
+        stake_cpu_quantity: `${Number(values.cpu)
+          .toFixed(4)
+          .toString()} EOS`,
+        transfer: values.transfer ? 1 : 0,
+      },
+    },
+  ];
+  return transaction;
+};
+
 const validationSchema = Yup.object().shape({
   owner: Yup.string().required('Owner name is required'),
   name: Yup.string().required('Account name is required'),
@@ -33,7 +54,7 @@ const DelegateForm = props => {
     <Tool>
       <ToolSection lg={8}>
         <ToolBody color="warning" icon={Redo} header="Delegate" subheader=" - Stake">
-          <FormObject {...props}/>
+          <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
@@ -48,9 +69,10 @@ const DelegateForm = props => {
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { handleSubmit } = props;
+      const { pushTransaction } = props;
+      const transaction = makeTransaction(values);
       setSubmitting(false);
-      handleSubmit({ ...values});
+      pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
       owner: props.eosAccount,

@@ -48,8 +48,10 @@ function ResourcesTable({ ...props }) {
             </TableCell>
             <TableCell className={classes.tableCell}>
               {account && account.refund_request ? (
-                <span>CPU: {account.refund_request.cpu_amount}
-                <br />NET: {account.refund_request.net_amount}</span>
+                <span>
+                  CPU: {account.refund_request.cpu_amount}
+                  <br />NET: {account.refund_request.net_amount}
+                </span>
               ) : (
                 <span>None</span>
               )}

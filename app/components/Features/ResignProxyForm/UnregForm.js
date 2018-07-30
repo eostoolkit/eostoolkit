@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { compose } from 'recompose';
 import { withFormik } from 'formik';
@@ -9,26 +8,42 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './UnregFormObject';
 
+const makeTransaction = values => {
+  const transaction = [
+    {
+      account: 'regproxyinfo',
+      name: 'remove',
+      data: {
+        proxy: values.proxy,
+      },
+    },
+  ];
+  return transaction;
+};
+
 const validationSchema = Yup.object().shape({
   proxy: Yup.string().required('Proxy account is required'),
 });
 
-
 const UnregForm = props => {
   return (
-    <ToolBody color="warning" icon={SupervisorAccount} header="Unregister Proxy Info" subheader=" - Remove details about your proxy">
-      <FormObject {...props}/>
+    <ToolBody
+      color="warning"
+      icon={SupervisorAccount}
+      header="Unregister Proxy Info"
+      subheader=" - Remove details about your proxy">
+      <FormObject {...props} />
     </ToolBody>
   );
 };
 
-
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { handleSubmit } = props;
+      const { pushTransaction } = props;
+      const transaction = makeTransaction(values);
       setSubmitting(false);
-      handleSubmit({ ...values});
+      pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
       proxy: props.eosAccount,
