@@ -12,7 +12,7 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import withStyles from '@material-ui/core/styles/withStyles';
-import VoteUs from 'containers/VoteUs/Loadable';
+import VoteUs from 'components/Features/VoteUs';
 import { makeSelectEosAccount } from 'containers/Scatter/selectors';
 
 import {
@@ -30,6 +30,20 @@ import sweetAlertStyle from './sweetAlertStyle';
 // eslint-disable-next-line react/prefer-stateless-function
 export class Notification extends React.Component {
   render() {
+    function replaceErrors(key, value) {
+      if (value instanceof Error) {
+        const error = {};
+
+        Object.getOwnPropertyNames(value).forEach(valueKey => {
+          error[valueKey] = value[valueKey];
+        });
+
+        return error;
+      }
+
+      return value;
+    }
+
     const { loading, failure, success, message, closeAll, eosAccount } = this.props;
     if (loading) {
       return (
@@ -73,16 +87,20 @@ export class Notification extends React.Component {
       );
     }
     if (failure && eosAccount !== '') {
+      const error = typeof message === 'string' ? JSON.parse(message) : message;
+
       return (
         <SweetAlert
           danger
-          style={{ display: 'block', marginTop: '-100px' }}
+          style={{ display: 'block', marginTop: '-200px' }}
           title="Failure"
           onConfirm={() => closeAll()}
           confirmBtnText="Close"
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.danger}`}>
           <h6>Transaction has failed</h6>
-          <h6>{message ? `Details: ${JSON.stringify(message)}` : ''}</h6>
+          <pre className={this.props.classes.preXYScrollable}>
+            {message ? `Details:\n${JSON.stringify(error, replaceErrors, 2)}` : ''}
+          </pre>
         </SweetAlert>
       );
     }

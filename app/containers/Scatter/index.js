@@ -18,14 +18,14 @@ import saga from './saga';
 
 export class Scatter extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
-
   componentDidMount() {
     if (window.scatter) {
+      console.log('Scatter already connected');
       this.props.onScatterLoaded(window.scatter);
       window.scatter = null;
     }
     document.addEventListener('scatterLoaded', () => {
-      // console.log('Scatter connected')
+      console.log('Scatter connected');
       this.props.onScatterLoaded(window.scatter);
 
       // Scatter will now be available from the window scope.

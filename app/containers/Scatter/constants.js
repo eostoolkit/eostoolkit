@@ -12,3 +12,5 @@ export const REFRESHED_DATA = 'app/Scatter/REFRESHED_DATA';
 export const REMOVE_ACCOUNT = 'app/Scatter/REMOVE_ACCOUNT';
 export const DETACHED_ACCOUNT = 'app/Scatter/DETACHED_ACCOUNT';
 export const EOSCLIENT_LOADED = 'app/Scatter/EOSCLIENT_LOADED';
+export const PUSH_TRANSACTION = 'app/Scatter/PUSH_TRANSACTION';
+export const PUSHED_TRANSACTION = 'app/Scatter/PUSHED_TRANSACTION';

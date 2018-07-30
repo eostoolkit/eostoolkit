@@ -24,6 +24,9 @@ function Header({ ...props }) {
   function makeBrand() {
     let name;
     props.routes.map(({ collapse, path, name: routeName, views }) => {
+      if (props.location.pathname.includes('/search')) {
+        name = 'Find Accounts';
+      }
       if (collapse) {
         views.map(prop => {
           if (prop.path === props.location.pathname) {

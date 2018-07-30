@@ -27,7 +27,7 @@ import ResourceTable from 'components/AccountTables/resources';
 import BalancesTable from 'components/AccountTables/balances';
 const Account = props => {
   const { classes, account, showJson, toggleVisibility } = props;
-  if(!account){
+  if (!account) {
     return (
       <GridItem xs={12} sm={12} lg={6}>
         <Card>
@@ -42,7 +42,7 @@ const Account = props => {
           </CardBody>
         </Card>
       </GridItem>
-    )
+    );
   }
   return (
     <GridItem xs={12} sm={12} lg={6}>

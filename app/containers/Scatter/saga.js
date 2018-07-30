@@ -5,10 +5,64 @@ import {
   makeSelectActiveNetwork,
   makeSelectEosClient,
 } from 'containers/Remote/selectors';
-import { makeSelectEosAccount, makeSelectScatter } from 'containers/Scatter/selectors';
+import {
+  makeSelectEosAccount,
+  makeSelectScatter,
+  makeSelectEosClient as scatterClient,
+  makeSelectEosAuthority,
+  makeSelectTransaction,
+} from 'containers/Scatter/selectors';
 import { NOTIFICATION_SUCCESS } from 'containers/Notification/constants';
-import { eosLoaded, attachedAccount, detachedAccount, refreshAccountData, refreshedAccountData } from './actions';
-import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT, REFRESH_DATA } from './constants';
+import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
+import {
+  eosLoaded,
+  attachedAccount,
+  detachedAccount,
+  refreshAccountData,
+  refreshedAccountData,
+  pushedTransaction,
+} from './actions';
+import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT, REFRESH_DATA, PUSH_TRANSACTION } from './constants';
+
+//
+// Get the EOS Client once Scatter loads
+//
+function* pushTransaction() {
+  yield put(loadingNotification());
+  try {
+    const eosAccount = yield select(makeSelectEosAccount());
+    const eosAuthority = yield select(makeSelectEosAuthority());
+    const transaction = yield select(makeSelectTransaction());
+    const eosClient = yield select(scatterClient());
+    console.log(typeof transaction);
+    if (transaction.error) {
+      throw { message: transaction.error };
+    }
+    if (transaction.success) {
+      yield put(successNotification(transaction.success));
+      return;
+    }
+    const actions = transaction.map(tx => {
+      return {
+        ...tx,
+        authorization: [{ actor: eosAccount, permission: eosAuthority }],
+      };
+    });
+    console.log(`Attempting to send tx to scatter: ${JSON.stringify(actions, null, 2)}`);
+    const res = yield eosClient.transaction({ actions });
+    yield put(successNotification(res.transaction_id));
+    yield put(pushedTransaction(res));
+  } catch (err) {
+    console.error('An EOSToolkit error occured - see details below:');
+    console.error(err);
+    yield put(failureNotification(err));
+    yield put(pushedTransaction(err));
+  }
+}
+
+function* watchPushTransaction() {
+  yield takeLatest(PUSH_TRANSACTION, pushTransaction);
+}
 
 //
 // Get the EOS Client once Scatter loads
@@ -37,10 +91,9 @@ function* getEosClient() {
     yield getEosAccount(false);
     yield put(eosLoaded(eosClient));
   } catch (err) {
-    console.error("An EOSToolkit error occured - see details below:");
+    console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
   }
-
 }
 
 function* watchScatterLoaded() {
@@ -61,8 +114,7 @@ function* getEosAccount(signout = true) {
     port: active.endpoint.port,
     chainId: active.network.chainId,
   };
-  //TODO: we need this for multi-network support - why doesn't it work?
-  //yield scatter.suggestNetwork(scatterConfig);
+  yield scatter.suggestNetwork(scatterConfig);
   try {
     if (scatter.identity && signout) {
       yield scatter.forgetIdentity();
@@ -86,7 +138,7 @@ function* getEosAccount(signout = true) {
     yield put(attachedAccount(eosAccount, accountAuth));
     yield put(refreshAccountData());
   } catch (err) {
-    console.error("An EOSToolkit error occured - see details below:");
+    console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
   }
 }
@@ -142,7 +194,7 @@ function* refreshEosAccountData() {
       yield put(refreshedAccountData(null));
     }
   } catch (err) {
-    console.error("An EOSToolkit error occured - see details below:");
+    console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
   }
 }
@@ -168,7 +220,7 @@ function* removeEosAccount() {
     yield put(detachedAccount());
     yield put(refreshAccountData());
   } catch (err) {
-    console.error("An EOSToolkit error occured - see details below:");
+    console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
   }
 }
@@ -188,5 +240,6 @@ export default function* rootSaga() {
     watchScatterRemove(),
     watchEosRefreshData(),
     watchEosSuccess(),
+    watchPushTransaction(),
   ]);
 }
