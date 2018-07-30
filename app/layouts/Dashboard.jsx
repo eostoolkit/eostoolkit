@@ -14,9 +14,6 @@
 
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -43,9 +40,7 @@ import appStyle from './dashboardStyle';
 
 import image from '../assets/img/bg.jpg';
 //import SwitchRoutes from './SwitchRoutes';
-import { pushTransaction } from 'containers/Scatter/actions'
-import { makeSelectEosAccount, makeSelectEosAuthority } from 'containers/Scatter/selectors';
-import ScatterConnector from 'containers/Scatter/Connector';
+import ScatterConnector from 'containers/Scatter/LoadableConnector';
 // import HomePage from 'containers/HomePage/Loadable';
 // import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
@@ -99,16 +94,13 @@ class Dashboard extends React.Component {
   switchRoutes = (
     <Switch>
       {dashboardRoutes.map(({ collapse, component, path, pathTo, redirect, views }) => {
-        const Component = component;
-        const { pushTransaction } = this.props;
-        const transactionProps = { pushTransaction };
         if (redirect) return <Redirect from={path} to={pathTo} key={`route-redirect-${path}`} />;
         if (collapse)
           return views.map(({ component: viewComponent, path: viewPath }) => {
             return <Route path={viewPath} component={viewComponent} key={`route-${viewPath}`} />;
           });
         //return <Route path={path} component={component} key={`route-${path}`} />;
-        return <Route path={path} render={() => <Component {...transactionProps}/>} key={`route-${path}`} />;
+        return <Route path={path} render={() => <ScatterConnector renderComponent={component}/>} key={`route-${path}`} />;
       })}
     </Switch>
   );
@@ -122,7 +114,6 @@ class Dashboard extends React.Component {
     return (
       <div className={classes.wrapper}>
         <Remote />
-        <ScatterConnector />
         <Sidebar
           routes={dashboardRoutes}
           logoText={'EOSTOOLKIT.IO'}
@@ -165,25 +156,4 @@ class Dashboard extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  eosAccount: makeSelectEosAccount(),
-  eosAuthority: makeSelectEosAuthority(),
-});
-
-function mapDispatchToProps(dispatch) {
-  console.log(pushTransaction);
-  return {
-    pushTransaction: transaction => dispatch(pushTransaction(transaction)),
-  };
-}
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-
-export default compose(
-  withStyles(appStyle),
-  withConnect
-)(Dashboard);
+export default withStyles(appStyle)(Dashboard);

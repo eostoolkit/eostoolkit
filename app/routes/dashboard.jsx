@@ -14,7 +14,7 @@ import ClaimRewards from 'containers/ClaimRewards/Loadable';
 import BidName from 'containers/BidName/Loadable';
 import ForumPost from 'containers/ForumPost/Loadable';
 import Airgrab from 'containers/Airgrab/Loadable';
-import Donate from 'components/Features/DonateForm/Loadable';
+import Donate from 'components/Features/DonateForm';
 import Network from 'containers/Network/Loadable';
 
 // Primary components

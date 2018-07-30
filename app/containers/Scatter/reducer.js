@@ -30,8 +30,6 @@ function scatterReducer(state = initialState, action) {
     case REFRESHED_DATA:
       return state.set('eosAccountData', action.data);
     case PUSH_TRANSACTION:
-      console.log("Reducer");
-      console.log(action);
       return state.set('transaction', action.transaction);
     case PUSHED_TRANSACTION:
       return state.set('transaction', null).set('transactionResult', action.result);

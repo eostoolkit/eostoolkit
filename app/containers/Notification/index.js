@@ -73,16 +73,31 @@ export class Notification extends React.Component {
       );
     }
     if (failure && eosAccount !== '') {
+      function replaceErrors(key, value) {
+        if (value instanceof Error) {
+            var error = {};
+
+            Object.getOwnPropertyNames(value).forEach(function (key) {
+                error[key] = value[key];
+            });
+
+            return error;
+        }
+
+        return value;
+      }
+      const error = typeof message === 'string' ? JSON.parse(message) : message;
+
       return (
         <SweetAlert
           danger
-          style={{ display: 'block', marginTop: '-100px' }}
+          style={{ display: 'block', marginTop: '-200px' }}
           title="Failure"
           onConfirm={() => closeAll()}
           confirmBtnText="Close"
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.danger}`}>
           <h6>Transaction has failed</h6>
-          <h6>{message ? `Details: ${JSON.stringify(message)}` : ''}</h6>
+          <pre className={this.props.classes.preXYScrollable}>{message ? `Details:\n${JSON.stringify(error, replaceErrors, 2)}`: ''}</pre>
         </SweetAlert>
       );
     }

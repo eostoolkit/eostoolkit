@@ -76,7 +76,6 @@ export function refreshedAccountData(data) {
 }
 
 export function pushTransaction(transaction) {
-  console.log("Push transaction");
   return {
     type: PUSH_TRANSACTION,
     transaction,

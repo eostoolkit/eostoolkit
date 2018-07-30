@@ -16,25 +16,26 @@ import { SCATTER_LOADED, CONNECT_ACCOUNT, REMOVE_ACCOUNT, REFRESH_DATA, PUSH_TRA
 // Get the EOS Client once Scatter loads
 //
 function* pushTransaction() {
+  yield put(loadingNotification());
   try {
     const eosAccount = yield select(makeSelectEosAccount());
     const eosAuthority = yield select(makeSelectEosAuthority());
     const transaction = yield select(makeSelectTransaction());
     const eosClient = yield select(scatterClient());
-    const authTransaction = transaction.map(tx => {
+    const actions = transaction.map(tx => {
       return {
         ...tx,
         authorization: [{ actor: eosAccount, permission: eosAuthority }]
       }
     })
-    console.log(authTransaction);
-    const res = yield eosClient.transaction(authTransaction);
+    console.log(`Attempting to send tx to scatter: ${JSON.stringify(actions, null, 2)}`);
+    const res = yield eosClient.transaction({actions});
     yield put(successNotification(res.transaction_id));
     yield put(pushedTransaction(res));
   } catch (err) {
     console.error("An EOSToolkit error occured - see details below:");
     console.error(err);
-    yield put(failureNotification(JSON.stringify(err)));
+    yield put(failureNotification(err));
     yield put(pushedTransaction(err));
   }
 

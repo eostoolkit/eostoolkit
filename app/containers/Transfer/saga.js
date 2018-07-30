@@ -20,19 +20,35 @@ function* performAction() {
   yield put(loadingNotification());
   try {
     const token = eosTokens.find(tk => tk.symbol === form.symbol);
-    const res = yield eosClient.transaction(token.account, tr => {
-      tr.transfer(
-        {
-          from: form.owner,
-          to: form.name,
-          quantity: `${Number(form.quantity)
-            .toFixed(token.precision)
-            .toString()} ${form.symbol}`,
-          memo: form.memo,
-        },
-        { authorization: [{ actor: eosAccount, permission: eosAuth }] }
-      );
-    });
+    const tx = [{
+      account: token.account,
+      name: 'transfer',
+      data: {
+        from: form.owner,
+        to: form.name,
+        memo: form.memo,
+        quantity: `${Number(form.quantity)
+          .toFixed(token.precision)
+          .toString()} ${form.symbol}`,
+      },
+      authorization: [{ actor: eosAccount, permission: eosAuth }]
+    }];
+    console.log(tx);
+    const res = yield eosClient.transaction({actions:tx});
+
+    // const res = yield eosClient.transaction(token.account, tr => {
+    //   tr.transfer(
+    //     {
+    //       from: form.owner,
+    //       to: form.name,
+    //       quantity: `${Number(form.quantity)
+    //         .toFixed(token.precision)
+    //         .toString()} ${form.symbol}`,
+    //       memo: form.memo,
+    //     },
+    //     { authorization: [{ actor: eosAccount, permission: eosAuth }] }
+    //   );
+    // });
     yield put(successNotification(res.transaction_id));
   } catch (err) {
     console.error("An EOSToolkit error occured - see details below:");

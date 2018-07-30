@@ -20,6 +20,14 @@ const sweetAlertStyle = {
   left: {
     textAlign: 'left',
   },
+  preXYScrollable: {
+    textAlign: 'left',
+    overflow: 'auto',
+    wordWrap: 'normal',
+    overflowWrap: 'normal',
+    whiteSpace: 'pre',
+    maxHeight: '150px',
+  },
   ...buttonStyle,
 };
 
