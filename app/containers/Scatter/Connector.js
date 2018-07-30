@@ -10,11 +10,38 @@ import { createStructuredSelector } from 'reselect';
 
 import { makeSelectEosAccount, makeSelectEosAuthority } from './selectors';
 import { pushTransaction } from './actions';
+import routes from 'routes/dashboard';
+
+
 
 const ScatterConnector = props => {
-  const { renderComponent, ...passProps } = props;
-  const Component = renderComponent;
-  return <Component {...passProps} />;
+  const { match, ...passProps } = props;
+
+  //TODO: Remove this shitty workaround cause fuck babel
+  let Component;
+  routes.map(({ collapse, path, name: routeName, views, component }) => {
+    if (collapse) {
+      views.map(prop => {
+        if (prop.path === match.path) {
+          Component = prop.component;
+        }
+      });
+    }
+    if (path === match.path) {
+      Component = component;
+    }
+  });
+
+  if(Component) {
+    return (
+      <Component {...passProps} />
+    );
+  } else {
+    return (
+      <div>Not found</div>
+    )
+  }
+
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -176,11 +176,11 @@ const dashRoutes = [
       },
     ],
   },
-  { redirect: true, path: '/vote/beproxy', pathTo: '/vote/createproxy', name: 'Create Proxy' },
-  { redirect: true, path: '/bidname', pathTo: '/community/bidname', name: 'Bid Names' },
+  // { redirect: true, path: '/vote/beproxy', pathTo: '/vote/createproxy', name: 'Create Proxy' },
+  // { redirect: true, path: '/bidname', pathTo: '/community/bidname', name: 'Bid Names' },
   // { redirect: true, path: '/forumpost', pathTo: '/community/forumpost', name: 'Forum Post' },
-  { redirect: true, path: '/account/buybytes', pathTo: '/account/buyram', name: 'Buy Ram (bytes)' },
-  { redirect: true, path: '/create', pathTo: '/account/create', name: 'Create Account' },
+  // { redirect: true, path: '/account/buybytes', pathTo: '/account/buyram', name: 'Buy Ram (bytes)' },
+  // { redirect: true, path: '/create', pathTo: '/account/create', name: 'Create Account' },
   { redirect: true, path: '/', pathTo: '/home', name: 'Home' },
 ];
 export default dashRoutes;

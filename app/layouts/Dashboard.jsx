@@ -90,28 +90,7 @@ class Dashboard extends React.Component {
     this.setState({ miniActive: !this.state.miniActive });
   };
 
-  switchRoutes = (
-    <Switch>
-      {dashboardRoutes.map(({ collapse, component, path, pathTo, redirect, views }) => {
-        if (path === '/search') return <Route path="/search/:name?" component={component} key={`route-${path}`} />;
-        if (redirect) return <Redirect from={path} to={pathTo} key={`route-redirect-${path}`} />;
-        if (collapse)
-          return views.map(({ component: viewComponent, path: viewPath }) => {
-            return (
-              <Route
-                path={viewPath}
-                render={() => <ScatterConnector renderComponent={viewComponent} />}
-                key={`route-${viewPath}`}
-              />
-            );
-          });
-        // return <Route path={path} component={component} key={`route-${path}`} />;
-        return (
-          <Route path={path} render={() => <ScatterConnector renderComponent={component} />} key={`route-${path}`} />
-        );
-      })}
-    </Switch>
-  );
+
 
   render() {
     const { classes, ...rest } = this.props;
@@ -119,6 +98,36 @@ class Dashboard extends React.Component {
       [classes.mainPanelSidebarMini]: this.state.miniActive,
       [classes.mainPanelWithPerfectScrollbar]: navigator.platform.indexOf('Win') > -1,
     })}`;
+
+    const switchRoutes = (
+      //TODO: Go back to using render once fixed babel bullshit
+      <Switch>
+        {dashboardRoutes.map(({ collapse, component, path, pathTo, redirect, views }) => {
+          if (path === '/search') return <Route path="/search/:name?" component={component} key={`route-${path}`} />;
+          if (redirect) return <Redirect from={path} to={pathTo} key={`route-redirect-${path}`} />;
+          if (collapse)
+            return views.map(({ component: viewComponent, path: viewPath }) => {
+              return (
+                <Route
+                  path={viewPath}
+                  component={ScatterConnector}
+                  //render={() => <ScatterConnector renderComponent={viewComponent} />}
+                  key={`route-${viewPath}`}
+                />
+              );
+            });
+          return (
+            <Route
+              path={path}
+              component={ScatterConnector}
+              //render={() => <ScatterConnector renderComponent={component} />}
+              key={`route-${path}`}
+            />
+          );
+        })}
+      </Switch>
+    );
+
     return (
       <div className={classes.wrapper}>
         <Remote />
