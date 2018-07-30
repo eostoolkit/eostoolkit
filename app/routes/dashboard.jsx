@@ -13,7 +13,11 @@ import ClaimRewards from 'components/Features/ClaimRewardsForm';
 import BidName from 'components/Features/BidNameForm';
 import Airgrab from 'components/Features/AirgrabForm';
 import Donate from 'components/Features/DonateForm';
-
+// EOSIO FORUM
+import ForumStatus from 'components/Features/ForumForms/Status';
+import ForumPost from 'components/Features/ForumForms/Post';
+import ForumProposal from 'components/Features/ForumForms/Propose';
+import ForumVote from 'components/Features/ForumForms/Vote';
 // containers
 import Network from 'containers/Network/Loadable';
 import SearchAccount from 'containers/SearchAccount/Loadable';
@@ -153,6 +157,30 @@ const dashRoutes = [
     state: 'openCommunity',
     icon: Forum,
     views: [
+      {
+        path: '/community/forum/status',
+        name: 'Forum Status',
+        mini: 'FS',
+        component: ForumStatus,
+      },
+      {
+        path: '/community/forum/post',
+        name: 'Forum Post',
+        mini: 'FP',
+        component: ForumPost,
+      },
+      {
+        path: '/community/forum/proposal',
+        name: 'Forum Proposal',
+        mini: 'Pr',
+        component: ForumProposal,
+      },
+      {
+        path: '/community/forum/vote',
+        name: 'Forum Vote',
+        mini: 'FV',
+        component: ForumVote,
+      },
       {
         path: '/community/bidname',
         name: 'Premium Names',
