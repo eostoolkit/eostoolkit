@@ -50,7 +50,7 @@ const FormObject = props => {
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Post',
+    submitText: 'Propose',
   };
   return (
     <ToolForm {...formProps}>

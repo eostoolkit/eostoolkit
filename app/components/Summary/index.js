@@ -19,10 +19,12 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectEosAccountData } from 'containers/Scatter/selectors';
 import { makeSelectActiveNetwork } from 'containers/Remote/selectors';
 
+import AccountCircle from '@material-ui/icons/AccountCircle';
 // core components
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Card from 'components/Card/Card';
+import CardIcon from 'components/Card/CardIcon';
 import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 
@@ -38,6 +40,7 @@ function Summary(props) {
           <GridItem xs={12} sm={12} md={12}>
             <Card>
               <CardHeader icon>
+                <CardIcon color="success"><AccountCircle/></CardIcon>
                 <h5 className={classes.cardIconTitle}>{eosAccountData.account_name}</h5>
               </CardHeader>
               <CardBody>
