@@ -7928,6 +7928,10 @@ react-bootstrap-sweetalert@^4.4.1:
   dependencies:
     object-assign "^4.1.0"
 
+react-device-detect@^1.5.8:
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/react-device-detect/-/react-device-detect-1.5.8.tgz#a26434195145e9b23f19ade031376656e1a8e135"
+
 react-dom@16.3.0:
   version "16.3.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.0.tgz#b318e52184188ecb5c3e81117420cca40618643e"
