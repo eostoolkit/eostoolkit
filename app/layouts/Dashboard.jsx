@@ -32,6 +32,7 @@ import Sidebar from 'components/Sidebar/Sidebar';
 import Notification from 'containers/Notification/Loadable';
 import Remote from 'containers/Remote/Loadable';
 import Summary from 'components/Summary/Loadable';
+import ScatterConnector from 'containers/Scatter/Connector';
 
 import dashboardRoutes from 'routes/dashboard';
 import logo from 'assets/img/logo.png';
@@ -39,11 +40,7 @@ import logo from 'assets/img/logo.png';
 import appStyle from './dashboardStyle';
 
 import image from '../assets/img/bg.jpg';
-// import SwitchRoutes from './SwitchRoutes';
-import ScatterConnector from 'containers/Scatter/LoadableConnector';
-// import SearchAccount from 'containers/SearchAccount/Loadable';
-// import HomePage from 'containers/HomePage/Loadable';
-// import NotFoundPage from 'containers/NotFoundPage/Loadable';
+
 
 let ps;
 
@@ -158,11 +155,11 @@ class Dashboard extends React.Component {
             <div className={classes.content}>
               <div className={classes.container}>
                 <Summary />
-                {this.switchRoutes}
+                {switchRoutes}
               </div>
             </div>
           ) : (
-            <div className={classes.map}>{this.switchRoutes}</div>
+            <div className={classes.map}>{switchRoutes}</div>
           )}
           {this.getRoute() ? <Footer fluid /> : null}
         </div>

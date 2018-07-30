@@ -14,7 +14,7 @@ import routes from 'routes/dashboard';
 
 
 
-const ScatterConnector = props => {
+const Connector = props => {
   const { match, ...passProps } = props;
 
   //TODO: Remove this shitty workaround cause fuck babel
@@ -58,4 +58,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ScatterConnector);
+)(Connector);
