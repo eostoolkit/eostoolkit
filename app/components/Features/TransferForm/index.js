@@ -24,7 +24,7 @@ const makeTransaction = (values, eosTokens) => {
   const token = eosTokens.find(tk => tk.symbol === values.symbol);
   const transaction = [
     {
-      account: 'eosio.token',
+      account: token.account,
       name: 'transfer',
       data: {
         from: values.owner,
