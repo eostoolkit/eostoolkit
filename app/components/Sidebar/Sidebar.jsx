@@ -22,6 +22,8 @@ import Scatter from 'containers/Scatter/Loadable';
 
 // core components
 import HeaderLinks from 'components/Header/HeaderLinks';
+import VoteUs from 'components/Features/VoteUs';
+import generEosLogo from 'assets/img/genereosWhite.png';
 
 import avatar from 'assets/img/scatter.png';
 
@@ -248,6 +250,9 @@ class Sidebar extends React.Component {
         <a href="https://www.genereos.io" className={logoNormal}>
           {logoText}
         </a>
+        <div className={classes.voteWrap}>
+          <VoteUs /> <img src={generEosLogo} alt="logo" className={classes.logoGenereos} />
+        </div>
       </div>
     );
     const drawerPaper = `${classes.drawerPaper} ${cx({
@@ -317,6 +322,7 @@ Sidebar.propTypes = {
   color: PropTypes.oneOf(['white', 'red', 'orange', 'green', 'blue', 'purple', 'rose']),
   logo: PropTypes.string,
   logoText: PropTypes.string,
+  voteText: PropTypes.string,
   image: PropTypes.string,
   routes: PropTypes.arrayOf(PropTypes.object),
 };
