@@ -16,6 +16,7 @@ import routes from 'routes/dashboard';
 
 const Connector = props => {
   const { match, ...passProps } = props;
+  return ('Page');
 
   //TODO: Remove this shitty workaround cause fuck babel
   let Component;

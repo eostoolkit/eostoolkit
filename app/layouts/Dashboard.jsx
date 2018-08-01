@@ -29,8 +29,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 import Sidebar from 'components/Sidebar/Sidebar';
+
+//load the environment
+import NetworkClient from 'containers/NetworkClient';
+
+// state based presentation
 import Notification from 'containers/Notification/Loadable';
-import Remote from 'containers/Remote/Loadable';
 import Summary from 'components/Summary/Loadable';
 import ScatterConnector from 'containers/Scatter/Connector';
 
@@ -127,7 +131,7 @@ class Dashboard extends React.Component {
 
     return (
       <div className={classes.wrapper}>
-        <Remote />
+        <NetworkClient />
         <Sidebar
           routes={dashboardRoutes}
           logoText={'EOSTOOLKIT.IO'}
