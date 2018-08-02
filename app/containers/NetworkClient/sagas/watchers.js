@@ -1,4 +1,4 @@
-import { takeLatest, put, select, all, call, fork, join } from 'redux-saga/effects';
+import { takeLatest, all } from 'redux-saga/effects';
 
 import {
   SET_SIGNER,

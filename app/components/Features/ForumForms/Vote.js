@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { sha256 } from 'js-sha256';
 import { makeSelectReader } from 'containers/NetworkClient/selectors';
-import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
+import { failureNotification, loadingNotification } from 'containers/Notification/actions';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -22,7 +22,6 @@ import ToolBody from 'components/Tool/ToolBody';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 import ToolSwitch from 'components/Tool/ToolSwitch';
-import uuidv4 from 'uuid/v4';
 
 const FormData = [
   {

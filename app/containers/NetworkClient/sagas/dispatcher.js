@@ -1,5 +1,5 @@
 import { put, select, spawn } from 'redux-saga/effects';
-import { buildReader, buildWriter, fetch } from './builders';
+import { buildReader, buildWriter } from './builders';
 import { makeSelectSigner, makeSelectActiveNetwork, makeSelectReader, makeSelectWriter } from '../selectors';
 import { loadAccount } from '../actions';
 

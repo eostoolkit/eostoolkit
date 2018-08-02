@@ -16,7 +16,6 @@ import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
-import ToolSwitch from 'components/Tool/ToolSwitch';
 
 const FormData = [
   {

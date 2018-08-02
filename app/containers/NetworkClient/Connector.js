@@ -18,17 +18,19 @@ const Connector = props => {
 
   // TODO: Remove this shitty workaround cause fuck babel
   let Component;
-  routes.map(({ collapse, path, name: routeName, views, component }) => {
+  routes.map(({ collapse, path, views, component }) => {
     if (collapse) {
       views.map(prop => {
         if (prop.path === match.path) {
           Component = prop.component;
         }
+        return Component;
       });
     }
     if (path === match.path) {
       Component = component;
     }
+    return Component;
   });
 
   if (Component) {

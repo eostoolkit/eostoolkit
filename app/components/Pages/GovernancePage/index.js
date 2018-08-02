@@ -14,7 +14,7 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import GovernanceDoc from 'components/Information/Governance';
 
-const GovernancePage = props => {
+const GovernancePage = () => {
   return (
     <Tool>
       <ToolSection lg={12}>

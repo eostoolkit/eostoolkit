@@ -136,6 +136,7 @@ export function* fetchIdentity(signer, activeNetwork) {
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
+    return null;
   }
 }
 

@@ -10,10 +10,10 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
 import { setSigner, loadNetworks } from './actions';
-import reducer from './reducer';
 import saga from './sagas/watchers';
+
+// we inject out reducer at the root level for lazy loading order reasons
 
 export class NetworkClient extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -23,12 +23,12 @@ export class NetworkClient extends React.Component {
     this.props.loadNetworks();
 
     if (window.scatter) {
-      console.log('Scatter already connected');
+      // console.log('Scatter already connected');
       this.props.setSigner(window.scatter);
       window.scatter = null;
     }
     document.addEventListener('scatterLoaded', () => {
-      console.log('Scatter connected');
+      // console.log('Scatter connected');
       this.props.setSigner(window.scatter);
       window.scatter = null;
     });

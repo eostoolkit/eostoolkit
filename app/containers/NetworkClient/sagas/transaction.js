@@ -1,5 +1,4 @@
-import { takeLatest, put, select, all, call, fork, join } from 'redux-saga/effects';
-import { NOTIFICATION_SUCCESS } from 'containers/Notification/constants';
+import { put, select } from 'redux-saga/effects';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
 
 import { makeSelectIdentity, makeSelectWriter, makeSelectTransaction } from '../selectors';
