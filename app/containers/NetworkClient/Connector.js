@@ -7,46 +7,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
-import { makeSelectEosAccount, makeSelectEosAuthority } from './selectors';
-import { pushTransaction } from './actions';
 import routes from 'routes/dashboard';
 
-
+import { makeSelectAccount, makeSelectIdentity } from './selectors';
+import { pushTransaction } from './actions';
 
 const Connector = props => {
   const { match, ...passProps } = props;
+  // return ('Page');
 
-  //TODO: Remove this shitty workaround cause fuck babel
+  // TODO: Remove this shitty workaround cause fuck babel
   let Component;
-  routes.map(({ collapse, path, name: routeName, views, component }) => {
+  routes.map(({ collapse, path, views, component }) => {
     if (collapse) {
       views.map(prop => {
         if (prop.path === match.path) {
           Component = prop.component;
         }
+        return Component;
       });
     }
     if (path === match.path) {
       Component = component;
     }
+    return Component;
   });
 
-  if(Component) {
-    return (
-      <Component {...passProps} />
-    );
-  } else {
-    return (
-      <div>Not found</div>
-    )
+  if (Component) {
+    return <Component {...passProps} />;
   }
-
+  return <div>Not found</div>;
 };
 
 const mapStateToProps = createStructuredSelector({
-  eosAccount: makeSelectEosAccount(),
-  eosAuthority: makeSelectEosAuthority(),
+  networkAccount: makeSelectAccount(),
+  networkIdentity: makeSelectIdentity(),
 });
 
 function mapDispatchToProps(dispatch) {

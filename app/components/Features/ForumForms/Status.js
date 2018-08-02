@@ -16,8 +16,6 @@ import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
-import ToolSwitch from 'components/Tool/ToolSwitch';
-
 
 const FormData = [
   {
@@ -54,7 +52,7 @@ const makeTransaction = values => {
       account: 'eosforumdapp',
       name: 'status',
       data: {
-        ...values
+        ...values,
       },
     },
   ];
@@ -79,7 +77,12 @@ const ForumStatusForm = props => {
           <h5>EOSIO Forum Status</h5>
           <p>This is part of the eosio.forum Referendum project.</p>
           <p>You can post a short, twitter like status</p>
-          <p>For more information checkout <a href="https://github.com/eoscanada/eosio.forum" target="new">Eos Canada GitHub</a></p>
+          <p>
+            For more information checkout{' '}
+            <a href="https://github.com/eoscanada/eosio.forum" target="new">
+              Eos Canada GitHub
+            </a>
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -95,7 +98,7 @@ const enhance = compose(
       pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
-      account: props.eosAccount,
+      account: props.networkIdentity ? props.networkIdentity.actor : '',
       content: '',
     }),
     validationSchema,

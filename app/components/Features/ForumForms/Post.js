@@ -16,7 +16,6 @@ import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
-import ToolSwitch from 'components/Tool/ToolSwitch';
 import uuidv4 from 'uuid/v4';
 
 const FormData = [
@@ -24,7 +23,8 @@ const FormData = [
     id: 'poster',
     label: 'Poster',
     placeholder: 'Account that sends the post',
-  },{
+  },
+  {
     id: 'reply_to_poster',
     label: 'Reply to Poster',
     placeholder: 'Reply to Poster that sends the post',
@@ -45,7 +45,7 @@ const FormData = [
     placeholder: 'Post content',
     multiline: true,
     rows: 3,
-    md:12,
+    md: 12,
   },
 ];
 
@@ -66,7 +66,7 @@ const FormObject = props => {
 };
 
 const makeTransaction = values => {
-  const {post_uuid, ...otherValues} = values;
+  const { post_uuid, ...otherValues } = values;
 
   const transaction = [
     {
@@ -101,7 +101,12 @@ const ForumPostForm = props => {
           <h5>EOSIO Forum Post</h5>
           <p>This is part of the eosio.forum Referendum project.</p>
           <p>You can create a forum post, and reply to other posts.</p>
-          <p>For more information checkout <a href="https://github.com/eoscanada/eosio.forum" target="new">Eos Canada GitHub</a></p>
+          <p>
+            For more information checkout{' '}
+            <a href="https://github.com/eoscanada/eosio.forum" target="new">
+              Eos Canada GitHub
+            </a>
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -117,7 +122,7 @@ const enhance = compose(
       pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
-      poster: props.eosAccount,
+      poster: props.networkIdentity ? props.networkIdentity.actor : '',
       reply_to_poster: '',
       content: '',
       post_uuid: '',

@@ -24,11 +24,12 @@ class SidebarWrapper extends React.Component {
     }
   }
   render() {
-    const { className, user, headerLinks, links } = this.props;
+    const { className, user, headerLinks, links, status } = this.props;
     return (
       <div className={className} ref="sidebarWrapper">
         {user}
         {headerLinks}
+        {status}
         {links}
       </div>
     );

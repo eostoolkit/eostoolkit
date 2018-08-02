@@ -9,8 +9,8 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { sha256 } from 'js-sha256';
-import { makeSelectEosClient } from 'containers/Remote/selectors';
-import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
+import { makeSelectReader } from 'containers/NetworkClient/selectors';
+import { failureNotification, loadingNotification } from 'containers/Notification/actions';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -22,7 +22,6 @@ import ToolBody from 'components/Tool/ToolBody';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 import ToolSwitch from 'components/Tool/ToolSwitch';
-import uuidv4 from 'uuid/v4';
 
 const FormData = [
   {
@@ -34,18 +33,18 @@ const FormData = [
     id: 'proposer',
     label: 'Proposer',
     placeholder: 'Account that created proposal',
-  },{
+  },
+  {
     id: 'proposal_name',
     label: 'Proposal Name',
     placeholder: 'Name of the proposal',
-  }
+  },
 ];
 
 const switchData = {
   id: 'vote',
   label: 'Your Vote (No/Yes)',
-  placeholder:
-    'Vote No - You disagree with the proposal. Vote Yes - You agree with the proposal.',
+  placeholder: 'Vote No - You disagree with the proposal. Vote Yes - You agree with the proposal.',
 };
 
 const FormObject = props => {
@@ -65,19 +64,19 @@ const FormObject = props => {
   );
 };
 
-async function getProposalHash(eosClient,values) {
+async function getProposalHash(networkReader, values) {
   const proposals = {
     json: true,
     scope: values.proposer,
     code: 'eosforumdapp',
     table: 'proposal',
     limit: 1000,
-  }
+  };
 
   try {
-    const data = await eosClient.getTableRows(proposals);
-    const row = data.rows.find(d=>d.proposal_name === values.proposal_name);
-    if(row) {
+    const data = await networkReader.getTableRows(proposals);
+    const row = data.rows.find(d => d.proposal_name === values.proposal_name);
+    if (row) {
       const hash = sha256(row.title + row.proposal_json);
       return hash;
     }
@@ -87,7 +86,7 @@ async function getProposalHash(eosClient,values) {
   }
 }
 
-const makeTransaction = (values,hash) => {
+const makeTransaction = (values, hash) => {
   const { vote, ...otherValues } = values;
   const transaction = [
     {
@@ -123,8 +122,16 @@ const ForumVoteForm = props => {
           <h5>EOSIO Forum Vote</h5>
           <p>This is part of the eosio.forum Referendum project.</p>
           <p>You can vote on a Referundum. The Proposer account name and Proposal name are required.</p>
-          <p>If you provide the correct details the proposal will be found and a unique hash generated to confirm your vote.</p>
-          <p>For more information checkout <a href="https://github.com/eoscanada/eosio.forum" target="new">Eos Canada GitHub</a></p>
+          <p>
+            If you provide the correct details the proposal will be found and a unique hash generated to confirm your
+            vote.
+          </p>
+          <p>
+            For more information checkout{' '}
+            <a href="https://github.com/eoscanada/eosio.forum" target="new">
+              Eos Canada GitHub
+            </a>
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -132,29 +139,29 @@ const ForumVoteForm = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  eosClient: makeSelectEosClient(),
+  networkReader: makeSelectReader(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     loading: () => dispatch(loadingNotification()),
-    failure: (err) => dispatch(failureNotification(err)),
+    failure: err => dispatch(failureNotification(err)),
   };
 }
 
 const enhance = compose(
   connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
   ),
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { loading, failure, eosClient, pushTransaction } = props;
+      const { loading, failure, networkReader, pushTransaction } = props;
       loading();
       setSubmitting(false);
-      getProposalHash(eosClient, values).then((hash) => {
-        if(!hash) {
-          failure({message: 'Unable to find proposal.'});
+      getProposalHash(networkReader, values).then(hash => {
+        if (!hash) {
+          failure({ message: 'Unable to find proposal.' });
         } else {
           const transaction = makeTransaction(values, hash);
           pushTransaction(transaction);
@@ -162,7 +169,7 @@ const enhance = compose(
       });
     },
     mapPropsToValues: props => ({
-      voter: props.eosAccount,
+      voter: props.networkIdentity ? props.networkIdentity.actor : '',
       proposer: '',
       proposal_name: '',
       vote: false,

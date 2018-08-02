@@ -16,15 +16,14 @@ import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
-import ToolSwitch from 'components/Tool/ToolSwitch';
-import uuidv4 from 'uuid/v4';
 
 const FormData = [
   {
     id: 'proposer',
     label: 'Proposer',
     placeholder: 'Account that creates proposal',
-  },{
+  },
+  {
     id: 'proposal_name',
     label: 'Proposal Name',
     placeholder: 'Name of the proposal',
@@ -33,7 +32,7 @@ const FormData = [
     id: 'title',
     label: 'Title',
     placeholder: 'Title of the proposal',
-    md:12,
+    md: 12,
   },
   {
     id: 'content',
@@ -41,7 +40,7 @@ const FormData = [
     placeholder: 'Post content',
     multiline: true,
     rows: 3,
-    md:12,
+    md: 12,
   },
 ];
 
@@ -62,7 +61,7 @@ const FormObject = props => {
 };
 
 const makeTransaction = values => {
-  const {content, ...otherValues} = values;
+  const { content, ...otherValues } = values;
 
   const transaction = [
     {
@@ -94,11 +93,19 @@ const ForumProposeForm = props => {
       </ToolSection>
       <ToolSection lg={4}>
         <ToolBody color="info" header="Tutorial">
-        <h5>EOSIO Forum Vote</h5>
-        <p>This is part of the eosio.forum Referendum project.</p>
-        <p>You can create a Referundum. You must provide the Proposer account name and Proposal name to others so they can vote.</p>
-        <p>The content can be as large as you require.</p>
-        <p>For more information checkout <a href="https://github.com/eoscanada/eosio.forum" target="new">Eos Canada GitHub</a></p>
+          <h5>EOSIO Forum Vote</h5>
+          <p>This is part of the eosio.forum Referendum project.</p>
+          <p>
+            You can create a Referundum. You must provide the Proposer account name and Proposal name to others so they
+            can vote.
+          </p>
+          <p>The content can be as large as you require.</p>
+          <p>
+            For more information checkout{' '}
+            <a href="https://github.com/eoscanada/eosio.forum" target="new">
+              Eos Canada GitHub
+            </a>
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -114,7 +121,7 @@ const enhance = compose(
       pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
-      proposer: props.eosAccount,
+      proposer: props.networkIdentity ? props.networkIdentity.actor : '',
       proposal_name: '',
       title: '',
       content: '',

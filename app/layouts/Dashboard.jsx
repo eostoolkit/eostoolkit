@@ -29,10 +29,14 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 import Sidebar from 'components/Sidebar/Sidebar';
+
+// load the environment
+import NetworkClient from 'containers/NetworkClient';
+
+// state based presentation
 import Notification from 'containers/Notification/Loadable';
-import Remote from 'containers/Remote/Loadable';
 import Summary from 'components/Summary/Loadable';
-import ScatterConnector from 'containers/Scatter/Connector';
+import NetworkConnector from 'containers/NetworkClient/Connector';
 
 import dashboardRoutes from 'routes/dashboard';
 import logo from 'assets/img/logo.png';
@@ -40,7 +44,6 @@ import logo from 'assets/img/logo.png';
 import appStyle from './dashboardStyle';
 
 import image from '../assets/img/bg.jpg';
-
 
 let ps;
 
@@ -87,8 +90,6 @@ class Dashboard extends React.Component {
     this.setState({ miniActive: !this.state.miniActive });
   };
 
-
-
   render() {
     const { classes, ...rest } = this.props;
     const mainPanel = `${classes.mainPanel} ${cx({
@@ -97,7 +98,7 @@ class Dashboard extends React.Component {
     })}`;
 
     const switchRoutes = (
-      //TODO: Go back to using render once fixed babel bullshit
+      // TODO: Go back to using render once fixed babel bullshit
       <Switch>
         {dashboardRoutes.map(({ collapse, component, path, pathTo, redirect, views }) => {
           if (path === '/search') return <Route path="/search/:name?" component={component} key={`route-${path}`} />;
@@ -107,8 +108,8 @@ class Dashboard extends React.Component {
               return (
                 <Route
                   path={viewPath}
-                  component={ScatterConnector}
-                  //render={() => <ScatterConnector renderComponent={viewComponent} />}
+                  component={NetworkConnector}
+                  // render={() => <NetworkConnector renderComponent={viewComponent} />}
                   key={`route-${viewPath}`}
                 />
               );
@@ -116,8 +117,8 @@ class Dashboard extends React.Component {
           return (
             <Route
               path={path}
-              component={ScatterConnector}
-              //render={() => <ScatterConnector renderComponent={component} />}
+              component={NetworkConnector}
+              // render={() => <NetworkConnector renderComponent={component} />}
               key={`route-${path}`}
             />
           );
@@ -127,7 +128,7 @@ class Dashboard extends React.Component {
 
     return (
       <div className={classes.wrapper}>
-        <Remote />
+        <NetworkClient />
         <Sidebar
           routes={dashboardRoutes}
           logoText={'EOSTOOLKIT.IO'}

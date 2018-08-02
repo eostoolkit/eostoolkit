@@ -16,15 +16,15 @@ import Disclaimer from 'components/Information/Disclaimer';
 
 import AirgrabTable from './AirgrabTable';
 
-const makeTransaction = (values, eosAccount) => {
+const makeTransaction = (values, networkIdentity) => {
   const data =
     values.method === 'signup'
       ? {
-        owner: eosAccount,
+        owner: networkIdentity ? networkIdentity.actor : '',
         quantity: `0.0000 ${values.symbol}`,
       }
       : {
-        claimer: eosAccount,
+        claimer: networkIdentity ? networkIdentity.actor : '',
       };
   const transaction = [
     {
@@ -37,9 +37,9 @@ const makeTransaction = (values, eosAccount) => {
 };
 
 const AirgrabForm = props => {
-  const { pushTransaction, eosAccount } = props;
+  const { pushTransaction, networkIdentity } = props;
   const handleSubmit = values => {
-    const transaction = makeTransaction(values, eosAccount);
+    const transaction = makeTransaction(values, networkIdentity);
     pushTransaction(transaction);
   };
   return (

@@ -8,8 +8,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import NetworkForm from 'components/Features/NetworkForm';
-import { makeSelectNetworks, makeSelectActiveNetwork } from 'containers/Remote/selectors';
-import { selectNetwork } from 'containers/Remote/actions';
+import { makeSelectNetworks, makeSelectActiveNetwork } from 'containers/NetworkClient/selectors';
+import { setNetwork } from 'containers/NetworkClient/actions';
 
 const mapStateToProps = createStructuredSelector({
   networks: makeSelectNetworks(),
@@ -18,7 +18,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    selectNetwork: (network, endpoint) => dispatch(selectNetwork(network, endpoint)),
+    selectNetwork: (network, endpoint) => dispatch(setNetwork({ network, endpoint })),
   };
 }
 

@@ -22,13 +22,13 @@ import BlockOneLetter from 'components/Information/BlockOneLetter';
 
 import FormObject from './FormObject';
 
-const makeTransaction = (values, eosAccount) => {
+const makeTransaction = (values, networkIdentity) => {
   const transaction = [
     {
       account: 'eosio.token',
       name: 'transfer',
       data: {
-        from: eosAccount,
+        from: networkIdentity ? networkIdentity.actor : '',
         to: 'myeostoolkit',
         memo: values.memo,
         quantity: `${Number(values.quantity)
@@ -68,8 +68,8 @@ const DonateForm = props => {
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { pushTransaction, eosAccount } = props;
-      const transaction = makeTransaction(values, eosAccount);
+      const { pushTransaction, networkIdentity } = props;
+      const transaction = makeTransaction(values, networkIdentity);
       setSubmitting(false);
       pushTransaction(transaction);
     },
