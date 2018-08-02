@@ -39,7 +39,9 @@ function Summary(props) {
           <GridItem xs={12} sm={12} md={12}>
             <Card>
               <CardHeader icon>
-                <CardIcon color="success"><AccountCircle/></CardIcon>
+                <CardIcon color="success">
+                  <AccountCircle />
+                </CardIcon>
                 <h5 className={classes.cardIconTitle}>{account.account_name}</h5>
               </CardHeader>
               <CardBody>

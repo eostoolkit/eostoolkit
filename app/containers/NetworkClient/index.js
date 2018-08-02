@@ -11,7 +11,7 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { setSigner, loadNetworks  } from './actions';
+import { setSigner, loadNetworks } from './actions';
 import reducer from './reducer';
 import saga from './sagas/watchers';
 
@@ -19,7 +19,7 @@ export class NetworkClient extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    //start loading the reader asap
+    // start loading the reader asap
     this.props.loadNetworks();
 
     if (window.scatter) {
@@ -44,7 +44,7 @@ const mapStateToProps = createStructuredSelector({});
 function mapDispatchToProps(dispatch) {
   return {
     loadNetworks: () => dispatch(loadNetworks()),
-    setSigner: (signer) => dispatch(setSigner(signer)),
+    setSigner: signer => dispatch(setSigner(signer)),
   };
 }
 

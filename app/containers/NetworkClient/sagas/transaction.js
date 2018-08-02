@@ -1,4 +1,3 @@
-
 import { takeLatest, put, select, all, call, fork, join } from 'redux-saga/effects';
 import { NOTIFICATION_SUCCESS } from 'containers/Notification/constants';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
@@ -11,7 +10,9 @@ export function* pushTransaction() {
     const networkIdentity = yield select(makeSelectIdentity());
     const transaction = yield select(makeSelectTransaction());
     const networkWriter = yield select(makeSelectWriter());
-    console.log(typeof transaction);
+    if (!networkWriter || !transaction || !networkIdentity) {
+      throw { message: 'Writing is not enabled - check your Scatter connection' };
+    }
     if (transaction.error) {
       throw { message: transaction.error };
     }

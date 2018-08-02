@@ -1,11 +1,6 @@
 import { put, select, spawn } from 'redux-saga/effects';
 import { buildReader, buildWriter, fetch } from './builders';
-import {
-  makeSelectSigner,
-  makeSelectActiveNetwork,
-  makeSelectReader,
-  makeSelectWriter,
-} from '../selectors';
+import { makeSelectSigner, makeSelectActiveNetwork, makeSelectReader, makeSelectWriter } from '../selectors';
 import { loadAccount } from '../actions';
 
 /*
@@ -18,18 +13,18 @@ import { loadAccount } from '../actions';
 export function* buildDispatcher() {
   const signer = yield select(makeSelectSigner());
   const network = yield select(makeSelectActiveNetwork());
-  //build only dispatches if we do have networks and signer
-  if(signer && network) {
-    yield spawn(buildReader,network);
-    yield spawn(buildWriter,signer,network);
+  // build only dispatches if we do have networks and signer
+  if (signer && network) {
+    yield spawn(buildReader, network);
+    yield spawn(buildWriter, signer, network);
   }
 }
 
 export function* accountDispatcher() {
   const reader = yield select(makeSelectReader());
   const writer = yield select(makeSelectWriter());
-  //account only dispatched if we have both a reader and writer
-  if(reader && writer) {
+  // account only dispatched if we have both a reader and writer
+  if (reader && writer) {
     yield put(loadAccount());
   }
 }

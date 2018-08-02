@@ -18,7 +18,6 @@ import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 import ToolSwitch from 'components/Tool/ToolSwitch';
 
-
 const FormData = [
   {
     id: 'account',
@@ -54,7 +53,7 @@ const makeTransaction = values => {
       account: 'eosforumdapp',
       name: 'status',
       data: {
-        ...values
+        ...values,
       },
     },
   ];
@@ -79,7 +78,12 @@ const ForumStatusForm = props => {
           <h5>EOSIO Forum Status</h5>
           <p>This is part of the eosio.forum Referendum project.</p>
           <p>You can post a short, twitter like status</p>
-          <p>For more information checkout <a href="https://github.com/eoscanada/eosio.forum" target="new">Eos Canada GitHub</a></p>
+          <p>
+            For more information checkout{' '}
+            <a href="https://github.com/eoscanada/eosio.forum" target="new">
+              Eos Canada GitHub
+            </a>
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>

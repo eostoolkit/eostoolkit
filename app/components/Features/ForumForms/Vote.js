@@ -34,18 +34,18 @@ const FormData = [
     id: 'proposer',
     label: 'Proposer',
     placeholder: 'Account that created proposal',
-  },{
+  },
+  {
     id: 'proposal_name',
     label: 'Proposal Name',
     placeholder: 'Name of the proposal',
-  }
+  },
 ];
 
 const switchData = {
   id: 'vote',
   label: 'Your Vote (No/Yes)',
-  placeholder:
-    'Vote No - You disagree with the proposal. Vote Yes - You agree with the proposal.',
+  placeholder: 'Vote No - You disagree with the proposal. Vote Yes - You agree with the proposal.',
 };
 
 const FormObject = props => {
@@ -65,19 +65,19 @@ const FormObject = props => {
   );
 };
 
-async function getProposalHash(networkReader,values) {
+async function getProposalHash(networkReader, values) {
   const proposals = {
     json: true,
     scope: values.proposer,
     code: 'eosforumdapp',
     table: 'proposal',
     limit: 1000,
-  }
+  };
 
   try {
     const data = await networkReader.getTableRows(proposals);
-    const row = data.rows.find(d=>d.proposal_name === values.proposal_name);
-    if(row) {
+    const row = data.rows.find(d => d.proposal_name === values.proposal_name);
+    if (row) {
       const hash = sha256(row.title + row.proposal_json);
       return hash;
     }
@@ -87,7 +87,7 @@ async function getProposalHash(networkReader,values) {
   }
 }
 
-const makeTransaction = (values,hash) => {
+const makeTransaction = (values, hash) => {
   const { vote, ...otherValues } = values;
   const transaction = [
     {
@@ -123,8 +123,16 @@ const ForumVoteForm = props => {
           <h5>EOSIO Forum Vote</h5>
           <p>This is part of the eosio.forum Referendum project.</p>
           <p>You can vote on a Referundum. The Proposer account name and Proposal name are required.</p>
-          <p>If you provide the correct details the proposal will be found and a unique hash generated to confirm your vote.</p>
-          <p>For more information checkout <a href="https://github.com/eoscanada/eosio.forum" target="new">Eos Canada GitHub</a></p>
+          <p>
+            If you provide the correct details the proposal will be found and a unique hash generated to confirm your
+            vote.
+          </p>
+          <p>
+            For more information checkout{' '}
+            <a href="https://github.com/eoscanada/eosio.forum" target="new">
+              Eos Canada GitHub
+            </a>
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -138,23 +146,23 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     loading: () => dispatch(loadingNotification()),
-    failure: (err) => dispatch(failureNotification(err)),
+    failure: err => dispatch(failureNotification(err)),
   };
 }
 
 const enhance = compose(
   connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
   ),
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
       const { loading, failure, networkReader, pushTransaction } = props;
       loading();
       setSubmitting(false);
-      getProposalHash(networkReader, values).then((hash) => {
-        if(!hash) {
-          failure({message: 'Unable to find proposal.'});
+      getProposalHash(networkReader, values).then(hash => {
+        if (!hash) {
+          failure({ message: 'Unable to find proposal.' });
         } else {
           const transaction = makeTransaction(values, hash);
           pushTransaction(transaction);

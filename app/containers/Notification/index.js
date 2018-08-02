@@ -13,7 +13,7 @@ import injectReducer from 'utils/injectReducer';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import withStyles from '@material-ui/core/styles/withStyles';
 import VoteUs from 'components/Features/VoteUs';
-import { makeSelectEosAccount } from 'containers/Scatter/selectors';
+import { makeSelectWriterEnabled } from 'containers/NetworkClient/selectors';
 
 import {
   makeSelectNotificationFailure,
@@ -44,7 +44,7 @@ export class Notification extends React.Component {
       return value;
     }
 
-    const { loading, failure, success, message, closeAll, eosAccount } = this.props;
+    const { loading, failure, success, message, closeAll, writeEnabled } = this.props;
     if (loading) {
       return (
         <SweetAlert
@@ -86,7 +86,7 @@ export class Notification extends React.Component {
         </SweetAlert>
       );
     }
-    if (failure && eosAccount !== '') {
+    if (failure && writeEnabled) {
       const error = typeof message === 'string' ? JSON.parse(message) : message;
 
       return (
@@ -104,7 +104,7 @@ export class Notification extends React.Component {
         </SweetAlert>
       );
     }
-    if (failure && eosAccount === '') {
+    if (failure && !writeEnabled) {
       return (
         <SweetAlert
           danger
@@ -136,7 +136,7 @@ const mapStateToProps = createStructuredSelector({
   failure: makeSelectNotificationFailure(),
   loading: makeSelectNotificationLoading(),
   message: makeSelectNotificationMessage(),
-  eosAccount: makeSelectEosAccount(),
+  writeEnabled: makeSelectWriterEnabled(),
 });
 
 function mapDispatchToProps(dispatch) {

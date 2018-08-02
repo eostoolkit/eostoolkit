@@ -8,21 +8,25 @@ import {
   makeSelectReaderEnabled,
   makeSelectWriterEnabled,
   makeSelectAccountEnabled,
-} from 'containers/NetworkClient/selectors'
+} from 'containers/NetworkClient/selectors';
+import CheckCircle from '@material-ui/icons/CheckCircle';
+import HighlightOff from '@material-ui/icons/HighlightOff';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const status = (enabled, loading) => {
-  if(enabled) return ('EN');
-  if(loading) return ('LD');
-  return ('NA');
-}
+  if (enabled) return <CheckCircle />;
+  if (loading) return <CircularProgress size={20} color="inherit" />;
+  return <HighlightOff />;
+};
 
-const NetworkStatus = (props) => {
+const NetworkStatus = props => {
   return (
-    `Read: ${status(props.readerEnabled,props.readerLoading)},
-    Write: ${status(props.writerEnabled,props.writerLoading)},
-    Acct: ${status(props.accountEnabled,props.accountLoading)}`
+    <div>
+      Read: {status(props.readerEnabled, props.readerLoading)} Write: {status(props.writerEnabled, props.writerLoading)}{' '}
+      Account: {status(props.accountEnabled, props.accountLoading)}
+    </div>
   );
-}
+};
 
 const mapStateToProps = createStructuredSelector({
   readerLoading: makeSelectReaderLoading(),
@@ -32,7 +36,6 @@ const mapStateToProps = createStructuredSelector({
   writerEnabled: makeSelectWriterEnabled(),
   accountEnabled: makeSelectAccountEnabled(),
 });
-
 
 export default connect(
   mapStateToProps,

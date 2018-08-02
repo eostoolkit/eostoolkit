@@ -140,7 +140,7 @@ class Sidebar extends React.Component {
     const status = (
       <List className={classes.list}>
         <ListItem className={classes.item}>
-          <ListItemText primary={<NetworkStatus/>} className={classes.itemText} disableTypography/>
+          <ListItemText primary={<NetworkStatus />} className={classes.statusText} disableTypography />
         </ListItem>
       </List>
     );
@@ -304,7 +304,7 @@ class Sidebar extends React.Component {
               paper: `${drawerPaper} ${classes[`${bgColor}Background`]}`,
             }}>
             {brand}
-            <SidebarWrapper className={sidebarWrapper} user={user} links={links} status={status}/>
+            <SidebarWrapper className={sidebarWrapper} user={user} links={links} status={status} />
             {image !== undefined ? (
               <div className={classes.background} style={{ backgroundImage: `url(${image})` }} />
             ) : null}

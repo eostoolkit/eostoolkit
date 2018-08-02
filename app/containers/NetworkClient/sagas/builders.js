@@ -1,5 +1,5 @@
 import Eos from 'eosjs';
-import { put, call  } from 'redux-saga/effects';
+import { put, call } from 'redux-saga/effects';
 import { fetchTokens, fetchIdentity } from './fetchers';
 import { enableReader, enableWriter, disableWriter } from '../actions';
 
@@ -21,7 +21,7 @@ export function* buildReader(activeNetwork) {
     };
 
     const networkReader = yield Eos(networkOptions);
-    const tokens = yield call(fetchTokens,networkReader);
+    const tokens = yield call(fetchTokens, networkReader);
 
     yield put(enableReader(networkReader, tokens));
   } catch (err) {
@@ -29,7 +29,6 @@ export function* buildReader(activeNetwork) {
     console.error(err);
   }
 }
-
 
 /*
 *
@@ -39,7 +38,7 @@ export function* buildReader(activeNetwork) {
 */
 
 // this is triggered by the buildDispatcher
-export function* buildWriter(signer,activeNetwork) {
+export function* buildWriter(signer, activeNetwork) {
   try {
     const signerClientConfig = {
       protocol: activeNetwork.endpoint.protocol,
@@ -56,11 +55,11 @@ export function* buildWriter(signer,activeNetwork) {
     };
     const protocol = activeNetwork.endpoint.protocol;
     const networkWriter = signer.eos(signerClientConfig, Eos, networkOptions, protocol);
-    const identity = yield call(fetchIdentity,signer,activeNetwork);
+    const identity = yield call(fetchIdentity, signer, activeNetwork);
 
-    if(identity) {
-      yield put(enableWriter(networkWriter,identity));
-    } else{
+    if (identity) {
+      yield put(enableWriter(networkWriter, identity));
+    } else {
       yield put(disableWriter());
     }
   } catch (err) {

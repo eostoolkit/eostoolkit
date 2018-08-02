@@ -1,4 +1,3 @@
-
 import { fromJS } from 'immutable';
 import {
   SET_SIGNER,
@@ -14,7 +13,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  readerLoading : true,
+  readerLoading: true,
   writerLoading: true,
   accountLoading: false,
   networkSigner: false,
@@ -33,9 +32,7 @@ function clientReducer(state = initialState, action) {
     case SET_SIGNER:
       return state.set('networkSigner', action.networkSigner);
     case LOADED_NETWORKS:
-      return state
-        .set('networks', action.networks)
-        .set('networkSelected', action.defaultNetwork);
+      return state.set('networks', action.networks).set('networkSelected', action.defaultNetwork);
     case READER_ENABLED:
       return state
         .set('networkReader', action.networkReader)
@@ -55,9 +52,7 @@ function clientReducer(state = initialState, action) {
     case LOAD_ACCOUNT:
       return state.set('accountLoading', true);
     case LOADED_ACCOUNT:
-      return state
-        .set('networkAccount', action.networkAccount)
-        .set('accountLoading', false);
+      return state.set('networkAccount', action.networkAccount).set('accountLoading', false);
     case SET_NETWORK:
       return state
         .set('networkSelected', action.networkSelected)
@@ -72,8 +67,7 @@ function clientReducer(state = initialState, action) {
         .set('networkAccount', null)
         .set('writerLoading', true);
     case PUSH_TRANSACTION:
-      return state
-        .set('transaction', action.transaction);
+      return state.set('transaction', action.transaction);
     default:
       return state;
   }

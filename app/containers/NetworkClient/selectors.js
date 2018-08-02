@@ -20,34 +20,37 @@ const makeSelectTransaction = () => createSelector(selectClientState, substate =
  * loading selectors
  */
 
- const makeSelectReaderLoading = () => createSelector(selectClientState, substate => substate.get('readerLoading'));
- const makeSelectWriterLoading = () => createSelector(selectClientState, substate => substate.get('writerLoading'));
- const makeSelectAccountLoading = () => createSelector(selectClientState, substate => substate.get('accountLoading'));
+const makeSelectReaderLoading = () => createSelector(selectClientState, substate => substate.get('readerLoading'));
+const makeSelectWriterLoading = () => createSelector(selectClientState, substate => substate.get('writerLoading'));
+const makeSelectAccountLoading = () => createSelector(selectClientState, substate => substate.get('accountLoading'));
 
- /**
-  * Enabled selectors
-  */
+/**
+ * Enabled selectors
+ */
 
-const makeSelectReaderEnabled = () => createSelector(selectClientState, substate => {
-  if(!substate) return false;
-  const loading = substate.get('readerLoading');
-  const reader = substate.get('networkReader');
-  return reader !== null && !loading;
-});
+const makeSelectReaderEnabled = () =>
+  createSelector(selectClientState, substate => {
+    if (!substate) return false;
+    const loading = substate.get('readerLoading');
+    const reader = substate.get('networkReader');
+    return reader !== null && !loading;
+  });
 
-const makeSelectWriterEnabled = () => createSelector(selectClientState, substate => {
-  if(!substate) return false;
-  const loading = substate.get('writerLoading');
-  const writer = substate.get('networkWriter');
-  return writer !== null && !loading;
-});
+const makeSelectWriterEnabled = () =>
+  createSelector(selectClientState, substate => {
+    if (!substate) return false;
+    const loading = substate.get('writerLoading');
+    const writer = substate.get('networkWriter');
+    return writer !== null && !loading;
+  });
 
-const makeSelectAccountEnabled = () => createSelector(selectClientState, substate => {
-  if(!substate) return false;
-  const loading = substate.get('accountLoading');
-  const account = substate.get('networkAccount');
-  return account !== null && !loading;
-});
+const makeSelectAccountEnabled = () =>
+  createSelector(selectClientState, substate => {
+    if (!substate) return false;
+    const loading = substate.get('accountLoading');
+    const account = substate.get('networkAccount');
+    return account !== null && !loading;
+  });
 
 /**
  * Default selector

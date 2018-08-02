@@ -29,7 +29,7 @@ const makeTransaction = (networkIdentity, accountData) => {
       account: 'eosio',
       name: 'voteproducer',
       data: {
-        voter: networkIdentity.actor,
+        voter: networkIdentity ? networkIdentity.actor : '',
         proxy: '',
         producers,
       },

@@ -11,10 +11,10 @@ import { makeSelectIdentity, makeSelectReader, makeSelectTokens } from '../selec
 *
 */
 
-//fetch networks and select defaultNetwork
+// fetch networks and select defaultNetwork
 export function* fetchNetworks() {
   try {
-    //fetch the remote network list
+    // fetch the remote network list
     const data = yield fetch(networksUrl);
     const networks = yield data.json();
 
@@ -28,7 +28,7 @@ export function* fetchNetworks() {
       endpoint,
     };
 
-    yield put(loadedNetworks(networks,activeNetwork));
+    yield put(loadedNetworks(networks, activeNetwork));
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
@@ -80,7 +80,6 @@ export function* fetchTokens(reader) {
   }
 }
 
-
 /*
 *
 * IDENTITY
@@ -88,11 +87,10 @@ export function* fetchTokens(reader) {
 *
 */
 
-
-export function* fetchIdentity(signer,activeNetwork) {
+export function* fetchIdentity(signer, activeNetwork) {
   try {
     const currentIdentity = yield select(makeSelectIdentity());
-    //build a network to suggest
+    // build a network to suggest
     const networkConfig = {
       protocol: activeNetwork.endpoint.protocol,
       blockchain: activeNetwork.network.network,
@@ -101,20 +99,20 @@ export function* fetchIdentity(signer,activeNetwork) {
       chainId: activeNetwork.network.chainId,
     };
 
-    //suggest the network to the user
+    // suggest the network to the user
     yield signer.suggestNetwork(networkConfig);
 
-    //should we remove an existing identity
-    //we assume that on first load:
+    // should we remove an existing identity
+    // we assume that on first load:
     //  signer.identity = object and currentIdentity = null
     //  so we can skip forgetIdentity
-    //if signer.identity = object and currentIdentity != null
+    // if signer.identity = object and currentIdentity != null
     //  then the user has requested t
     if (signer.identity && currentIdentity) {
       yield signer.forgetIdentity();
     }
 
-    //get identities specific to the activeNetwork
+    // get identities specific to the activeNetwork
     const id = yield signer.getIdentity({
       accounts: [
         {
@@ -124,15 +122,17 @@ export function* fetchIdentity(signer,activeNetwork) {
       ],
     });
 
+    // console.log(id);
+
     const match = id && id.accounts.find(x => x.blockchain === activeNetwork.network.network);
-    if(match) {
+
+    if (match) {
       return {
         actor: match.name,
         permission: match.authority,
-      }
-    } else {
-      return null;
+      };
     }
+    return null;
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
@@ -167,7 +167,7 @@ function* getAccountDetail(reader, name) {
     const tokens = yield select(makeSelectTokens());
     const tokenData = yield all(
       tokens.map(token => {
-        return fork(getCurrency, token.account, name);
+        return fork(getCurrency, reader, token.account, name);
       })
     );
     const currencies = yield join(...tokenData);
@@ -176,11 +176,10 @@ function* getAccountDetail(reader, name) {
       ...account,
       balances,
     };
-  } catch(c) {
+  } catch (c) {
     return null;
   }
 }
-
 
 export function* fetchAccount() {
   const reader = yield select(makeSelectReader());

@@ -30,7 +30,7 @@ import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 import Sidebar from 'components/Sidebar/Sidebar';
 
-//load the environment
+// load the environment
 import NetworkClient from 'containers/NetworkClient';
 
 // state based presentation
@@ -44,7 +44,6 @@ import logo from 'assets/img/logo.png';
 import appStyle from './dashboardStyle';
 
 import image from '../assets/img/bg.jpg';
-
 
 let ps;
 
@@ -91,8 +90,6 @@ class Dashboard extends React.Component {
     this.setState({ miniActive: !this.state.miniActive });
   };
 
-
-
   render() {
     const { classes, ...rest } = this.props;
     const mainPanel = `${classes.mainPanel} ${cx({
@@ -101,7 +98,7 @@ class Dashboard extends React.Component {
     })}`;
 
     const switchRoutes = (
-      //TODO: Go back to using render once fixed babel bullshit
+      // TODO: Go back to using render once fixed babel bullshit
       <Switch>
         {dashboardRoutes.map(({ collapse, component, path, pathTo, redirect, views }) => {
           if (path === '/search') return <Route path="/search/:name?" component={component} key={`route-${path}`} />;
@@ -112,7 +109,7 @@ class Dashboard extends React.Component {
                 <Route
                   path={viewPath}
                   component={NetworkConnector}
-                  //render={() => <NetworkConnector renderComponent={viewComponent} />}
+                  // render={() => <NetworkConnector renderComponent={viewComponent} />}
                   key={`route-${viewPath}`}
                 />
               );
@@ -121,7 +118,7 @@ class Dashboard extends React.Component {
             <Route
               path={path}
               component={NetworkConnector}
-              //render={() => <NetworkConnector renderComponent={component} />}
+              // render={() => <NetworkConnector renderComponent={component} />}
               key={`route-${path}`}
             />
           );

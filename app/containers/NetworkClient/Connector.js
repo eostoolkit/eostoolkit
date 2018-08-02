@@ -12,14 +12,11 @@ import routes from 'routes/dashboard';
 import { makeSelectAccount, makeSelectIdentity } from './selectors';
 import { pushTransaction } from './actions';
 
-
-
-
 const Connector = props => {
   const { match, ...passProps } = props;
-  //return ('Page');
+  // return ('Page');
 
-  //TODO: Remove this shitty workaround cause fuck babel
+  // TODO: Remove this shitty workaround cause fuck babel
   let Component;
   routes.map(({ collapse, path, name: routeName, views, component }) => {
     if (collapse) {
@@ -34,16 +31,10 @@ const Connector = props => {
     }
   });
 
-  if(Component) {
-    return (
-      <Component {...passProps} />
-    );
-  } else {
-    return (
-      <div>Not found</div>
-    )
+  if (Component) {
+    return <Component {...passProps} />;
   }
-
+  return <div>Not found</div>;
 };
 
 const mapStateToProps = createStructuredSelector({

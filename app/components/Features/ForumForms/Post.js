@@ -24,7 +24,8 @@ const FormData = [
     id: 'poster',
     label: 'Poster',
     placeholder: 'Account that sends the post',
-  },{
+  },
+  {
     id: 'reply_to_poster',
     label: 'Reply to Poster',
     placeholder: 'Reply to Poster that sends the post',
@@ -45,7 +46,7 @@ const FormData = [
     placeholder: 'Post content',
     multiline: true,
     rows: 3,
-    md:12,
+    md: 12,
   },
 ];
 
@@ -66,7 +67,7 @@ const FormObject = props => {
 };
 
 const makeTransaction = values => {
-  const {post_uuid, ...otherValues} = values;
+  const { post_uuid, ...otherValues } = values;
 
   const transaction = [
     {
@@ -101,7 +102,12 @@ const ForumPostForm = props => {
           <h5>EOSIO Forum Post</h5>
           <p>This is part of the eosio.forum Referendum project.</p>
           <p>You can create a forum post, and reply to other posts.</p>
-          <p>For more information checkout <a href="https://github.com/eoscanada/eosio.forum" target="new">Eos Canada GitHub</a></p>
+          <p>
+            For more information checkout{' '}
+            <a href="https://github.com/eoscanada/eosio.forum" target="new">
+              Eos Canada GitHub
+            </a>
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>

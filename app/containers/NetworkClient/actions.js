@@ -26,7 +26,7 @@ export function loadNetworks() {
   };
 }
 
-export function loadedNetworks(networks,defaultNetwork) {
+export function loadedNetworks(networks, defaultNetwork) {
   return {
     type: LOADED_NETWORKS,
     networks,
@@ -34,7 +34,7 @@ export function loadedNetworks(networks,defaultNetwork) {
   };
 }
 
-export function enableReader(networkReader,tokens) {
+export function enableReader(networkReader, tokens) {
   return {
     type: READER_ENABLED,
     networkReader,

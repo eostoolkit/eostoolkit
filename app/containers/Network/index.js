@@ -18,7 +18,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    selectNetwork: (network, endpoint) => dispatch(setNetwork({network, endpoint})),
+    selectNetwork: (network, endpoint) => dispatch(setNetwork({ network, endpoint })),
   };
 }
 

@@ -43,7 +43,7 @@ function AirgrabTable({ ...props }) {
                         Airgrab!
                       </Button>
                     ) : (
-                      <MobileAlert/>
+                      <MobileAlert />
                     )}
                   </TableCell>
                 </TableRow>

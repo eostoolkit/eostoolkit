@@ -20,11 +20,11 @@ const makeTransaction = (values, networkIdentity) => {
   const data =
     values.method === 'signup'
       ? {
-        owner: networkIdentity.actor,
+        owner: networkIdentity ? networkIdentity.actor : '',
         quantity: `0.0000 ${values.symbol}`,
       }
       : {
-        claimer: networkIdentity.actor,
+        claimer: networkIdentity ? networkIdentity.actor : '',
       };
   const transaction = [
     {

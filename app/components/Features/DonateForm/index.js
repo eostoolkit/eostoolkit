@@ -28,7 +28,7 @@ const makeTransaction = (values, networkIdentity) => {
       account: 'eosio.token',
       name: 'transfer',
       data: {
-        from: networkIdentity.actor,
+        from: networkIdentity ? networkIdentity.actor : '',
         to: 'myeostoolkit',
         memo: values.memo,
         quantity: `${Number(values.quantity)
