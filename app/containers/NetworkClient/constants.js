@@ -22,3 +22,6 @@ export const LOADED_ACCOUNT = 'app/NetworkClient/LOADED_ACCOUNT';
 //user intervention set network or identity
 export const SET_NETWORK = 'app/NetworkClient/SET_NETWORK';
 export const SET_IDENTITY = 'app/NetworkClient/SET_IDENTITY';
+
+//push transaction to the network
+export const PUSH_TRANSACTION = 'app/NetworkClient/PUSH_TRANSACTION';

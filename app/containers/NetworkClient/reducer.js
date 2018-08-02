@@ -10,6 +10,7 @@ import {
   LOADED_ACCOUNT,
   SET_NETWORK,
   SET_IDENTITY,
+  PUSH_TRANSACTION,
 } from './constants';
 
 const initialState = fromJS({
@@ -24,6 +25,7 @@ const initialState = fromJS({
   networkSelected: null,
   networks: [],
   tokens: [],
+  transaction: null,
 });
 
 function clientReducer(state = initialState, action) {
@@ -69,6 +71,9 @@ function clientReducer(state = initialState, action) {
         .set('networkWriter', null)
         .set('networkAccount', null)
         .set('writerLoading', true);
+    case PUSH_TRANSACTION:
+      return state
+        .set('transaction', action.transaction);
     default:
       return state;
   }

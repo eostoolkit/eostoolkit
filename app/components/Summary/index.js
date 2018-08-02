@@ -16,8 +16,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectEosAccountData } from 'containers/Scatter/selectors';
-import { makeSelectActiveNetwork } from 'containers/Remote/selectors';
+import { makeSelectActiveNetwork, makeSelectAccount } from 'containers/NetworkClient/selectors';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 // core components
@@ -32,8 +31,8 @@ import ResourceTable from './resources';
 import userProfileStyles from './comingSoon';
 
 function Summary(props) {
-  const { classes, eosAccountData, network } = props;
-  if (eosAccountData) {
+  const { classes, account, network } = props;
+  if (account) {
     return (
       <div>
         <GridContainer>
@@ -41,13 +40,13 @@ function Summary(props) {
             <Card>
               <CardHeader icon>
                 <CardIcon color="success"><AccountCircle/></CardIcon>
-                <h5 className={classes.cardIconTitle}>{eosAccountData.account_name}</h5>
+                <h5 className={classes.cardIconTitle}>{account.account_name}</h5>
               </CardHeader>
               <CardBody>
                 <h6>
                   Connected to: [{network.network.name}] -- Chain ID: [{network.network.chainId}]
                 </h6>
-                <ResourceTable account={eosAccountData} />
+                <ResourceTable account={account} />
               </CardBody>
             </Card>
           </GridItem>
@@ -59,7 +58,7 @@ function Summary(props) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  eosAccountData: makeSelectEosAccountData(),
+  account: makeSelectAccount(),
   network: makeSelectActiveNetwork(),
 });
 

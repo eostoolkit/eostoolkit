@@ -14,6 +14,7 @@ const makeSelectAccount = () => createSelector(selectClientState, substate => su
 const makeSelectActiveNetwork = () => createSelector(selectClientState, substate => substate.get('networkSelected'));
 const makeSelectNetworks = () => createSelector(selectClientState, substate => substate.get('networks'));
 const makeSelectTokens = () => createSelector(selectClientState, substate => substate.get('tokens'));
+const makeSelectTransaction = () => createSelector(selectClientState, substate => substate.get('transaction'));
 
 /**
  * loading selectors
@@ -70,4 +71,5 @@ export {
   makeSelectReaderEnabled,
   makeSelectWriterEnabled,
   makeSelectAccountEnabled,
+  makeSelectTransaction,
 };

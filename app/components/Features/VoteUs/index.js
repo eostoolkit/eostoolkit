@@ -8,10 +8,10 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectEosAccount, makeSelectEosAuthority, makeSelectEosAccountData } from 'containers/Scatter/selectors';
-import { pushTransaction as sendTransaction } from 'containers/Scatter/actions';
+import { makeSelectIdentity, makeSelectAccount } from 'containers/NetworkClient/selectors';
+import { pushTransaction as sendTransaction } from 'containers/NetworkClient/actions';
 
-const makeTransaction = (eosAccount, accountData) => {
+const makeTransaction = (networkIdentity, accountData) => {
   if (!accountData) {
     return { error: 'No scatter identity attached' };
   }
@@ -29,7 +29,7 @@ const makeTransaction = (eosAccount, accountData) => {
       account: 'eosio',
       name: 'voteproducer',
       data: {
-        voter: eosAccount,
+        voter: networkIdentity.actor,
         proxy: '',
         producers,
       },
@@ -39,9 +39,9 @@ const makeTransaction = (eosAccount, accountData) => {
 };
 
 const VoteUs = props => {
-  const { pushTransaction, eosAccount, accountData } = props;
+  const { pushTransaction, networkIdentity, networkAccount } = props;
   const handleSubmit = () => {
-    const transaction = makeTransaction(eosAccount, accountData);
+    const transaction = makeTransaction(networkIdentity, networkAccount);
     pushTransaction(transaction);
   };
   return (
@@ -52,9 +52,8 @@ const VoteUs = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  eosAccount: makeSelectEosAccount(),
-  eosAuthority: makeSelectEosAuthority(),
-  accountData: makeSelectEosAccountData(),
+  networkIdentity: makeSelectIdentity(),
+  networkAccount: makeSelectAccount(),
 });
 
 function mapDispatchToProps(dispatch) {

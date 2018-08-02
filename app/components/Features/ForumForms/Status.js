@@ -95,7 +95,7 @@ const enhance = compose(
       pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
-      account: props.eosAccount,
+      account: props.networkIdentity ? props.networkIdentity.actor : '',
       content: '',
     }),
     validationSchema,

@@ -9,7 +9,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { sha256 } from 'js-sha256';
-import { makeSelectEosClient } from 'containers/Remote/selectors';
+import { makeSelectReader } from 'containers/NetworkClient/selectors';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
@@ -65,7 +65,7 @@ const FormObject = props => {
   );
 };
 
-async function getProposalHash(eosClient,values) {
+async function getProposalHash(networkReader,values) {
   const proposals = {
     json: true,
     scope: values.proposer,
@@ -75,7 +75,7 @@ async function getProposalHash(eosClient,values) {
   }
 
   try {
-    const data = await eosClient.getTableRows(proposals);
+    const data = await networkReader.getTableRows(proposals);
     const row = data.rows.find(d=>d.proposal_name === values.proposal_name);
     if(row) {
       const hash = sha256(row.title + row.proposal_json);
@@ -132,7 +132,7 @@ const ForumVoteForm = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  eosClient: makeSelectEosClient(),
+  networkReader: makeSelectReader(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -149,10 +149,10 @@ const enhance = compose(
   ),
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { loading, failure, eosClient, pushTransaction } = props;
+      const { loading, failure, networkReader, pushTransaction } = props;
       loading();
       setSubmitting(false);
-      getProposalHash(eosClient, values).then((hash) => {
+      getProposalHash(networkReader, values).then((hash) => {
         if(!hash) {
           failure({message: 'Unable to find proposal.'});
         } else {
@@ -162,7 +162,7 @@ const enhance = compose(
       });
     },
     mapPropsToValues: props => ({
-      voter: props.eosAccount,
+      voter: props.networkIdentity ? props.networkIdentity.actor : '',
       proposer: '',
       proposal_name: '',
       vote: false,

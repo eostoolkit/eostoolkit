@@ -10,6 +10,7 @@ import {
   LOADED_ACCOUNT,
   SET_NETWORK,
   SET_IDENTITY,
+  PUSH_TRANSACTION,
 } from './constants';
 
 export function setSigner(networkSigner) {
@@ -78,5 +79,12 @@ export function setNetwork(networkSelected) {
 export function setIdentity() {
   return {
     type: SET_IDENTITY,
+  };
+}
+
+export function pushTransaction(transaction) {
+  return {
+    type: PUSH_TRANSACTION,
+    transaction,
   };
 }

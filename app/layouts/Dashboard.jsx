@@ -36,7 +36,7 @@ import NetworkClient from 'containers/NetworkClient';
 // state based presentation
 import Notification from 'containers/Notification/Loadable';
 import Summary from 'components/Summary/Loadable';
-import ScatterConnector from 'containers/Scatter/Connector';
+import NetworkConnector from 'containers/NetworkClient/Connector';
 
 import dashboardRoutes from 'routes/dashboard';
 import logo from 'assets/img/logo.png';
@@ -111,8 +111,8 @@ class Dashboard extends React.Component {
               return (
                 <Route
                   path={viewPath}
-                  component={ScatterConnector}
-                  //render={() => <ScatterConnector renderComponent={viewComponent} />}
+                  component={NetworkConnector}
+                  //render={() => <NetworkConnector renderComponent={viewComponent} />}
                   key={`route-${viewPath}`}
                 />
               );
@@ -120,8 +120,8 @@ class Dashboard extends React.Component {
           return (
             <Route
               path={path}
-              component={ScatterConnector}
-              //render={() => <ScatterConnector renderComponent={component} />}
+              component={NetworkConnector}
+              //render={() => <NetworkConnector renderComponent={component} />}
               key={`route-${path}`}
             />
           );

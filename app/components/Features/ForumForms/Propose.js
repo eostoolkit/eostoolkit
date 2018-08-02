@@ -114,7 +114,7 @@ const enhance = compose(
       pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
-      proposer: props.eosAccount,
+      proposer: props.networkIdentity ? props.networkIdentity.actor : '',
       proposal_name: '',
       title: '',
       content: '',

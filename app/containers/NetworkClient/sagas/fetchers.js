@@ -128,7 +128,7 @@ export function* fetchIdentity(signer,activeNetwork) {
     if(match) {
       return {
         actor: match.name,
-        authority: match.authority,
+        permission: match.authority,
       }
     } else {
       return null;

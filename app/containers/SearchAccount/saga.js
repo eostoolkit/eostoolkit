@@ -1,13 +1,13 @@
-import { makeSelectTokens as selectTokens, makeSelectEosClient } from 'containers/Remote/selectors';
+import { makeSelectTokens as selectTokens, makeSelectReader } from 'containers/NetworkClient/selectors';
 import { takeLatest, call, put, select, all, fork, join } from 'redux-saga/effects';
 import { makeSelectSearchName, makeSelectSearchPubkey } from './selectors';
 import { LOOKUP_ACCOUNT, LOOKUP_PUBKEY } from './constants';
 import { lookupLoading, lookupLoaded } from './actions';
 
 function* getCurrency(token, name) {
-  const eosClient = yield select(makeSelectEosClient());
+  const networkReader = yield select(makeSelectReader());
   try {
-    const currency = yield eosClient.getCurrencyBalance(token, name);
+    const currency = yield networkReader.getCurrencyBalance(token, name);
     const currencies = currency.map(c => {
       return {
         account: token,
@@ -24,9 +24,9 @@ function* getCurrency(token, name) {
 
 function* getAccountDetail(name) {
   try {
-    const eosClient = yield select(makeSelectEosClient());
+    const networkReader = yield select(makeSelectReader());
     const eosTokens = yield select(selectTokens());
-    const account = yield eosClient.getAccount(name);
+    const account = yield networkReader.getAccount(name);
     const tokens = yield all(
       eosTokens.map(token => {
         return fork(getCurrency, token.account, name);
@@ -49,11 +49,11 @@ function* getAccountDetail(name) {
 // Get the EOS all accounts by public key
 //
 function* performSearchPubkey() {
-  const eosClient = yield select(makeSelectEosClient());
+  const networkReader = yield select(makeSelectReader());
   const publicKey = yield select(makeSelectSearchPubkey());
   yield put(lookupLoading());
   try {
-    const res = yield eosClient.getKeyAccounts(publicKey);
+    const res = yield networkReader.getKeyAccounts(publicKey);
     const details = yield all(
       res.account_names.map(accountName => {
         return fork(getAccountDetail, accountName);

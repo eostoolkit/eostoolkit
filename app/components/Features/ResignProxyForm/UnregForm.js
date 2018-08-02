@@ -46,7 +46,7 @@ const enhance = compose(
       pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
-      proxy: props.eosAccount,
+      proxy: props.networkIdentity ? props.networkIdentity.actor : '',
     }),
     validationSchema,
   })

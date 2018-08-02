@@ -7,7 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectTokens as selectTokens } from 'containers/Remote/selectors';
+import { makeSelectTokens as selectTokens } from 'containers/NetworkClient/selectors';
 import { compose } from 'recompose';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
@@ -24,7 +24,7 @@ const makeTransaction = (values, eosTokens) => {
   const token = eosTokens.find(tk => tk.symbol === values.symbol);
   const transaction = [
     {
-      account: 'eosio.token',
+      account: token.account,
       name: 'transfer',
       data: {
         from: values.owner,
@@ -83,7 +83,7 @@ const enhance = compose(
       pushTransaction(transaction);
     },
     mapPropsToValues: props => ({
-      owner: props.eosAccount,
+      owner: props.networkIdentity ? props.networkIdentity.actor : '',
       name: '',
       symbol: 'EOS',
       quantity: '0',

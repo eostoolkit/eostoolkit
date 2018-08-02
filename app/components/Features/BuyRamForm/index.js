@@ -106,7 +106,7 @@ const enhance = compose(
     },
     mapPropsToValues: props => ({
       byteQuantity: 8192,
-      owner: props.eosAccount,
+      owner: props.networkIdentity ? props.networkIdentity.actor : '',
       eosQuantity: 1,
       isEOS: props.unit.isEOS,
       name: '',
