@@ -14,7 +14,7 @@ import {
 
 const initialState = fromJS({
   readerLoading: true,
-  writerLoading: true,
+  writerLoading: false,
   accountLoading: false,
   networkSigner: false,
   networkReader: null,
@@ -30,7 +30,9 @@ const initialState = fromJS({
 function clientReducer(state = initialState, action) {
   switch (action.type) {
     case SET_SIGNER:
-      return state.set('networkSigner', action.networkSigner);
+      return state
+        .set('networkSigner', action.networkSigner)
+        .set('writerLoading',true);
     case LOADED_NETWORKS:
       return state.set('networks', action.networks).set('networkSelected', action.defaultNetwork);
     case READER_ENABLED:
