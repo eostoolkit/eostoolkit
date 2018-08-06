@@ -13,6 +13,7 @@ import ClaimRewards from 'components/Features/ClaimRewardsForm';
 import BidName from 'components/Features/BidNameForm';
 import Airgrab from 'components/Features/AirgrabForm';
 import Donate from 'components/Features/DonateForm';
+import VotingTable from 'components/Features/VotingTable';
 // EOSIO FORUM
 import ForumStatus from 'components/Features/ForumForms/Status';
 import ForumPost from 'components/Features/ForumForms/Post';
@@ -130,6 +131,12 @@ const dashRoutes = [
     state: 'openVote',
     icon: AssignmentTurnedIn,
     views: [
+      {
+        path: '/vote/producers',
+        name: 'Vote Producers',
+        mini: 'VP',
+        component: VotingTable,
+      },
       {
         path: '/vote/setproxy',
         name: 'Set Proxy',
