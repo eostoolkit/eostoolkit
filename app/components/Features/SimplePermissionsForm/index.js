@@ -45,7 +45,7 @@ const makeTransaction = values => {
         account: values.owner,
         permission: 'owner',
         parent: '',
-        auth: values.activeKey,
+        auth: values.ownerKey,
       },
     });
   }
