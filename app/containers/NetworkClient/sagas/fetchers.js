@@ -66,8 +66,18 @@ export function* fetchTokens(reader) {
     const data = yield fetch(tokensUrl);
     const list = yield data.json();
 
+    const tokenList = [
+      {
+        symbol: "EOS",
+        account: "eosio.token"
+      },
+      ...list
+    ]
+
+    console.log(tokenList);
+
     const info = yield all(
-      list.map(token => {
+      tokenList.map(token => {
         return fork(fetchTokenInfo, reader, token.account, token.symbol);
       })
     );

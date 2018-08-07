@@ -22,6 +22,7 @@ function AirgrabTable({ ...props }) {
         <TableHead className={classes.successRow}>
           <TableRow className={classes.tableRow}>
             <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Symbol</TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Description</TableCell>
             <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Website</TableCell>
             <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Grab</TableCell>
           </TableRow>
@@ -32,6 +33,7 @@ function AirgrabTable({ ...props }) {
               return (
                 <TableRow className={classes.tableRowHover} key={row.symbol}>
                   <TableCell className={classes.tableCell}>{row.symbol}</TableCell>
+                  <TableCell className={classes.tableCell}>{row.description}</TableCell>
                   <TableCell className={classes.tableCell}>
                     <a href={row.url} target="new">
                       {row.url}
