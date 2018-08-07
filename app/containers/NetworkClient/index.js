@@ -8,9 +8,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import injectSaga from 'utils/injectSaga';
-import { setSigner, loadNetworks } from './actions';
+import { setSigner, loadNetworks, loadAccount } from './actions';
 import saga from './sagas/watchers';
 
 // we inject out reducer at the root level for lazy loading order reasons
@@ -32,6 +31,12 @@ export class NetworkClient extends React.Component {
       this.props.setSigner(window.scatter);
       window.scatter = null;
     });
+
+    this.interval = setInterval(() => this.props.loadAccount(), 10000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {
@@ -44,6 +49,7 @@ const mapStateToProps = createStructuredSelector({});
 function mapDispatchToProps(dispatch) {
   return {
     loadNetworks: () => dispatch(loadNetworks()),
+    loadAccount: () => dispatch(loadAccount()),
     setSigner: signer => dispatch(setSigner(signer)),
   };
 }

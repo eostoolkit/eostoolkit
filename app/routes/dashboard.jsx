@@ -15,11 +15,13 @@ import BidName from 'components/Features/BidNameForm';
 import Airgrab from 'components/Features/AirgrabForm';
 import Donate from 'components/Features/DonateForm';
 import VotingTable from 'containers/NetworkProducers';
+import ProxyTable from 'containers/ProxyInfo';
 // EOSIO FORUM
 import ForumStatus from 'components/Features/ForumForms/Status';
 import ForumPost from 'components/Features/ForumForms/Post';
 import ForumProposal from 'components/Features/ForumForms/Propose';
 import ForumVote from 'components/Features/ForumForms/Vote';
+
 // containers
 import Network from 'containers/Network/Loadable';
 import SearchAccount from 'containers/SearchAccount/Loadable';
@@ -143,6 +145,12 @@ const dashRoutes = [
         name: 'Vote Producers',
         mini: 'VP',
         component: VotingTable,
+      },
+      {
+        path: '/vote/proxies',
+        name: 'Proxy Information',
+        mini: 'PI',
+        component: ProxyTable,
       },
       {
         path: '/vote/setproxy',

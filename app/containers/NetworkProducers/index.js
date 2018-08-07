@@ -21,6 +21,10 @@ import saga from './saga';
 export class NetworkProducers extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
 
+  componentDidMount() {
+    this.interval = setInterval(() => this.props.refreshProducers(), 5000);
+  }
+
   componentWillUpdate(nextProps) {
     if (this.props.readerEnabled !== nextProps.readerEnabled) {
       // start loading the reader asap
@@ -37,6 +41,10 @@ export class NetworkProducers extends React.Component {
         // do nothing
       }
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {

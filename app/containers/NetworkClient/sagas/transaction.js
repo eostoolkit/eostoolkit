@@ -27,7 +27,9 @@ export function* pushTransaction() {
     });
     console.log(`Attempting to send tx to scatter: ${JSON.stringify(actions, null, 2)}`);
     const res = yield networkWriter.transaction({ actions });
+    console.log("Happy");
     yield put(successNotification(res.transaction_id));
+    console.log("Sad");
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
