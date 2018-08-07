@@ -22,8 +22,9 @@ const status = (enabled, loading) => {
 const NetworkStatus = props => {
   return (
     <div>
-      Read: {status(props.readerEnabled, props.readerLoading)} Write: {status(props.writerEnabled, props.writerLoading)}{' '}
-      Account: {status(props.accountEnabled, props.accountLoading)}
+      <span title="If READ is not ticked, it means the selected mainnet endpoint could not be accessed. Either your internet is restricted or the selected endpoint is down. Try selecting a different endpoint via 'Change network' menu above.">Read: {status(props.readerEnabled, props.readerLoading)}{' '}</span> 
+      <span title="If WRITE access is not ticked, make sure scatter is configured with a valid network and that network is also linked to your scatter identity.">Write: {status(props.writerEnabled, props.writerLoading)}{' '}</span>
+      <span title="If ACCOUNT is not ticked make sure to use the 'Select account' menu above and select a scatter identity and account to perform actions under.">Account: {status(props.accountEnabled, props.accountLoading)}</span>
     </div>
   );
 };
