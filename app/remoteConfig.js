@@ -33,7 +33,7 @@ const airgrabs = [
   },
 ];
 
-const tokensUrl = 'https://raw.githubusercontent.com/eostoolkit/eos-airdrops/master/tokens.json';
+const tokensUrl = 'https://raw.githubusercontent.com/eoscafe/eos-airdrops/master/tokens.json';
 const networksUrl = 'https://raw.githubusercontent.com/eostoolkit/eos-networks/master/networks.json';
 
 export { tokensUrl, networksUrl, airgrabs };
