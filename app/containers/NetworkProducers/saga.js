@@ -3,21 +3,50 @@ import { takeLatest, call, put, select, all, fork, join } from 'redux-saga/effec
 import { FETCH_PRODUCERS } from './constants';
 import { fetchedProducers } from './actions';
 
-const producerTable = {
-  json: true,
-  scope: "eosio",
-  code: "eosio",
-  table: "producers",
-  limit: 5000,
-}
+const producerTable = key => {
+  return {
+    json: true,
+    scope: 'eosio',
+    code: 'eosio',
+    table: 'producers',
+    limit: 101,
+    table_key: 'owner',
+    lower_bound: key,
+  };
+};
+
+const globalTable = () => {
+  return {
+    json: true,
+    scope: 'eosio',
+    code: 'eosio',
+    table: 'global',
+  };
+};
 
 //
 // Get the network Producers
 //
 function* getProducers() {
   try {
+    const producers = [];
+    let key = '';
+    let data = { more: true };
+
     const networkReader = yield select(makeSelectReader());
-    const producers = yield networkReader.getTableRows(producerTable);
+    const global = yield networkReader.getTableRows(globalTable());
+    const total_vote = global.rows[0].total_producer_vote_weight;
+
+    while (data.more) {
+      data = yield networkReader.getTableRows(producerTable(key));
+      key = data.rows.pop().owner;
+      data.rows.map(row => {
+        producers.push({
+          ...row,
+          vote_percent: (row.total_votes / total_vote) * 100,
+        });
+      });
+    }
     yield put(fetchedProducers(producers));
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');

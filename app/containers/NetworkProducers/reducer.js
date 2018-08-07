@@ -5,11 +5,12 @@
  */
 
 import { fromJS } from 'immutable';
-import { FETCH_PRODUCERS, FETCHED_PRODUCERS } from './constants';
+import { FETCH_PRODUCERS, FETCHED_PRODUCERS, SELECT_PRODUCERS } from './constants';
 
 const initialState = fromJS({
   loading: false,
   producers: [],
+  selected: [],
 });
 
 function NetworkProducersReducer(state = initialState, action) {
@@ -17,9 +18,9 @@ function NetworkProducersReducer(state = initialState, action) {
     case FETCH_PRODUCERS:
       return state.set('loading', true);
     case FETCHED_PRODUCERS:
-      return state
-        .set('producers', action.producers)
-        .set('loading', false);
+      return state.set('producers', action.producers).set('loading', false);
+    case SELECT_PRODUCERS:
+      return state.set('selected', action.selection);
     default:
       return state;
   }

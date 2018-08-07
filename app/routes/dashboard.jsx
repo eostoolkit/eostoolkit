@@ -7,13 +7,14 @@ import BuyRam from 'components/Features/BuyRamForm';
 import SellRam from 'components/Features/SellRamForm';
 import Delegate from 'components/Features/DelegateForm';
 import Undelegate from 'components/Features/UndelegateForm';
+import Refund from 'components/Features/RefundForm';
 import Transfer from 'components/Features/TransferForm';
 import SimplePermissions from 'components/Features/SimplePermissionsForm';
 import ClaimRewards from 'components/Features/ClaimRewardsForm';
 import BidName from 'components/Features/BidNameForm';
 import Airgrab from 'components/Features/AirgrabForm';
 import Donate from 'components/Features/DonateForm';
-import VotingTable from 'components/Features/VotingTable';
+import VotingTable from 'containers/NetworkProducers';
 // EOSIO FORUM
 import ForumStatus from 'components/Features/ForumForms/Status';
 import ForumPost from 'components/Features/ForumForms/Post';
@@ -121,6 +122,12 @@ const dashRoutes = [
         name: 'Sell Ram (bytes)',
         mini: 'SR',
         component: SellRam,
+      },
+      {
+        path: '/account/refund',
+        name: 'Refund Stake',
+        mini: 'RS',
+        component: Refund,
       },
     ],
   },

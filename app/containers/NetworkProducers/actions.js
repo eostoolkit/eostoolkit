@@ -4,7 +4,7 @@
  *
  */
 
-import { FETCH_PRODUCERS, FETCHED_PRODUCERS } from './constants';
+import { FETCH_PRODUCERS, FETCHED_PRODUCERS, SELECT_PRODUCERS } from './constants';
 
 export function fetchProducers() {
   return {
@@ -16,5 +16,12 @@ export function fetchedProducers(producers) {
   return {
     type: FETCHED_PRODUCERS,
     producers,
+  };
+}
+
+export function selectProducers(selection) {
+  return {
+    type: SELECT_PRODUCERS,
+    selection,
   };
 }

@@ -14,7 +14,7 @@ export function* buildDispatcher() {
   const signer = yield select(makeSelectSigner());
   const network = yield select(makeSelectActiveNetwork());
   // build only dispatches if we do have networks and signer
-  if(network) {
+  if (network) {
     yield spawn(buildReader, network);
   }
 
