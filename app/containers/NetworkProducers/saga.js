@@ -9,7 +9,7 @@ const producerTable = key => {
     scope: 'eosio',
     code: 'eosio',
     table: 'producers',
-    limit: 101,
+    limit: 1000,
     table_key: 'owner',
     lower_bound: key,
   };
@@ -39,7 +39,9 @@ function* getProducers() {
 
     while (data.more) {
       data = yield networkReader.getTableRows(producerTable(key));
-      key = data.rows.pop().owner;
+      if(data.more) {
+        key = data.rows.pop().owner;
+      }
       data.rows.map(row => {
         producers.push({
           ...row,
