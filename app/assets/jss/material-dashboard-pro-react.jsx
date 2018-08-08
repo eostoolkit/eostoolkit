@@ -221,7 +221,7 @@ const title = {
   marginTop: '30px',
   marginBottom: '25px',
   minHeight: '32px',
-  fontFamily: "'Bebas', 'Helvetica', 'Arial', sans-serif",
+  fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
   '& small': {
     color: '#777',
     fontSize: '65%',
