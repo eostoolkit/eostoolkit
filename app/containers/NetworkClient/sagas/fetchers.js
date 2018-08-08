@@ -73,9 +73,6 @@ export function* fetchTokens(reader) {
       },
       ...list
     ]
-
-    console.log(tokenList);
-
     const info = yield all(
       tokenList.map(token => {
         return fork(fetchTokenInfo, reader, token.account, token.symbol);
