@@ -20,7 +20,7 @@ export function* fetchNetworks() {
 
     // get default
     const network = networks.find(n => n.network === 'eos' && n.type === 'mainnet');
-    const endpoint = network.endpoints.find(e => e.name === 'GenerEOS');
+    const endpoint = network.endpoints.find(e => e.name === 'Scatter Load Balancer');
 
     // build activeNetwork
     const activeNetwork = {

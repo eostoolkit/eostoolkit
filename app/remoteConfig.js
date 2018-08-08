@@ -21,7 +21,7 @@ const airgrabs = [
     symbol: 'TRYBE',
     account: 'trybenetwork',
     method: 'claim',
-    description: 'Decentralized Intelligence. A tokenized knowledge and content sharing platform. A Trusted Information System.',
+    description: 'A tokenized knowledge and content sharing platform. Airgrab now for 50 TRYBE tokens (dropped 11th September). Sign up to the platform for a bonus 100 tokens.',
     url: 'https://trybe.one',
   },
   {
