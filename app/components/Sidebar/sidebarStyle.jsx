@@ -170,17 +170,6 @@ const sidebarStyle = theme => ({
     verticalAlign: 'middle',
     border: '0',
   },
-  voteWrap: {
-    fontFamily: "'Bebas', 'Helvetica', 'Arial', sans-serif",
-    letterSpacing: '3px',
-    fontSize: '15px',
-    margin: '15px 5px 5px 25px',
-    whiteSpace: 'nowrap',
-  },
-  logoGenereos: {
-    width: '35px',
-    marginLeft: '5px',
-  },
   background: {
     position: 'absolute',
     zIndex: '1',
