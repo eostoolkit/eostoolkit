@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 
+// core components
+import logo from 'assets/img/genereosWhite.png';
+
+import VoteUs from 'components/Features/VoteUs';
+
 import headerLinksStyle from './headerLinksStyle';
 
 class HeaderLinks extends React.Component {
@@ -36,7 +41,14 @@ class HeaderLinks extends React.Component {
     return (
       // TODO: Lets add some alerts for transaction success failure
       // TODO: Or we add all our social media here
-      ''
+      <div className={wrapper}>
+        <div className={classes.poweredBy}>
+          <span className={classes.logoNormal}>
+            <VoteUs />
+          </span>
+          <img src={logo} alt="logo" className={classes.logo} />
+        </div>
+      </div>
       //
       //   <Manager className={managerClasses}>
       //     <Target>
