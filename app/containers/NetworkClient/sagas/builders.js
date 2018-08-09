@@ -14,8 +14,8 @@ import { enableReader, enableWriter, disableWriter } from '../actions';
 export function* buildReader(activeNetwork) {
   try {
     const networkOptions = {
-      broadcast: true,
-      sign: true,
+      broadcast: false,
+      sign: false,
       chainId: activeNetwork.network.chainId,
       httpEndpoint: `${activeNetwork.endpoint.protocol}://${activeNetwork.endpoint.url}:${activeNetwork.endpoint.port}`,
     };

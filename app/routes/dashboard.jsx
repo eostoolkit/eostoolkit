@@ -10,6 +10,7 @@ import Undelegate from 'components/Features/UndelegateForm';
 import Refund from 'components/Features/RefundForm';
 import Transfer from 'components/Features/TransferForm';
 import SimplePermissions from 'components/Features/SimplePermissionsForm';
+import ComplexPermissions from 'components/Features/ComplexPermissionsForm';
 import ClaimRewards from 'components/Features/ClaimRewardsForm';
 import BidName from 'components/Features/BidNameForm';
 import Airgrab from 'components/Features/AirgrabForm';
@@ -112,6 +113,12 @@ const dashRoutes = [
         name: 'Manage Permissions',
         mini: 'P',
         component: SimplePermissions,
+      },
+      {
+        path: '/account/advanced',
+        name: 'Advanced Permissions',
+        mini: 'AP',
+        component: ComplexPermissions,
       },
       {
         path: '/account/buyram',
