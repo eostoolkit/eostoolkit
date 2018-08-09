@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
+import ScatterJS from 'scatter-js/dist/scatter.esm';
 import { setSigner, loadNetworks, loadAccount } from './actions';
 import saga from './sagas/watchers';
 
@@ -21,15 +22,11 @@ export class NetworkClient extends React.Component {
     // start loading the reader asap
     this.props.loadNetworks();
 
-    if (window.scatter) {
-      // console.log('Scatter already connected');
-      this.props.setSigner(window.scatter);
-      window.scatter = null;
-    }
-    document.addEventListener('scatterLoaded', () => {
-      // console.log('Scatter connected');
-      this.props.setSigner(window.scatter);
-      window.scatter = null;
+    ScatterJS.scatter.connect('EOSToolkit').then(connected => {
+      if(connected){
+          this.props.setSigner(ScatterJS.scatter);
+          window.scatter = null;
+      }
     });
 
     this.interval = setInterval(() => this.props.loadAccount(), 10000);

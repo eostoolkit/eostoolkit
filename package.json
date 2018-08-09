@@ -104,6 +104,7 @@
     "redux-saga": "0.15.3",
     "reselect": "3.0.1",
     "sanitize.css": "4.1.0",
+    "scatter-js": "^2.0.5",
     "styled-components": "2.0.0",
     "uuid": "^3.3.2",
     "warning": "3.0.0",
