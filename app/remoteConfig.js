@@ -28,7 +28,7 @@ const airgrabs = [
     symbol: 'WIZZ',
     account: 'wizznetwork1',
     method: 'signup',
-    description: 'A crypto-asset wallet and purchasing tool.',
+    description: 'Modern Decentralized Ecosystem, Built on EOSIO. Tools, Rewards, Chat, and more. AIGRAB NOW!',
     url: 'https://wizz.network',
   },
 ];
