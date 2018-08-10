@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
-import ScatterJS from 'scatter-js/dist/scatter.esm';
+import ScatterJS from 'scatter-js/dist/scatter.cjs';
 import { setSigner, loadNetworks, loadAccount } from './actions';
 import saga from './sagas/watchers';
 

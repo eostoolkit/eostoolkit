@@ -12,6 +12,10 @@ const webpack = require('webpack');
 process.noDeprecation = true;
 
 module.exports = options => ({
+  node: {
+    fs: 'empty',
+    child_process: 'empty',
+  },
   entry: options.entry,
   output: Object.assign(
     {

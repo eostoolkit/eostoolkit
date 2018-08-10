@@ -2,6 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // const OfflinePlugin = require('offline-plugin'); Offline service workers caused issues
 
 module.exports = require('./webpack.base.babel')({
@@ -21,6 +22,10 @@ module.exports = require('./webpack.base.babel')({
       children: true,
       minChunks: 2,
       async: true,
+    }),
+    new UglifyJsPlugin({
+      test: /\.(js|jsx)$/, // Transform all .js and  files required somewhere with Babel
+      exclude: /node_modules/,
     }),
 
     // Minify and optimize the index.html
