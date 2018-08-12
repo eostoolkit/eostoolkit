@@ -29,7 +29,7 @@ const VotingTable = props => {
         account: 'eosio',
         name: 'voteproducer',
         data: {
-          voter: networkIdentity ? networkIdentity.actor : '',
+          voter: networkIdentity ? networkIdentity.name : '',
           proxy: '',
           producers: selectedProducers,
         },
@@ -40,7 +40,7 @@ const VotingTable = props => {
 
   const handleSubmit = () => {
     const transaction = makeTransaction();
-    pushTransaction(transaction);
+    pushTransaction(transaction,props.history);
   };
 
   const handleReset = () => {

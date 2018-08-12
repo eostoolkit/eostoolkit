@@ -29,7 +29,7 @@ const makeTransaction = (networkIdentity, accountData) => {
       account: 'eosio',
       name: 'voteproducer',
       data: {
-        voter: networkIdentity ? networkIdentity.actor : '',
+        voter: networkIdentity ? networkIdentity.name : '',
         proxy: '',
         producers,
       },
@@ -42,7 +42,7 @@ const VoteUs = props => {
   const { pushTransaction, networkIdentity, networkAccount } = props;
   const handleSubmit = () => {
     const transaction = makeTransaction(networkIdentity, networkAccount);
-    pushTransaction(transaction);
+    pushTransaction(transaction,props.history);
   };
   return (
     <a href="#" onClick={handleSubmit}>
@@ -58,7 +58,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    pushTransaction: transaction => dispatch(sendTransaction(transaction)),
+    pushTransaction: (transaction,history) => dispatch(sendTransaction(transaction,history)),
   };
 }
 

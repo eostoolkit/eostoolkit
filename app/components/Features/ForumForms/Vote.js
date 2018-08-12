@@ -164,12 +164,12 @@ const enhance = compose(
           failure({ message: 'Unable to find proposal.' });
         } else {
           const transaction = makeTransaction(values, hash);
-          pushTransaction(transaction);
+          pushTransaction(transaction,props.history);
         }
       });
     },
     mapPropsToValues: props => ({
-      voter: props.networkIdentity ? props.networkIdentity.actor : '',
+      voter: props.networkIdentity ? props.networkIdentity.name : '',
       proposer: '',
       proposal_name: '',
       vote: false,

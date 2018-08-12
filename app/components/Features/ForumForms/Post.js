@@ -119,10 +119,10 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction);
+      pushTransaction(transaction,props.history);
     },
     mapPropsToValues: props => ({
-      poster: props.networkIdentity ? props.networkIdentity.actor : '',
+      poster: props.networkIdentity ? props.networkIdentity.name : '',
       reply_to_poster: '',
       content: '',
       post_uuid: '',

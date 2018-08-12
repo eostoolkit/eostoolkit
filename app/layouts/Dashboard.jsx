@@ -32,11 +32,12 @@ import Sidebar from 'components/Sidebar/Sidebar';
 
 // load the environment
 import NetworkClient from 'containers/NetworkClient';
+import OfflineClient from 'containers/OfflineClient';
 
 // state based presentation
 import Notification from 'containers/Notification/Loadable';
 import Summary from 'components/Summary/Loadable';
-import NetworkConnector from 'containers/NetworkClient/Connector';
+import NetworkConnector from 'containers/NetworkConnector';
 
 import dashboardRoutes from 'routes/dashboard';
 import logo from 'assets/img/logo.png';
@@ -129,6 +130,7 @@ class Dashboard extends React.Component {
     return (
       <div className={classes.wrapper}>
         <NetworkClient />
+        <OfflineClient />
         <Sidebar
           routes={dashboardRoutes}
           logoText={'EOSTOOLKIT.IO'}

@@ -10,6 +10,7 @@ import {
   SET_NETWORK,
   SET_IDENTITY,
   PUSH_TRANSACTION,
+  TOGGLE_OFFLINE,
 } from './constants';
 
 const initialState = fromJS({
@@ -25,6 +26,7 @@ const initialState = fromJS({
   networks: [],
   tokens: [],
   transaction: null,
+  offlineMode: false,
 });
 
 function clientReducer(state = initialState, action) {
@@ -68,6 +70,8 @@ function clientReducer(state = initialState, action) {
         .set('writerLoading', true);
     case PUSH_TRANSACTION:
       return state.set('transaction', action.transaction);
+    case TOGGLE_OFFLINE:
+      return state.set('offlineMode', !state.get('offlineMode'));
     default:
       return state;
   }

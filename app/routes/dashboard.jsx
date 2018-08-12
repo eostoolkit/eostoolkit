@@ -17,6 +17,7 @@ import Airgrab from 'components/Features/AirgrabForm';
 import Donate from 'components/Features/DonateForm';
 import VotingTable from 'containers/NetworkProducers';
 import ProxyTable from 'containers/ProxyInfo';
+
 // EOSIO FORUM
 import ForumStatus from 'components/Features/ForumForms/Status';
 import ForumPost from 'components/Features/ForumForms/Post';
@@ -57,6 +58,13 @@ const dashRoutes = [
     name: 'Network',
     icon: Settings,
     component: Network,
+    hide: true,
+  },
+  {
+    path: '/multisig/auth',
+    name: 'Multisig Auth',
+    icon: Settings,
+    component: GovernancePage,
     hide: true,
   },
   {

@@ -25,3 +25,6 @@ export const SET_IDENTITY = 'app/NetworkClient/SET_IDENTITY';
 
 // push transaction to the network
 export const PUSH_TRANSACTION = 'app/NetworkClient/PUSH_TRANSACTION';
+
+// push transaction to the network
+export const TOGGLE_OFFLINE = 'app/NetworkClient/TOGGLE_OFFLINE';

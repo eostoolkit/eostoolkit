@@ -10,6 +10,7 @@ import {
   SET_NETWORK,
   SET_IDENTITY,
   PUSH_TRANSACTION,
+  TOGGLE_OFFLINE,
 } from './constants';
 
 export function setSigner(networkSigner) {
@@ -81,9 +82,16 @@ export function setIdentity() {
   };
 }
 
-export function pushTransaction(transaction) {
+export function pushTransaction(transaction,history) {
   return {
     type: PUSH_TRANSACTION,
     transaction,
+    history,
+  };
+}
+
+export function toggleOffline() {
+  return {
+    type: TOGGLE_OFFLINE,
   };
 }

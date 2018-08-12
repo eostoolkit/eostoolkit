@@ -28,7 +28,7 @@ const makeTransaction = (values, networkIdentity) => {
       account: 'eosio.token',
       name: 'transfer',
       data: {
-        from: networkIdentity ? networkIdentity.actor : '',
+        from: networkIdentity ? networkIdentity.name : '',
         to: 'myeostoolkit',
         memo: values.memo,
         quantity: `${Number(values.quantity)
@@ -71,7 +71,7 @@ const enhance = compose(
       const { pushTransaction, networkIdentity } = props;
       const transaction = makeTransaction(values, networkIdentity);
       setSubmitting(false);
-      pushTransaction(transaction);
+      pushTransaction(transaction,props.history);
     },
     mapPropsToValues: () => ({
       quantity: '1',

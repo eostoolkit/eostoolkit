@@ -134,10 +134,7 @@ export function* fetchIdentity(signer, activeNetwork) {
     const match = id && id.accounts.find(x => x.blockchain === activeNetwork.network.network);
 
     if (match) {
-      return {
-        actor: match.name,
-        permission: match.authority,
-      };
+      return match;
     }
     return null;
   } catch (err) {
@@ -193,8 +190,8 @@ export function* fetchAccount() {
   const reader = yield select(makeSelectReader());
   const identity = yield select(makeSelectIdentity());
   try {
-    if (identity && identity.actor) {
-      const account = yield call(getAccountDetail, reader, identity.actor);
+    if (identity && identity.name) {
+      const account = yield call(getAccountDetail, reader, identity.name);
       yield put(loadedAccount(account));
     } else {
       yield put(loadedAccount(null));
