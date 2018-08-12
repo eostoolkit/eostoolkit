@@ -7,7 +7,7 @@ import { makeSelectIdentity, makeSelectWriter, makeSelectTransaction, makeSelect
 export function* pushTransaction(action) {
   const offlineMode = yield select(makeSelectOffline());
   if(offlineMode) {
-    yield action.history.push('/multisig/auth');
+    yield action.history.push('/multisig/create');
   } else {
     yield put(loadingNotification());
     try {
@@ -32,7 +32,7 @@ export function* pushTransaction(action) {
       });
       console.log(`Attempting to send tx to scatter: ${JSON.stringify(actions, null, 2)}`);
       const res = yield networkWriter.transaction({ actions });
-      yield put(successNotification(res.transaction_id));
+      yield put(successNotification({TransactionId: res.transaction_id}));
 
     } catch (err) {
       console.error('An EOSToolkit error occured - see details below:');

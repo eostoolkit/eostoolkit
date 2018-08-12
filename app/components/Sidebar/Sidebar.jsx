@@ -39,6 +39,7 @@ class Sidebar extends React.Component {
       openAccount: this.activeRoute('/account'),
       openVote: this.activeRoute('/vote'),
       openCommunity: this.activeRoute('/community'),
+      openMultisig: this.activeRoute('/multisig'),
       openBlockProducer: this.activeRoute('/block-producer'),
       miniActive: true,
     };

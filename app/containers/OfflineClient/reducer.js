@@ -12,14 +12,7 @@ const initialState = fromJS({
 });
 
 function OfflineClientReducer(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
-    case STAGE_TRANSACTION:
-      return state.set('transaction', action.transaction);
-    case SIGN_TRANSACTION:
-      return state.set('transaction', action.transaction);
-    case PUSH_TRANSACTION:
-      return state.set('transaction', action.transaction);
     default:
       return state;
   }
