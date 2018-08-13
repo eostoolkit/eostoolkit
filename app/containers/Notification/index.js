@@ -66,7 +66,7 @@ export class Notification extends React.Component {
       return (
         <SweetAlert
           success
-          style={{ display: 'block', marginTop: '-100px' }}
+          style={{ display: 'block', marginTop: '-200px' }}
           title="Success"
           onConfirm={() => closeAll()}
           confirmBtnText="Thanks"
