@@ -157,11 +157,11 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction);
+      pushTransaction(transaction,props.history);
     },
     mapPropsToValues: props => {
       return {
-        owner: props.networkIdentity ? props.networkIdentity.actor : '',
+        owner: props.networkIdentity ? props.networkIdentity.name : '',
         threshold: '1',
         permission: 'active',
         parent: 'owner',

@@ -102,11 +102,11 @@ const enhance = compose(
       setSubmitting(false);
       const transaction = makeTransaction(values, isEOS);
       setSubmitting(false);
-      pushTransaction(transaction);
+      pushTransaction(transaction,props.history);
     },
     mapPropsToValues: props => ({
       byteQuantity: 8192,
-      owner: props.networkIdentity ? props.networkIdentity.actor : '',
+      owner: props.networkIdentity ? props.networkIdentity.name : '',
       eosQuantity: 1,
       isEOS: props.unit.isEOS,
       name: '',

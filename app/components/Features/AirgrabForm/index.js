@@ -20,11 +20,11 @@ const makeTransaction = (values, networkIdentity) => {
   const data =
     values.method === 'signup'
       ? {
-        owner: networkIdentity ? networkIdentity.actor : '',
+        owner: networkIdentity ? networkIdentity.name : '',
         quantity: `0.0000 ${values.symbol}`,
       }
       : {
-        claimer: networkIdentity ? networkIdentity.actor : '',
+        claimer: networkIdentity ? networkIdentity.name : '',
       };
   const transaction = [
     {
@@ -40,7 +40,7 @@ const AirgrabForm = props => {
   const { pushTransaction, networkIdentity } = props;
   const handleSubmit = values => {
     const transaction = makeTransaction(values, networkIdentity);
-    pushTransaction(transaction);
+    pushTransaction(transaction,props.history);
   };
   return (
     <Tool>

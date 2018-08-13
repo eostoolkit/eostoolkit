@@ -26,7 +26,7 @@ const ProxyTable = props => {
         account: 'eosio',
         name: 'voteproducer',
         data: {
-          voter: networkIdentity ? networkIdentity.actor : '',
+          voter: networkIdentity ? networkIdentity.name : '',
           proxy,
           producers: null,
         },
@@ -37,7 +37,7 @@ const ProxyTable = props => {
 
   const handleSubmit = (proxy) => {
     const transaction = makeTransaction(proxy);
-    pushTransaction(transaction);
+    pushTransaction(transaction,props.history);
   };
 
   const data = proxies.map(proxy => {

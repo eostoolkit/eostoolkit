@@ -1,6 +1,6 @@
 /**
  *
- * Scatter
+ * Toolkit Connector
  *
  */
 
@@ -8,9 +8,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import routes from 'routes/dashboard';
-
-import { makeSelectAccount, makeSelectIdentity } from './selectors';
-import { pushTransaction } from './actions';
+import { makeSelectAccount, makeSelectIdentity } from 'containers/NetworkClient/selectors';
+import { pushTransaction } from 'containers/NetworkClient/actions';
+import { stageTransaction } from 'containers/OfflineClient/actions';
 
 const Connector = props => {
   const { match, ...passProps } = props;
@@ -46,7 +46,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    pushTransaction: transaction => dispatch(pushTransaction(transaction)),
+    pushTransaction: (transaction,history) => dispatch(pushTransaction(transaction,history)),
+    stageTransaction: transaction => dispatch(stageTransaction(transaction)),
   };
 }
 

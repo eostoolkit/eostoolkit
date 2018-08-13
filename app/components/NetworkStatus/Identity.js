@@ -5,7 +5,7 @@ import { makeSelectSigner, makeSelectIdentity } from 'containers/NetworkClient/s
 const NetworkIdentity = props => {
   const { signer, identity } = props;
   if (signer && !identity) return 'Please attach Identity';
-  if (signer && identity) return `${identity.actor}@${identity.permission}`;
+  if (signer && identity) return `${identity.name}@${identity.authority}`;
   return 'Please install Scatter';
 };
 

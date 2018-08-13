@@ -95,10 +95,10 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction);
+      pushTransaction(transaction,props.history);
     },
     mapPropsToValues: props => ({
-      account: props.networkIdentity ? props.networkIdentity.actor : '',
+      account: props.networkIdentity ? props.networkIdentity.name : '',
       content: '',
     }),
     validationSchema,

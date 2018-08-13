@@ -17,12 +17,17 @@ import Airgrab from 'components/Features/AirgrabForm';
 import Donate from 'components/Features/DonateForm';
 import VotingTable from 'containers/NetworkProducers';
 import ProxyTable from 'containers/ProxyInfo';
+
 // EOSIO FORUM
 import ForumStatus from 'components/Features/ForumForms/Status';
 import ForumPost from 'components/Features/ForumForms/Post';
 import ForumProposal from 'components/Features/ForumForms/Propose';
 import ForumVote from 'components/Features/ForumForms/Vote';
 
+// MULTISIG - OFFLINE SIGN
+import MultisigCreate from 'components/Features/Multisig/Create';
+import MultisigSign from 'components/Features/Multisig/Sign';
+import MultisigPush from 'components/Features/Multisig/Push';
 // containers
 import Network from 'containers/Network/Loadable';
 import SearchAccount from 'containers/SearchAccount/Loadable';
@@ -43,21 +48,16 @@ import {
   Favorite,
   CloudDownload,
   Settings,
+  VpnKey,
 } from '@material-ui/icons';
 
 const dashRoutes = [
+  { hide: true, path: '/networks', name: 'Network', component: Network },
   {
     path: '/home',
     name: 'Support',
     icon: Favorite,
     component: Donate,
-  },
-  {
-    path: '/networks',
-    name: 'Network',
-    icon: Settings,
-    component: Network,
-    hide: true,
   },
   {
     path: '/governance',
@@ -220,6 +220,33 @@ const dashRoutes = [
   },
   {
     collapse: true,
+    path: '/multisig',
+    name: 'Multisig Transactions',
+    state: 'openMultisig',
+    icon: VpnKey,
+    views: [
+      {
+        path: '/multisig/create',
+        name: 'Create Transaction',
+        mini: 'CT',
+        component: MultisigCreate,
+      },
+      {
+        path: '/multisig/sign',
+        name: 'Sign Transaction',
+        mini: 'ST',
+        component: MultisigSign,
+      },
+      {
+        path: '/multisig/push',
+        name: 'Push Transaction',
+        mini: 'PT',
+        component: MultisigPush,
+      },
+    ],
+  },
+  {
+    collapse: true,
     path: '/block-producer',
     name: 'Block Producer',
     state: 'openBlockProducer',
@@ -233,11 +260,6 @@ const dashRoutes = [
       },
     ],
   },
-  // { redirect: true, path: '/vote/beproxy', pathTo: '/vote/createproxy', name: 'Create Proxy' },
-  // { redirect: true, path: '/bidname', pathTo: '/community/bidname', name: 'Bid Names' },
-  // { redirect: true, path: '/forumpost', pathTo: '/community/forumpost', name: 'Forum Post' },
-  // { redirect: true, path: '/account/buybytes', pathTo: '/account/buyram', name: 'Buy Ram (bytes)' },
-  // { redirect: true, path: '/create', pathTo: '/account/create', name: 'Create Account' },
   { redirect: true, path: '/', pathTo: '/home', name: 'Home' },
 ];
 export default dashRoutes;

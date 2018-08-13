@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // javascript plugin used to create scrollbars on windows
 import { NavLink } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 import cx from 'classnames';
 
 // @material-ui/core components
@@ -14,10 +15,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Hidden from '@material-ui/core/Hidden';
 import Collapse from '@material-ui/core/Collapse';
-import { AddBox, ExitToApp, SettingsApplications } from '@material-ui/icons';
+import { AddBox, ExitToApp, SettingsApplications, Autorenew } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { setIdentity, disableWriter } from 'containers/NetworkClient/actions';
+import { makeSelectOffline } from 'containers/NetworkClient/selectors';
+import { setIdentity, disableWriter, toggleOffline } from 'containers/NetworkClient/actions';
 import NetworkIdentity from 'components/NetworkStatus/Identity';
 import NetworkStatus from 'components/NetworkStatus/Status';
 
@@ -37,6 +39,7 @@ class Sidebar extends React.Component {
       openAccount: this.activeRoute('/account'),
       openVote: this.activeRoute('/vote'),
       openCommunity: this.activeRoute('/community'),
+      openMultisig: this.activeRoute('/multisig'),
       openBlockProducer: this.activeRoute('/block-producer'),
       miniActive: true,
     };
@@ -114,6 +117,18 @@ class Sidebar extends React.Component {
                     </ListItemIcon>
                     <ListItemText
                       primary="Change Network" // TODO: Make this international
+                      disableTypography
+                      className={collapseItemText}
+                    />
+                  </NavLink>
+                </ListItem>
+                <ListItem className={classes.collapseItem} onClick={this.props.toggleOffline}>
+                  <NavLink to="#" className={`${classes.itemLink} ${classes.userCollapseLinks}`}>
+                    <ListItemIcon className={classes.itemIconMini}>
+                      <Autorenew />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={this.props.offlineMode ? "Multisig Mode" : "Singlesig Mode"} // TODO: Make this international
                       disableTypography
                       className={collapseItemText}
                     />
@@ -330,17 +345,22 @@ Sidebar.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.object),
 };
 
+const mapStateToProps = createStructuredSelector({
+  offlineMode: makeSelectOffline(),
+});
+
 function mapDispatchToProps(dispatch) {
   return {
     onLogin: () => dispatch(setIdentity()),
     onLogout: () => dispatch(disableWriter()),
+    toggleOffline: () => dispatch(toggleOffline())
   };
 }
 
 export default compose(
   withStyles(sidebarStyle),
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )
 )(Sidebar);

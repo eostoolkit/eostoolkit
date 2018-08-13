@@ -61,6 +61,8 @@ export class Notification extends React.Component {
       );
     }
     if (success) {
+      const txid = message && message.TransactionId;
+
       return (
         <SweetAlert
           success
@@ -69,15 +71,15 @@ export class Notification extends React.Component {
           onConfirm={() => closeAll()}
           confirmBtnText="Thanks"
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.success}`}>
-          <h6>
-            {message ? (
-              <a href={`https://bloks.io/transaction/${message}`} target="new">
-                TxId: {message}
+            {txid ? (
+              <a href={`https://bloks.io/transaction/${txid}`} target="new">
+                <h6>{txid}</h6>
               </a>
             ) : (
-              ''
+              <pre className={this.props.classes.preXYScrollable}>
+                {message ? `${JSON.stringify(message, null, 2)}` : ''}
+              </pre>
             )}
-          </h6>
           <p>Thank you for using EOSToolkit.io</p>
           <h6>Your votes support continued development of these tools</h6>
           <h5>
