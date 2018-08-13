@@ -10,9 +10,6 @@ import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
 import RemoveCircle from '@material-ui/icons/RemoveCircle';
-
-import Tool from 'components/Tool/Tool';
-import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
@@ -41,18 +38,9 @@ const validationSchema = Yup.object().shape({
 
 const SellRamForm = props => {
   return (
-    <Tool>
-      <ToolSection lg={8}>
-        <ToolBody color="warning" icon={RemoveCircle} header="Sell RAM">
-          <FormObject {...props} />
-        </ToolBody>
-      </ToolSection>
-      <ToolSection lg={4}>
-        <ToolBody color="info" header="Tutorial">
-          <p>Tutorial coming soon</p>
-        </ToolBody>
-      </ToolSection>
-    </Tool>
+    <ToolBody color="warning" icon={RemoveCircle} header="Sell RAM">
+      <FormObject {...props} />
+    </ToolBody>
   );
 };
 

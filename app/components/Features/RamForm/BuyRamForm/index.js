@@ -10,9 +10,6 @@ import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
 import AddCircle from '@material-ui/icons/AddCircle';
-
-import Tool from 'components/Tool/Tool';
-import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
@@ -56,18 +53,9 @@ const validationSchema = ({ unit: { isEOS } }) => {
 
 const BuyRamForm = props => {
   return (
-    <Tool>
-      <ToolSection lg={8}>
-        <ToolBody color="warning" icon={AddCircle} header="Buy RAM">
-          <FormObject {...props} />
-        </ToolBody>
-      </ToolSection>
-      <ToolSection lg={4}>
-        <ToolBody color="info" header="Tutorial">
-          <p>Tutorial coming soon</p>
-        </ToolBody>
-      </ToolSection>
-    </Tool>
+      <ToolBody color="warning" icon={AddCircle} header="Buy RAM">
+        <FormObject {...props} />
+      </ToolBody>
   );
 };
 

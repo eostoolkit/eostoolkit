@@ -1,6 +1,6 @@
 /**
  *
- * ResignProxyForm
+ * LinkAuthForm
  *
  */
 
@@ -10,25 +10,23 @@ import Tool from 'components/Tool/Tool';
 import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 
-import ResignProxyInfo from 'components/Information/ResignProxy';
+import BuyRam from './BuyRamForm';
+import SellRam from './SellRamForm';
 
-import ResignForm from './ResignForm';
-import UnregForm from './UnregForm';
-
-const ResignProxyForm = props => {
+const RamForm = props => {
   return (
     <Tool>
       <ToolSection lg={8}>
-        <ResignForm {...props} />
-        <UnregForm {...props} />
+        <BuyRam {...props} />
+        <SellRam {...props} />
       </ToolSection>
       <ToolSection lg={4}>
         <ToolBody color="info" header="Information">
-          <ResignProxyInfo />
+          <p>Tutorial coming soon</p>
         </ToolBody>
       </ToolSection>
     </Tool>
   );
 };
 
-export default ResignProxyForm;
+export default RamForm;

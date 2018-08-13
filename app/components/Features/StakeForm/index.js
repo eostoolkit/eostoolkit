@@ -1,6 +1,6 @@
 /**
  *
- * ResignProxyForm
+ * LinkAuthForm
  *
  */
 
@@ -10,25 +10,23 @@ import Tool from 'components/Tool/Tool';
 import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 
-import ResignProxyInfo from 'components/Information/ResignProxy';
+import Delegate from './DelegateForm';
+import Undelegate from './UndelegateForm';
 
-import ResignForm from './ResignForm';
-import UnregForm from './UnregForm';
-
-const ResignProxyForm = props => {
+const StakeForm = props => {
   return (
     <Tool>
       <ToolSection lg={8}>
-        <ResignForm {...props} />
-        <UnregForm {...props} />
+        <Delegate {...props} />
+        <Undelegate {...props} />
       </ToolSection>
       <ToolSection lg={4}>
         <ToolBody color="info" header="Information">
-          <ResignProxyInfo />
+          <p>Tutorial coming soon</p>
         </ToolBody>
       </ToolSection>
     </Tool>
   );
 };
 
-export default ResignProxyForm;
+export default StakeForm;

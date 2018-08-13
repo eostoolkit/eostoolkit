@@ -16,12 +16,11 @@ import CreateForm from './CreateForm';
 import RegForm from './RegForm';
 
 const CreateProxyForm = props => {
-  const { handleCreate, handleInfo } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
-        <CreateForm handleSubmit={handleCreate} {...props} />
-        <RegForm handleSubmit={handleInfo} {...props} />
+        <CreateForm {...props} />
+        <RegForm {...props} />
       </ToolSection>
       <ToolSection lg={4}>
         <ToolBody color="info" header="Information">

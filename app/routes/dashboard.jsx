@@ -3,14 +3,13 @@ import CreateAccount from 'components/Features/CreateAccountForm';
 import CreateProxy from 'components/Features/CreateProxyForm';
 import ResignProxy from 'components/Features/ResignProxyForm';
 import SetProxy from 'components/Features/SetProxyForm';
-import BuyRam from 'components/Features/BuyRamForm';
-import SellRam from 'components/Features/SellRamForm';
-import Delegate from 'components/Features/DelegateForm';
-import Undelegate from 'components/Features/UndelegateForm';
+import RamForm from 'components/Features/RamForm';
+import StakeForm from 'components/Features/StakeForm';
 import Refund from 'components/Features/RefundForm';
 import Transfer from 'components/Features/TransferForm';
 import SimplePermissions from 'components/Features/SimplePermissionsForm';
 import ComplexPermissions from 'components/Features/ComplexPermissionsForm';
+import LinkAuth from 'components/Features/LinkAuthForm';
 import ClaimRewards from 'components/Features/ClaimRewardsForm';
 import BidName from 'components/Features/BidNameForm';
 import Airgrab from 'components/Features/AirgrabForm';
@@ -28,6 +27,7 @@ import ForumVote from 'components/Features/ForumForms/Vote';
 import MultisigCreate from 'components/Features/Multisig/Create';
 import MultisigSign from 'components/Features/Multisig/Sign';
 import MultisigPush from 'components/Features/Multisig/Push';
+
 // containers
 import Network from 'containers/Network/Loadable';
 import SearchAccount from 'containers/SearchAccount/Loadable';
@@ -98,15 +98,15 @@ const dashRoutes = [
     views: [
       {
         path: '/account/delegate',
-        name: 'Delegate (Stake)',
-        mini: 'DG',
-        component: Delegate,
+        name: 'Manage Stake',
+        mini: 'MS',
+        component: StakeForm,
       },
       {
-        path: '/account/undelegate',
-        name: 'Undelegate (Unstake)',
-        mini: 'UN',
-        component: Undelegate,
+        path: '/account/ram',
+        name: 'Manage RAM',
+        mini: 'MR',
+        component: RamForm,
       },
       {
         path: '/account/permissions',
@@ -121,16 +121,10 @@ const dashRoutes = [
         component: ComplexPermissions,
       },
       {
-        path: '/account/buyram',
-        name: 'Buy Ram (EOS)',
-        mini: 'BR',
-        component: BuyRam,
-      },
-      {
-        path: '/account/sellram',
-        name: 'Sell Ram (bytes)',
-        mini: 'SR',
-        component: SellRam,
+        path: '/account/linkauth',
+        name: 'Link Auth',
+        mini: 'LA',
+        component: LinkAuth,
       },
       {
         path: '/account/refund',
@@ -261,5 +255,7 @@ const dashRoutes = [
     ],
   },
   { redirect: true, path: '/', pathTo: '/home', name: 'Home' },
+  { redirect: true, path: '/account/buyram', pathTo: '/account/ram', name: 'Buy RAM' },
+  { redirect: true, path: '/account/sellram', pathTo: '/account/ram', name: 'Sell RAM' },
 ];
 export default dashRoutes;
