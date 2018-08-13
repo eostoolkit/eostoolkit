@@ -75,6 +75,7 @@ const ProxyTable = props => {
           icon={AssignmentTurnedIn}
           header="Registered Proxies"
           subheader=" - Select one to vote for you!">
+          <h5>Click the account name to view more info at bloks.io. Select a proxy to make it your proxy!</h5>
           <ReactTable
             data={data}
             filterable
@@ -84,6 +85,13 @@ const ProxyTable = props => {
                 Header: 'Account',
                 accessor: 'owner',
                 width: 150,
+                Cell: row => {
+                  return (
+                    <a href={`https://bloks.io/account/${row.value}#voter-info`} target="new" style={{color:'black'}}>
+                      {row.value}
+                    </a>
+                  )
+                }
               },
               {
                 Header: 'Name',
