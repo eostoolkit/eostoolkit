@@ -39,7 +39,7 @@ const makeTransaction = values => {
 
     mixed.map(perm => {
       //is account?
-      if(perm.value.includes('@') || perm.value.length < 54) {
+      if(perm.value.includes('@') || perm.value.length < 53) {
         if(perm.value.split('@')[1] === undefined && perm.value.length > 0) throw("Accounts must have @permission appended i.e. account@active")
         accounts.push({
           permission: {
