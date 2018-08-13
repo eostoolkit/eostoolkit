@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'recompose';
@@ -21,6 +22,16 @@ import ToolInput from 'components/Tool/ToolInput';
 
 import { makeSelectTransaction } from 'containers/NetworkClient/selectors';
 import { stageTransaction } from 'containers/OfflineClient/actions';
+
+const styles = {
+  preOverflow: {
+    textAlign: 'left',
+    overflow: 'auto',
+    wordWrap: 'normal',
+    overflowWrap: 'normal',
+    whiteSpace: 'pre',
+  }
+}
 
 const FormData = [
   {
@@ -67,7 +78,7 @@ const MultisigCreate = props => {
           header="Create Transaction"
           subheader=" - Share the resulting JSON for signing">
           <h5>Transaction details:</h5>
-          <pre>{transaction ? JSON.stringify(props.transaction,null,2) : 'No transaction available - Switch to multisig mode and use one of the toolkit features.'}</pre>
+          <pre className={props.classes.preOverflow}>{transaction ? JSON.stringify(props.transaction,null,2) : 'No transaction available - Switch to multisig mode and use one of the toolkit features.'}</pre>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
@@ -96,6 +107,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const enhance = compose(
+  withStyles(styles),
   connect(
     mapStateToProps,
     mapDispatchToProps
