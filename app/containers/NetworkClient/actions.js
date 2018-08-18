@@ -2,6 +2,7 @@ import {
   SET_SIGNER,
   LOAD_NETWORKS,
   LOADED_NETWORKS,
+  UPDATE_NETWORKS,
   READER_ENABLED,
   WRITER_ENABLED,
   WRITER_DISABLED,
@@ -31,6 +32,13 @@ export function loadedNetworks(networks, defaultNetwork) {
     type: LOADED_NETWORKS,
     networks,
     defaultNetwork,
+  };
+}
+
+export function updateNetworks(networks) {
+  return {
+    type: UPDATE_NETWORKS,
+    networks,
   };
 }
 

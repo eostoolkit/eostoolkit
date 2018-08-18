@@ -32,7 +32,6 @@ import userProfileStyles from './comingSoon';
 
 function Summary(props) {
   const { classes, account, network } = props;
-  if (account) {
     return (
       <div>
         <GridContainer>
@@ -42,12 +41,14 @@ function Summary(props) {
                 <CardIcon color="success">
                   <AccountCircle />
                 </CardIcon>
-                <h5 className={classes.cardIconTitle}>{account.account_name}</h5>
+                <h5 className={classes.cardIconTitle}>
+                  {account ? (
+                    `${account.account_name} [${network.network.name} via ${network.endpoint.name}]`
+                  ) : ('Attach an Account')}
+
+                </h5>
               </CardHeader>
               <CardBody>
-                <h6>
-                  Connected to: [{network.network.name}] -- Chain ID: [{network.network.chainId}]
-                </h6>
                 <ResourceTable account={account} />
               </CardBody>
             </Card>
@@ -55,8 +56,6 @@ function Summary(props) {
         </GridContainer>
       </div>
     );
-  }
-  return '';
 }
 
 const mapStateToProps = createStructuredSelector({

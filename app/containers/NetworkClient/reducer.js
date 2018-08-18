@@ -2,6 +2,7 @@ import { fromJS } from 'immutable';
 import {
   SET_SIGNER,
   LOADED_NETWORKS,
+  UPDATE_NETWORKS,
   READER_ENABLED,
   WRITER_ENABLED,
   WRITER_DISABLED,
@@ -35,6 +36,8 @@ function clientReducer(state = initialState, action) {
       return state.set('networkSigner', action.networkSigner).set('writerLoading', true);
     case LOADED_NETWORKS:
       return state.set('networks', action.networks).set('networkSelected', action.defaultNetwork);
+    case UPDATE_NETWORKS:
+      return state.set('networks', action.networks);
     case READER_ENABLED:
       return state
         .set('networkReader', action.networkReader)

@@ -23,6 +23,8 @@ function NetworksTable({ ...props }) {
             <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Type</TableCell>
             <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>API</TableCell>
             <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Host</TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Failures</TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Ping</TableCell>
             <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Select</TableCell>
           </TableRow>
         </TableHead>
@@ -41,8 +43,10 @@ function NetworksTable({ ...props }) {
                       {'://'}
                       {endpoint.url}:{endpoint.port}
                     </TableCell>
+                    <TableCell className={classes.tableCell}>{endpoint.failures}</TableCell>
+                    <TableCell className={classes.tableCell}>{endpoint.ping === -1 ? 'Unknown' : `${endpoint.ping} ms`}</TableCell>
                     <TableCell className={classes.tableCell}>
-                      {active && active.network === network && active.endpoint === endpoint ? (
+                      {active && active.network === network && active.endpoint.name === endpoint.name ? (
                         'Current Network'
                       ) : (
                         <Button onClick={() => selectNetwork(network, endpoint)} color="info">

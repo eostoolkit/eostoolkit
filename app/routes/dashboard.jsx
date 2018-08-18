@@ -54,13 +54,13 @@ import {
 const dashRoutes = [
   { hide: true, path: '/networks', name: 'Network', component: Network },
   {
-    path: '/home',
-    name: 'Support',
+    path: '/donate',
+    name: 'Donate',
     icon: Favorite,
     component: Donate,
   },
   {
-    path: '/governance',
+    path: '/home',
     name: 'Governance',
     icon: AccountBalance,
     component: GovernancePage,

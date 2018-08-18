@@ -18,7 +18,7 @@ import Collapse from '@material-ui/core/Collapse';
 import { AddBox, ExitToApp, SettingsApplications, Autorenew } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { makeSelectOffline } from 'containers/NetworkClient/selectors';
+import { makeSelectOffline, makeSelectIdentity } from 'containers/NetworkClient/selectors';
 import { setIdentity, disableWriter, toggleOffline } from 'containers/NetworkClient/actions';
 import NetworkIdentity from 'components/NetworkStatus/Identity';
 import NetworkStatus from 'components/NetworkStatus/Status';
@@ -89,66 +89,48 @@ class Sidebar extends React.Component {
               onClick={() => this.openCollapse('openAvatar')}>
               <ListItemText
                 primary={<NetworkIdentity />}
-                secondary={
-                  <b className={`${caret} ${classes.userCaret} ${this.state.openAvatar ? classes.caretActive : ''}`} />
-                }
                 disableTypography
                 className={`${itemText} ${classes.userItemText}`}
               />
             </NavLink>
-            <Collapse in={this.state.openAvatar} unmountOnExit>
-              <List className={`${classes.list} ${classes.collapseList}`}>
-                <ListItem className={classes.collapseItem} onClick={this.props.onLogin}>
-                  <NavLink to="#" className={`${classes.itemLink} ${classes.userCollapseLinks}`}>
-                    <ListItemIcon className={classes.itemIconMini}>
-                      <AddBox />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary="Connect Account" // TODO: Make this international
-                      disableTypography
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-                <ListItem className={classes.collapseItem}>
-                  <NavLink to="/networks" className={`${classes.itemLink} ${classes.userCollapseLinks}`}>
-                    <ListItemIcon className={classes.itemIconMini}>
-                      <SettingsApplications />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary="Change Network" // TODO: Make this international
-                      disableTypography
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-                <ListItem className={classes.collapseItem} onClick={this.props.toggleOffline}>
-                  <NavLink to="#" className={`${classes.itemLink} ${classes.userCollapseLinks}`}>
-                    <ListItemIcon className={classes.itemIconMini}>
-                      <Autorenew />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={this.props.offlineMode ? "Multisig Mode" : "Singlesig Mode"} // TODO: Make this international
-                      disableTypography
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-                <ListItem className={classes.collapseItem} onClick={this.props.onLogout}>
-                  <NavLink to="#" className={`${classes.itemLink} ${classes.userCollapseLinks}`}>
-                    <ListItemIcon className={classes.itemIconMini}>
-                      <ExitToApp />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary="Sign Out" // TODO: Make this international
-                      disableTypography
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-              </List>
-            </Collapse>
           </ListItem>
+          <ListItem className={classes.item} onClick={this.props.identity ? this.props.onLogout : this.props.onLogin}>
+            <NavLink to="#" className={`${classes.itemLink}`}>
+              <ListItemIcon className={classes.itemIconMini}>
+                {this.props.identity ? (<ExitToApp />) : (<AddBox />)}
+              </ListItemIcon>
+              <ListItemText
+                primary={this.props.identity ? "Detach Account" : "Attach Account"} // TODO: Make this international
+                disableTypography
+                className={collapseItemText}
+              />
+            </NavLink>
+          </ListItem>
+          <ListItem className={classes.item}>
+            <NavLink to="/networks" className={`${classes.itemLink}`}>
+              <ListItemIcon className={classes.itemIconMini}>
+                <SettingsApplications />
+              </ListItemIcon>
+              <ListItemText
+                primary="Change Network" // TODO: Make this international
+                disableTypography
+                className={collapseItemText}
+              />
+            </NavLink>
+          </ListItem>
+          <ListItem className={classes.item} onClick={this.props.toggleOffline}>
+            <NavLink to="#" className={`${classes.itemLink}`}>
+              <ListItemIcon className={classes.itemIconMini}>
+                <Autorenew />
+              </ListItemIcon>
+              <ListItemText
+                primary={this.props.offlineMode ? "Multisig Mode" : "Singlesig Mode"} // TODO: Make this international
+                disableTypography
+                className={collapseItemText}
+              />
+            </NavLink>
+          </ListItem>
+
         </List>
       </div>
     );
@@ -347,6 +329,7 @@ Sidebar.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   offlineMode: makeSelectOffline(),
+  identity: makeSelectIdentity(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -1,8 +1,11 @@
-import { put, all, join, fork, select, call } from 'redux-saga/effects';
+//import Ping from 'ping.js';
+import Ping from 'utils/ping';
+import { orderBy } from 'lodash';
+import { put, all, join, fork, select, call, spawn } from 'redux-saga/effects';
 import { tokensUrl, networksUrl } from 'remoteConfig';
 
-import { loadedNetworks, loadedAccount } from '../actions';
-import { makeSelectIdentity, makeSelectReader, makeSelectTokens } from '../selectors';
+import { loadedNetworks, updateNetworks, loadedAccount, setNetwork } from '../actions';
+import { makeSelectIdentity, makeSelectReader, makeSelectTokens, makeSelectNetworks, makeSelectActiveNetwork } from '../selectors';
 
 /*
 *
@@ -16,11 +19,26 @@ export function* fetchNetworks() {
   try {
     // fetch the remote network list
     const data = yield fetch(networksUrl);
-    const networks = yield data.json();
+    const rawNetworks = yield data.json();
+
+    const networks = rawNetworks.map(network => {
+      const { endpoints, ...networkDetails } = network;
+      const endpointDetails = endpoints.map(endpoint => {
+        return {
+          ...endpoint,
+          failures: 0,
+          ping: -1,
+        }
+      })
+      return {
+        ...networkDetails,
+        endpoints: endpointDetails,
+      }
+    });
 
     // get default
     const network = networks.find(n => n.network === 'eos' && n.type === 'mainnet');
-    const endpoint = network.endpoints.find(e => e.name === 'EOS New York');
+    const endpoint = network.endpoints.find(e => e.name === 'GenerEOS');
 
     // build activeNetwork
     const activeNetwork = {
@@ -29,6 +47,54 @@ export function* fetchNetworks() {
     };
 
     yield put(loadedNetworks(networks, activeNetwork));
+  } catch (err) {
+    console.error('An EOSToolkit error occured - see details below:');
+    console.error(err);
+  }
+}
+
+
+function* makeEndpointsLatency(endpoint) {
+  const {ping, ...endpointDetails} = endpoint;
+
+  return {
+    ...endpointDetails,
+    ping: yield call(Ping,`${endpoint.protocol}://${endpoint.url}:${endpoint.port}/v1/chain/get_info`)
+  };
+}
+
+export function* fetchLatency() {
+  try {
+    // fetch the remote network list
+    let networks = yield select(makeSelectNetworks());
+    const active = yield select(makeSelectActiveNetwork());
+
+    const activeIndex = networks.findIndex(network=>{
+      return network.chainId === active.network.chainId;
+    });
+
+    let endpoints = networks[activeIndex].endpoints;
+
+    const latencies = yield all(endpoints.map(endpoint => {
+      return fork(makeEndpointsLatency,endpoint)
+    }));
+
+    endpoints = yield join(...latencies);
+    networks[activeIndex].endpoints = endpoints;
+    yield put(updateNetworks(networks));
+
+    const sorted = orderBy(endpoints, ['failures','ping'], 'asc');
+    const best = sorted[0];
+
+    if(active.endpoint.name !== best.name) {
+      const activeNetwork = {
+        network: networks[activeIndex],
+        endpoint: best,
+      };
+
+      yield put(setNetwork(activeNetwork));
+    }
+
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
@@ -109,16 +175,6 @@ export function* fetchIdentity(signer, activeNetwork) {
     // suggest the network to the user
     yield signer.suggestNetwork(networkConfig);
 
-    // should we remove an existing identity
-    // we assume that on first load:
-    //  signer.identity = object and currentIdentity = null
-    //  so we can skip forgetIdentity
-    // if signer.identity = object and currentIdentity != null
-    //  then the user has requested t
-    if (signer.identity && currentIdentity) {
-      yield signer.forgetIdentity();
-    }
-
     // get identities specific to the activeNetwork
     const id = yield signer.getIdentity({
       accounts: [
@@ -128,8 +184,6 @@ export function* fetchIdentity(signer, activeNetwork) {
         },
       ],
     });
-
-    // console.log(id);
 
     const match = id && id.accounts.find(x => x.blockchain === activeNetwork.network.network);
 
@@ -162,6 +216,20 @@ function* getCurrency(reader, token, name) {
     });
     return currencies;
   } catch (c) {
+    let networks = yield select(makeSelectNetworks());
+    const active = yield select(makeSelectActiveNetwork());
+
+    const activeIndex = networks.findIndex(network=>{
+      return network.chainId === active.network.chainId;
+    })
+
+    const endpointIndex = networks[activeIndex].endpoints.findIndex(endpoint=>{
+      return endpoint.name === active.endpoint.name;
+    })
+
+    networks[activeIndex].endpoints[endpointIndex].failures += 1;
+
+    yield put(updateNetworks(networks));
     return [];
   }
 }
@@ -175,8 +243,10 @@ function* getAccountDetail(reader, name) {
         return fork(getCurrency, reader, token.account, name);
       })
     );
+
     const currencies = yield join(...tokenData);
     const balances = currencies.reduce((a, b) => a.concat(b), []);
+    yield spawn(fetchLatency);
     return {
       ...account,
       balances,

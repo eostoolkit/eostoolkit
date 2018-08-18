@@ -50,15 +50,10 @@ const validationSchema = Yup.object().shape({
 const DonateForm = props => {
   return (
     <Tool>
-      <ToolSection lg={6}>
+      <ToolSection lg={12}>
         <ToolBody color="warning" icon={CardGiftcard} header="Donate">
           <Donate />
           <FormObject {...props} />
-        </ToolBody>
-      </ToolSection>
-      <ToolSection lg={6}>
-        <ToolBody color="rose" icon={Favorite} header="Help support us">
-          <BlockOneLetter />
         </ToolBody>
       </ToolSection>
     </Tool>
