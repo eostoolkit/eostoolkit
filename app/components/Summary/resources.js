@@ -22,7 +22,7 @@ function ResourcesTable({ ...props }) {
                   <h6>EOS</h6>
                 </TableCell>
                 <TableCell className={classes.tableCell}>
-                  {account.balances.find(b=>b.account==='eosio.token').balance}
+                  {account.balances.find(b=>b.account==='eosio.token') ? account.balances.find(b=>b.account==='eosio.token').balance : 'None'}
                 </TableCell>
                 <TableCell className={classes.tableCell}>
                   <h6>RAM</h6>
