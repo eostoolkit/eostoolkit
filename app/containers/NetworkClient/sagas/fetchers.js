@@ -92,7 +92,7 @@ export function* fetchLatency() {
         endpoint: best,
       };
 
-      yield put(setNetwork(activeNetwork));
+      yield put(setNetwork(activeNetwork,false));
     }
 
   } catch (err) {

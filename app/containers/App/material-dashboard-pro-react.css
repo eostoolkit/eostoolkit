@@ -2169,7 +2169,7 @@ body {
   background-color: #EEEEEE;
   color: #3C4858;
   margin: 0;
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 300;
   line-height: 1.5em; }
 
@@ -2219,7 +2219,7 @@ p {
 body {
   background-color: #EEEEEE;
   color: #3C4858;
-  font-size: 14px; }
+  font-size: 16px; }
 
 blockquote p {
   font-style: italic; }

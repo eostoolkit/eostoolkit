@@ -34,9 +34,11 @@ import SearchAccount from 'containers/SearchAccount/Loadable';
 
 // Pages
 import GovernancePage from 'components/Pages/GovernancePage/Loadable';
+import FeaturesPage from 'components/Pages/FeaturesPage/Loadable';
 
 // @material-ui/icons
 import {
+  Dashboard,
   AccountBalance,
   Search,
   PersonAdd,
@@ -54,13 +56,19 @@ import {
 const dashRoutes = [
   { hide: true, path: '/networks', name: 'Network', component: Network },
   {
+    path: '/home',
+    name: 'Features',
+    icon: Dashboard,
+    component: FeaturesPage,
+  },
+  {
     path: '/donate',
     name: 'Donate',
     icon: Favorite,
     component: Donate,
   },
   {
-    path: '/home',
+    path: '/governance',
     name: 'Governance',
     icon: AccountBalance,
     component: GovernancePage,

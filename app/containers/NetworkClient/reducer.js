@@ -28,6 +28,7 @@ const initialState = fromJS({
   tokens: [],
   transaction: null,
   offlineMode: false,
+  override: false,
 });
 
 function clientReducer(state = initialState, action) {
@@ -59,13 +60,18 @@ function clientReducer(state = initialState, action) {
     case LOADED_ACCOUNT:
       return state.set('networkAccount', action.networkAccount).set('accountLoading', false);
     case SET_NETWORK:
-      return state
-        .set('networkSelected', action.networkSelected)
-        .set('networkReader', null)
-        .set('networkWriter', null)
-        .set('networkAccount', null)
-        .set('readerLoading', true)
-        .set('writerLoading', true);
+      if(action.override || !state.get('override')) {
+        return state
+          .set('networkSelected', action.networkSelected)
+          .set('networkReader', null)
+          .set('networkWriter', null)
+          .set('networkAccount', null)
+          .set('readerLoading', true)
+          .set('writerLoading', true)
+          .set('override', action.override ? true : false);
+      } else {
+        return state;
+      }
     case SET_IDENTITY:
       return state
         .set('networkWriter', null)

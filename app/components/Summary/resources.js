@@ -71,8 +71,14 @@ function ResourcesTable({ ...props }) {
           ) : (
             <TableBody>
               <TableRow className={`${classes.tableRowHover}`}>
+                <TableCell className={classes.tableCell}>
+                  <h6>Load an account to view your resource utilitization and balances.</h6>
+                </TableCell>
               </TableRow>
               <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
+                <TableCell className={classes.tableCell}>
+                  <p>If your account details keep disappearing it is because many networks are close to you. Select one manually by clicking "Change Network" to prevent this.</p>
+                </TableCell>
               </TableRow>
             </TableBody>
           )}
