@@ -152,7 +152,7 @@ class Sidebar extends React.Component {
           }
           if (prop.collapse) {
             const navLinkClasses = `${classes.itemLink} ${cx({
-              [` ${classes.collapseActive}`]: this.activeRoute(prop.path),
+              [` ${classes.collapseActive}`]: (this.activeRoute(prop.path) && this.props.location.pathname !== '/account/create'),
             })}`;
             const listItemTextClass = `${classes.itemText} ${cx({
               [classes.itemTextMini]: this.props.miniActive && this.state.miniActive,
