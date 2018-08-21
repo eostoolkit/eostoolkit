@@ -11,29 +11,52 @@ const stakeTable = {
     limit: 500
 }
 
+const refundTable = {
+    json: true,
+    //scope: 'regproxyinfo', scope is the user
+    code: 'horustokenio',
+    table: 'refunds',
+    limit: 500
+}
+
 
 //
 // Get the network Stake
 //
 function* getStake() {
   try {
-    const stakes = [];
+    const data = [];
     const networkReader = yield select(makeSelectReader());
     const currentIdentity = yield select(makeSelectIdentity());
 
-    const table = {
+    const stake = {
       ...stakeTable,
       scope: currentIdentity.name,
     }
-    const data = yield networkReader.getTableRows(table);
+    const stakes = yield networkReader.getTableRows(stake);
 
+    const refund = {
+      ...refundTable,
+      scope: currentIdentity.name,
+    }
+    const refunds = yield networkReader.getTableRows(refund);
 
-    data.rows.map(row => {
-      stakes.push({
+    stakes.rows.map(row => {
+      data.push({
         ...row,
       });
     });
-    yield put(fetchedStake(stakes));
+
+    refunds.rows.map(row => {
+      data.push({
+        to: 'Refunding',
+        horus_weight: row.horus_amount,
+        time_initial: row.request_time,
+      });
+    });
+
+
+    yield put(fetchedStake(data));
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);

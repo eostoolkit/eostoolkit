@@ -48,17 +48,20 @@ const HorusPay = props => {
   };
 
   const data = stakes.map(stake => {
+    console.log(stake);
     return {
       ...stake,
-      actions: (
-            <div className="actions-right">
-              <Button
-                onClick={() => {handleUnstake(stake)}}
-                color="warning">Unstake</Button>{" "}
-              <Button
-                onClick={() => {handleClaim(stake)}}
-                color="success">Claim</Button>
-            </div>
+      actions: stake.to === 'Refunding' ? (
+        <div className="actions-right">Available on {(new Date((stake.time_initial+604800)*1000)).toLocaleString()}</div>
+      ) : (
+        <div className="actions-right">
+          <Button
+            onClick={() => {handleUnstake(stake)}}
+            color="warning">Unstake</Button>{" "}
+          <Button
+            onClick={() => {handleClaim(stake)}}
+            color="success">Claim</Button>
+        </div>
       ),
     };
   });
@@ -84,7 +87,7 @@ const HorusPay = props => {
             filterable: false,
           },
           {
-            Header: 'Staked On',
+            Header: 'Start Time',
             accessor: 'time_initial',
             filterable: false,
             Cell: row => {
