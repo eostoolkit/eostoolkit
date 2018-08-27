@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'recompose';
@@ -23,17 +22,15 @@ import ToolInput from 'components/Tool/ToolInput';
 import { makeSelectTransaction } from 'containers/NetworkClient/selectors';
 import { stageTransaction } from 'containers/OfflineClient/actions';
 
-const styles = {
-  preOverflow: {
-    textAlign: 'left',
-    overflow: 'auto',
-    wordWrap: 'normal',
-    overflowWrap: 'normal',
-    whiteSpace: 'pre',
-  }
-}
-
 const FormData = [
+  {
+    id: 'transaction',
+    label: 'Transaction Details',
+    placeholder: 'Write your transaction details here',
+    multiline: true,
+    rows: 30,
+    md: 12,
+  },
   {
     id: 'actor',
     label: 'Authorization Account',
@@ -78,7 +75,6 @@ const MultisigCreate = props => {
           header="Create Transaction"
           subheader=" - Share the resulting JSON for signing">
           <h5>Transaction details:</h5>
-          <pre className={props.classes.preOverflow}>{transaction ? JSON.stringify(props.transaction,null,2) : 'No transaction available - Switch to multisig mode and use one of the toolkit features.'}</pre>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
@@ -102,12 +98,11 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleTransaction: (authorization) => dispatch(stageTransaction(authorization)),
+    handleTransaction: (data) => dispatch(stageTransaction(data)),
   };
 }
 
 const enhance = compose(
-  withStyles(styles),
   connect(
     mapStateToProps,
     mapDispatchToProps
@@ -121,6 +116,7 @@ const enhance = compose(
     mapPropsToValues: props => ({
       actor: '',
       permission: '',
+      transaction: props.transaction ? JSON.stringify(props.transaction,null,2) : 'No transaction available - Switch to multisig mode and use one of the toolkit features.',
     }),
     validationSchema,
   })

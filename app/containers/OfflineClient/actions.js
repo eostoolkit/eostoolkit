@@ -6,10 +6,10 @@
 
 import { STAGE_TRANSACTION, SIGN_TRANSACTION, PUSH_TRANSACTION } from './constants';
 
-export function stageTransaction(authorization) {
+export function stageTransaction(data) {
   return {
     type: STAGE_TRANSACTION,
-    authorization
+    data,
   };
 }
 

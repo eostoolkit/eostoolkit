@@ -9,7 +9,7 @@ import { STAGE_TRANSACTION, SIGN_TRANSACTION, PUSH_TRANSACTION } from './constan
 export function* stageTransaction(action) {
   yield put(loadingNotification());
   try {
-    const transaction = yield select(makeSelectTransaction());
+    const transaction = JSON.parse(action.data.transaction);//yield select(makeSelectTransaction());
     const networkReader = yield select(makeSelectReader());
 
     if (!networkReader || !transaction ) {
@@ -26,12 +26,12 @@ export function* stageTransaction(action) {
     const actions = transaction.map(tx => {
       return {
         ...tx,
-        authorization: [action.authorization],
+        authorization: [{actor: action.data.actor, permission: action.data.permission}],
       };
     });
     const res = yield networkReader.transaction({ actions },{broadcast: false, sign: false, expireInSeconds: 3600});
     const data = JSON.stringify(res.transaction.transaction, null, 2);
-    const filename = `tx-${action.authorization.actor}-${(new Date()).getTime()}.json`;
+    const filename = `tx-${action.data.actor}-${(new Date()).getTime()}.json`;
 
     fileDownload(data,filename,'application/json');
     yield put(successNotification(res.transaction.transaction));

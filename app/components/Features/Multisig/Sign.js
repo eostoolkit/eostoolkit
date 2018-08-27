@@ -27,8 +27,8 @@ import { signTransaction } from 'containers/OfflineClient/actions';
 const FormData = [
   {
     id: 'transaction',
-    label: 'Transaction JSON',
-    placeholder: 'Transaction JSON',
+    label: 'Paste Transaction JSON below',
+    placeholder: 'Paste Transaction JSON Here',
     multiline: true,
     rows: 30,
     md: 12,
