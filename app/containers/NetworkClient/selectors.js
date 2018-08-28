@@ -16,7 +16,7 @@ const makeSelectNetworks = () => createSelector(selectClientState, substate => s
 const makeSelectTokens = () => createSelector(selectClientState, substate => substate.get('tokens'));
 const makeSelectTransaction = () => createSelector(selectClientState, substate => substate.get('transaction'));
 const makeSelectOffline = () => createSelector(selectClientState, substate => substate.get('offlineMode'));
-
+const makeSelectSwitchTime = () => createSelector(selectClientState, substate => substate.get('networkSwitchTime'));
 /**
  * loading selectors
  */

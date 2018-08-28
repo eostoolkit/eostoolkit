@@ -17,6 +17,7 @@ export function* buildReader(activeNetwork) {
       broadcast: false,
       sign: false,
       chainId: activeNetwork.network.chainId,
+      keyPrefix: activeNetwork.network.prefix || 'EOS',
       httpEndpoint: `${activeNetwork.endpoint.protocol}://${activeNetwork.endpoint.url}:${activeNetwork.endpoint.port}`,
     };
 
@@ -46,12 +47,14 @@ export function* buildWriter(signer, activeNetwork) {
       host: activeNetwork.endpoint.url,
       port: activeNetwork.endpoint.port,
       chainId: activeNetwork.network.chainId,
+      keyPrefix: activeNetwork.network.prefix || 'EOS'
     };
 
     const networkOptions = {
       broadcast: true,
       sign: true,
       chainId: activeNetwork.network.chainId,
+      keyPrefix: activeNetwork.network.prefix || 'EOS'
     };
     const protocol = activeNetwork.endpoint.protocol;
     const networkWriter = signer.eos(signerClientConfig, Eos, networkOptions, protocol);

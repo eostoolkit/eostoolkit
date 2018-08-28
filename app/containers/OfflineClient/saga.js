@@ -59,6 +59,11 @@ export function* signTransaction(action) {
     //sign a transaction json
     const chainId = network.network.chainId;
     const transaction = JSON.parse(action.data.transaction);
+    const abis = yield all(transaction.actions.map(action=>{
+      return fork(networkReader.fc.abiCache.abiAsync,action.account);
+    }));
+    yield join(...abis);
+
     const chainIdBuf = Buffer.from(chainId,'hex');
     const packedContextFreeData = Buffer.from(new Uint8Array(32)) // TODO
     let buf = networkReader.fc.toBuffer('transaction',transaction);
@@ -87,7 +92,7 @@ export function* pushTransaction(action) {
     if (!networkReader ) {
       throw { message: 'Reader is not enabled - check your network connection' };
     }
-    const signatures = action.data.signatures.replace(/[\n\r]/g,'').trim().split(',');
+    const signatures = action.data.signatures.replace(/[\n\r]/g,'').replace(/['"]+/g,'').trim().split(',');
     const transaction = {
       compression: "none",
       transaction: JSON.parse(action.data.transaction),

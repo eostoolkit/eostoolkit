@@ -38,7 +38,7 @@ export function* fetchNetworks() {
 
     // get default
     const network = networks.find(n => n.network === 'eos' && n.type === 'mainnet');
-    const endpoint = network.endpoints.find(e => e.name === 'GenerEOS');
+    const endpoint = network.endpoints.find(e => e.name === 'Greymass');
 
     // build activeNetwork
     const activeNetwork = {
@@ -57,10 +57,17 @@ export function* fetchNetworks() {
 function* makeEndpointsLatency(endpoint) {
   const {ping, ...endpointDetails} = endpoint;
 
-  return {
-    ...endpointDetails,
-    ping: yield call(Ping,`${endpoint.protocol}://${endpoint.url}:${endpoint.port}/v1/chain/get_info`)
-  };
+  try {
+    return {
+      ...endpointDetails,
+      ping: yield call(Ping,`${endpoint.protocol}://${endpoint.url}:${endpoint.port}/v1/chain/get_info`)
+    };
+  } catch (c) {
+    return {
+      ...endpointDetails,
+      ping: 5000
+    };
+  }
 }
 
 export function* fetchLatency() {
