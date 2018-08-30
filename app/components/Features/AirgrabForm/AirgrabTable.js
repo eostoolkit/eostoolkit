@@ -15,7 +15,7 @@ import { airgrabs } from 'remoteConfig';
 import tableStyle from 'assets/jss/tableStyle';
 
 function AirgrabTable({ ...props }) {
-  const { classes, handleSubmit } = props;
+  const { classes, handleSubmit, account } = props;
   return (
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>
@@ -40,12 +40,16 @@ function AirgrabTable({ ...props }) {
                     </a>
                   </TableCell>
                   <TableCell className={classes.tableCell}>
-                    {!isMobile ? (
-                      <Button onClick={() => handleSubmit(row)} color="rose">
-                        Airgrab!
-                      </Button>
+                    {account && account.balances.find(b=>b.account===row.account) ? (
+                      <span>Already Grabbed!</span>
                     ) : (
-                      <MobileAlert />
+                      !isMobile ? (
+                        <Button onClick={() => handleSubmit(row)} color="rose">
+                          Airgrab!
+                        </Button>
+                      ) : (
+                        <MobileAlert />
+                      )
                     )}
                   </TableCell>
                 </TableRow>

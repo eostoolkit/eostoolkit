@@ -37,7 +37,7 @@ const makeTransaction = (values, networkIdentity) => {
 };
 
 const AirgrabForm = props => {
-  const { pushTransaction, networkIdentity } = props;
+  const { pushTransaction, networkIdentity, networkAccount } = props;
   const handleSubmit = values => {
     const transaction = makeTransaction(values, networkIdentity);
     pushTransaction(transaction,props.history);
@@ -49,7 +49,7 @@ const AirgrabForm = props => {
           <h6>Note: Airgrabbing tokens consumes your personal RAM.</h6>
           <h6>You cannot recover this RAM until the token has dropped.</h6>
           <Disclaimer />
-          <AirgrabTable handleSubmit={handleSubmit} />
+          <AirgrabTable handleSubmit={handleSubmit} account={networkAccount} />
           <p>
             Have an Airgrab you want here? Email us: <a href="mailto:contact@genereos.io">contact@genereos.io</a>
           </p>
