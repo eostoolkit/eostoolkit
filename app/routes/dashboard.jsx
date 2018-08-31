@@ -15,7 +15,6 @@ import BidName from 'components/Features/BidNameForm';
 import Airgrab from 'components/Features/AirgrabForm';
 import Donate from 'components/Features/DonateForm';
 import VotingTable from 'containers/NetworkProducers';
-import ProxyTable from 'containers/ProxyInfo';
 
 // EOSIO FORUM
 import ForumStatus from 'components/Features/ForumForms/Status';
@@ -36,6 +35,10 @@ import SearchAccount from 'containers/SearchAccount/Loadable';
 import GovernancePage from 'components/Pages/GovernancePage/Loadable';
 import FeaturesPage from 'components/Pages/FeaturesPage/Loadable';
 
+// external Features
+import ProxyTable from 'containers/ProxyInfo';
+import HorusPay from 'containers/HorusPay';
+
 // @material-ui/icons
 import {
   Dashboard,
@@ -52,6 +55,8 @@ import {
   Settings,
   VpnKey,
 } from '@material-ui/icons';
+import HorusIcon from 'components/Icons/Horus';
+
 
 const dashRoutes = [
   { hide: true, path: '/networks', name: 'Network', component: Network },
@@ -72,6 +77,12 @@ const dashRoutes = [
     name: 'Governance',
     icon: AccountBalance,
     component: GovernancePage,
+  },
+  {
+    path: '/horuspay',
+    name: 'HorusPay',
+    icon: HorusIcon,
+    component: HorusPay,
   },
   {
     path: '/airgrab',

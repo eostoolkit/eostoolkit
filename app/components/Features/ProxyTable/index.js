@@ -12,7 +12,7 @@ import CheckBoxOff from '@material-ui/icons/CheckBoxOutlineBlank';
 import AssignmentTurnedIn from '@material-ui/icons/AssignmentTurnedIn';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const ProxyTable = props => {
+const HorusPay = props => {
   const { proxies, ...clientProps } = props;
   const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
 
@@ -172,4 +172,4 @@ const ProxyTable = props => {
   );
 };
 
-export default ProxyTable;
+export default HorusPay;
