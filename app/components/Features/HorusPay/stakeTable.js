@@ -40,7 +40,7 @@ const HorusPay = props => {
         name: 'unstakehorus',
         data: {
           from: stake.from,
-          unstake_id: stake.id,
+          stake_id: stake.id,
         },
       },
     ];
