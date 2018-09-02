@@ -33,15 +33,10 @@ const FormData = [
     id: 'stake',
     label: 'Quantity',
     placeholder: 'Amount of HORUS to stake',
+    md: 12,
   },
 ];
 
-const switchData = {
-  id: 'transfer',
-  label: 'Transfer',
-  placeholder:
-    'Transfer Off: Owner retains staking and reward control. Transfer On: Receiver receives staking and reward control.',
-};
 
 const FormObject = props => {
   const { handleSubmit } = props;
@@ -55,7 +50,6 @@ const FormObject = props => {
       {FormData.map(form => {
         return <ToolInput key={form.id} {...form} {...props} />;
       })}
-      <ToolSwitch {...switchData} {...props} />
     </ToolForm>
   );
 };
@@ -71,7 +65,6 @@ const makeTransaction = values => {
         stake_horus_quantity: `${Number(stake)
           .toFixed(4)
           .toString()} HORUS`,
-        transfer: transfer ? 1 : 0,
       },
     },
   ];
@@ -104,9 +97,8 @@ const enhance = compose(
     },
     mapPropsToValues: props => ({
       from: props.networkIdentity ? props.networkIdentity.name : '',
-      receiver: '',
+      receiver: props.networkIdentity ? props.networkIdentity.name : '',
       stake: '',
-      transfer: false,
     }),
     validationSchema,
   })
