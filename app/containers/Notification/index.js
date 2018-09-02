@@ -49,9 +49,10 @@ export class Notification extends React.Component {
       return (
         <SweetAlert
           info
-          style={{ display: 'block', marginTop: '-100px' }}
+          style={{ display: 'block', marginTop: '-200px' }}
           title="Sending..."
           onConfirm={() => closeAll()}
+          onCancel={() => closeAll()}
           confirmBtnText="Hide"
           // onCancel={() => closeAll()}
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.info}`}>
@@ -69,6 +70,7 @@ export class Notification extends React.Component {
           style={{ display: 'block', marginTop: '-200px' }}
           title="Success"
           onConfirm={() => closeAll()}
+          onCancel={() => closeAll()}
           confirmBtnText="Thanks"
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.success}`}>
             {txid ? (
@@ -94,9 +96,10 @@ export class Notification extends React.Component {
         return (
           <SweetAlert
             success
-            style={{ display: 'block', marginTop: '-100px' }}
+            style={{ display: 'block', marginTop: '-200px' }}
             title="Already Grabbed!"
             onConfirm={() => closeAll()}
+            onCancel={() => closeAll()}
             confirmBtnText="Hide"
             // onCancel={() => closeAll()}
             confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.info}`}>
@@ -112,6 +115,7 @@ export class Notification extends React.Component {
           style={{ display: 'block', marginTop: '-200px' }}
           title="Failure"
           onConfirm={() => closeAll()}
+          onCancel={() => closeAll()}
           confirmBtnText="Close"
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.danger}`}>
           <h6>Transaction has failed</h6>
@@ -125,9 +129,10 @@ export class Notification extends React.Component {
       return (
         <SweetAlert
           danger
-          style={{ display: 'block', marginTop: '-100px' }}
+          style={{ display: 'block', marginTop: '-200px' }}
           title="Failure"
           onConfirm={() => closeAll()}
+          onCancel={() => closeAll()}
           confirmBtnText="Close"
           // onCancel={() => closeAll()}
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.danger}`}>

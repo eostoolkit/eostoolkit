@@ -22,7 +22,8 @@ import { makeSelectOffline, makeSelectIdentity } from 'containers/NetworkClient/
 import { setIdentity, disableWriter, toggleOffline } from 'containers/NetworkClient/actions';
 import NetworkIdentity from 'components/NetworkStatus/Identity';
 import NetworkStatus from 'components/NetworkStatus/Status';
-
+import VoteUs from 'components/Features/VoteUs';
+import GenereosIcon from 'components/Icons/Genereos';
 // core components
 import HeaderLinks from 'components/Header/HeaderLinks';
 
@@ -141,6 +142,18 @@ class Sidebar extends React.Component {
         </ListItem>
       </List>
     );
+    const vote = (
+      <List className={classes.list} style={{marginBottom: '-20px'}}>
+        <ListItem className={classes.item}>
+          <div className={classes.itemLink}>
+            <ListItemIcon className={classes.itemIcon}>
+              <GenereosIcon />
+            </ListItemIcon>
+            <ListItemText primary={<VoteUs className={classes.itemText}/>} disableTypography className={classes.itemText} />
+          </div>
+        </ListItem>
+      </List>
+    )
     const links = (
       <List className={classes.list}>
         {routes.map(prop => {
@@ -197,7 +210,7 @@ class Sidebar extends React.Component {
                       })}`;
                       return (
                         <ListItem key={`list-item-collapse-${viewProp.path}`} className={classes.collapseItem}>
-                          <NavLink to={viewProp.path} className={navLinkCollapseClasses}>
+                          <NavLink to={viewProp.path} className={navLinkCollapseClasses} onClick={this.props.handleDrawerToggle}>
                             <span className={collapseItemMini}>{viewProp.mini}</span>
                             <ListItemText primary={viewProp.name} disableTypography className={collapseItemTextClass} />
                           </NavLink>
@@ -222,7 +235,7 @@ class Sidebar extends React.Component {
           })}`;
           return (
             <ListItem key={`list-${prop.path}`} className={classes.item}>
-              <NavLink to={prop.path} className={navLinkClasses}>
+              <NavLink to={prop.path} className={navLinkClasses} onClick={this.props.handleDrawerToggle}>
                 <ListItemIcon className={itemIcon}>
                   <prop.icon />
                 </ListItemIcon>
@@ -282,8 +295,8 @@ class Sidebar extends React.Component {
               className={sidebarWrapper}
               user={user}
               status={status}
-              headerLinks={<HeaderLinks rtlActive={rtlActive} />}
               links={links}
+              headerLinks={vote}
             />
             {image !== undefined ? (
               <div className={classes.background} style={{ backgroundImage: `url(${image})` }} />
@@ -301,7 +314,7 @@ class Sidebar extends React.Component {
               paper: `${drawerPaper} ${classes[`${bgColor}Background`]}`,
             }}>
             {brand}
-            <SidebarWrapper className={sidebarWrapper} user={user} links={links} status={status} />
+            <SidebarWrapper className={sidebarWrapper} user={user} links={links} status={status}/>
             {image !== undefined ? (
               <div className={classes.background} style={{ backgroundImage: `url(${image})` }} />
             ) : null}

@@ -28,8 +28,8 @@ class SidebarWrapper extends React.Component {
     return (
       <div className={className} ref="sidebarWrapper">
         {user}
-        {headerLinks}
         {status}
+        {headerLinks}
         {links}
       </div>
     );

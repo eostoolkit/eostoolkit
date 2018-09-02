@@ -39,13 +39,13 @@ const makeTransaction = (networkIdentity, accountData) => {
 };
 
 const VoteUs = props => {
-  const { pushTransaction, networkIdentity, networkAccount } = props;
+  const { pushTransaction, networkIdentity, networkAccount, className } = props;
   const handleSubmit = () => {
     const transaction = makeTransaction(networkIdentity, networkAccount);
     pushTransaction(transaction,props.history);
   };
   return (
-    <a href="#" onClick={handleSubmit}>
+    <a href="#" onClick={handleSubmit} className={className}>
       Vote for GenerEOS
     </a>
   );

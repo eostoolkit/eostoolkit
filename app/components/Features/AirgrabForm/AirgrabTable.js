@@ -1,7 +1,6 @@
 import React from 'react';
 
 // @material-ui/core components
-import { isMobile } from 'react-device-detect';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,7 +8,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from 'components/CustomButtons/Button';
-import MobileAlert from 'components/Tool/MobileAlert';
 
 import { airgrabs } from 'remoteConfig';
 import tableStyle from 'assets/jss/tableStyle';
@@ -43,13 +41,9 @@ function AirgrabTable({ ...props }) {
                     {account && account.balances.find(b=>b.account===row.account) ? (
                       <span>Already Grabbed!</span>
                     ) : (
-                      !isMobile ? (
-                        <Button onClick={() => handleSubmit(row)} color="rose">
-                          Airgrab!
-                        </Button>
-                      ) : (
-                        <MobileAlert />
-                      )
+                      <Button onClick={() => handleSubmit(row)} color="rose">
+                        Airgrab!
+                      </Button>
                     )}
                   </TableCell>
                 </TableRow>
