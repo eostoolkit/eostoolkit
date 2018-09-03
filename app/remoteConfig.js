@@ -14,15 +14,8 @@ const airgrabs = [
     symbol: 'POOR',
     account: 'poormantoken',
     method: 'signup',
-    description: 'A public test of the airgrab and alternative airdrop methods.',
+    description: 'A reward for people who STAKE and VOTE for EOS Block Producers with MONTHLY drops.',
     url: 'https://eostoolkit.io/airgrab',
-  },
-  {
-    symbol: 'RIDL',
-    account: 'ridlridlcoin',
-    method: 'claim',
-    description: 'Support Scatter and trustless reputation on blockchain.',
-    url: 'https://ridl.get-scatter.com',
   },
   {
     symbol: 'TRYBE',

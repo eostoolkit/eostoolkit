@@ -5,8 +5,16 @@ const PoormanInfo = () => {
     <div>
       <h5>The POORMANTOKEN is an EOS token that includes signups and burning to make airdrops cheaper</h5>
       <p>The intention is to allow EOS accounts to Airgrab the token (i.e. opt-in or signup)</p>
-      <p>The September 1st Drop is coming! Airgrab now so you don{"'"}t miss out!</p>
-      <p>After September 1st there will be no more catchups. A new dropping model will takes it{"'"}s place. More drops will comes, so keep signing up if you haven{"'"}t aleady.</p>
+      <p>The September 1st airdrop has been completed.</p>
+      <p>
+        The new purpose for POOR is to reward people for STAKING and VOTING for 25+ MAINNET Block Producers. Each month we
+        will drop additional POOR to everyone who meets the following criteria:
+      </p>
+      <p>1. Already have POOR (either from AIRGRAB or a previous DROP)</p>
+      <p>2. Have voted for 25+ producers (either directly or through a PROXY)</p>
+      <p>3. Have a STAKED balance</p>
+      <p>Accounts that meet this criteria will receive POOR 1:1 to STAKED EOS only!</p>
+      <p>What can you do with all this POOR? Details coming soon!</p>
       <p>
         To read more about this token contract check out the{' '}
         <a href="https://github.com/generEOS/poorman.token" target="new">
