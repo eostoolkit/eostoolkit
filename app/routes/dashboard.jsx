@@ -38,6 +38,7 @@ import FeaturesPage from 'components/Pages/FeaturesPage/Loadable';
 // external Features
 import ProxyTable from 'containers/ProxyInfo';
 import HorusPay from 'containers/HorusPay';
+import Karma from 'containers/Karma';
 
 // @material-ui/icons
 import {
@@ -56,7 +57,7 @@ import {
   VpnKey,
 } from '@material-ui/icons';
 import HorusIcon from 'components/Icons/Horus';
-
+import KarmaIcon from 'components/Icons/Karma';
 
 const dashRoutes = [
   { hide: true, path: '/networks', name: 'Network', component: Network },
@@ -77,6 +78,12 @@ const dashRoutes = [
     name: 'Governance',
     icon: AccountBalance,
     component: GovernancePage,
+  },
+  {
+    path: '/karma',
+    name: 'KARMA',
+    icon: KarmaIcon,
+    component: Karma,
   },
   {
     path: '/horuspay',

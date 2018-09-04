@@ -5,17 +5,17 @@ import { fetchedStake } from './actions';
 
 const stakeTable = {
     json: true,
-    //scope: 'regproxyinfo', scope is the user
-    code: 'horustokenio',
-    table: 'stakedhorus',
+    //scope: scope is the user
+    code: 'therealkarma',
+    table: 'power',
     limit: 500
 }
 
 const refundTable = {
     json: true,
-    //scope: 'regproxyinfo', scope is the user
-    code: 'horustokenio',
-    table: 'refunds',
+    //scope: scope is the user
+    code: 'therealkarma',
+    table: 'refunding',
     limit: 500
 }
 
@@ -43,15 +43,16 @@ function* getStake() {
 
     stakes.rows.map(row => {
       data.push({
+        owner: currentIdentity.name,
         ...row,
       });
     });
 
     refunds.rows.map(row => {
       data.push({
-        to: 'Refunding',
-        horus_weight: row.horus_amount,
-        time_initial: row.request_time,
+        owner: 'Refunding',
+        weight: row.quantity,
+        last_claim_time: row.request_time,
       });
     });
 
