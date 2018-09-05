@@ -18,7 +18,6 @@ const HorusPay = props => {
   const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
 
   const handleClaim = (stake) => {
-    console.log(stake);
     const transaction = [
       {
         account: 'horustokenio',
@@ -33,7 +32,6 @@ const HorusPay = props => {
   };
 
   const handleUnstake = (stake) => {
-    console.log(stake);
     const transaction = [
       {
         account: 'horustokenio',
@@ -47,8 +45,10 @@ const HorusPay = props => {
     pushTransaction(transaction,props.history);
   };
 
+  let totalHorusStake = 0;
+
   const data = stakes.map(stake => {
-    console.log(stake);
+    totalHorusStake += Number(stake.horus_weight.split(' ')[0]);
     return {
       ...stake,
       actions: stake.to === 'Refunding' ? (
@@ -71,6 +71,7 @@ const HorusPay = props => {
       color="warning"
       icon={AccountBalance}
       header="Your HorusPay Stakes" subheader=" - These stakes are earning you ECASH">
+      <h3>Total Stake: {Number(totalHorusStake).toFixed(4)} HORUS</h3>
       <ReactTable
         data={data}
         filterable
