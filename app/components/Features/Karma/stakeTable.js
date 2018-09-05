@@ -13,10 +13,9 @@ import AccountBalance from '@material-ui/icons/AccountBalance';
 const Karma = props => {
   const { stakes, loading, ...clientProps } = props;
   const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
-  console.log(networkAccount);
 
   const claimDelay   = 1800*1000; //7*24*3600*1000; // 7 days for LIVE, 30 minutes for TEST
-  const refundDelay  = 900*1000; //3*24*3600*1000; // 3 days for LIVE, 15 minutes for TEST
+  const refundDelay  = 900*1000;  //3*24*3600*1000; // 3 days for LIVE, 15 minutes for TEST
 
   let karmaLiquid = 0;
   let karmaStaked = 0;
@@ -44,10 +43,6 @@ const Karma = props => {
   }
 
   let claimDate = new Date(claimTime);
-
-  console.log(stakes);
-  console.log(stakes);
-
   const totalKarma = karmaLiquid + karmaStaked + karmaRefund;
 
   const handleClaim = (stake) => {
