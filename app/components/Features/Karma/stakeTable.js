@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactTable from 'react-table';
 
 import Tool from 'components/Tool/Tool';
 import ToolSection from 'components/Tool/ToolSection';
@@ -11,18 +10,45 @@ import Button from 'components/CustomButtons/Button';
 import Undo from '@material-ui/icons/Undo';
 import AccountBalance from '@material-ui/icons/AccountBalance';
 
-import CircularProgress from '@material-ui/core/CircularProgress';
-
 const Karma = props => {
   const { stakes, loading, ...clientProps } = props;
   const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
   console.log(networkAccount);
-  const karmaBalance = networkAccount ? Number(networkAccount.balances.find(b=>b.account === 'therealkarma').balance.split(' ')[0]) : 0;
-  //console.log(stakes);
-  //const stakeBalance = stakes ? stakes.reduce((total,stake)=>total+Number(stake.weight.split(' ')[0])) : 0;
 
-  console.log(karmaBalance);
+  const claimDelay   = 1800*1000; //7*24*3600*1000; // 7 days for LIVE, 30 minutes for TEST
+  const refundDelay  = 900*1000; //3*24*3600*1000; // 3 days for LIVE, 15 minutes for TEST
 
+  let karmaLiquid = 0;
+  let karmaStaked = 0;
+  let karmaRefund = 0;
+  let claimTime = 0;
+  let refundTime = 0;
+
+  let hasStaked = stakes.find(s=>s.owner !== 'Refunding');
+  let hasRefund = stakes.find(s=>s.owner === 'Refunding');
+
+  if(networkAccount) {
+    let hasKarma = networkAccount.balances.find(b=>b.account === 'therealkarma');
+
+    if(hasKarma) {
+      karmaLiquid = Number(hasKarma.balance.split(' ')[0]);
+    }
+    if(hasStaked) {
+      karmaStaked = Number(hasStaked.weight.split(' ')[0]);
+      claimTime = (hasStaked.last_claim_time/1000)+claimDelay;
+    }
+    if(hasRefund) {
+      karmaRefund = Number(hasRefund.weight.split(' ')[0]);
+      refundTime = (hasRefund.last_claim_time/1000)+refundDelay;
+    }
+  }
+
+  let claimDate = new Date(claimTime);
+
+  console.log(stakes);
+  console.log(stakes);
+
+  const totalKarma = karmaLiquid + karmaStaked + karmaRefund;
 
   const handleClaim = (stake) => {
     const transaction = [
@@ -37,67 +63,35 @@ const Karma = props => {
     pushTransaction(transaction,props.history);
   };
 
-  let stakeBalance = 0;
-  const data = stakes.map(stake => {
-    stakeBalance += Number(stake.weight.split(' ')[0]);
-    return {
-      ...stake,
-      actions: stake.owner === 'Refunding' ? (
-        <div className="actions-right">Available on {(new Date(((stake.last_claim_time/1000)+(259200*1000)))).toLocaleString()}</div>
-      ) : (
-        <div className="actions-right">
-          <Button
-            onClick={() => {handleClaim(stake)}}
-            color="success">Claim</Button>
-        </div>
-      ),
-    };
-  });
-
-  console.log(stakeBalance);
-
   return (
     <ToolBody
       color="warning"
       icon={AccountBalance}
-      header="Your KARMA POWER" subheader=" - Good KARMA grows!">
-      <h3>Your total KARMA</h3><p style={{marginTop:'-10px'}}>Liquid, powered up, and refunding...</p>
-      <h2>{(Number(karmaBalance)+Number(stakeBalance)).toFixed(4)}</h2>
-      <ReactTable
-        data={data}
-        filterable
-        noDataText={loading ? (<CircularProgress color="secondary" />) : ('No active stakes found')}
-        columns={[
-          {
-            Header: 'Weight',
-            accessor: 'weight',
-            filterable: false,
-          },
-          {
-            Header: 'Start Time',
-            accessor: 'last_claim_time',
-            filterable: false,
-            Cell: row => {
-              const date = new Date(row.value/1000);
-              return (`${date.toLocaleString()}`);
-              //return(row.value);
-            },
-            width: 200,
-          },
-          {
-            Header: 'Actions',
-            accessor: 'actions',
-            filterable: false,
-            sortable: false,
-            width: 200,
-          },
-        ]}
-        defaultPageSize={50}
-        pageSize={data.length}
-        showPaginationTop = {false}
-        showPaginationBottom={false}
-        className="-striped -highlight"
-      />
+      header="Your KARMA" subheader=" - Good KARMA grows!">
+      <h3>Total KARMA</h3>
+      <h2 style={{marginTop:'-10px'}}>{Number(totalKarma).toFixed(4)}</h2>
+      <h4 style={{marginTop:'-10px'}}>Powered Up</h4>
+      <h3 style={{marginTop:'-10px'}}>
+        {karmaStaked > 0 ? Number(karmaStaked).toFixed(4) : 'None - Power Up to Earn More!'}
+      </h3>
+      {karmaStaked > 0 ? (
+        claimDate < new Date() ? (
+          <Button onClick={() => {handleClaim(hasStaked)}} color="success">Claim</Button>
+        ) : (
+          <p>Claim your rewards on {claimDate.toLocaleString()}</p>
+        )
+      ):('')}
+
+
+      {karmaRefund > 0 ? (
+        <React.Fragment>
+          <h4>Refunding</h4>
+          <p style={{marginTop:'-10px'}}>Available on {new Date(refundTime).toLocaleString()}</p>
+          <h3 style={{marginTop:'-10px'}}>{Number(karmaRefund).toFixed(4)}</h3>
+        </React.Fragment>
+      ): ('')}
+
+
     </ToolBody>
   );
 };

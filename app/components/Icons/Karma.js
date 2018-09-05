@@ -1,6 +1,6 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import KarmaIcon from 'assets/img/karmaWhite.svg';
+import KarmaIcon from 'assets/img/karmaWhite2.svg';
 
 const style = {
   logoMini: {

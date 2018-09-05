@@ -23,11 +23,13 @@ const FormData = [
     id: 'owner',
     label: 'Account',
     placeholder: 'Account that provides the stake',
+    lg:12
   },
   {
     id: 'quantity',
     label: 'Quantity',
     placeholder: 'Amount of KARMA to POWER UP',
+    lg:12
   },
 ];
 
@@ -75,6 +77,7 @@ const validationSchema = Yup.object().shape({
 const StakeForm = props => {
   return (
     <ToolBody color="warning" icon={Undo} header="Power Down your KARMA" subheader=" - You don't want more KARMA?">
+      <h6>Advance Preview: Works on JUNGLE only</h6>
       <FormObject {...props} />
     </ToolBody>
   );

@@ -45,7 +45,10 @@ const HorusPay = props => {
     pushTransaction(transaction,props.history);
   };
 
+  let totalHorusStake = 0;
+
   const data = stakes.map(stake => {
+    totalHorusStake += Number(stake.horus_weight.split(' ')[0]);
     return {
       ...stake,
       actions: stake.to === 'Refunding' ? (
@@ -68,6 +71,7 @@ const HorusPay = props => {
       color="warning"
       icon={AccountBalance}
       header="Your HorusPay Stakes" subheader=" - These stakes are earning you ECASH">
+      <h3>Total Stake: {Number(totalHorusStake).toFixed(4)} HORUS</h3>
       <ReactTable
         data={data}
         filterable
