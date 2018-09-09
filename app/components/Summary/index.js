@@ -19,6 +19,8 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectActiveNetwork, makeSelectAccount } from 'containers/NetworkClient/selectors';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Announcement from '@material-ui/icons/Announcement';
+import Warning from "components/Typography/Warning.jsx";
 // core components
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
@@ -49,6 +51,10 @@ function Summary(props) {
                 </h5>
               </CardHeader>
               <CardBody>
+                <Warning>
+                  <h6>Having connectivity issues or Scatter not appearing when transacting?</h6>
+                  <h5><Announcement/>Please ensure you have updated to the latest Scatter Desktop</h5>
+                </Warning>
                 <ResourceTable account={account} />
               </CardBody>
             </Card>
