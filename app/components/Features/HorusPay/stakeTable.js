@@ -45,14 +45,34 @@ const HorusPay = props => {
     pushTransaction(transaction,props.history);
   };
 
+  const handleRefund = (stake) => {
+    const transaction = [
+      {
+        account: 'horustokenio',
+        name: 'refundhorus',
+        data: {
+          owner: networkIdentity.name,
+        },
+      },
+    ];
+    pushTransaction(transaction,props.history);
+  };
+
   let totalHorusStake = 0;
 
   const data = stakes.map(stake => {
     totalHorusStake += Number(stake.horus_weight.split(' ')[0]);
+    const refundTime = new Date((stake.time_initial+604800)*1000);
     return {
       ...stake,
       actions: stake.to === 'Refunding' ? (
-        <div className="actions-right">Available on {(new Date((stake.time_initial+604800)*1000)).toLocaleString()}</div>
+        refundTime < Date.now() ? (
+          <div className="actions-right"><Button
+            onClick={() => {handleRefund(stake)}}
+            color="success">Refund</Button></div>
+        ) : (
+          <div className="actions-right">Available on {refundTime.toLocaleString()}</div>
+        )
       ) : (
         <div className="actions-right">
           <Button
