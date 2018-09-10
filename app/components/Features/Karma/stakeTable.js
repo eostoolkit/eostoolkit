@@ -14,8 +14,8 @@ const Karma = props => {
   const { stakes, loading, ...clientProps } = props;
   const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
 
-  const claimDelay   = 1800*1000; //7*24*3600*1000; // 7 days for LIVE, 30 minutes for TEST
-  const refundDelay  = 900*1000;  //3*24*3600*1000; // 3 days for LIVE, 15 minutes for TEST
+  const claimDelay   = 7*24*3600*1000; // 7 days for LIVE, 30 minutes for TEST
+  const refundDelay  = 3*24*3600*1000; // 3 days for LIVE, 15 minutes for TEST
 
   let karmaLiquid = 0;
   let karmaStaked = 0;

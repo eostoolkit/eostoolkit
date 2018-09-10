@@ -77,7 +77,6 @@ const validationSchema = Yup.object().shape({
 const StakeForm = props => {
   return (
     <ToolBody color="warning" icon={Undo} header="Power Down your KARMA" subheader=" - You don't want more KARMA?">
-      <h6>Advance Preview: Works on JUNGLE only</h6>
       <FormObject {...props} />
     </ToolBody>
   );
