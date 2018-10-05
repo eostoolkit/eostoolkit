@@ -26,6 +26,7 @@ const initialState = fromJS({
   networkSelected: null,
   networks: [],
   tokens: [],
+  claims: [],
   transaction: null,
   offlineMode: false,
   override: false,
@@ -44,6 +45,7 @@ function clientReducer(state = initialState, action) {
       return state
         .set('networkReader', action.networkReader)
         .set('tokens', action.tokens)
+        .set('claims', action.claims)
         .set('readerLoading', false);
     case WRITER_ENABLED:
       return state

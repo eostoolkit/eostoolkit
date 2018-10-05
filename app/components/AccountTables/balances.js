@@ -23,7 +23,7 @@ function BalancesTable({ ...props }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {account.balances.length > 0 ? (
+          {account.balance && account.balances.length > 0 ? (
             account.balances.map(row => {
               return (
                 <TableRow className={classes.tableRowHover} key={row.balance}>

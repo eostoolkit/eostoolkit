@@ -42,11 +42,12 @@ export function updateNetworks(networks) {
   };
 }
 
-export function enableReader(networkReader, tokens) {
+export function enableReader(networkReader, tokens, claims) {
   return {
     type: READER_ENABLED,
     networkReader,
     tokens,
+    claims,
   };
 }
 

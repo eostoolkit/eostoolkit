@@ -1,6 +1,6 @@
 import Eos from 'eosjs';
 import { put, call } from 'redux-saga/effects';
-import { fetchTokens, fetchIdentity } from './fetchers';
+import { fetchTokens, fetchClaims, fetchIdentity } from './fetchers';
 import { enableReader, enableWriter, disableWriter } from '../actions';
 
 /*
@@ -23,8 +23,9 @@ export function* buildReader(activeNetwork) {
 
     const networkReader = yield Eos(networkOptions);
     const tokens = yield call(fetchTokens, networkReader);
+    const claims = yield call(fetchClaims);
 
-    yield put(enableReader(networkReader, tokens));
+    yield put(enableReader(networkReader, tokens, claims));
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);

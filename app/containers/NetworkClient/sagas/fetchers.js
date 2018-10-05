@@ -2,7 +2,7 @@
 import Ping from 'utils/ping';
 import { orderBy } from 'lodash';
 import { put, all, join, fork, select, call, spawn } from 'redux-saga/effects';
-import { tokensUrl, networksUrl } from 'remoteConfig';
+import { tokensUrl, networksUrl, claimsUrl } from 'remoteConfig';
 
 import { loadedNetworks, updateNetworks, loadedAccount, setNetwork } from '../actions';
 import { makeSelectIdentity, makeSelectReader, makeSelectTokens, makeSelectNetworks, makeSelectActiveNetwork } from '../selectors';
@@ -157,6 +157,18 @@ export function* fetchTokens(reader) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
     return null;
+  }
+}
+
+export function* fetchClaims() {
+  try {
+    const data = yield fetch(claimsUrl);
+    const claims = yield data.json();
+    return claims;
+  } catch (err) {
+    console.error('An EOSToolkit error occured - see details below:');
+    console.error(err);
+    return [];
   }
 }
 

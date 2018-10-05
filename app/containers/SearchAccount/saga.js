@@ -64,7 +64,7 @@ function* performSearchPubkey() {
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
-    yield put(lookupLoaded([]));
+    yield put(lookupLoaded([{}]));
   }
 }
 

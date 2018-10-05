@@ -29,6 +29,7 @@ function LoadingSpinner(props) {
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class SearchAccount extends React.Component {
+
   render() {
     return (
       <div>
@@ -36,7 +37,7 @@ export class SearchAccount extends React.Component {
         <LoadingSpinner {...this.props} />
         <GridContainer>
           {this.props.accounts.map(account => {
-            if (!account) return <Account account={account} key="invalid" />;
+            if (!Object.keys(account).length) return <Account account={null} key="invalid" />;
             return <Account account={account} key={account.account_name} />;
           })}
         </GridContainer>
