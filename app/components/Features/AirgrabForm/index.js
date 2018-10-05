@@ -79,6 +79,7 @@ const AirgrabForm = props => {
         </ToolBody>
         <ToolBody color="warning" icon={CloudDownload} header="Claim your Tokens!">
           <h6>Note: You can only claim a token you have already received.</h6>
+          <h6>Claim will succeed even if you already claimed. Next release will say you have already claimed if you have.</h6>
           <Disclaimer />
           <ClaimsTable handleSubmit={handleClaims} account={networkAccount} claims={props.claims}/>
         </ToolBody>
