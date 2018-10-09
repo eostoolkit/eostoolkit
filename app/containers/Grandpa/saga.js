@@ -53,7 +53,7 @@ function* getStats(token,round,balance) {
       balanceData.claimed = balance.claimed === 1 ? true  : false;
       balanceData.lastMined = new Date(balance.last_mined_on/1000).toLocaleString();
       balanceData.velocity = activity ? activity.activity.velocity : null;
-      balanceData.quantity = activity ? activity.activity.quantity : null;
+      balanceData.quantity = activity ? `${activity.activity.quantity/10000} ${token}` : null;
       balanceData.referrer = balance.referrer;
     }
 

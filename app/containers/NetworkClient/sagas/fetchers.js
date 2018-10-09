@@ -254,6 +254,10 @@ function* getCurrency(reader, token, name) {
   }
 }
 
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
+
 function* getAccountDetail(reader, name) {
   try {
     const account = yield reader.getAccount(name);
@@ -265,11 +269,18 @@ function* getAccountDetail(reader, name) {
     );
 
     const currencies = yield join(...tokenData);
-    const balances = currencies.reduce((a, b) => a.concat(b), []);
+    const balances = currencies.reduce((a, b) => a.concat(b), []);//.filter( onlyUnique );
+    const unique = [...new Set(balances.map(item => item.balance))];
+    const final = unique.map(bal => {
+      return {
+        token: tokens.find(t=>t.symbol === bal.split(' ')[1]).account,
+        balance: bal,
+      }
+    });
     yield spawn(fetchLatency);
     return {
       ...account,
-      balances,
+      balances: final,
     };
   } catch (c) {
     return null;

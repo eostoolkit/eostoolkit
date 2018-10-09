@@ -8,6 +8,7 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import Button from 'components/CustomButtons/Button';
 import { makeSelectIdentity, makeSelectAccount } from 'containers/NetworkClient/selectors';
 import { pushTransaction as sendTransaction } from 'containers/NetworkClient/actions';
 
@@ -45,9 +46,12 @@ const VoteUs = props => {
     pushTransaction(transaction,props.history);
   };
   return (
-    <a href="#" onClick={handleSubmit} className={className}>
-      Vote for GenerEOS
-    </a>
+    <React.Fragment>
+      <a href="#" onClick={handleSubmit} className={className}>
+        Built by GenerEOS
+      </a>
+      <Button type="submit" color="success" onClick={handleSubmit} style={{marginTop:'-7px',marginLeft:'10px'}}>Vote</Button>
+    </React.Fragment>
   );
 };
 
