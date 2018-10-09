@@ -32,8 +32,8 @@ const MinerTable = props => {
       color="warning"
       icon={AccountBalance}
       header="GrandpaCoins" subheader=" - Let's make these old coins move FAST">
-        <p>Transfer the highest total quantity of coins to win the Jackpot!</p>
-        <p>Will you win by speed or volume?</p>
+        <p>Transfer the highest VOLUME of coins to win the Jackpot!</p>
+        <p>Will you win by speed or by being a whale?</p>
         <p>The winning coin gets the Team Dividend divided amongst all holders</p>
         <div className={classes.tableResponsive}>
           <Table className={classes.table}>

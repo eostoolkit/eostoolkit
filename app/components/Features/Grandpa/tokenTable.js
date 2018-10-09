@@ -56,11 +56,11 @@ const MinerTable = props => {
                 <TableCell className={classes.tableCell}>{token ? token.supply : 'Loading'}</TableCell>
               </TableRow>
               <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
-                <TableCell className={classes.tableCell}>My Quantity</TableCell>
+                <TableCell className={classes.tableCell}>My Volume</TableCell>
                 <TableCell className={classes.tableCell}>{token ? (token.account.quantity ? token.account.quantity : `0.0000 ${symbol}`) : 'Loading'}</TableCell>
               </TableRow>
               <TableRow className={`${classes.tableRowHover}`}>
-                <TableCell className={classes.tableCell}>Highest Quantity</TableCell>
+                <TableCell className={classes.tableCell}>Highest Volume</TableCell>
                 <TableCell className={classes.tableCell}>{quantity ? `${quantity.owner} (${quantity.value/10000} ${symbol})` : 'Loading'}</TableCell>
               </TableRow>
               <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
