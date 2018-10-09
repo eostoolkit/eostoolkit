@@ -5,7 +5,7 @@ import Button from 'components/CustomButtons/Button';
 import Disclaimer from 'components/Information/Disclaimer';
 
 const DefaultSubmit = props => {
-  const { xs, sm, md, lg, submitColor, submitText, extraButtons } = props;
+  const { xs, sm, md, lg, submitColor, submitText, extraButtons, noDisclaimer } = props;
   return (
     <React.Fragment>
       <GridItem xs={xs || 12} sm={sm || 12} md={md || lg || 4} lg={lg || md || 4}>
@@ -15,7 +15,7 @@ const DefaultSubmit = props => {
         {extraButtons ? <props.extraButtons /> : ''}
       </GridItem>
       <GridItem xs={12 - (xs || 0)} sm={12 - (sm || 0)} md={12 - (md || lg || 4)} lg={12 - (lg || md || 4)}>
-        <Disclaimer />
+        {noDisclaimer ? '' : <Disclaimer />}        
       </GridItem>
     </React.Fragment>
   );

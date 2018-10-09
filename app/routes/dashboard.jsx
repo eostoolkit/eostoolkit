@@ -39,6 +39,7 @@ import FeaturesPage from 'components/Pages/FeaturesPage/Loadable';
 import ProxyTable from 'containers/ProxyInfo';
 import HorusPay from 'containers/HorusPay';
 import Karma from 'containers/Karma';
+import Grandpa from 'containers/Grandpa';
 
 // @material-ui/icons
 import {
@@ -55,6 +56,7 @@ import {
   CloudDownload,
   Settings,
   VpnKey,
+  Games,
 } from '@material-ui/icons';
 import HorusIcon from 'components/Icons/Horus';
 import KarmaIcon from 'components/Icons/Karma';
@@ -66,6 +68,12 @@ const dashRoutes = [
     name: 'Features',
     icon: Dashboard,
     component: FeaturesPage,
+  },
+  {
+    path: '/grandpacoins',
+    name: 'GrandpaCoins',
+    icon: Games,
+    component: Grandpa,
   },
   {
     path: '/donate',

@@ -120,7 +120,7 @@ function* fetchTokenInfo(reader, account, symbol) {
     if (symbol === 'OCT') throw { message: 'OCT has no STATS table - please fix!' };
     const stats = yield reader.getCurrencyStats(account, symbol);
     const split = stats[symbol].max_supply.split(' ')[0].split('.');
-    const precision = split.length > 1 ? stats[symbol].max_supply.split(' ')[0].split('.')[1].length : 0;
+    const precision = split.length > 1 ? split[1].length : 0;
     return {
       account,
       symbol,
