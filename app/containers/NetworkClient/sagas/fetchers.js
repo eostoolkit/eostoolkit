@@ -272,17 +272,20 @@ function* getAccountDetail(reader, name) {
     const balances = currencies.reduce((a, b) => a.concat(b), []);//.filter( onlyUnique );
     const unique = [...new Set(balances.map(item => item.balance))];
     const final = unique.map(bal => {
+      const tokenFind = tokens.find(t=>t.symbol === bal.split(' ')[1]);
       return {
-        token: tokens.find(t=>t.symbol === bal.split(' ')[1]).account,
+        token: tokenFind ? tokenFind.account : 'grandpacoins',
         balance: bal,
       }
-    });
+
+    }); 
     yield spawn(fetchLatency);
     return {
       ...account,
       balances: final,
     };
   } catch (c) {
+    console.log(c);
     return null;
   }
 }
