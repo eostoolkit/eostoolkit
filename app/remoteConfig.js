@@ -11,6 +11,13 @@ const airgrabs = [
     url: 'https://www.atidium.io/',
   },
   {
+    symbol: 'INF',
+    account: 'infinicoinio',
+    method: 'open',
+    description: 'Infiniverse is a decentralized augmented reality platform and virtual world on top of the real world. Infinicoin lets you register land and transact on the Infiniverse marketplace.',
+    url: 'https://www.infiniverse.net/',
+  },
+  {
     symbol: 'POOR',
     account: 'poormantoken',
     method: 'signup',

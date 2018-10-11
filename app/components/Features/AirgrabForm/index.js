@@ -21,15 +21,25 @@ import AirgrabTable from './AirgrabTable';
 import ClaimsTable from './ClaimsTable';
 
 const makeTransaction = (values, networkIdentity) => {
-  const data =
-    values.method === 'signup'
-      ? {
-        owner: networkIdentity ? networkIdentity.name : '',
-        quantity: `0.0000 ${values.symbol}`,
-      }
-      : {
-        claimer: networkIdentity ? networkIdentity.name : '',
-      };
+  let data = null;
+  if(values.method === 'signup') {
+    data = {
+      owner: networkIdentity ? networkIdentity.name : '',
+      quantity: `0.0000 ${values.symbol}`,
+    };
+  }
+  if(values.method === 'open') {
+    data = {
+      owner: networkIdentity ? networkIdentity.name : '',
+      symbol: `0.0000 ${values.symbol}`,
+      ram_payer: networkIdentity ? networkIdentity.name : '',
+    };
+  }
+  if(values.method === 'claim') {
+    data = {
+      claimer: networkIdentity ? networkIdentity.name : '',
+    };
+  }
   const transaction = [
     {
       account: values.account,

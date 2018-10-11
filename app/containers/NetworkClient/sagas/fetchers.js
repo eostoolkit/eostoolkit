@@ -274,11 +274,11 @@ function* getAccountDetail(reader, name) {
     const final = unique.map(bal => {
       const tokenFind = tokens.find(t=>t.symbol === bal.split(' ')[1]);
       return {
-        token: tokenFind ? tokenFind.account : 'grandpacoins',
+        account: tokenFind ? tokenFind.account : 'grandpacoins',
         balance: bal,
       }
 
-    }); 
+    });
     yield spawn(fetchLatency);
     return {
       ...account,

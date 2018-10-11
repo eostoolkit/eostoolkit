@@ -9,11 +9,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from 'components/CustomButtons/Button';
 
-import { airgrabs } from 'remoteConfig';
 import tableStyle from 'assets/jss/tableStyle';
 
 function AirgrabTable({ ...props }) {
-  const { classes, handleSubmit, account } = props;
+  const { classes, handleSubmit, account, claims } = props;
   return (
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>
@@ -22,12 +21,12 @@ function AirgrabTable({ ...props }) {
             <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Symbol</TableCell>
             <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Description</TableCell>
             <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Website</TableCell>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Grab</TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Claim</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {airgrabs.length > 0 ? (
-            airgrabs.map(row => {
+          {claims.length > 0 ? (
+            claims.map(row => {
               return (
                 <TableRow className={classes.tableRowHover} key={row.symbol}>
                   <TableCell className={classes.tableCell}>{row.symbol}</TableCell>
@@ -39,11 +38,11 @@ function AirgrabTable({ ...props }) {
                   </TableCell>
                   <TableCell className={classes.tableCell}>
                     {account && account.balances.find(b=>b.account===row.account) ? (
-                      <span>Already Grabbed!</span>
-                    ) : (
                       <Button onClick={() => handleSubmit(row)} color="rose">
-                        Airgrab!
+                        Claim
                       </Button>
+                    ) : (
+                      <span>Claim unavailable</span>
                     )}
                   </TableCell>
                 </TableRow>
@@ -52,7 +51,7 @@ function AirgrabTable({ ...props }) {
           ) : (
             <TableRow className={classes.tableRowHover}>
               <TableCell className={classes.tableCell} colSpan={3}>
-                No Airgrabs
+                No Claimable Tokens
               </TableCell>
             </TableRow>
           )}
