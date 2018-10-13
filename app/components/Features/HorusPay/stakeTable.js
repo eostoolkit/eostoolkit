@@ -49,9 +49,10 @@ const HorusPay = props => {
     const transaction = [
       {
         account: 'horustokenio',
-        name: 'refundhorus',
+        name: 'refundbyid',
         data: {
-          owner: networkIdentity.name,
+          owner: stake.from,
+          refund_id: stake.id,
         },
       },
     ];
@@ -61,11 +62,11 @@ const HorusPay = props => {
   let totalHorusStake = 0;
 
   const data = stakes.map(stake => {
-    totalHorusStake += Number(stake.horus_weight.split(' ')[0]);
+    if(stake.type==='Stake') totalHorusStake += Number(stake.horus_weight.split(' ')[0]);
     const refundTime = new Date((stake.time_initial+604800)*1000);
     return {
       ...stake,
-      actions: stake.to === 'Refunding' ? (
+      actions: stake.type === 'Refund' ? (
         refundTime < Date.now() ? (
           <div className="actions-right"><Button
             onClick={() => {handleRefund(stake)}}
@@ -97,6 +98,11 @@ const HorusPay = props => {
         filterable
         noDataText={loading ? (<CircularProgress color="secondary" />) : ('No active stakes found')}
         columns={[
+          {
+            Header: 'Type',
+            accessor: 'type',
+            filterable: false,
+          },
           {
             Header: 'Staked To',
             accessor: 'to',

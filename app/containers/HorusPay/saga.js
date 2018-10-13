@@ -15,7 +15,7 @@ const refundTable = {
     json: true,
     //scope: 'regproxyinfo', scope is the user
     code: 'horustokenio',
-    table: 'refunds',
+    table: 'horusrefunds',
     limit: 500
 }
 
@@ -43,15 +43,18 @@ function* getStake() {
 
     stakes.rows.map(row => {
       data.push({
+        type:'Stake',
         ...row,
       });
     });
 
     refunds.rows.map(row => {
       data.push({
-        to: 'Refunding',
-        horus_weight: row.horus_amount,
-        time_initial: row.request_time,
+        type:'Refund',
+        from: row.from,
+        to:row.to,
+        horus_weight:row.horus_amount,
+        time_initial:row.request_time
       });
     });
 
