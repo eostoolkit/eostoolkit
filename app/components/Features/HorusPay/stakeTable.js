@@ -64,6 +64,7 @@ const HorusPay = props => {
   const data = stakes.map(stake => {
     if(stake.type==='Stake') totalHorusStake += Number(stake.horus_weight.split(' ')[0]);
     const refundTime = new Date((stake.time_initial+604800)*1000);
+    console.log(stake);
     return {
       ...stake,
       actions: stake.type === 'Refund' ? (
