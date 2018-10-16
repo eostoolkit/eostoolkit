@@ -51,6 +51,7 @@ function* getStake() {
     refunds.rows.map(row => {
       data.push({
         type:'Refund',
+        id: row.id,
         from: row.from,
         to:row.to,
         horus_weight:row.horus_amount,
