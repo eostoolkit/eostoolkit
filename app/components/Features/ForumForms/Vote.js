@@ -68,7 +68,7 @@ async function getProposalHash(networkReader, values) {
   const proposals = {
     json: true,
     scope: values.proposer,
-    code: 'eosforumdapp',
+    code: 'eosforumrcpp',
     table: 'proposal',
     limit: 1000,
   };
@@ -90,7 +90,7 @@ const makeTransaction = (values, hash) => {
   const { vote, ...otherValues } = values;
   const transaction = [
     {
-      account: 'eosforumdapp',
+      account: 'eosforumrcpp',
       name: 'vote',
       data: {
         ...otherValues,
