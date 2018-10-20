@@ -9,9 +9,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
-import ScatterJS from 'scatter-js/dist/scatter.esm.js';
+import ScatterJS from 'scatterjs-core';
+import ScatterEOS from 'scatterjs-plugin-eosjs';
 import { setSigner, loadNetworks, loadAccount } from './actions';
 import saga from './sagas/watchers';
+ScatterJS.plugins( new ScatterEOS() );
 
 // we inject out reducer at the root level for lazy loading order reasons
 
