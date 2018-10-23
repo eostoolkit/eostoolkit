@@ -35,8 +35,8 @@ import NetworkClient from 'containers/NetworkClient';
 import OfflineClient from 'containers/OfflineClient';
 
 // state based presentation
-import Notification from 'containers/Notification/Loadable';
-import Summary from 'components/Summary/Loadable';
+import Notification from 'containers/Notification';
+import Summary from 'components/Summary';
 import NetworkConnector from 'containers/NetworkConnector';
 
 import dashboardRoutes from 'routes/dashboard';
