@@ -28,12 +28,12 @@ import MultisigSign from 'components/Features/Multisig/Sign';
 import MultisigPush from 'components/Features/Multisig/Push';
 
 // containers
-import Network from 'containers/Network/Loadable';
-import SearchAccount from 'containers/SearchAccount/Loadable';
+import Network from 'containers/Network';
+import SearchAccount from 'containers/SearchAccount';
 
 // Pages
-import GovernancePage from 'components/Pages/GovernancePage/Loadable';
-import FeaturesPage from 'components/Pages/FeaturesPage/Loadable';
+import GovernancePage from 'components/Pages/GovernancePage';
+import FeaturesPage from 'components/Pages/FeaturesPage';
 
 // external Features
 import ProxyTable from 'containers/ProxyInfo';
