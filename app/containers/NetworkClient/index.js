@@ -9,9 +9,10 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
-
 import { setSigner, loadNetworks, loadAccount } from './actions';
 import saga from './sagas/watchers';
+
+
 
 // we inject out reducer at the root level for lazy loading order reasons
 
