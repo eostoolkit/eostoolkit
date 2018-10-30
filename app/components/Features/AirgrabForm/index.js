@@ -22,10 +22,16 @@ import ClaimsTable from './ClaimsTable';
 
 const makeTransaction = (values, networkIdentity) => {
   let data = null;
-  if(values.method === 'signup') {
+  if(values.method === 'signup' && values.symbol !== 'SEED') {
     data = {
       owner: networkIdentity ? networkIdentity.name : '',
       quantity: `0.0000 ${values.symbol}`,
+    };
+  }
+  if(values.method === 'signup' && values.symbol === 'SEED') {
+    data = {
+      owner: networkIdentity ? networkIdentity.name : '',
+      sym: `4,${values.symbol}`,
     };
   }
   if(values.method === 'open') {
