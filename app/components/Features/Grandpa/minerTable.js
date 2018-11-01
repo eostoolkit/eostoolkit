@@ -40,7 +40,7 @@ const MinerTable = props => {
             <TableHead className={classes.successRow}>
               <TableRow className={classes.tableRow}>
                 <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`} colSpan={2}>
-                   Round Info - Ends Oct 31 (1:00 UTC)
+                   Round Info - Ends Nov 31 (1:00 UTC)
                 </TableCell>
               </TableRow>
             </TableHead>

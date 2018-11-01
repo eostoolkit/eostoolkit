@@ -41,8 +41,9 @@ function AirgrabTable({ ...props }) {
                       <Button onClick={() => handleSubmit(row)} color="rose">
                         Claim
                       </Button>
+
                     ) : (
-                      <span>Claim unavailable</span>
+                      <span>Claim unavailable - You must have the token balance to claim it.</span>
                     )}
                   </TableCell>
                 </TableRow>
