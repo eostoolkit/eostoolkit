@@ -43,6 +43,7 @@ const Karma = props => {
   }
 
   let claimDate = new Date(claimTime);
+  let refundDate = new Date(refundTime);
   const totalKarma = karmaLiquid + karmaStaked + karmaRefund;
 
   const handleClaim = (stake) => {
@@ -50,6 +51,19 @@ const Karma = props => {
       {
         account: 'therealkarma',
         name: 'claim',
+        data: {
+          owner: stake.owner,
+        },
+      },
+    ];
+    pushTransaction(transaction,props.history);
+  };
+
+  const handleRefund = (stake) => {
+    const transaction = [
+      {
+        account: 'therealkarma',
+        name: 'refund',
         data: {
           owner: stake.owner,
         },
@@ -81,7 +95,11 @@ const Karma = props => {
       {karmaRefund > 0 ? (
         <React.Fragment>
           <h4>Refunding</h4>
-          <p style={{marginTop:'-10px'}}>Available on {new Date(refundTime).toLocaleString()}</p>
+          {refundDate < new Date() ? (
+            <Button onClick={() => {handleRefund(hasRefund)}} color="success">Refund</Button>
+          ) : (
+            <p style={{marginTop:'-10px'}}>Available on {new Date(refundTime).toLocaleString()}</p>
+          )}
           <h3 style={{marginTop:'-10px'}}>{Number(karmaRefund).toFixed(4)}</h3>
         </React.Fragment>
       ): ('')}

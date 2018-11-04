@@ -12,7 +12,7 @@ const Home = () => {
       <h5>Show the world how fast these coins can go on EOS!</h5>
       <h3>Achieve the highest VOLUME with one of the three coins and win the JACKPOT</h3>
       <h5>Consolation prize for highest VELOCITY with one of the three coins (10% of JACKPOT)</h5>
-      <h3>The round 1 Prize is being distributed shortly. Unfortunately there has been a delay due to medical reasons.</h3>
+      <h3>The round 1 Prize jackpot has been paid. The round 1 dividend is delayed due to medical reasons.</h3>
     </div>
   );
 };

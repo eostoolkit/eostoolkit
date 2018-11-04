@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
+import ScatterJS from 'scatterjs-core';
+import ScatterEOS from 'scatterjs-plugin-eosjs';
 import { setSigner, loadNetworks, loadAccount } from './actions';
 import saga from './sagas/watchers';
 
@@ -23,10 +25,10 @@ export class NetworkClient extends React.Component {
     // start loading the reader asap
     this.props.loadNetworks();
 
-    window.ScatterJS.plugins( new window.ScatterEOS() );
-    window.ScatterJS.scatter.connect('EOSToolkit').then(connected => {
+    ScatterJS.plugins( new ScatterEOS() );
+    ScatterJS.scatter.connect('EOSToolkit').then(connected => {
       if(connected){
-          this.props.setSigner(window.ScatterJS.scatter);
+          this.props.setSigner(ScatterJS.scatter);
           window.ScatterJS = null;
       }
     });
