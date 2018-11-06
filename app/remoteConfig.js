@@ -18,6 +18,13 @@ const airgrabs = [
     url: 'https://www.infiniverse.net/',
   },
   {
+    symbol: 'NEB',
+    account: 'nebulatokenn',
+    method: 'open',
+    description: 'Nebula is a decentralized, curated list of professionals and job opportunities.',
+    url: 'https://nebulaprotocol.com',
+  },
+  {
     symbol: 'POOR',
     account: 'poormantoken',
     method: 'signup',
