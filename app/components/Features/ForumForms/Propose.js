@@ -36,7 +36,7 @@ const FormData = [
   },
   {
     id: 'question',
-    label: 'Content',
+    label: 'Question',
     placeholder: 'Proposal question',
     md: 12,
   },
