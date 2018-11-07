@@ -78,7 +78,7 @@ const makeTransaction = values => {
       name: 'propose',
       data: {
         ...otherValues,
-        proposal_json: `{"type": "bps-proposal-v1", "question":${question}, "content":"${content}"}`,
+        proposal_json: `{"type": "bps-proposal-v1", "question":"${question}", "content":"${content}"}`,
         expires_at: today.toISOString().slice(0,-5),
       },
     },
