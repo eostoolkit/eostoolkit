@@ -35,9 +35,15 @@ const FormData = [
     md: 12,
   },
   {
+    id: 'question',
+    label: 'Content',
+    placeholder: 'Proposal question',
+    md: 12,
+  },
+  {
     id: 'content',
     label: 'Content',
-    placeholder: 'Post content',
+    placeholder: 'Proposal content in markdown',
     multiline: true,
     rows: 3,
     md: 12,
@@ -61,7 +67,10 @@ const FormObject = props => {
 };
 
 const makeTransaction = values => {
-  const { content, ...otherValues } = values;
+  const { content, question, ...otherValues } = values;
+
+  let today = new Date();
+  today.setMonth(today.getMonth()+4);
 
   const transaction = [
     {
@@ -69,7 +78,8 @@ const makeTransaction = values => {
       name: 'propose',
       data: {
         ...otherValues,
-        proposal_json: `{"type": "bps-proposal-v1", "content":"${content}"}`,
+        proposal_json: `{"type": "bps-proposal-v1", "question":${question}, "content":"${content}"}`,
+        expires_at: today.toISOString().slice(0,-5),
       },
     },
   ];
@@ -80,6 +90,7 @@ const validationSchema = Yup.object().shape({
   proposer: Yup.string().required('Account is required'),
   proposal_name: Yup.string().required('Proposals require a name'),
   title: Yup.string().required('Title is required'),
+  question: Yup.string().required('Question is required'),
   content: Yup.string().required('Content is required'),
 });
 
@@ -99,7 +110,7 @@ const ForumProposeForm = props => {
             You can create a Referundum. You must provide the Proposer account name and Proposal name to others so they
             can vote.
           </p>
-          <p>The content can be as large as you require.</p>
+          <p>The content can be as large as you require. The expiry is 120 days from creation.</p>
           <p>
             For more information checkout{' '}
             <a href="https://github.com/eoscanada/eosio.forum" target="new">
@@ -124,6 +135,7 @@ const enhance = compose(
       proposer: props.networkIdentity ? props.networkIdentity.name : '',
       proposal_name: '',
       title: '',
+      question: '',
       content: '',
     }),
     validationSchema,

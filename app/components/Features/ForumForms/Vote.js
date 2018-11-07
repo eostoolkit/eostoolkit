@@ -30,11 +30,6 @@ const FormData = [
     placeholder: 'Account that votes',
   },
   {
-    id: 'proposer',
-    label: 'Proposer',
-    placeholder: 'Account that created proposal',
-  },
-  {
     id: 'proposal_name',
     label: 'Proposal Name',
     placeholder: 'Name of the proposal',
@@ -64,29 +59,30 @@ const FormObject = props => {
   );
 };
 
-async function getProposalHash(networkReader, values) {
-  const proposals = {
-    json: true,
-    scope: values.proposer,
-    code: 'eosforumrcpp',
-    table: 'proposal',
-    limit: 1000,
-  };
+// async function getProposalHash(networkReader, values) {
+//   const proposals = {
+//     json: true,
+//     scope: 'eosforumrcpp',
+//     code: 'eosforumrcpp',
+//     table: 'proposal',
+//     lower_bound: values.proposal_name
+//     limit: 1,
+//   };
+//
+//   try {
+//     const data = await networkReader.getTableRows(proposals);
+//     const row = data.rows.find(d => d.proposal_name === values.proposal_name);
+//     if (row) {
+//       const hash = sha256(row.title + row.proposal_json);
+//       return hash;
+//     }
+//     return false;
+//   } catch (err) {
+//     return false;
+//   }
+// }
 
-  try {
-    const data = await networkReader.getTableRows(proposals);
-    const row = data.rows.find(d => d.proposal_name === values.proposal_name);
-    if (row) {
-      const hash = sha256(row.title + row.proposal_json);
-      return hash;
-    }
-    return false;
-  } catch (err) {
-    return false;
-  }
-}
-
-const makeTransaction = (values, hash) => {
+const makeTransaction = (values) => {
   const { vote, ...otherValues } = values;
   const transaction = [
     {
@@ -95,7 +91,6 @@ const makeTransaction = (values, hash) => {
       data: {
         ...otherValues,
         vote: vote ? 1 : 0,
-        proposal_hash: hash,
         vote_json: '',
       },
     },
@@ -105,7 +100,6 @@ const makeTransaction = (values, hash) => {
 
 const validationSchema = Yup.object().shape({
   voter: Yup.string().required('Account is required'),
-  proposer: Yup.string().required('Account is required'),
   proposal_name: Yup.string().required('Proposals require a name'),
 });
 
@@ -121,11 +115,7 @@ const ForumVoteForm = props => {
         <ToolBody color="info" header="Tutorial">
           <h5>EOSIO Forum Vote</h5>
           <p>This is part of the eosio.forum Referendum project.</p>
-          <p>You can vote on a Referundum. The Proposer account name and Proposal name are required.</p>
-          <p>
-            If you provide the correct details the proposal will be found and a unique hash generated to confirm your
-            vote.
-          </p>
+          <p>You can vote on a Referundum. The proposal name is required.</p>
           <p>
             For more information checkout{' '}
             <a href="https://github.com/eoscanada/eosio.forum" target="new">
@@ -159,18 +149,11 @@ const enhance = compose(
       const { loading, failure, networkReader, pushTransaction } = props;
       loading();
       setSubmitting(false);
-      getProposalHash(networkReader, values).then(hash => {
-        if (!hash) {
-          failure({ message: 'Unable to find proposal.' });
-        } else {
-          const transaction = makeTransaction(values, hash);
-          pushTransaction(transaction,props.history);
-        }
-      });
+      const transaction = makeTransaction(values);
+      pushTransaction(transaction,props.history);      
     },
     mapPropsToValues: props => ({
       voter: props.networkIdentity ? props.networkIdentity.name : '',
-      proposer: '',
       proposal_name: '',
       vote: false,
     }),
