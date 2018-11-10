@@ -65,7 +65,7 @@ const Karma = props => {
         account: 'therealkarma',
         name: 'refund',
         data: {
-          owner: stake.owner,
+          owner: networkIdentity ? networkIdentity.name : '',
         },
       },
     ];
