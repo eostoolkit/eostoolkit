@@ -20,18 +20,19 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
 
-const makeTransaction = (values, eosTokens) => {
-  const token = eosTokens.find(tk => tk.symbol === values.symbol);
+const makeTransaction = (values, networkAccount) => {
+  const token = networkAccount.balances.find(tk => tk.symbol === values.symbol);
+  const precision = token.amount.split(".")[1] ? token.amount.split(".")[1].length : 0;
   const transaction = [
     {
-      account: token.account,
+      account: token.code || 'eosio.token',
       name: 'transfer',
       data: {
         from: values.owner,
         to: values.name,
         memo: values.memo,
         quantity: `${Number(values.quantity)
-          .toFixed(token.precision)
+          .toFixed(precision)
           .toString()} ${values.symbol}`,
       },
     },
@@ -66,19 +67,19 @@ const TransferForm = props => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  eosTokens: selectTokens(),
-});
+// const mapStateToProps = createStructuredSelector({
+//   eosTokens: selectTokens(),
+// });
 
 const enhance = compose(
-  connect(
-    mapStateToProps,
-    null
-  ),
+  // connect(
+  //   mapStateToProps,
+  //   null
+  // ),
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { pushTransaction, eosTokens } = props;
-      const transaction = makeTransaction(values, eosTokens);
+      const { pushTransaction, networkAccount } = props;
+      const transaction = makeTransaction(values, networkAccount);
       setSubmitting(false);
       pushTransaction(transaction,props.history);
     },

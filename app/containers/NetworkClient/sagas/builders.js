@@ -22,7 +22,7 @@ export function* buildReader(activeNetwork) {
     };
 
     const networkReader = yield Eos(networkOptions);
-    const tokens = yield call(fetchTokens, networkReader);
+    const tokens = [];//yield call(fetchTokens, networkReader);
     const claims = yield call(fetchClaims);
 
     yield put(enableReader(networkReader, tokens, claims));
