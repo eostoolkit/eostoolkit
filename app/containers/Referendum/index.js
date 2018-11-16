@@ -8,7 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import ReferendumForm from 'components/Features/Referendum';
+import ReferendumForm from 'components/Features/ForumForms/Vote';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -44,7 +44,7 @@ export class Referendum extends React.Component {
 const mapStateToProps = createStructuredSelector({
   readerEnabled: makeSelectReaderEnabled(),
   writerEnabled: makeSelectWriterEnabled(),
-  stakes: makeSelectRef(),
+  refs: makeSelectRef(),
   loading: makeSelectLoading(),
 });
 

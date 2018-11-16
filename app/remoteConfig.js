@@ -58,5 +58,6 @@ const claimsUrl = 'https://raw.githubusercontent.com/eostoolkit/eos-claims/maste
 const airgrabsUrl = 'https://raw.githubusercontent.com/eoscafe/eos-airgrabs/master/airgrabs.json';
 const tokensUrl = 'https://raw.githubusercontent.com/eoscafe/eos-airdrops/master/tokens.json';
 const networksUrl = 'https://raw.githubusercontent.com/eostoolkit/eos-networks/master/networks.json';
+const refUrl = 'https://s3.amazonaws.com/api.eosvotes.io/eosvotes/tallies/latest.json';
 
-export { tokensUrl, networksUrl, claimsUrl, airgrabs };
+export { refUrl, tokensUrl, networksUrl, claimsUrl, airgrabs };

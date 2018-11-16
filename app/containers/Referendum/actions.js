@@ -12,9 +12,9 @@ export function fetchRef() {
   };
 }
 
-export function fetchedRef(stakes) {
+export function fetchedRef(refs) {
   return {
     type: FETCHED_REF,
-    stakes,
+    refs,
   };
 }

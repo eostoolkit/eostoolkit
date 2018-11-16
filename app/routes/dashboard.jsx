@@ -39,6 +39,7 @@ import FeaturesPage from 'components/Pages/FeaturesPage';
 import ProxyTable from 'containers/ProxyInfo';
 import HorusPay from 'containers/HorusPay';
 import Karma from 'containers/Karma';
+import Referendum from 'containers/Referendum';
 import Grandpa from 'containers/Grandpa';
 
 // @material-ui/icons
@@ -236,7 +237,7 @@ const dashRoutes = [
         path: '/community/forum/vote',
         name: 'Forum Vote',
         mini: 'FV',
-        component: ForumVote,
+        component: Referendum,
       },
       {
         path: '/community/bidname',

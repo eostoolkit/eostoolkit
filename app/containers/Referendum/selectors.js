@@ -10,7 +10,7 @@ const selectProxyState = state => state.get('Referendum');
  */
 
 const makeSelectLoading = () => createSelector(selectProxyState, substate => substate.get('loading'));
-const makeSelectRef = () => createSelector(selectProxyState, substate => substate.get('stakes'));
+const makeSelectRef = () => createSelector(selectProxyState, substate => substate.get('refs'));
 
 export default selectProxyState;
 export { selectProxyState, makeSelectLoading, makeSelectRef };

@@ -9,7 +9,7 @@ import { FETCH_REF, FETCHED_REF } from './constants';
 
 const initialState = fromJS({
   loading: false,
-  stakes: [],
+  refs: [],
 });
 
 function ReferendumReducer(state = initialState, action) {
@@ -17,7 +17,7 @@ function ReferendumReducer(state = initialState, action) {
     case FETCH_REF:
       return state.set('loading', true);
     case FETCHED_REF:
-      return state.set('stakes', action.stakes).set('loading', false);
+      return state.set('refs', action.refs).set('loading', false);
     default:
       return state;
   }
