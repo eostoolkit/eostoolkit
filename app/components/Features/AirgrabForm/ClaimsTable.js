@@ -37,7 +37,7 @@ function AirgrabTable({ ...props }) {
                     </a>
                   </TableCell>
                   <TableCell className={classes.tableCell}>
-                    {account && account.balances.find(b=>b.account===row.account) ? (
+                    {account && account.balances.find(b=>b.code===row.account) ? (
                       <Button onClick={() => handleSubmit(row)} color="rose">
                         Claim
                       </Button>

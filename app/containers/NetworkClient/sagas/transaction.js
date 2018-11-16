@@ -3,6 +3,11 @@ import { put, select, call } from 'redux-saga/effects';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
 import { push } from 'react-router-redux';
 import { makeSelectIdentity, makeSelectWriter, makeSelectTransaction, makeSelectOffline } from '../selectors';
+import { loadAccount } from '../actions';
+
+function *sleep(time) {
+  yield new Promise(resolve => setTimeout(resolve, time));
+}
 
 export function* pushTransaction(action) {
   const offlineMode = yield select(makeSelectOffline());
@@ -33,7 +38,9 @@ export function* pushTransaction(action) {
       console.log(`Attempting to send tx to scatter: ${JSON.stringify(actions, null, 2)}`);
       const res = yield networkWriter.transaction({ actions });
       yield put(successNotification({TransactionId: res.transaction_id}));
-
+      //wait for block to be committed
+      yield sleep(1000);
+      yield put(loadAccount());
     } catch (err) {
       console.error('An EOSToolkit error occured - see details below:');
       console.error(err);

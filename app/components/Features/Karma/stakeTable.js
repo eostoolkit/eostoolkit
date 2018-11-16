@@ -27,7 +27,7 @@ const Karma = props => {
   let hasRefund = stakes.find(s=>s.owner === 'Refunding');
 
   if(networkAccount) {
-    let hasKarma = networkAccount.balances.find(b=>b.account === 'therealkarma');
+    let hasKarma = networkAccount.balances.find(b=>b.code === 'therealkarma');
 
     if(hasKarma) {
       karmaLiquid = Number(hasKarma.balance.split(' ')[0]);

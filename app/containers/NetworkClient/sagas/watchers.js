@@ -13,7 +13,7 @@ import {
   PUSH_TRANSACTION,
 } from '../constants';
 
-import { buildDispatcher, accountDispatcher } from './dispatcher';
+import { buildDispatcher, writerDispatcher, accountDispatcher } from './dispatcher';
 import { fetchNetworks, fetchAccount } from './fetchers';
 import { destroyIdentity } from './destroyers';
 import { pushTransaction } from './transaction';
@@ -21,6 +21,10 @@ import { pushTransaction } from './transaction';
 // client (re)build can be triggered by signer set, networks loaded, or user request
 function* watchForClientBuild() {
   yield takeLatest([SET_SIGNER, LOADED_NETWORKS, SET_NETWORK, SET_IDENTITY], buildDispatcher);
+}
+
+function* watchForLink() {
+  yield takeLatest([SET_IDENTITY], writerDispatcher);
 }
 
 // account( re)load can be triggered by reader or writer enabled, or user request
@@ -51,6 +55,7 @@ function* watchTransaction() {
 export default function* rootSaga() {
   yield all([
     watchForClientBuild(),
+    watchForLink(),
     watchForAccountLoad(),
     watchLoadNetworks(),
     watchLoadAccount(),

@@ -22,7 +22,7 @@ function ResourcesTable({ ...props }) {
                   <h6>EOS</h6>
                 </TableCell>
                 <TableCell className={classes.tableCell}>
-                  {account.balances.find(b=>b.account==='eosio.token') ? account.balances.find(b=>b.account==='eosio.token').balance : 'None'}
+                  {account.balances.find(b=>b.code==='eosio.token') ? account.balances.find(b=>b.code==='eosio.token').amount : 'None'}
                 </TableCell>
                 <TableCell className={classes.tableCell}>
                   <h6>RAM</h6>
@@ -64,7 +64,7 @@ function ResourcesTable({ ...props }) {
                   <h6>Tokens</h6>
                 </TableCell>
                 <TableCell className={classes.tableCell} colSpan={9}>
-                  <h6>{account.balances.map(bal => bal.balance).join(', ')}</h6>
+                  <h6>{account.balances.map(bal => `${bal.amount} ${bal.symbol}`).join(', ')}</h6>
                 </TableCell>
               </TableRow>
             </TableBody>

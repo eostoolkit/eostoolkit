@@ -261,28 +261,40 @@ function onlyUnique(value, index, self) {
 function* getAccountDetail(reader, name) {
   try {
     const account = yield reader.getAccount(name);
-    const tokens = yield select(makeSelectTokens());
-    const tokenData = yield all(
-      tokens.map(token => {
-        return fork(getCurrency, reader, token.account, name);
-      })
-    );
+    //const tokens = yield select(makeSelectTokens());
+    // const tokenData = yield all(
+    //   tokens.map(token => {
+    //     return fork(getCurrency, reader, token.account, name);
+    //   })
+    // );
+    //
+    // const currencies = yield join(...tokenData);
+    // const balances = currencies.reduce((a, b) => a.concat(b), []);//.filter( onlyUnique );
+    // const unique = [...new Set(balances.map(item => item.balance))];
+    // const final = unique.map(bal => {
+    //   const tokenFind = tokens.find(t=>t.symbol === bal.split(' ')[1]);
+    //   return {
+    //     account: tokenFind ? tokenFind.account : 'grandpacoins',
+    //     balance: bal,
+    //   }
+    //
+    // });
 
-    const currencies = yield join(...tokenData);
-    const balances = currencies.reduce((a, b) => a.concat(b), []);//.filter( onlyUnique );
-    const unique = [...new Set(balances.map(item => item.balance))];
-    const final = unique.map(bal => {
-      const tokenFind = tokens.find(t=>t.symbol === bal.split(' ')[1]);
-      return {
-        account: tokenFind ? tokenFind.account : 'grandpacoins',
-        balance: bal,
-      }
-
+    const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances',{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body:JSON.stringify({account:account.account_name}),
     });
-    yield spawn(fetchLatency);
+    const list = yield data.json();
+    //console.log(list);
+
+
+    //yield spawn(fetchLatency);
     return {
       ...account,
-      balances: final,
+      balances: list,
     };
   } catch (c) {
     console.log(c);
