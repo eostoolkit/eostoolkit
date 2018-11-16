@@ -11,8 +11,31 @@ function* getRef() {
 
     const data = yield fetch(refUrl);
     const list = yield data.json();
-    console.log(list);//TODO: remove
-    yield put(fetchedRef(list));
+    const formatted = Object.keys(list).map(ref => {
+      console.log(list[ref]);
+      const prop = list[ref].proposal;
+      const stats = list[ref].stats;
+      let json = {};
+      try {
+        json = JSON.parse(prop.proposal_json);
+      } catch(err) {}
+      const content = json.content ? json.content : "No content";
+      return {
+        name: prop.proposal_name,
+        proposer: prop.proposer,
+        title: prop.proposer,
+        created: prop.created_at,
+        expires: prop.expires_at,
+        content,
+        votes_yes: stats.votes[1] || 0,
+        votes_no: stats.votes[0] || 0,
+        votes_total: stats.votes["total"] || 0,
+        weight_yes: stats.staked[1] || 0,
+        weight_no: stats.staked[0] || 0,
+        weight_total: stats.staked["total"] || 0,
+      }
+    });
+    yield put(fetchedRef(formatted));
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);

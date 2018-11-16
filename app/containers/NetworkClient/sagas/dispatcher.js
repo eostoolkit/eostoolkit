@@ -18,6 +18,16 @@ export function* buildDispatcher() {
     yield spawn(buildReader, network);
   }
 
+  // if (signer && network) {
+  //   yield spawn(buildWriter, signer, network);
+  // }
+}
+
+export function* writerDispatcher() {
+  const signer = yield select(makeSelectSigner());
+  const network = yield select(makeSelectActiveNetwork());
+  // build only dispatches if we do have networks and signer
+
   if (signer && network) {
     yield spawn(buildWriter, signer, network);
   }

@@ -1,164 +1,121 @@
-/**
- *
- * ForumStatusForm
- *
- */
-
 import React from 'react';
-import { compose } from 'recompose';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { sha256 } from 'js-sha256';
-import { makeSelectReader } from 'containers/NetworkClient/selectors';
-import { failureNotification, loadingNotification } from 'containers/Notification/actions';
-import { withFormik } from 'formik';
-import * as Yup from 'yup';
-
-import CheckCircle from '@material-ui/icons/CheckCircle';
+import ReactTable from 'react-table';
 
 import Tool from 'components/Tool/Tool';
 import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
-import ToolForm from 'components/Tool/ToolForm';
-import ToolInput from 'components/Tool/ToolInput';
-import ToolSwitch from 'components/Tool/ToolSwitch';
+import GridContainer from 'components/Grid/GridContainer';
+import GridItem from 'components/Grid/GridItem';
+import Button from 'components/CustomButtons/Button';
 
-const FormData = [
-  {
-    id: 'voter',
-    label: 'Voter',
-    placeholder: 'Account that votes',
-  },
-  {
-    id: 'proposal_name',
-    label: 'Proposal Name',
-    placeholder: 'Name of the proposal',
-  },
-];
+import Undo from '@material-ui/icons/Undo';
+import AccountBalance from '@material-ui/icons/AccountBalance';
 
-const switchData = {
-  id: 'vote',
-  label: 'Your Vote (No/Yes)',
-  placeholder: 'Vote No - You disagree with the proposal. Vote Yes - You agree with the proposal.',
-};
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const FormObject = props => {
-  const { handleSubmit } = props;
-  const formProps = {
-    handleSubmit,
-    submitColor: 'rose',
-    submitText: 'Vote',
-  };
-  return (
-    <ToolForm {...formProps}>
-      {FormData.map(form => {
-        return <ToolInput key={form.id} {...form} {...props} />;
-      })}
-      <ToolSwitch {...switchData} {...props} />
-    </ToolForm>
-  );
-};
+const Vote = props => {
+  const { refs, loading, ...clientProps } = props;
+  const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
+  console.log(refs);
 
-// async function getProposalHash(networkReader, values) {
-//   const proposals = {
-//     json: true,
-//     scope: 'eosforumrcpp',
-//     code: 'eosforumrcpp',
-//     table: 'proposal',
-//     lower_bound: values.proposal_name
-//     limit: 1,
-//   };
-//
-//   try {
-//     const data = await networkReader.getTableRows(proposals);
-//     const row = data.rows.find(d => d.proposal_name === values.proposal_name);
-//     if (row) {
-//       const hash = sha256(row.title + row.proposal_json);
-//       return hash;
-//     }
-//     return false;
-//   } catch (err) {
-//     return false;
-//   }
-// }
-
-const makeTransaction = (values) => {
-  const { vote, ...otherValues } = values;
-  const transaction = [
-    {
-      account: 'eosforumrcpp',
-      name: 'vote',
-      data: {
-        ...otherValues,
-        vote: vote ? 1 : 0,
-        vote_json: '',
+  const makeTransaction = (values,vote) => {
+    const transaction = [
+      {
+        account: 'eosforumrcpp',
+        name: 'vote',
+        data: {
+          voter: networkIdentity ? networkIdentity.name : '',
+          proposal_name: values.name,
+          vote,
+          vote_json: '',
+        },
       },
-    },
-  ];
-  return transaction;
-};
+    ];
+    pushTransaction(transaction,props.history);
+  };
 
-const validationSchema = Yup.object().shape({
-  voter: Yup.string().required('Account is required'),
-  proposal_name: Yup.string().required('Proposals require a name'),
-});
+  const data = refs.map(ref => {
+    return {
+      ...ref,
+      actions: (
+        <div className="actions-right">
+          <Button
+            onClick={() => {makeTransaction(ref,1)}}
+            color="warning">Yes</Button>{" "}
+          <Button
+            onClick={() => {makeTransaction(ref,0)}}
+            color="success">No</Button>
+        </div>
+      ),
+    };
+  });
 
-const ForumVoteForm = props => {
   return (
-    <Tool>
-      <ToolSection lg={8}>
-        <ToolBody color="warning" icon={CheckCircle} header="FORUM" subheader=" - Vote">
-          <FormObject {...props} />
-        </ToolBody>
-      </ToolSection>
-      <ToolSection lg={4}>
-        <ToolBody color="info" header="Tutorial">
-          <h5>EOSIO Forum Vote</h5>
-          <p>This is part of the eosio.forum Referendum project.</p>
-          <p>You can vote on a Referundum. The proposal name is required.</p>
-          <p>
-            For more information checkout{' '}
-            <a href="https://github.com/eoscanada/eosio.forum" target="new">
-              Eos Canada GitHub
-            </a>
-          </p>
-        </ToolBody>
-      </ToolSection>
-    </Tool>
+    <ToolBody
+      color="warning"
+      icon={AccountBalance}
+      header="Referendum Proposals">
+      <ReactTable
+        data={data}
+        filterable
+        noDataText={loading ? (<CircularProgress color="secondary" />) : ('No proposals found')}
+        columns={[
+          {
+            Header: 'Name',
+            accessor: 'name',
+            filterable: true,
+          },
+          {
+            Header: 'Title',
+            accessor: 'title',
+            filterable: true,
+          },
+          {
+            Header: 'Content',
+            accessor: 'content',
+            filterable: true,
+            width: 300,
+          },
+          {
+            Header: 'Yes',
+            accessor: 'votes_yes',
+            filterable: true,
+            width: 100,
+          },
+          {
+            Header: 'No',
+            accessor: 'votes_no',
+            filterable: true,
+            width: 100,
+          },
+          {
+            Header: 'Total',
+            accessor: 'votes_total',
+            filterable: true,
+            width: 100,
+          },
+          {
+            Header: 'Actions',
+            accessor: 'actions',
+            filterable: false,
+            sortable: false,
+            width: 300,
+          },
+        ]}
+        defaultSorted={[
+            {
+              id: "votes_total",
+              desc: true
+            }
+          ]}
+        defaultPageSize={10}
+        pageSize={10}
+        showPaginationTop = {true}
+        showPaginationBottom={false}
+        className="-striped -highlight"
+      />
+    </ToolBody>
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  networkReader: makeSelectReader(),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    loading: () => dispatch(loadingNotification()),
-    failure: err => dispatch(failureNotification(err)),
-  };
-}
-
-const enhance = compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  withFormik({
-    handleSubmit: (values, { props, setSubmitting }) => {
-      const { loading, failure, networkReader, pushTransaction } = props;
-      loading();
-      setSubmitting(false);
-      const transaction = makeTransaction(values);
-      pushTransaction(transaction,props.history);      
-    },
-    mapPropsToValues: props => ({
-      voter: props.networkIdentity ? props.networkIdentity.name : '',
-      proposal_name: '',
-      vote: false,
-    }),
-    validationSchema,
-  })
-);
-
-export default enhance(ForumVoteForm);
+export default Vote;
