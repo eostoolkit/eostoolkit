@@ -22,7 +22,8 @@ export class Referendum extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    this.interval = setInterval(() => this.props.refreshRef(), 5000);
+    //this.interval = setInterval(() => this.props.refreshRef(), 5000);
+    this.props.refreshRef();
   }
 
   componentWillUpdate(nextProps) {
@@ -32,9 +33,9 @@ export class Referendum extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+  // componentWillUnmount() {
+  //   clearInterval(this.interval);
+  // }
 
   render() {
     return <ReferendumForm {...this.props} />;

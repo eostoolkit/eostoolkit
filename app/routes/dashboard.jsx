@@ -58,6 +58,8 @@ import {
   Settings,
   VpnKey,
   Games,
+  Feedback,
+  Extension
 } from '@material-ui/icons';
 import HorusIcon from 'components/Icons/Horus';
 import KarmaIcon from 'components/Icons/Karma';
@@ -71,10 +73,10 @@ const dashRoutes = [
     component: FeaturesPage,
   },
   {
-    path: '/grandpacoins',
-    name: 'GrandpaCoins',
-    icon: Games,
-    component: Grandpa,
+    path: '/community/forum/vote',
+    name: 'Referendum',
+    icon: Feedback,
+    component: Referendum,
   },
   {
     path: '/donate',
@@ -89,17 +91,33 @@ const dashRoutes = [
     component: GovernancePage,
   },
   {
-    path: '/karma',
-    name: 'KARMA',
-    icon: KarmaIcon,
-    component: Karma,
+    collapse: true,
+    path: '/dapps',
+    name: 'Dapps',
+    state: 'openDapps',
+    icon: Extension,
+    views: [
+      {
+        path: '/dapps/karma',
+        name: 'KARMA',
+        mini: 'K',
+        component: Karma,
+      },
+      {
+        path: '/dapps/horuspay',
+        name: 'HorusPay',
+        mini: 'HP',
+        component: HorusPay,
+      },
+      {
+        path: '/dapps/grandpacoins',
+        name: 'GrandpaCoins',
+        mini: 'GC',
+        component: Grandpa,
+      },
+    ]
   },
-  {
-    path: '/horuspay',
-    name: 'HorusPay',
-    icon: HorusIcon,
-    component: HorusPay,
-  },
+
   {
     path: '/airgrab',
     name: 'Airgrab Tokens',
@@ -234,12 +252,6 @@ const dashRoutes = [
         component: ForumProposal,
       },
       {
-        path: '/community/forum/vote',
-        name: 'Forum Vote',
-        mini: 'FV',
-        component: Referendum,
-      },
-      {
         path: '/community/bidname',
         name: 'Premium Names',
         mini: 'PN',
@@ -292,5 +304,8 @@ const dashRoutes = [
   { redirect: true, path: '/', pathTo: '/home', name: 'Home' },
   { redirect: true, path: '/account/buyram', pathTo: '/account/ram', name: 'Buy RAM' },
   { redirect: true, path: '/account/sellram', pathTo: '/account/ram', name: 'Sell RAM' },
+  { redirect: true, path: '/karma', pathTo: '/dapps/karma', name: 'Karma' },
+  { redirect: true, path: '/horuspay', pathTo: '/dapps/horuspay', name: 'HorusPay' },
+  { redirect: true, path: '/grandpacoins', pathTo: '/dapps/grandpacoins', name: 'Grandpa' },
 ];
 export default dashRoutes;

@@ -288,7 +288,7 @@ function* getAccountDetail(reader, name) {
       body:JSON.stringify({account:account.account_name}),
     });
     const list = yield data.json();
-    console.log(list);
+    //console.log(list);
 
 
     //yield spawn(fetchLatency);

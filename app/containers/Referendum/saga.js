@@ -12,7 +12,7 @@ function* getRef() {
     const data = yield fetch(refUrl);
     const list = yield data.json();
     const formatted = Object.keys(list).map(ref => {
-      console.log(list[ref]);
+      
       const prop = list[ref].proposal;
       const stats = list[ref].stats;
       let json = {};

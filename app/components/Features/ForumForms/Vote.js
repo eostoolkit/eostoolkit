@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTable from 'react-table';
+import MarkdownRenderer from 'react-markdown-renderer';
 
 import Tool from 'components/Tool/Tool';
 import ToolSection from 'components/Tool/ToolSection';
@@ -16,8 +17,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const Vote = props => {
   const { refs, loading, ...clientProps } = props;
   const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
-  console.log(refs);
-
   const makeTransaction = (values,vote) => {
     const transaction = [
       {
@@ -71,28 +70,19 @@ const Vote = props => {
             filterable: true,
           },
           {
-            Header: 'Content',
-            accessor: 'content',
-            filterable: true,
-            width: 300,
-          },
-          {
             Header: 'Yes',
             accessor: 'votes_yes',
             filterable: true,
-            width: 100,
           },
           {
             Header: 'No',
             accessor: 'votes_no',
             filterable: true,
-            width: 100,
           },
           {
             Header: 'Total',
             accessor: 'votes_total',
             filterable: true,
-            width: 100,
           },
           {
             Header: 'Actions',
@@ -113,6 +103,14 @@ const Vote = props => {
         showPaginationTop = {true}
         showPaginationBottom={false}
         className="-striped -highlight"
+        SubComponent={row => {
+            return (
+              <div  style={{ padding: "20px" }}>
+                <MarkdownRenderer markdown={row.original.content} />
+              </div>
+            )
+          }
+        }
       />
     </ToolBody>
   );

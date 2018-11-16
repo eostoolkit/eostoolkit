@@ -37,6 +37,7 @@ class Sidebar extends React.Component {
     super(props);
     this.state = {
       openAvatar: false,
+      openDapps: this.activeRoute('/dapps'),
       openAccount: this.activeRoute('/account'),
       openVote: this.activeRoute('/vote'),
       openCommunity: this.activeRoute('/community'),
