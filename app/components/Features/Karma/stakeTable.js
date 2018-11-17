@@ -30,7 +30,7 @@ const Karma = props => {
     let hasKarma = networkAccount.balances.find(b=>b.code === 'therealkarma');
 
     if(hasKarma) {
-      karmaLiquid = Number(hasKarma.balance.split(' ')[0]);
+      karmaLiquid = Number(hasKarma.amount);
     }
     if(hasStaked) {
       karmaStaked = Number(hasStaked.weight.split(' ')[0]);
