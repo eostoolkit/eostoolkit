@@ -280,12 +280,36 @@ function* getAccountDetail(reader, name) {
     //
     // });
 
+    let body = {account:account.account_name};
+
+    try {
+      const flare = yield fetch('https://api-pub.eosflare.io/v1/eosflare/get_account',{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        body:JSON.stringify(body),
+      });
+      const flareData = yield flare.json();
+
+      if(flareData.account) {
+        let tokens = flareData.account.tokens.map(token=>{
+          return `${token.contract}:${token.symbol}`;
+        });
+        tokens.unshift('eosio.token:EOS');
+        body = {
+          ...body,
+          tokens,
+        }
+      }
+    } catch(err) {}
+
     const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances',{
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
       },
-      body:JSON.stringify({account:account.account_name}),
+      body:JSON.stringify(body),
     });
     const list = yield data.json();
     //console.log(list);

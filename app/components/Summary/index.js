@@ -51,11 +51,11 @@ function Summary(props) {
                 </h5>
               </CardHeader>
               <CardBody>
-                <Warning>
-                  <h6>Having connectivity issues or Scatter not appearing when transacting?</h6>
-                  <h5><Announcement/>Please ensure you have updated to the latest Scatter Desktop</h5>
-                </Warning>
+
                 <ResourceTable account={account} />
+                <Warning>
+                  <h6><Announcement/> Token details powered by eosflare and greymass</h6>
+                </Warning>
               </CardBody>
             </Card>
           </GridItem>
