@@ -32,8 +32,11 @@ import CardHeader from 'components/Card/CardHeader';
 import ResourceTable from './resources';
 import userProfileStyles from './comingSoon';
 
+import { injectIntl, FormattedMessage } from 'react-intl';
+import messages from './messages';
+
 function Summary(props) {
-  const { classes, account, network } = props;
+  const { classes, account, network, intl } = props;
     return (
       <div>
         <GridContainer>
@@ -46,7 +49,7 @@ function Summary(props) {
                 <h5 className={classes.cardIconTitle}>
                   {account ? (
                     `${account.account_name} [${network.network.name} via ${network.endpoint.name}]`
-                  ) : ('Attach an Account')}
+                  ) : (intl.formatMessage(messages.attachAccount))}
 
                 </h5>
               </CardHeader>
@@ -54,7 +57,7 @@ function Summary(props) {
 
                 <ResourceTable account={account} />
                 <Warning>
-                  <h6><Announcement/> Token details powered by eosflare and greymass</h6>
+                  <h6><Announcement/> <FormattedMessage { ...messages.tokenDetailInfoText } /></h6>
                 </Warning>
               </CardBody>
             </Card>
@@ -79,4 +82,4 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   )
-)(Summary);
+)(injectIntl(Summary));

@@ -1,0 +1,16 @@
+{
+  "app.components.Information.Home.header": "Erste Schritte",
+  "app.components.Information.Home.scatterInfo": "Du musst <a href=\"https://get-scatter.com/\" target=\"new\">Scatter</a> installiert haben um sicher Transaktionen im EOS Netzwerk machen zu können",
+  "app.components.Information.Home.helpdeskInfo": "Schaue auf unserem <a href=\"https://eoshelpdesk.zendesk.com\" target=\"new\">EOS Helpdesk</a> vorbei um nützliche Informationen zum EOSToolkit und dem EOS Netzwerk zu erhalten.",
+  "app.components.Information.Home.generEOSTelegram": "Wenn du Fragen an uns hast, oder an der GenerEOS Community teilhaben möchtest, besuche uns auf <a href=\"https://t.me/generEOS\" target=\"new\">Telegram</a>.",
+  "app.components.Information.Home.governanceLinkP1": "Stelle sicher, dass du die ",
+  "app.components.Information.Home.governanceLinkP2": " gelesen und verstanden hast, bevor du das EOS Netzwerk benutzt.",
+
+  "app.components.Summary.index.attachAccount": "Account Hinzufügen",
+  "app.components.Summary.resources.loadAccountText": "Lade einen Account um deine Ressourcennutzung und Kontostand zu sehen.",
+  "app.components.Summary.resources.loadAccountAdditionalInfoText": "Falls deine Account-Details weiterhin nicht angezeigt werden, liegt es daran, dass einige Netzte in deiner Nähe sind. Wähle eines manuell durch einen Click auf \"Change Network\".",
+  "app.components.Summary.resources.tokenDetailInfoText": "Token-Details bereitgestellt von eosflare und greymass",
+
+  "app.components.Features.NetworkForm.selectNetwork": "Wähle ein Netzwerk",
+  "app.components.Features.NetworkForm.addNetworkToGit": "Füge dein Testnetzwerk oder Endpunkt durch einen Pull Request auf <a href=\"https://github.com/eostoolkit/eos-networks\" target=\"new\">GitHub</a> zu dieser Liste hinzu."
+}

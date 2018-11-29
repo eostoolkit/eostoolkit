@@ -7,10 +7,12 @@
 import { fromJS } from 'immutable';
 
 import { CHANGE_LOCALE } from './constants';
-import {DEFAULT_LOCALE} from '../App/constants'; // eslint-disable-line
+import { DEFAULT_LOCALE } from '../App/constants'; // eslint-disable-line
+
+const browserLang = navigator ? navigator.language || navigator.browserLanguage || DEFAULT_LOCALE : DEFAULT_LOCALE;
 
 const initialState = fromJS({
-  locale: DEFAULT_LOCALE,
+  locale: browserLang.substring(0,2),
 });
 
 function languageProviderReducer(state = initialState, action) {
@@ -23,3 +25,4 @@ function languageProviderReducer(state = initialState, action) {
 }
 
 export default languageProviderReducer;
+
