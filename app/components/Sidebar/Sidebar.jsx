@@ -32,6 +32,9 @@ import avatar from 'assets/img/scatter.png';
 import SidebarWrapper from './SidebarWrapper';
 import sidebarStyle from './sidebarStyle';
 
+import { injectIntl } from 'react-intl';
+import messages from './messages';
+
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -102,7 +105,7 @@ class Sidebar extends React.Component {
                 {this.props.identity ? (<ExitToApp />) : (<AddBox />)}
               </ListItemIcon>
               <ListItemText
-                primary={this.props.identity ? "Detach Account" : "Attach Account"} // TODO: Make this international
+                primary={this.props.identity ? this.props.intl.formatMessage(messages.detachAccount) : this.props.intl.formatMessage(messages.attachAccount)}
                 disableTypography
                 className={collapseItemText}
               />
@@ -114,7 +117,7 @@ class Sidebar extends React.Component {
                 <SettingsApplications />
               </ListItemIcon>
               <ListItemText
-                primary="Change Network" // TODO: Make this international
+                primary={this.props.intl.formatMessage(messages.changeNetwork)}
                 disableTypography
                 className={collapseItemText}
               />
@@ -126,7 +129,7 @@ class Sidebar extends React.Component {
                 <Autorenew />
               </ListItemIcon>
               <ListItemText
-                primary={this.props.offlineMode ? "Multisig Mode" : "Singlesig Mode"} // TODO: Make this international
+                primary={this.props.offlineMode ? this.props.intl.formatMessage(messages.multiSigMode) : this.props.intl.formatMessage(messages.singleSigMode)}
                 disableTypography
                 className={collapseItemText}
               />
@@ -360,4 +363,4 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   )
-)(Sidebar);
+)(injectIntl(Sidebar));

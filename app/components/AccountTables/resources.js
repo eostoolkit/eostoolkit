@@ -10,10 +10,13 @@ import TableRow from '@material-ui/core/TableRow';
 
 import tableStyle from 'assets/jss/tableStyle';
 
+import { FormattedMessage } from 'react-intl';
+import generalMessages from '../messages';
+
 function ResourcesTable({ ...props }) {
   const { classes, account } = props;
   if (!account) {
-    return <div>Invalid name or not found</div>;
+    return <div><FormattedMessage { ...generalMessages.invalidNotFoundText }/></div>;
   }
   return (
     <div className={classes.tableResponsive}>

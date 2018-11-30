@@ -12,5 +12,26 @@
   "app.components.Summary.resources.tokenDetailInfoText": "Token-Details bereitgestellt von eosflare und greymass",
 
   "app.components.Features.NetworkForm.selectNetwork": "Wähle ein Netzwerk",
-  "app.components.Features.NetworkForm.addNetworkToGit": "Füge dein Testnetzwerk oder Endpunkt durch einen Pull Request auf <a href=\"https://github.com/eostoolkit/eos-networks\" target=\"new\">GitHub</a> zu dieser Liste hinzu."
+  "app.components.Features.NetworkForm.addNetworkToGit": "Füge dein Testnetzwerk oder Endpunkt durch einen Pull Request auf <a href=\"https://github.com/eostoolkit/eos-networks\" target=\"new\">GitHub</a> zu dieser Liste hinzu.",
+
+  "app.components.Account.reviewSearchTermText": "Bitte überprüfe deinen Suchbegriff",
+
+  "app.components.NetworkStatus.Identity.attachAccountText": "Bitte füge einen Account hinzu",
+  "app.components.NetworkStatus.Identity.installScatterText": "Bitte installiere Scatter",
+
+  "app.components.NetworkStatus.Status.ifReadNotTickedText": "Falls READ nicht aktiv ist, bedeutet das, dass nicht auf den gewählten Mainnet Endpoint zugegriffen werden kann. Entweder liegt das an Berechtigungen deiner Internetverbindung, oder der Enpoint ist down. Versuche ein anderes Netzwer unter dem Menüpunkt 'Change network' zu wählen.",
+  "app.components.NetworkStatus.Status.ifWriteNotTickedText": "Falls WRITE access nicht aktiv ist, stelle sicher, dass Scatter mit einem gültigen Netzwerk konfiguriert und mit deinem Account verbunden ist.",
+  "app.components.NetworkStatus.Status.ifAccountNotTickedText": "Falls ACCOUNT nicht aktiv ist, wähle 'Select account' aus dem oberen Menü und wähle einen Account um Aktionen durchzuführen",
+
+  "app.components.Pages.FeaturesPage.welcomeText": "Willkommen beim EOSToolkit",
+  "app.components.Pages.FeaturesPage.easyAccessText": " - Einfacher Zugang zum EOS Netzwerk",
+  "app.components.Pages.GovernancePage.governanceInfoText": " - By using this tool you agree to the following",
+
+  "app.components.Sidebar.attachAccount": "Account verbinden",
+  "app.components.Sidebar.detachAccount": "Account trennen",
+  "app.components.Sidebar.changeNetwork": "Netzwerk wechseln",
+  "app.components.Sidebar.multiSigMode": "Multisig Modus",
+  "app.components.Sidebar.singleSigMode": "Singlesig Modus",
+
+  "app.components.general.invalidNotFoundText": "Ungültig oder nicht gefunden"
 }

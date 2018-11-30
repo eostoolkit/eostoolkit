@@ -14,15 +14,20 @@ import ToolBody from 'components/Tool/ToolBody';
 import dashboardRoutes from 'routes/dashboard';
 import HomeDoc from 'components/Information/Home';
 
-const FeaturesPage = () => {
+import { injectIntl } from 'react-intl';
+import messages from './messages';
+
+const FeaturesPage = (props) => {
+  const { intl } = props;
+
   return (
     <Tool>
       <ToolSection lg={12}>
         <ToolBody
           color="info"
           icon={Info}
-          header="Welcome to EOSToolkit"
-          subheader=" - Easy access to the EOS Network">
+          header={intl.formatMessage(messages.welcomeText)}
+          subheader={intl.formatMessage(messages.easyAccessText)}>
           <HomeDoc />
         </ToolBody>
       </ToolSection>
@@ -62,4 +67,4 @@ const FeaturesPage = () => {
   );
 };
 
-export default FeaturesPage;
+export default (injectIntl(FeaturesPage));

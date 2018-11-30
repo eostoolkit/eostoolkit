@@ -25,6 +25,11 @@ import regularFormsStyle from 'assets/jss/regularFormsStyle';
 
 import ResourceTable from 'components/AccountTables/resources';
 import BalancesTable from 'components/AccountTables/balances';
+
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
+import generalMessages from '../messages';
+
 const Account = props => {
   const { classes, account, showJson, toggleVisibility } = props;
   if (!account) {
@@ -35,10 +40,10 @@ const Account = props => {
             <CardIcon color="rose">
               <Person />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Invalid or Not found</h4>
+            <h4 className={classes.cardIconTitle}><FormattedMessage { ...generalMessages.invalidNotFoundText } /></h4>
           </CardHeader>
           <CardBody>
-            <h5>Please review your search terms</h5>
+            <h5><FormattedMessage { ...messages.reviewSearchTermText } /></h5>
           </CardBody>
         </Card>
       </GridItem>
