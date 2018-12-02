@@ -25,18 +25,42 @@ function* getCurrency(token, name) {
 function* getAccountDetail(name) {
   try {
     const networkReader = yield select(makeSelectReader());
-    const eosTokens = yield select(selectTokens());
     const account = yield networkReader.getAccount(name);
-    const tokens = yield all(
-      eosTokens.map(token => {
-        return fork(getCurrency, token.account, name);
-      })
-    );
-    const currencies = yield join(...tokens);
-    const balances = currencies.reduce((a, b) => a.concat(b), []);
+
+    let body = {account:account.account_name};
+    try {
+      const flare = yield fetch('https://api-pub.eosflare.io/v1/eosflare/get_account',{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        body:JSON.stringify(body),
+      });
+      const flareData = yield flare.json();
+
+      if(flareData.account) {
+        let tokens = flareData.account.tokens.map(token=>{
+          return `${token.contract}:${token.symbol}`;
+        });
+        tokens.unshift('eosio.token:EOS');
+        body = {
+          ...body,
+          tokens,
+        }
+      }
+    } catch(err) {}
+
+    const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances',{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body:JSON.stringify(body),
+    });
+    const list = yield data.json();
     return {
       ...account,
-      balances,
+      balances: list,
     };
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');

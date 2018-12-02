@@ -21,21 +21,6 @@ import saga from './saga';
 export class Grandpa extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
 
-  componentDidMount() {
-    this.interval = setInterval(() => this.props.refreshMiner(), 5000);
-  }
-
-  componentWillUpdate(nextProps) {
-    if (this.props.readerEnabled !== nextProps.readerEnabled) {
-      // start loading the reader asap
-      this.props.refreshMiner();
-    }
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
   render() {
     return <GrandpaForm {...this.props} />;
   }

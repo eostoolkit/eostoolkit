@@ -23,12 +23,12 @@ function BalancesTable({ ...props }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {account.balance && account.balances.length > 0 ? (
+          {account.balances && account.balances.length > 0 ? (
             account.balances.map(row => {
               return (
-                <TableRow className={classes.tableRowHover} key={row.balance}>
-                  <TableCell className={classes.tableCell}>{row.account}</TableCell>
-                  <TableCell className={classes.tableCell}>{row.balance}</TableCell>
+                <TableRow className={classes.tableRowHover} key={`${row.code}:${row.symbol}`}>
+                  <TableCell className={classes.tableCell}>{row.code}</TableCell>
+                  <TableCell className={classes.tableCell}>{row.amount} {row.symbol}</TableCell>
                 </TableRow>
               );
             })
