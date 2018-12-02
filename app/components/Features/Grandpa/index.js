@@ -23,7 +23,9 @@ const makeClaim = (values, networkIdentity) => {
     {
       account: 'grandpacoins',
       name: 'quit',
-      owner: networkIdentity ? networkIdentity.name : ''
+      data: {
+        owner: networkIdentity ? networkIdentity.name : ''
+      }      
     },
   ];
   return transaction;
