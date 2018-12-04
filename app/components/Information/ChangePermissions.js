@@ -1,20 +1,39 @@
 import React from 'react';
 
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
+
 const ChangePermissions = () => {
   return (
     <div>
       <h5>
-        <strong>This action has serious consequences</strong>
+        <strong>
+          <FormattedMessage {...messages.changePermissionsHeader} />
+        </strong>
       </h5>
-      <h5>If you don{"'"}t control the permissions you assign - your account becomes IRRECOVERABLE</h5>
-      <h5>If you assign an ACCOUNT instead of a KEY as a permission you risk breaking your account - be 100% SURE</h5>
-      <p>You can change active or owner permission or both</p>
-      <p>Leave blank any permission you DON{"'"}T want to change</p>
-      <p>To change only active permission select youraccount@active for your Scatter identity</p>
-      <p>To change any permission select youraccount@owner for your Scatter identity</p>
-      <p>If you change your active permission you have to update your scatter identity to use this new key pair</p>
+      <h5>
+        <FormattedMessage {...messages.changePermissionsHeaderTow} />
+      </h5>
+      <h5>
+        <FormattedMessage {...messages.changePermissionsHeaderThree} />
+      </h5>
       <p>
-        If you dont have the key pairs you assign to the active permission you will no longer be able send transactions
+        <FormattedMessage {...messages.changePermissionsLineOne} />
+      </p>
+      <p>
+        <FormattedMessage {...messages.changePermissionsLineTwo} />
+      </p>
+      <p>
+        <FormattedMessage {...messages.changePermissionsLineThree} />
+      </p>
+      <p>
+        <FormattedMessage {...messages.changePermissionsLineFour} />
+      </p>
+      <p>
+        <FormattedMessage {...messages.changePermissionsLineFive} />
+      </p>
+      <p>
+        <FormattedMessage {...messages.changePermissionsLineSix} />
       </p>
     </div>
   );
