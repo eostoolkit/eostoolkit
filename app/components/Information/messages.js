@@ -73,5 +73,127 @@ export default defineMessages({
   disclaimerText: {
     id: 'app.components.Information.Disclaimer.disclaimerText',
     defaultMessage: `By executing this action you are agreeing to the EOS constitution and this action's associated ricardian contract. The ricardian contract may be viewed in the Scatter approval prompt.`,
-  }
+  },
+  // Messages for ComplexPermissions component
+  complexPermissionsHeader: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsHeader',
+    defaultMessage: `This action has serious consequences - You can make your account IRRECOVERABLE`,
+  },
+  complexPermissionsHeaderTwo: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsHeaderTwo',
+    defaultMessage: `Adding or modifying permissions`,
+  },
+  complexPermissionsHeaderThree: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsHeaderThree',
+    defaultMessage: `Remove a permission`,
+  },
+  complexPermissionsLineOne: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsLineOne',
+    defaultMessage: `EOS accounts can have complex permission structures which include a parent/child relationship. 
+                     Every account starts with the basic structure <i>owner</i>, which is the parent permission for all 
+                     future permissions, and it's child <i>active</i>.`,
+  },
+  complexPermissionsLineTow: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsLineTwo',
+    defaultMessage: `Parent permissions can always change or remove the child permissions. For example, <i>active</i> 
+                     can have the child permission <i>delegate</i> added beneath it. Both <i>owner</i> and <i>active</i>
+                     can change or remove the <i>delegate</i> permission because it is the child of both.`,
+  },
+  complexPermissionsLineThree: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsLineThree',
+    defaultMessage: `Each permission itself has a threshold, and can have a set of keys, accounts, or delays associated 
+                     with various weight. If the threshold is 1, any of these authorities with a weight of 1 can execute
+                     a transaction. If the threshold is 2 you will require the signatures of two <i>weight 1</i> 
+                     authorities, or a single <i>weight 2</i> authority.`,
+  },
+  complexPermissionsLineFour: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsLineFour',
+    defaultMessage: `<u>Threshold</u> is the required sum of permission weights to execute an action.`,
+  },
+  complexPermissionsLineFive: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsLineFive',
+    defaultMessage: `<u>Permission</u> is the name of the new permission.`,
+  },
+  complexPermissionsLineSix: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsLineSix',
+    defaultMessage: `<u>Parent</u> is the parent permission of the new permission.`,
+  },
+  complexPermissionsLineSeven: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsLineSeven',
+    defaultMessage: `<u>Authority</u> can be an actor authority in the format <i>accountname@permission</i>, a public key, or a delay in seconds.`,
+  },
+  complexPermissionsLineEight: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsLineEight',
+    defaultMessage: `<u>Weight</u> is how much weight this Authority lends to the Threshold.`,
+  },
+  complexPermissionsLineNine: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsLineNine',
+    defaultMessage: `You can add or remove rows as required to meet your multisig requirements.`,
+  },
+  complexPermissionsLineTen: {
+    id: 'app.components.Information.ComplexPermissions.complexPermissionsLineTen',
+    defaultMessage: `Specify the <u>Permission</u> and <u>Parent</u>, and leave a single <u>Authority</u> row empty with the default <u>Weight</u> of 1.`,
+  },
+  // Messages for Donate component
+  donateHeader: {
+    id: 'app.components.Information.Donate.donateHeader',
+    defaultMessage: `Dear EOSToolkit supporters,`,
+  },
+  donateLineOne: {
+    id: 'app.components.Information.Donate.donateLineOne',
+    defaultMessage: `The <strong>EOSToolkit</strong> was made out of love prior to the launch of the EOS mainnet thanks to long hours
+                     late into the night and a staunch belief in making EOS accessible to everyone.`,
+  },
+  donateLineTwo: {
+    id: 'app.components.Information.Donate.donateLineTwo',
+    defaultMessage: `Thanks to your support and votes <strong>Team GenerEOS</strong> now receives block rewards and this helps fund
+                     further development of the eostoolkit and other EOS projects.`,
+  },
+  donateLineThree: {
+    id: 'app.components.Information.Donate.donateLineThree',
+    defaultMessage: `However, the goal of GenerEOS is to give back to the community.`,
+  },
+  donateLineFour: {
+    id: 'app.components.Information.Donate.donateLineFour',
+    defaultMessage: `By donating you will be supporting development of the <strong>EOSToolkit</strong> directly, while allowing
+                     GenerEOS to give even more back to those who need it most.`,
+  },
+  donateLineFive: {
+    id: 'app.components.Information.Donate.donateLineFive',
+    defaultMessage: `We hope you love the <strong>EOSToolkit</strong> as much as I've loved making it.`,
+  },
+  // Messages for LinkAuth component
+  linkAuthHeaderOne: {
+    id: 'app.components.Information.LinkAuth.linkAuthHeaderOne',
+    defaultMessage: `Link Authorization`,
+  },
+  linkAuthHeaderTwo: {
+    id: 'app.components.Information.LinkAuth.linkAuthHeaderTwo',
+    defaultMessage: `Unlink Authorization`,
+  },
+  linkAuthLineOne: {
+    id: 'app.components.Information.LinkAuth.linkAuthLineOne',
+    defaultMessage: `You can create special permissions that can access only specific actions. (Use the Advanced Permissions feature)`,
+  },
+  linkAuthLineTwo: {
+    id: 'app.components.Information.LinkAuth.linkAuthLineTwo',
+    defaultMessage: `The default owner and active permissions can do anything - depending the account this can be dangerous.
+                     You can create special permissions on your account that are allowed to execute specific contract actions.`,
+  },
+  linkAuthLineThree: {
+    id: 'app.components.Information.LinkAuth.linkAuthLineThree',
+    defaultMessage: `A common use case may be a high value account. The owner and active keys are safely locked away, while you create a <i>transfer</i> permission with multisig requirements.`,
+  },
+  linkAuthLineFour: {
+    id: 'app.components.Information.LinkAuth.linkAuthLineFour',
+    defaultMessage: `You would then link the <i>transfer</i> permission to the eosio.token contract and transfer action.`,
+  },
+  linkAuthLineFive: {
+    id: 'app.components.Information.LinkAuth.linkAuthLineFive',
+    defaultMessage: `NOTE: Linked auths do not appear on your account - you must use a block explorer to find link auth actions you have done.`,
+  },
+  linkAuthLineSix: {
+    id: 'app.components.Information.LinkAuth.linkAuthLineSix',
+    defaultMessage: `If you want to remove a link simply specify the same contract and action.`,
+  },
 });

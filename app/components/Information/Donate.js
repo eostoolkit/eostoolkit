@@ -1,24 +1,24 @@
 import React from 'react';
 
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import messages from './messages';
+
 const Donate = () => {
   return (
     <div>
-      <h5>Dear EOSToolkit supporters,</h5>
+      <h5><FormattedMessage {...messages.donateHeader}/></h5>
       <p>
-        The <strong>EOSToolkit</strong> was made out of love prior to the launch of the EOS mainnet thanks to long hours
-        late into the night and a staunch belief in making EOS accessible to everyone.
+        <FormattedHTMLMessage {...messages.donateLineOne} />
       </p>
       <p>
-        Thanks to your support and votes <strong>Team GenerEOS</strong> now receives block rewards and this helps fund
-        further development of the eostoolkit and other EOS projects.
+        <FormattedHTMLMessage {...messages.donateLineTwo} />
       </p>
-      <p>However, the goal of GenerEOS is to give back to the community.</p>
+      <p><FormattedMessage {...messages.donateLineThree} /></p>
       <p>
-        By donating you will be supporting development of the <strong>EOSToolkit</strong> directly, while allowing
-        GenerEOS to give even more back to those who need it most.
+        <FormattedHTMLMessage {...messages.donateLineFour} />
       </p>
       <p>
-        We hope you love the <strong>EOSToolkit</strong> as much as I{"'"}ve loved making it.
+        <FormattedHTMLMessage {...messages.donateLineFive} />
       </p>
       <p>
         <strong>&hearts;,</strong>
