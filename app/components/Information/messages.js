@@ -196,4 +196,172 @@ export default defineMessages({
     id: 'app.components.Information.LinkAuth.linkAuthLineSix',
     defaultMessage: `If you want to remove a link simply specify the same contract and action.`,
   },
+  // Messages for LinkAuth component
+  poormanInfoHeader: {
+    id: 'app.components.Information.PoormanInfo.poormanInfoHeader',
+    defaultMessage: `The POORMANTOKEN is an EOS token that includes signups and burning to make airdrops cheaper`,
+  },
+  poormanInfoLineOne: {
+    id: 'app.components.Information.PoormanInfo.poormanInfoLineOne',
+    defaultMessage: `The intention is to allow EOS accounts to Airgrab the token (i.e. opt-in or signup)`,
+  },
+  poormanInfoLineTwo: {
+    id: 'app.components.Information.PoormanInfo.poormanInfoLineTwo',
+    defaultMessage: `The September 1st airdrop has been completed.`,
+  },
+  poormanInfoLineThree: {
+    id: 'app.components.Information.PoormanInfo.poormanInfoLineThree',
+    defaultMessage: `The new purpose for POOR is to reward people for STAKING and VOTING for 25+ MAINNET Block Producers. Each month we
+                     will drop additional POOR to everyone who meets the following criteria:`,
+  },
+  poormanInfoLineFour: {
+    id: 'app.components.Information.PoormanInfo.poormanInfoLineFour',
+    defaultMessage: `1. Already have POOR (either from AIRGRAB or a previous DROP)`,
+  },
+  poormanInfoLineFive: {
+    id: 'app.components.Information.PoormanInfo.poormanInfoLineFive',
+    defaultMessage: `2. Have voted for 25+ producers (either directly or through a PROXY)`,
+  },
+  poormanInfoLineSix: {
+    id: 'app.components.Information.PoormanInfo.poormanInfoLineSix',
+    defaultMessage: `3. Have a STAKED balance`,
+  },
+  poormanInfoLineSeven: {
+    id: 'app.components.Information.PoormanInfo.poormanInfoLineSeven',
+    defaultMessage: `Accounts that meet this criteria will receive POOR 1:1 to STAKED EOS only!`,
+  },
+  poormanInfoLineEigth: {
+    id: 'app.components.Information.PoormanInfo.poormanInfoLineEight',
+    defaultMessage: `What can you do with all this POOR? Details coming soon!`,
+  },
+  poormanInfoLineNine: {
+    id: 'app.components.Information.PoormanInfo.poormanInfoLineNine',
+    defaultMessage: `To read more about this token contract check out the 
+        <a href="https://github.com/generEOS/poorman.token" target="new">
+          poorman.token Github
+        </a>`,
+  },
+  // Messages for RegProxy component
+  regProxyHeaderOne: {
+    id: 'app.components.Information.RegProxy.regProxyHeaderOne',
+    defaultMessage: `Create Proxy`,
+  },
+  regProxyHeaderTwo: {
+    id: 'app.components.Information.RegProxy.regProxyHeaderTwo',
+    defaultMessage: `Register Proxy Info`,
+  },
+  regProxyLineOne: {
+    id: 'app.components.Information.RegProxy.regProxyLineOne',
+    defaultMessage: `By becoming a proxy you can vote on behalf of others who set you as their proxy. This can be as simple as
+                     managing voting for your own accounts, or as complex as becoming a world wide proxy.`,
+  },
+  regProxyLineTwo: {
+    id: 'app.components.Information.RegProxy.regProxyLineTwo',
+    defaultMessage: `If you do wish to use your proxy powers for the community, we suggest you participate in the Register Proxy Info
+                     project:`,
+  },
+  regProxyLineThree: {
+    id: 'app.components.Information.RegProxy.regProxyLineThree',
+    defaultMessage: `This is an on-chain EOS contract (or dApp) that allows EOS proxy accounts to register additional information
+                     about themselves, such as name and website. This information is published on the EOS blockchain and freely
+                     available to be republished. An example website that uses this information is the 
+                     <a href="https://www.alohaeos.com/vote/proxy" target="new">
+                       Aloha EOS Proxy Research Portal
+                     </a>.`,
+  },
+  regProxyLineFour: {
+    id: 'app.components.Information.RegProxy.regProxyLineFour',
+    defaultMessage: `The contract is published on the 
+                     <a href="https://bloks.io/account/regproxyinfo" target="new">
+                       regproxyinfo
+                     </a> 
+                     account on the EOS mainnet. More information about this project can be found on 
+                     <a href="https://github.com/AlohaEOS/eos-proxyinfo" target="new">
+                       GitHub
+                     </a>`,
+  },
+  regProxyLineFive: {
+    id: 'app.components.Information.RegProxy.regProxyLineFive',
+    defaultMessage: `This action will use your Proxy Account RAM allocation. Depending on how much detail you provide, this could be
+                     as large as 1kB`,
+  },
+  // Messages for ResignProxy component
+  resignProxyHeaderOne: {
+    id: 'app.components.Information.RegProxy.resignProxyHeaderOne',
+    defaultMessage: `Resign Proxy`,
+  },
+  resignProxyHeaderTwo: {
+    id: 'app.components.Information.RegProxy.resignProxyHeaderTwo',
+    defaultMessage: `Unregister Proxy Info`,
+  },
+  resignProxyLineOne: {
+    id: 'app.components.Information.RegProxy.resignProxyLineOne',
+    defaultMessage: `By resigning as proxy you will no longer vote on behalf of others who set you as their proxy. Vote weight
+                     changes immediately. All accounts that had you set as a proxy will no longer have any votes.`,
+  },
+  resignProxyLineTwo: {
+    id: 'app.components.Information.RegProxy.resignProxyLineTwo',
+    defaultMessage: `As a courtesy please attempt to notify these accounts.`,
+  },
+  resignProxyLineThree: {
+    id: 'app.components.Information.RegProxy.resignProxyLineThree',
+    defaultMessage: `If you had previously registered your Proxy Info, please unregister to keep the proxy database clean.`,
+  },
+  resignProxyLineFour: {
+    id: 'app.components.Information.RegProxy.resignProxyLineFour',
+    defaultMessage: `This is an on-chain EOS contract (or dApp) that allows EOS proxy accounts to register additional information
+                     about themselves, such as name and website. This information is published on the EOS blockchain and freely
+                     available to be republished. An example website that uses this information is the 
+                     <a href="https://www.alohaeos.com/vote/proxy" target="new">
+                       Aloha EOS Proxy Research Portal
+                     </a>.`,
+  },
+  resignProxyLineFive: {
+    id: 'app.components.Information.RegProxy.resignProxyLineFive',
+    defaultMessage: `The contract is published on the 
+                     <a href="https://bloks.io/account/regproxyinfo" target="new">
+                       regproxyinfo
+                     </a> 
+                     account on the EOS mainnet. More information about this project can be found on 
+                     <a href="https://github.com/AlohaEOS/eos-proxyinfo" target="new">
+                       GitHub
+                     </a>`,
+  },
+  // Messages for Grandpa component
+  grandpaLineOne: {
+    id: 'app.components.Information.Granpa.grandpaLineOne',
+    defaultMessage: `Win the jackpot by transferring dusty coins: BTC, ETH, DOGE`,
+  },
+  grandpaLineTwo: {
+    id: 'app.components.Information.Granpa.grandpaLineTwo',
+    defaultMessage: `You can mine these coins for FREE every 12 hours. Refer others to earn more, become Chief Miner to earn most!`,
+  },
+  grandpaLineThree: {
+    id: 'app.components.Information.Granpa.grandpaLineThree',
+    defaultMessage: `Chief miner makes 10% bonus of all mining, and 10% fees on all transfers`,
+  },
+  grandpaLineFour: {
+    id: 'app.components.Information.Granpa.grandpaLineFour',
+    defaultMessage: `Referrers make 5% bonus of mining, and 2.5% fees on transfers`,
+  },
+  grandpaLineFive: {
+    id: 'app.components.Information.Granpa.grandpaLineFive',
+    defaultMessage: `The last person to transfer a coin makes 2.5% fees on the subsequent transfer`,
+  },
+  grandpaLineSix: {
+    id: 'app.components.Information.Granpa.grandpaLineSix',
+    defaultMessage: `Show the world how fast these coins can go on EOS!`,
+  },
+  grandpaLineSeven: {
+    id: 'app.components.Information.Granpa.grandpaLineSeven',
+    defaultMessage: `Achieve the highest VOLUME with one of the three coins and win the JACKPOT`,
+  },
+  grandpaLineEight: {
+    id: 'app.components.Information.Granpa.grandpaLineEight',
+    defaultMessage: `Consolation prize for highest VELOCITY with one of the three coins (10% of JACKPOT)`,
+  },
+  grandpaLineNine: {
+    id: 'app.components.Information.Granpa.grandpaLineNine',
+    defaultMessage: `The round 1 Prize jackpot has been paid. The round 1 dividend is delayed due to medical reasons.`,
+  },
 });
