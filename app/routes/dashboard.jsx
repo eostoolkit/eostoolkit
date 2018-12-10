@@ -36,6 +36,7 @@ import GovernancePage from 'components/Pages/GovernancePage';
 import FeaturesPage from 'components/Pages/FeaturesPage';
 
 // external Features
+import PoorSwap from 'containers/PoorSwap';
 import ProxyTable from 'containers/ProxyInfo';
 import HorusPay from 'containers/HorusPay';
 import Karma from 'containers/Karma';
@@ -59,7 +60,8 @@ import {
   VpnKey,
   Games,
   Feedback,
-  Extension
+  Extension,
+  CompareArrows
 } from '@material-ui/icons';
 import HorusIcon from 'components/Icons/Horus';
 import KarmaIcon from 'components/Icons/Karma';
@@ -77,6 +79,12 @@ const dashRoutes = [
     name: 'Referendum',
     icon: Feedback,
     component: Referendum,
+  },
+  {
+    path: '/poorswap',
+    name: 'PoorSwap',
+    icon: CompareArrows,
+    component: PoorSwap,
   },
   {
     path: '/donate',
