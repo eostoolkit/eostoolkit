@@ -28,7 +28,6 @@ function* getAccountDetail(name) {
     const account = yield networkReader.getAccount(name);
 
     let body = {account:account.account_name};
-    let tokens = null;
     try {
       const flare = yield fetch('https://api-pub.eosflare.io/v1/eosflare/get_account',{
         method: "POST",
@@ -40,54 +39,28 @@ function* getAccountDetail(name) {
       const flareData = yield flare.json();
 
       if(flareData.account) {
-        tokens = flareData.account.tokens.map(token=>{
-        //   return `${token.contract}:${token.symbol}`;
-          return {
-            account: token.contract,
-            symbol:token.symbol,
-          }
+        let tokens = flareData.account.tokens.map(token=>{
+          return `${token.contract}:${token.symbol}`;
         });
-        // tokens.unshift('eosio.token:EOS');
-        // body = {
-        //   ...body,
-        //   tokens,
-        // }
+        tokens.unshift('eosio.token:EOS');
+        body = {
+          ...body,
+          tokens,
+        }
       }
     } catch(err) {}
 
-    // const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances',{
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json; charset=utf-8",
-    //   },
-    //   body:JSON.stringify(body),
-    // });
-    // const list = yield data.json();
-
-
-
-    const tokenData = yield all(
-      tokens.map(token => {
-        return fork(getCurrency, token.account, name);
-      })
-    );
-
-    const currencies = yield join(...tokenData);
-    const balances = currencies.reduce((a, b) => a.concat(b), []);//.filter( onlyUnique );
-    const unique = [...new Set(balances.map(item => item.balance))];
-    const final = unique.map(bal => {
-      const tokenFind = tokens.find(t=>t.symbol === bal.split(' ')[1]);
-      return {
-        code: tokenFind.account,
-        amount: bal.split(' ')[0],
-        symbol: bal.split(' ')[1],
-      }
-
+    const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances',{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body:JSON.stringify(body),
     });
-
+    const list = yield data.json();
     return {
       ...account,
-      balances: final,
+      balances: list,
     };
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
