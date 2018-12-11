@@ -46,10 +46,6 @@ const PoorSwap = props => {
   const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
 
 
-
-
-
-
   const claimTransaction = () => {
     if (!writerEnabled) {
       return { error: 'No scatter identity attached' };
@@ -105,12 +101,13 @@ const PoorSwap = props => {
               {
                 Header: 'Day',
                 accessor: 'cycle',
-                width: 300,
+                width:200,
               },
               {
                 Header: 'POOR',
-                width: 300,
                 accessor: 'tokens',
+                headerStyle: { 'text-align': 'left' },
+                style: { 'text-align': 'left' }
               },
             ]}
             defaultPageSize={50}
