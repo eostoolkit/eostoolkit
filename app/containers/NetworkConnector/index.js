@@ -6,6 +6,8 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import { injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import routes from 'routes/dashboard';
 import { makeSelectAccount, makeSelectIdentity } from 'containers/NetworkClient/selectors';
@@ -51,7 +53,10 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  injectIntl
 )(Connector);
