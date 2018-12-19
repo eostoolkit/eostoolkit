@@ -8,6 +8,9 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './CreateFormObject';
 
+import messages from './messages';
+import commonMessages from '../../messages';
+
 const makeTransaction = values => {
   const transaction = [
     {
@@ -22,17 +25,14 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Proxy name is required'),
-});
-
 const CreateForm = props => {
+  const { intl } = props;
   return (
     <ToolBody
       color="warning"
       icon={SupervisorAccount}
-      header="Create Proxy"
-      subheader=" - You will vote on behalf of others">
+      header={intl.formatMessage(messages.createProxyHeader)}
+      subheader={intl.formatMessage(messages.createProxySubHeader)}>
       <FormObject {...props} />
     </ToolBody>
   );
@@ -44,12 +44,17 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        owner: Yup.string().required(intl.formatMessage(commonMessages.formProxyNameRequired)),
+      });
+    },
   })
 );
 

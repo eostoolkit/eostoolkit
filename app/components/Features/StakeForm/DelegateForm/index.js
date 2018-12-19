@@ -41,7 +41,11 @@ const makeTransaction = values => {
 const DelegateForm = props => {
   const { intl } = props;
   return (
-    <ToolBody color="warning" icon={Redo} header={intl.formatMessage(messages.delegateFormHeader)} subheader={intl.formatMessage(messages.delegateFormSubHeader)}>
+    <ToolBody
+      color="warning"
+      icon={Redo}
+      header={intl.formatMessage(messages.delegateFormHeader)}
+      subheader={intl.formatMessage(messages.delegateFormSubHeader)}>
       <FormObject {...props} />
     </ToolBody>
   );

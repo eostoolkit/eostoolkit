@@ -6,14 +6,18 @@ import messages from './messages';
 const Donate = () => {
   return (
     <div>
-      <h5><FormattedMessage {...messages.donateHeader}/></h5>
+      <h5>
+        <FormattedMessage {...messages.donateHeader} />
+      </h5>
       <p>
         <FormattedHTMLMessage {...messages.donateLineOne} />
       </p>
       <p>
         <FormattedHTMLMessage {...messages.donateLineTwo} />
       </p>
-      <p><FormattedMessage {...messages.donateLineThree} /></p>
+      <p>
+        <FormattedMessage {...messages.donateLineThree} />
+      </p>
       <p>
         <FormattedHTMLMessage {...messages.donateLineFour} />
       </p>

@@ -16,7 +16,8 @@ export default defineMessages({
   },
   loadAccountAdditionalInfoText: {
     id: 'app.components.Summary.resources.loadAccountAdditionalInfoText',
-    defaultMessage: 'If your account details keep disappearing it is because many networks are close to you. Select one manually by clicking "Change Network" to prevent this.',
+    defaultMessage:
+      'If your account details keep disappearing it is because many networks are close to you. Select one manually by clicking "Change Network" to prevent this.',
   },
   tokenDetailInfoText: {
     id: 'app.components.Summary.resources.tokenDetailInfoText',

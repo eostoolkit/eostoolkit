@@ -63,13 +63,13 @@ const SimplePermissionsForm = props => {
         <ToolBody
           color="warning"
           icon={PersonAdd}
-          header={intl.formatMessage(messages.simplePermissionFormHeader)}
+          header={intl.formatMessage(commonMessages.formChangePermissionHeader)}
           subheader={intl.formatMessage(messages.simplePermissionFormSubHeader)}>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="danger" header={intl.formatMessage(messages.simplePermissionFormImportantHeader)}>
+        <ToolBody color="danger" header={intl.formatMessage(commonMessages.formImportantHeader)}>
           <ChangePermissions />
         </ToolBody>
       </ToolSection>

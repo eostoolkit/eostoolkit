@@ -8,6 +8,8 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './RegFormObject';
 
+import messages from './messages';
+
 const makeTransaction = values => {
   const transaction = [
     {
@@ -21,33 +23,14 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  proxy: Yup.string().required('Proxy account is required'),
-  name: Yup.string()
-    .required('Name is required')
-    .max(64),
-  slogan: Yup.string().max(64),
-  philosophy: Yup.string().max(1024),
-  background: Yup.string().max(1024),
-  website: Yup.string()
-    .url()
-    .max(256),
-  logo_256: Yup.string()
-    .url()
-    .max(256),
-  telegram: Yup.string().max(64),
-  steemit: Yup.string().max(64),
-  twitter: Yup.string().max(64),
-  wechat: Yup.string().max(64),
-});
-
 const RegForm = props => {
+  const { intl } = props;
   return (
     <ToolBody
       color="warning"
       icon={SupervisorAccount}
-      header="Register Proxy Info"
-      subheader=" - Provide details about your proxy to the world">
+      header={intl.formatMessage(messages.createProxyRegisterHeader)}
+      subheader={intl.formatMessage(messages.createProxyRegisterSubHeader)}>
       <FormObject {...props} />
     </ToolBody>
   );
@@ -74,7 +57,28 @@ const enhance = compose(
       twitter: '',
       wechat: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        proxy: Yup.string().required(intl.formatMessage(messages.formCreateProxyAccountRequired)),
+        name: Yup.string()
+          .required(intl.formatMessage(messages.formCreateProxyNameRequired))
+          .max(64),
+        slogan: Yup.string().max(64),
+        philosophy: Yup.string().max(1024),
+        background: Yup.string().max(1024),
+        website: Yup.string()
+          .url()
+          .max(256),
+        logo_256: Yup.string()
+          .url()
+          .max(256),
+        telegram: Yup.string().max(64),
+        steemit: Yup.string().max(64),
+        twitter: Yup.string().max(64),
+        wechat: Yup.string().max(64),
+      });
+    },
   })
 );
 

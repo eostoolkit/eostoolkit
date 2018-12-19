@@ -2,74 +2,76 @@ import React from 'react';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
-const FormData = [
-  {
-    id: 'proxy',
-    label: 'Proxy Account',
-    placeholder: 'Account that is the proxy',
-  },
-  {
-    id: 'name',
-    label: 'Proxy Name (64 char allowed)',
-    placeholder: 'Full name of the proxy',
-  },
-  {
-    id: 'slogan',
-    label: 'Slogan (64 char allowed)',
-    placeholder: 'A short description of your proxy',
-    md: 12,
-  },
-  {
-    id: 'philosophy',
-    label: 'Philosophy (1024 char allowed)',
-    placeholder: "Description of proxy's voting philosophy",
-    md: 12,
-  },
-  {
-    id: 'background',
-    label: 'Background (1024 char allowed)',
-    placeholder: 'Background information / who is the proxy?',
-    md: 12,
-  },
-  {
-    id: 'website',
-    label: 'Background (1024 char allowed)',
-    placeholder: 'Background information / who is the proxy?',
-  },
-  {
-    id: 'logo_256',
-    label: 'Logo URL (256px x 256px)',
-    placeholder: 'Url to an image for your proxy',
-  },
-  {
-    id: 'telegram',
-    label: 'Telegram',
-    placeholder: 'Telegram account name',
-  },
-  {
-    id: 'steemit',
-    label: 'Steemit',
-    placeholder: 'Steemit account name',
-  },
-  {
-    id: 'twitter',
-    label: 'Twitter',
-    placeholder: 'Twitter account name',
-  },
-  {
-    id: 'wechat',
-    label: 'WeChat',
-    placeholder: 'WeChat account name',
-  },
-];
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
     submitText: 'Register',
   };
+  const FormData = [
+    {
+      id: 'proxy',
+      label: intl.formatMessage(commonMessages.formProxyAccountLabel),
+      placeholder: intl.formatMessage(commonMessages.formProxyAccountPlaceholder),
+    },
+    {
+      id: 'name',
+      label: intl.formatMessage(messages.formProxyName64Label),
+      placeholder: intl.formatMessage(messages.formProxyName64Placeholder),
+    },
+    {
+      id: 'slogan',
+      label: intl.formatMessage(messages.formProxySlogan64Label),
+      placeholder: intl.formatMessage(messages.formProxySlogan64Placeholder),
+      md: 12,
+    },
+    {
+      id: 'philosophy',
+      label: intl.formatMessage(messages.formProxyPhilosophy1024Label),
+      placeholder: intl.formatMessage(messages.formProxyPhilosophy1024Placeholder),
+      md: 12,
+    },
+    {
+      id: 'background',
+      label: intl.formatMessage(messages.formProxyBackground1024Label),
+      placeholder: intl.formatMessage(messages.formProxyBackground1024Placeholder),
+      md: 12,
+    },
+    {
+      id: 'website',
+      label: intl.formatMessage(messages.formProxyWebsite1024Label),
+      placeholder: intl.formatMessage(messages.formProxyWebsite1024Placeholder),
+    },
+    {
+      id: 'logo_256',
+      label: intl.formatMessage(messages.formProxyLogo256Label),
+      placeholder: intl.formatMessage(messages.formProxyLogo256Placeholder),
+    },
+    {
+      id: 'telegram',
+      label: 'Telegram',
+      placeholder: intl.formatMessage(messages.formProxyTelegramPlaceholder),
+    },
+    {
+      id: 'steemit',
+      label: 'Steemit',
+      placeholder: intl.formatMessage(messages.formProxySteemitPlaceholder),
+    },
+    {
+      id: 'twitter',
+      label: 'Twitter',
+      placeholder: intl.formatMessage(messages.formProxyTwitterPlaceholder),
+    },
+    {
+      id: 'wechat',
+      label: 'WeChat',
+      placeholder: intl.formatMessage(messages.formProxyWeChatPlaceholder),
+    },
+  ];
   return (
     <ToolForm {...formProps}>
       {FormData.map(form => {

@@ -26,17 +26,9 @@ export default defineMessages({
     id: 'app.components.Features.SimplePermissionForm.simplePermissionUpdateText',
     defaultMessage: 'Update',
   },
-  simplePermissionFormHeader: {
-    id: 'app.components.Features.SimplePermissionForm.simplePermissionFormHeader',
-    defaultMessage: 'Change Permissions',
-  },
   simplePermissionFormSubHeader: {
     id: 'app.components.Features.SimplePermissionForm.simplePermissionFormSubHeader',
     defaultMessage: ' Simple active / owner',
-  },
-  simplePermissionFormImportantHeader: {
-    id: 'app.components.Features.SimplePermissionForm.simplePermissionFormImportantHeader',
-    defaultMessage: 'Important',
   },
   simplePermissionFormBreakAccountError: {
     id: 'app.components.Features.SimplePermissionForm.simplePermissionFormBreakAccountError',

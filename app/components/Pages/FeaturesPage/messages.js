@@ -6,12 +6,16 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  welcomeText: {
-    id: 'app.components.Pages.FeaturesPage.welcomeText',
+  welcomeEosToolkitHeader: {
+    id: 'app.components.Pages.FeaturesPage.welcomeEosToolkitHeader',
     defaultMessage: 'Welcome to EOSToolkit',
   },
-  easyAccessText: {
-    id: 'app.components.Pages.FeaturesPage.easyAccessText',
-    defaultMessage: ' - Einfacher Zugang zum EOS Netzwerk',
+  welcomeEosToolkitSubheader: {
+    id: 'app.components.Pages.FeaturesPage.welcomeEosToolkitSubheader',
+    defaultMessage: ' - Easy access to the EOS Network',
+  },
+  favouritesHeader: {
+    id: 'app.components.Pages.FeaturesPage.favouritesHeader',
+    defaultMessage: 'Favourites',
   },
 });

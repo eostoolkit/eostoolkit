@@ -31,7 +31,6 @@ export default defineMessages({
     id: 'app.components.Information.Home.governanceLinkP2',
     defaultMessage: ` prior to using the EOS Network.`,
   },
-  // TODO: Add to de.json
   // Messages for ChangePermissions component
   changePermissionsHeader: {
     id: 'app.components.Information.ChangePermissions.changePermissionsHeader',
@@ -363,5 +362,33 @@ export default defineMessages({
   grandpaLineNine: {
     id: 'app.components.Information.Granpa.grandpaLineNine',
     defaultMessage: `The round 1 Prize jackpot has been paid. The round 1 dividend is delayed due to medical reasons.`,
+  },
+  blockOneLetterHeader: {
+    id: 'app.components.Information.BlockOneLetter.blockOneLetterHeader',
+    defaultMessage: 'Dear GenerEOS supporters,',
+  },
+  blockOneLetterText1: {
+    id: 'app.components.Information.BlockOneLetter.blockOneLetterText1',
+    defaultMessage:
+      'Block One recently announced that that they will be voting for Block Producers that share the core values necessary to maximize the integrity and potential of the EOS public blockchain network.',
+  },
+  blockOneLetterText2: {
+    id: 'app.components.Information.BlockOneLetter.blockOneLetterText2',
+    defaultMessage:
+      "They have provided an email for BP's and token holders to campaign for the Block Producers they believe in.",
+  },
+  blockOneLetterText3: {
+    id: 'app.components.Information.BlockOneLetter.blockOneLetterText3',
+    defaultMessage:
+      'We would love if you could rally behind us showing your support by sending a passionate email to Block One explaining why they should vote for GenerEOS.',
+  },
+  blockOneLetterText4: {
+    id: 'app.components.Information.BlockOneLetter.blockOneLetterText4',
+    defaultMessage: 'Send your email to - ',
+  },
+  blockOneLetterText5: {
+    id: 'app.components.Information.BlockOneLetter.blockOneLetterText5',
+    defaultMessage:
+      'This support would mean the world to us and help us keep creating great tools and contributions for the community.',
   },
 });

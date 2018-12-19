@@ -16,7 +16,11 @@ import generalMessages from '../messages';
 function ResourcesTable({ ...props }) {
   const { classes, account } = props;
   if (!account) {
-    return <div><FormattedMessage { ...generalMessages.invalidNotFoundText }/></div>;
+    return (
+      <div>
+        <FormattedMessage {...generalMessages.invalidNotFoundText} />
+      </div>
+    );
   }
   return (
     <div className={classes.tableResponsive}>

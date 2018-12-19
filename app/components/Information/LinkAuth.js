@@ -6,7 +6,9 @@ import messages from './messages';
 const LinkAuth = () => {
   return (
     <div>
-      <h5><FormattedMessage {...messages.linkAuthHeaderOne} /></h5>
+      <h5>
+        <FormattedMessage {...messages.linkAuthHeaderOne} />
+      </h5>
       <p>
         <FormattedMessage {...messages.linkAuthLineOne} />
       </p>
@@ -19,9 +21,15 @@ const LinkAuth = () => {
       <p>
         <FormattedHTMLMessage {...messages.linkAuthLineFour} />
       </p>
-      <p><FormattedMessage {...messages.linkAuthLineFive} /></p>
-      <h5><FormattedMessage {...messages.linkAuthHeaderTwo} /></h5>
-      <p><FormattedMessage {...messages.linkAuthLineSix} /></p>
+      <p>
+        <FormattedMessage {...messages.linkAuthLineFive} />
+      </p>
+      <h5>
+        <FormattedMessage {...messages.linkAuthHeaderTwo} />
+      </h5>
+      <p>
+        <FormattedMessage {...messages.linkAuthLineSix} />
+      </p>
     </div>
   );
 };

@@ -3,14 +3,15 @@ import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
 import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
   const { handleSubmit, intl } = props;
   const FormData = [
     {
       id: 'owner',
-      label: intl.formatMessage(messages.proxyAccountLabel),
-      placeholder: intl.formatMessage(messages.proxyAccountPlaceholder),
+      label: intl.formatMessage(commonMessages.formProxyAccountLabel),
+      placeholder: intl.formatMessage(commonMessages.formProxyAccountPlaceholder),
       md: 12,
     },
   ];

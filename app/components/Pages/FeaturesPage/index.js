@@ -17,7 +17,7 @@ import HomeDoc from 'components/Information/Home';
 import { injectIntl } from 'react-intl';
 import messages from './messages';
 
-const FeaturesPage = (props) => {
+const FeaturesPage = props => {
   const { intl } = props;
 
   return (
@@ -26,16 +26,16 @@ const FeaturesPage = (props) => {
         <ToolBody
           color="info"
           icon={Info}
-          header={intl.formatMessage(messages.welcomeText)}
-          subheader={intl.formatMessage(messages.easyAccessText)}>
+          header={intl.formatMessage(messages.welcomeEosToolkitHeader)}
+          subheader={intl.formatMessage(messages.welcomeEosToolkitSubheader)}>
           <HomeDoc />
         </ToolBody>
       </ToolSection>
 
       <ToolSection lg={4}>
-        <ToolBody color="warning" icon={Favorite} header='Favourites'>
+        <ToolBody color="warning" icon={Favorite} header={intl.formatMessage(messages.favouritesHeader)}>
           {dashboardRoutes.map(({ icon, name, collapse, hide, redirect, path, views }) => {
-            if(!redirect && !hide && !collapse) {
+            if (!redirect && !hide && !collapse) {
               return (
                 <NavLink to={path} key={`route-${path}`}>
                   <h4>{name}</h4>
@@ -46,12 +46,12 @@ const FeaturesPage = (props) => {
         </ToolBody>
       </ToolSection>
 
-      {dashboardRoutes.map((route) => {
+      {dashboardRoutes.map(route => {
         if (route.collapse) {
           return (
             <ToolSection lg={4} key={`header-${route.name}`}>
               <ToolBody color="rose" icon={route.icon} header={route.name}>
-                {route.views.map((view) => {
+                {route.views.map(view => {
                   return (
                     <NavLink to={view.path} key={`route-view-${view.path}`}>
                       <h4>{view.name}</h4>
@@ -61,10 +61,10 @@ const FeaturesPage = (props) => {
               </ToolBody>
             </ToolSection>
           );
-
-        }})}
+        }
+      })}
     </Tool>
   );
 };
 
-export default (injectIntl(FeaturesPage));
+export default injectIntl(FeaturesPage);

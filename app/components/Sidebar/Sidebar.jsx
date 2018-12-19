@@ -102,10 +102,14 @@ class Sidebar extends React.Component {
           <ListItem className={classes.item} onClick={this.props.identity ? this.props.onLogout : this.props.onLogin}>
             <NavLink to="#" className={`${classes.itemLink}`}>
               <ListItemIcon className={classes.itemIconMini}>
-                {this.props.identity ? (<ExitToApp />) : (<AddBox />)}
+                {this.props.identity ? <ExitToApp /> : <AddBox />}
               </ListItemIcon>
               <ListItemText
-                primary={this.props.identity ? this.props.intl.formatMessage(messages.detachAccount) : this.props.intl.formatMessage(messages.attachAccount)}
+                primary={
+                  this.props.identity
+                    ? this.props.intl.formatMessage(messages.detachAccount)
+                    : this.props.intl.formatMessage(messages.attachAccount)
+                }
                 disableTypography
                 className={collapseItemText}
               />
@@ -129,13 +133,16 @@ class Sidebar extends React.Component {
                 <Autorenew />
               </ListItemIcon>
               <ListItemText
-                primary={this.props.offlineMode ? this.props.intl.formatMessage(messages.multiSigMode) : this.props.intl.formatMessage(messages.singleSigMode)}
+                primary={
+                  this.props.offlineMode
+                    ? this.props.intl.formatMessage(messages.multiSigMode)
+                    : this.props.intl.formatMessage(messages.singleSigMode)
+                }
                 disableTypography
                 className={collapseItemText}
               />
             </NavLink>
           </ListItem>
-
         </List>
       </div>
     );
@@ -147,17 +154,21 @@ class Sidebar extends React.Component {
       </List>
     );
     const vote = (
-      <List className={classes.list} style={{marginBottom: '-20px'}}>
+      <List className={classes.list} style={{ marginBottom: '-20px' }}>
         <ListItem className={classes.item}>
           <div className={classes.itemLink}>
             <ListItemIcon className={classes.itemIcon}>
               <GenereosIcon />
             </ListItemIcon>
-            <ListItemText primary={<VoteUs className={classes.itemText}/>} disableTypography className={classes.itemText} />
+            <ListItemText
+              primary={<VoteUs className={classes.itemText} />}
+              disableTypography
+              className={classes.itemText}
+            />
           </div>
         </ListItem>
       </List>
-    )
+    );
     const links = (
       <List className={classes.list}>
         {routes.map(prop => {
@@ -169,7 +180,8 @@ class Sidebar extends React.Component {
           }
           if (prop.collapse) {
             const navLinkClasses = `${classes.itemLink} ${cx({
-              [` ${classes.collapseActive}`]: (this.activeRoute(prop.path) && this.props.location.pathname !== '/account/create'),
+              [` ${classes.collapseActive}`]:
+                this.activeRoute(prop.path) && this.props.location.pathname !== '/account/create',
             })}`;
             const listItemTextClass = `${classes.itemText} ${cx({
               [classes.itemTextMini]: this.props.miniActive && this.state.miniActive,
@@ -214,7 +226,10 @@ class Sidebar extends React.Component {
                       })}`;
                       return (
                         <ListItem key={`list-item-collapse-${viewProp.path}`} className={classes.collapseItem}>
-                          <NavLink to={viewProp.path} className={navLinkCollapseClasses} onClick={this.props.handleDrawerToggle}>
+                          <NavLink
+                            to={viewProp.path}
+                            className={navLinkCollapseClasses}
+                            onClick={this.props.handleDrawerToggle}>
                             <span className={collapseItemMini}>{viewProp.mini}</span>
                             <ListItemText primary={viewProp.name} disableTypography className={collapseItemTextClass} />
                           </NavLink>
@@ -295,13 +310,7 @@ class Sidebar extends React.Component {
               keepMounted: true, // Better open performance on mobile.
             }}>
             {brand}
-            <SidebarWrapper
-              className={sidebarWrapper}
-              user={user}
-              status={status}
-              links={links}
-              headerLinks={vote}
-            />
+            <SidebarWrapper className={sidebarWrapper} user={user} status={status} links={links} headerLinks={vote} />
             {image !== undefined ? (
               <div className={classes.background} style={{ backgroundImage: `url(${image})` }} />
             ) : null}
@@ -318,7 +327,7 @@ class Sidebar extends React.Component {
               paper: `${drawerPaper} ${classes[`${bgColor}Background`]}`,
             }}>
             {brand}
-            <SidebarWrapper className={sidebarWrapper} user={user} links={links} status={status}/>
+            <SidebarWrapper className={sidebarWrapper} user={user} links={links} status={status} />
             {image !== undefined ? (
               <div className={classes.background} style={{ backgroundImage: `url(${image})` }} />
             ) : null}
@@ -353,7 +362,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onLogin: () => dispatch(setIdentity()),
     onLogout: () => dispatch(disableWriter()),
-    toggleOffline: () => dispatch(toggleOffline())
+    toggleOffline: () => dispatch(toggleOffline()),
   };
 }
 

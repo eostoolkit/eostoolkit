@@ -12,7 +12,7 @@ const FormObject = props => {
   const switchData = {
     id: 'transfer',
     label: intl.formatMessage(commonMessages.transferLabel),
-    placeholder: intl.formatMessage(commonMessages.transferPlaceholder),
+    placeholder: intl.formatMessage(messages.transferPlaceholder),
     md: 12,
   };
   const FormData = [

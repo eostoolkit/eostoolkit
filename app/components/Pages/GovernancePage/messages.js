@@ -6,8 +6,12 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  governanceInfoText: {
-    id: 'app.components.Pages.GovernancePage.governanceInfoText',
+  governancePageHeader: {
+    id: 'app.components.Pages.GovernancePage.governancePageHeader',
+    defaultMessage: 'Governance',
+  },
+  governancePageSubHeader: {
+    id: 'app.components.Pages.GovernancePage.governancePageSubHeader',
     defaultMessage: ' - By using this tool you agree to the following',
   },
 });

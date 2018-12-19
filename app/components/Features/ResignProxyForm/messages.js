@@ -10,14 +10,6 @@ export default defineMessages({
     id: 'app.components.Features.ResignProxyForm.resignProxyFormSubHeader',
     defaultMessage: ' - You no longer vote on behalf of others',
   },
-  proxyAccountLabel: {
-    id: 'app.components.Features.ResignProxyForm.proxyAccountLabel',
-    defaultMessage: 'Proxy Account',
-  },
-  proxyAccountPlaceholder: {
-    id: 'app.components.Features.ResignProxyForm.proxyAccountPlaceholder',
-    defaultMessage: 'Account that becomes proxy',
-  },
   donateText: {
     id: 'app.components.Features.ResignProxyForm.submitText',
     defaultMessage: 'Resign',

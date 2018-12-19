@@ -15,7 +15,10 @@ import RegProxyInfo from 'components/Information/RegProxy';
 import CreateForm from './CreateForm';
 import RegForm from './RegForm';
 
+import commonMessages from '../../messages';
+
 const CreateProxyForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
@@ -23,7 +26,7 @@ const CreateProxyForm = props => {
         <RegForm {...props} />
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="info" header="Information">
+        <ToolBody color="info" header={intl.formatMessage(commonMessages.informationHeaderMessage)}>
           <RegProxyInfo />
         </ToolBody>
       </ToolSection>
