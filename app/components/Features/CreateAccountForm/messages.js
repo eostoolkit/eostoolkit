@@ -22,10 +22,6 @@ export default defineMessages({
     id: 'app.components.Features.CreateAccountForm.formAccountName',
     defaultMessage: 'New Account Name',
   },
-  formAccountNamePlaceholder: {
-    id: 'app.components.Features.CreateAccountForm.formAccountNamePlaceholder',
-    defaultMessage: '12 characters, a-z, 1-5',
-  },
   formAccountNameCreatorMessage: {
     id: 'app.components.Features.CreateAccountForm.formAccountNameCreatorMessage',
     defaultMessage: 'Creator name is required',

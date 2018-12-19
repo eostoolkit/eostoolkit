@@ -15,7 +15,12 @@ import Tool from 'components/Tool/Tool';
 import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 
+import { FormattedMessage } from 'react-intl';
+
 import FormObject from './FormObject';
+
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const makeTransaction = values => {
   const transaction = [
@@ -31,26 +36,22 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Proxied name is required'),
-  name: Yup.string().required('Account name is required'),
-});
-
 const SetProxyForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
         <ToolBody
           color="warning"
           icon={SupervisorAccount}
-          header="Set Proxy"
-          subheader=" - They will vote on your behalf">
+          header={intl.formatMessage(messages.proxyFormHeader)}
+          subheader={intl.formatMessage(messages.proxyFormSubHeader)}>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="info" header="Tutorial">
-          <p>Tutorial coming soon</p>
+        <ToolBody color="info" header={intl.formatMessage(commonMessages.tutorialHeaderMessage)}>
+          <p><FormattedMessage { ...commonMessages.tutorialCommingSoonMessage }/></p>
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -63,13 +64,19 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',
       name: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        owner: Yup.string().required(intl.formatMessage(messages.proxyNameRequired)),
+        name: Yup.string().required(intl.formatMessage(messages.proxyAccountRequired)),
+      });
+    },
   })
 );
 

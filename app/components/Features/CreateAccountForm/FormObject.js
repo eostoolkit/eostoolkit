@@ -14,7 +14,7 @@ const FormObject = props => {
     {
       id: 'name',
       label: intl.formatMessage(messages.formAccountName),
-      placeholder: intl.formatMessage(messages.formAccountNamePlaceholder),
+      placeholder: intl.formatMessage(commonMessages.twelveCharactersMessage),
     },
     {
       id: 'owner',
