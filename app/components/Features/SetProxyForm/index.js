@@ -51,7 +51,7 @@ const SetProxyForm = props => {
       </ToolSection>
       <ToolSection lg={4}>
         <ToolBody color="info" header={intl.formatMessage(commonMessages.tutorialHeaderMessage)}>
-          <p><FormattedMessage { ...commonMessages.tutorialCommingSoonMessage }/></p>
+          <p><FormattedMessage { ...commonMessages.tutorialComingSoonMessage }/></p>
         </ToolBody>
       </ToolSection>
     </Tool>

@@ -6,10 +6,6 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  accountFormAccountName: {
-    id: 'app.components.Features.SearchAccountForm.accountFormAccountName',
-    defaultMessage: 'Account Name',
-  },
   accountFormSearchAccountPlaceholder: {
     id: 'app.components.Features.SearchAccountForm.accountFormSearchAccountPlaceholder',
     defaultMessage: 'Search for this account',

@@ -8,6 +8,9 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './UnregFormObject';
 
+import messages from './messages';
+import commonMessages from '../../messages';
+
 const makeTransaction = values => {
   const transaction = [
     {
@@ -21,17 +24,14 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  proxy: Yup.string().required('Proxy account is required'),
-});
-
 const UnregForm = props => {
+  const { intl } = props;
   return (
     <ToolBody
       color="warning"
       icon={SupervisorAccount}
-      header="Unregister Proxy Info"
-      subheader=" - Remove details about your proxy">
+      header={intl.formatMessage(messages.unregisterHeader)}
+      subheader={intl.formatMessage(messages.unregisterSubHeader)}>
       <FormObject {...props} />
     </ToolBody>
   );
@@ -43,12 +43,17 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       proxy: props.networkIdentity ? props.networkIdentity.name : '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        proxy: Yup.string().required(intl.formatMessage(commonMessages.formProxyNameRequired)),
+      });
+    },
   })
 );
 

@@ -15,7 +15,10 @@ import ResignProxyInfo from 'components/Information/ResignProxy';
 import ResignForm from './ResignForm';
 import UnregForm from './UnregForm';
 
+import commonMessages from '../../messages';
+
 const ResignProxyForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
@@ -23,7 +26,7 @@ const ResignProxyForm = props => {
         <UnregForm {...props} />
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="info" header="Information">
+        <ToolBody color="info" header={intl.formatMessage(commonMessages.informationHeaderMessage)}>
           <ResignProxyInfo />
         </ToolBody>
       </ToolSection>

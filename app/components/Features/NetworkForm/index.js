@@ -38,11 +38,13 @@ const NetworkForm = props => {
             <CardIcon color="warning">
               <Settings />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}><FormattedMessage { ...messages.selectNetwork } /></h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...messages.selectNetwork} />
+            </h4>
           </CardHeader>
           <CardBody>
             <h6>
-              <FormattedHTMLMessage { ...messages.addNetworkToGit } />
+              <FormattedHTMLMessage {...messages.addNetworkToGit} />
             </h6>
             <NetworkTable {...tableProps} />
           </CardBody>

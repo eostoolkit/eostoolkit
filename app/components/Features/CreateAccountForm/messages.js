@@ -14,10 +14,6 @@ export default defineMessages({
     id: 'app.components.Features.CreateAccountForm.formTutorialHeader',
     defaultMessage: 'Tutorial',
   },
-  formTutorialText: {
-    id: 'app.components.Features.CreateAccountForm.formTutorialText',
-    defaultMessage: 'Tutorial coming soon',
-  },
   formAccountName: {
     id: 'app.components.Features.CreateAccountForm.formAccountName',
     defaultMessage: 'New Account Name',
@@ -77,18 +73,6 @@ export default defineMessages({
   formRAMPlaceholder: {
     id: 'app.components.Features.CreateAccountForm.formRAMPlaceholder',
     defaultMessage: 'Required to store account',
-  },
-  formRAMMessageRequired: {
-    id: 'app.components.Features.CreateAccountForm.formRAMMessageRequired',
-    defaultMessage: 'RAM purchase is required',
-  },
-  formRAMMessagePositive: {
-    id: 'app.components.Features.CreateAccountForm.formRAMMessagePositive',
-    defaultMessage: 'RAM must be a positive quantity',
-  },
-  formRAMMessageInteger: {
-    id: 'app.components.Features.CreateAccountForm.formRAMMessageInteger',
-    defaultMessage: 'RAM cannot be fractional',
   },
   formTransferPlaceholder: {
     id: 'app.components.Features.CreateAccountForm.formTransferPlaceholder',

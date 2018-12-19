@@ -15,6 +15,7 @@ import Button from 'components/CustomButtons/Button';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
 import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
   const { values, touched, errors, handleChange, handleBlur, handleSubmit, intl } = props;
@@ -23,7 +24,7 @@ const FormObject = props => {
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <CustomInput
-            labelText={intl.formatMessage(messages.accountFormAccountName)}
+            labelText={intl.formatMessage(commonMessages.formAccountNameText)}
             id="name"
             error={errors.name}
             touched={touched.name}

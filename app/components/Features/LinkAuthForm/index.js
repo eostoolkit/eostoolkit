@@ -15,7 +15,10 @@ import LinkAuthInfo from 'components/Information/LinkAuth';
 import LinkForm from './LinkForm';
 import UnlinkForm from './UnlinkForm';
 
+import commonMessages from '../../messages';
+
 const LinkAuthForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
@@ -23,7 +26,7 @@ const LinkAuthForm = props => {
         <UnlinkForm {...props} />
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="info" header="Information">
+        <ToolBody color="info" header={intl.formatMessage(commonMessages.informationHeaderMessage)}>
           <LinkAuthInfo />
         </ToolBody>
       </ToolSection>

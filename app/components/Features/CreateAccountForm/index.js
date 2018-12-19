@@ -73,7 +73,7 @@ const CreateAccountForm = props => {
       <ToolSection lg={4}>
         <ToolBody color="info" header={intl.formatMessage(messages.formTutorialHeader)}>
           <p>
-            <FormattedMessage {...messages.formTutorialText} />
+            <FormattedMessage {...commonMessages.tutor} />
           </p>
         </ToolBody>
       </ToolSection>
@@ -117,9 +117,9 @@ const enhance = compose(
           .required(intl.formatMessage(commonMessages.formCPUStakeRequired))
           .positive(intl.formatMessage(commonMessages.formStakePositiveQuantity)),
         ram: Yup.number()
-          .required(intl.formatMessage(messages.formRAMMessageRequired))
-          .positive(intl.formatMessage(commonMessages.formStakePositiveQuantity))
-          .integer(intl.formatMessage(messages.formRAMMessageInteger)),
+          .required(intl.formatMessage(commonMessages.formRAMPurchaseRequired))
+          .positive(intl.formatMessage(commonMessages.formRamPositiveQuantity))
+          .integer(intl.formatMessage(commonMessages.formRamNotFractional)),
       });
     },
   })

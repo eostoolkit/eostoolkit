@@ -13,6 +13,8 @@ import ToolBody from 'components/Tool/ToolBody';
 import Delegate from './DelegateForm';
 import Undelegate from './UndelegateForm';
 
+import { FormattedMessage } from 'react-intl';
+
 import commonMessages from '../../messages';
 
 const StakeForm = props => {
@@ -25,7 +27,9 @@ const StakeForm = props => {
       </ToolSection>
       <ToolSection lg={4}>
         <ToolBody color="info" header={intl.formatMessage(commonMessages.informationHeaderMessage)}>
-          <p>Tutorial coming soon</p>
+          <p>
+            <FormattedMessage {...commonMessages.tutorialComingSoonMessage} />
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>

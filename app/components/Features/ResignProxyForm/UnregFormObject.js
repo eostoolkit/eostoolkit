@@ -2,21 +2,23 @@ import React from 'react';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
-const FormData = [
-  {
-    id: 'proxy',
-    label: 'Proxy Account',
-    placeholder: 'Account that is the proxy',
-    md: 12,
-  },
-];
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+  const FormData = [
+    {
+      id: 'proxy',
+      label: intl.formatMessage(messages.proxyAccountLabel),
+      placeholder: intl.format(commonMessages.formProxyPlaceholder),
+      md: 12,
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Unregister',
+    submitText: intl.formatMessage(messages.unregisterSubmitText),
   };
   return (
     <ToolForm {...formProps}>
