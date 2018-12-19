@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeSelectTokens as selectTokens } from 'containers/NetworkClient/selectors';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 import messages from './messages';
@@ -15,23 +14,23 @@ const FormObject = props => {
     },
     {
       id: 'owner',
-      label: 'Sender',
-      placeholder: 'Account that sends the Token',
+      label: intl.formatMessage(messages.senderLabel),
+      placeholder: intl.formatMessage(messages.senderPlaceholder),
     },
     {
       id: 'quantity',
-      label: 'Quantity (in Tokens)',
-      placeholder: 'How many Tokens to send',
+      label: intl.formatMessage(messages.quantityLabel),
+      placeholder: intl.formatMessage(messages.quantityPlaceholder),
     },
     {
       id: 'symbol',
-      label: 'Symbol',
-      placeholder: 'Symbol of the Token',
+      label: intl.formatMessage(messages.symbolLabel),
+      placeholder: intl.formatMessage(messages.symbolPlaceholder),
     },
     {
       id: 'memo',
-      label: 'Memo',
-      placeholder: 'A memo to attach to transfer',
+      label: intl.formatMessage(messages.memoLabel),
+      placeholder: intl.formatMessage(messages.memoPlaceholder),
       md: 12,
     },
   ];

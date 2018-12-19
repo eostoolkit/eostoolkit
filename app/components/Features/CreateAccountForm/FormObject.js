@@ -4,53 +4,56 @@ import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 import ToolSwitch from 'components/Tool/ToolSwitch';
 
-const FormData = [
-  {
-    id: 'name',
-    label: 'New Account Name',
-    placeholder: '12 characters, a-z, 1-5',
-  },
-  {
-    id: 'owner',
-    label: 'Creator',
-    placeholder: 'Account that creates the new account',
-  },
-  {
-    id: 'ownerKey',
-    label: 'Owner Public Key',
-    placeholder: 'Enter public key',
-  },
-  {
-    id: 'activeKey',
-    label: 'Active Public Key',
-    placeholder: 'Enter public key',
-  },
-  {
-    id: 'cpu',
-    label: 'CPU Stake (in EOS)',
-    placeholder: 'Required to process transactions',
-  },
-  {
-    id: 'net',
-    label: 'Net Stake (in EOS)',
-    placeholder: 'Required to use network',
-  },
-  {
-    id: 'ram',
-    label: 'Ram Purchase (in bytes)',
-    placeholder: 'Required to store account',
-  },
-];
-
-const switchData = {
-  id: 'transfer',
-  label: 'Transfer',
-  placeholder:
-    'Tranfer Off: owner retains staking control and voting rights. Transfer On: New account gains staking control and voting rights.',
-};
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+
+  const FormData = [
+    {
+      id: 'name',
+      label: intl.formatMessage(messages.formAccountName),
+      placeholder: intl.formatMessage(messages.formAccountNamePlaceholder),
+    },
+    {
+      id: 'owner',
+      label: intl.formatMessage(messages.formOwner),
+      placeholder: intl.formatMessage(messages.formOwnerPlaceholder),
+    },
+    {
+      id: 'ownerKey',
+      label: intl.formatMessage(messages.formOwnerKey),
+      placeholder: intl.formatMessage(messages.formPublicKeyPlaceholder),
+    },
+    {
+      id: 'activeKey',
+      label: intl.formatMessage(messages.formActiveKey),
+      placeholder: intl.formatMessage(messages.formPublicKeyPlaceholder),
+    },
+    {
+      id: 'cpu',
+      label: intl.formatMessage(messages.formCPULabel),
+      placeholder: intl.formatMessage(messages.formCPUPlaceholder),
+    },
+    {
+      id: 'net',
+      label: intl.formatMessage(messages.formNETLabel),
+      placeholder: intl.formatMessage(messages.formNETPlaceholder),
+    },
+    {
+      id: 'ram',
+      label: intl.formatMessage(messages.formRAMLabel),
+      placeholder: intl.formatMessage(messages.formRAMPlaceholder),
+    },
+  ];
+
+  const switchData = {
+    id: 'transfer',
+    label: intl.formatMessage(commonMessages.transferLabel),
+    placeholder: intl.formatMessage(messages.formFransferPlaceholder),
+  };
+
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
