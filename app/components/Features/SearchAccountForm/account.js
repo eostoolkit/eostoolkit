@@ -12,14 +12,17 @@ import GridItem from 'components/Grid/GridItem';
 import CustomInput from 'components/CustomInput/CustomInput';
 import Button from 'components/CustomButtons/Button';
 
+import { injectIntl } from 'react-intl';
+import messages from './messages';
+
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, intl } = props;
   return (
     <form onSubmit={handleSubmit}>
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <CustomInput
-            labelText="Account Name"
+            labelText={intl.formatMessage(messages.accountFormAccountName)}
             id="name"
             error={errors.name}
             touched={touched.name}
@@ -28,7 +31,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Search for this account',
+              placeholder: intl.formatMessage(messages.accountFormSearchAccountPlaceholder),
               value: values.name,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -44,4 +47,4 @@ const FormObject = props => {
     </form>
   );
 };
-export default FormObject;
+export default (injectIntl(FormObject));

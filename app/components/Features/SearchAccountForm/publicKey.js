@@ -12,14 +12,17 @@ import GridItem from 'components/Grid/GridItem';
 import CustomInput from 'components/CustomInput/CustomInput';
 import Button from 'components/CustomButtons/Button';
 
+import { injectIntl } from 'react-intl';
+import messages from './messages';
+
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, intl } = props;
   return (
     <form onSubmit={handleSubmit}>
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <CustomInput
-            labelText="Public Key"
+            labelText={intl.formatMessage(messages.accountFormPublicKey)}
             id="publicKey"
             error={errors.publicKey}
             touched={touched.publicKey}
@@ -28,7 +31,7 @@ const FormObject = props => {
             }}
             inputProps={{
               type: 'text',
-              placeholder: 'Search for this public key',
+              placeholder: intl.formatMessage(messages.accountFormSearchPublicKeyPlaceholder),
               value: values.publicKey,
               onChange: handleChange,
               onBlur: handleBlur,
