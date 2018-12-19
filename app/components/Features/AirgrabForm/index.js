@@ -20,28 +20,32 @@ import Disclaimer from 'components/Information/Disclaimer';
 import AirgrabTable from './AirgrabTable';
 import ClaimsTable from './ClaimsTable';
 
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+
 const makeTransaction = (values, networkIdentity) => {
   let data = null;
-  if(values.method === 'signup' && values.symbol !== 'SEED') {
+  if (values.method === 'signup' && values.symbol !== 'SEED') {
     data = {
       owner: networkIdentity ? networkIdentity.name : '',
       quantity: `0.0000 ${values.symbol}`,
     };
   }
-  if(values.method === 'signup' && values.symbol === 'SEED') {
+  if (values.method === 'signup' && values.symbol === 'SEED') {
     data = {
       owner: networkIdentity ? networkIdentity.name : '',
       sym: `4,${values.symbol}`,
     };
   }
-  if(values.method === 'open') {
+  if (values.method === 'open') {
     data = {
       owner: networkIdentity ? networkIdentity.name : '',
       symbol: `0.0000 ${values.symbol}`,
       ram_payer: networkIdentity ? networkIdentity.name : '',
     };
   }
-  if(values.method === 'claim') {
+  if (values.method === 'claim') {
     data = {
       claimer: networkIdentity ? networkIdentity.name : '',
     };
@@ -60,7 +64,7 @@ const makeClaim = (values, networkIdentity) => {
   const data = {
     owner: networkIdentity ? networkIdentity.name : '',
     sym: values.data.sym,
-  }
+  };
   const transaction = [
     {
       account: values.account,
@@ -72,36 +76,45 @@ const makeClaim = (values, networkIdentity) => {
 };
 
 const AirgrabForm = props => {
-  const { pushTransaction, networkIdentity, networkAccount } = props;
+  const { pushTransaction, networkIdentity, networkAccount, intl } = props;
   const handleSubmit = values => {
     const transaction = makeTransaction(values, networkIdentity);
-    pushTransaction(transaction,props.history);
+    pushTransaction(transaction, props.history);
   };
   const handleClaims = values => {
     const transaction = makeClaim(values, networkIdentity);
-    pushTransaction(transaction,props.history);
+    pushTransaction(transaction, props.history);
   };
   return (
     <Tool>
       <ToolSection lg={8}>
-        <ToolBody color="warning" icon={CloudDownload} header="Airgrab your Tokens!">
-          <h6>Note: Airgrabbing tokens consumes your personal RAM.</h6>
-          <h6>You cannot recover this RAM until the token has dropped.</h6>
+        <ToolBody color="warning" icon={CloudDownload} header={intl.formatMessage(messages.airgrabHeader)}>
+          <h6>
+            <FormattedMessage {...messages.airgrabNoteHeader} />
+          </h6>
+          <h6>
+            <FormattedMessage {...messages.airgrabNoteHeader2} />
+          </h6>
           <Disclaimer />
-          <AirgrabTable handleSubmit={handleSubmit} account={networkAccount} />
+          <AirgrabTable handleSubmit={handleSubmit} account={networkAccount} intl={intl} />
           <p>
-            Have an Airgrab you want here? Email us: <a href="mailto:contact@genereos.io">contact@genereos.io</a>
+            <FormattedMessage {...messages.airgrabGenerEOSMail} />{' '}
+            <a href="mailto:contact@genereos.io">contact@genereos.io</a>
           </p>
         </ToolBody>
-        <ToolBody color="warning" icon={CloudDownload} header="Claim your Tokens!">
-          <h6>Note: You can only claim a token you have already received.</h6>
-          <h6>Claim will succeed even if you already claimed. Next release will say you have already claimed if you have.</h6>
+        <ToolBody color="warning" icon={CloudDownload} header={intl.formatMessage(messages.claimTokenHeader)}>
+          <h6>
+            <FormattedMessage {...messages.claimNoteHeader} />
+          </h6>
+          <h6>
+            <FormattedMessage {...messages.claimNoteHeader2} />
+          </h6>
           <Disclaimer />
-          <ClaimsTable handleSubmit={handleClaims} account={networkAccount} claims={props.claims}/>
+          <ClaimsTable handleSubmit={handleClaims} account={networkAccount} claims={props.claims} intl={intl} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody header="Poorman Token">
+        <ToolBody header={intl.formatMessage(messages.poormanTokenHeader)}>
           <PoormanInfo />
         </ToolBody>
       </ToolSection>
