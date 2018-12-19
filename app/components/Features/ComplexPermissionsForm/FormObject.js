@@ -8,6 +8,7 @@ import AddCircle from '@material-ui/icons/AddCircle';
 import RemoveCircle from '@material-ui/icons/RemoveCircle';
 
 import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
   const {
@@ -19,7 +20,7 @@ const FormObject = props => {
   const StaticFields = [
     {
       id: 'owner',
-      label: intl.formatMessage(messages.complexPermissionFormAccountLabel),
+      label: intl.formatMessage(commonMessages.formAccountLabel),
       placeholder: intl.formatMessage(messages.complexPermissionFormAccountPlaceholder),
       md: 6,
     },

@@ -2,10 +2,6 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   // Messages for ComplexPermissionForm
-  complexPermissionFormAccountLabel: {
-    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormAccountLabel',
-    defaultMessage: 'Account',
-  },
   complexPermissionFormAccountPlaceholder: {
     id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormAccountPlaceholder',
     defaultMessage: 'Account being updated',

@@ -17,26 +17,30 @@ import ToolBody from 'components/Tool/ToolBody';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
-const FormData = [
-  {
-    id: 'account',
-    label: 'Account',
-    placeholder: 'Account to set status for',
-  },
-  {
-    id: 'content',
-    label: 'Status',
-    placeholder: 'Status text',
-  },
-];
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Submit',
+    submitText: intl.formatMessage(messages.referendumProposalsSubmitText),
   };
+  const FormData = [
+    {
+      id: 'account',
+      label: intl.formatMessage(commonMessages.formAccountLabel),
+      placeholder: intl.formatMessage(messages.formAccountPlaceholder),
+    },
+    {
+      id: 'content',
+      label: intl.formatMessage(messages.formStatusLabel),
+      placeholder: intl.formatMessage(messages.formStatusPlaceholder),
+    },
+  ];
   return (
     <ToolForm {...formProps}>
       {FormData.map(form => {
@@ -59,26 +63,32 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  account: Yup.string().required('Account is required'),
-  content: Yup.string().required('Status text is required'),
-});
-
 const ForumStatusForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
-        <ToolBody color="warning" icon={RecordVoiceOver} header="Forum" subheader=" - Status">
+        <ToolBody
+          color="warning"
+          icon={RecordVoiceOver}
+          header={intl.formatMessage(messages.forumHeader)}
+          subheader={intl.formatMessage(messages.forumSubHeader)}>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="info" header="Tutorial">
-          <h5>EOSIO Forum Status</h5>
-          <p>This is part of the eosio.forum Referendum project.</p>
-          <p>You can post a short, twitter like status</p>
+        <ToolBody color="info" header={intl.formatMessage.tutorialHeaderMessage}>
+          <h5>
+            <FormattedMessage {...messages.eosioForumStatusHeader} />
+          </h5>
           <p>
-            For more information checkout{' '}
+            <FormattedMessage {...messages.eosioForumStatusText1} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.eosioForumStatusText2} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.eosioForumStatusTextCheckout} />
             <a href="https://github.com/eoscanada/eosio.forum" target="new">
               Eos Canada GitHub
             </a>
@@ -95,13 +105,19 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       account: props.networkIdentity ? props.networkIdentity.name : '',
       content: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        account: Yup.string().required(intl.formatMessage(commonMessages.formAccountRequired)),
+        content: Yup.string().required(intl.formatMessage(messages.formStatusTextRequired)),
+      });
+    },
   })
 );
 
