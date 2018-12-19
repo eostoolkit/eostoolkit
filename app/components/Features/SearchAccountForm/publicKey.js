@@ -12,7 +12,7 @@ import GridItem from 'components/Grid/GridItem';
 import CustomInput from 'components/CustomInput/CustomInput';
 import Button from 'components/CustomButtons/Button';
 
-import { injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import messages from './messages';
 
 const FormObject = props => {
@@ -40,11 +40,11 @@ const FormObject = props => {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Button type="submit" color="rose">
-            Search
+            <FormattedMessage {...messages.searchButtonText} />
           </Button>
         </GridItem>
       </GridContainer>
     </form>
   );
 };
-export default FormObject;
+export default injectIntl(FormObject);

@@ -26,10 +26,6 @@ export default defineMessages({
     id: 'app.components.Features.CreateAccountForm.formAccountNameCreatorMessage',
     defaultMessage: 'Creator name is required',
   },
-  formAccountNameMessageRequired: {
-    id: 'app.components.Features.CreateAccountForm.formAccountNameMessageRequired',
-    defaultMessage: 'Account name is required',
-  },
   formAccountNameInvalid: {
     id: 'app.components.Features.CreateAccountForm.formAccountNameInvalid',
     defaultMessage: 'Invalid account name',
@@ -66,33 +62,13 @@ export default defineMessages({
     id: 'app.components.Features.CreateAccountForm.formActiveKeyPlaceholder',
     defaultMessage: 'Search for this public key',
   },
-  formCPULabel: {
-    id: 'app.components.Features.CreateAccountForm.formCPULabel',
-    defaultMessage: 'CPU Stake (in EOS)',
-  },
   formCPUPlaceholder: {
     id: 'app.components.Features.CreateAccountForm.formCPUPlaceholder',
     defaultMessage: 'Required to process transactions',
   },
-  formCPUMessageRequired: {
-    id: 'app.components.Features.CreateAccountForm.formCPUMessageRequired',
-    defaultMessage: 'CPU Stake is required',
-  },
-  formNETLabel: {
-    id: 'app.components.Features.CreateAccountForm.formNETLabel',
-    defaultMessage: 'Net Stake (in EOS)',
-  },
   formNETPlaceholder: {
     id: 'app.components.Features.CreateAccountForm.formNETPlaceholder',
     defaultMessage: 'Required to use network',
-  },
-  formNETMessageRequired: {
-    id: 'app.components.Features.CreateAccountForm.formNETMessageRequired',
-    defaultMessage: 'NET Stake is required',
-  },
-  formPositiveQuantityRequired: {
-    id: 'app.components.Features.CreateAccountForm.formPositiveQuantityRequired',
-    defaultMessage: 'You must stake a positive quantity',
   },
   formRAMLabel: {
     id: 'app.components.Features.CreateAccountForm.formRAMLabel',
@@ -114,9 +90,13 @@ export default defineMessages({
     id: 'app.components.Features.CreateAccountForm.formRAMMessageInteger',
     defaultMessage: 'RAM cannot be fractional',
   },
-  formFransferPlaceholder: {
-    id: 'app.components.Features.CreateAccountForm.formFransferPlaceholder',
+  formTransferPlaceholder: {
+    id: 'app.components.Features.CreateAccountForm.formTransferPlaceholder',
     defaultMessage:
       'ranfer Off: owner retains staking control and voting rights. Transfer On: New account gains staking control and voting rights.',
+  },
+  submitText: {
+    id: 'app.components.Features.CreateAccountForm.submitText',
+    defaultMessage: 'Create',
   },
 });

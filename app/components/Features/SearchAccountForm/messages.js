@@ -30,4 +30,8 @@ export default defineMessages({
     id: 'app.components.Features.SearchAccountForm.accountFormIndexSearchPublicKeyHeader',
     defaultMessage: 'Search Public Key',
   },
+  searchButtonText: {
+    id: 'app.components.Features.SearchAccountForm.searchButtonText',
+    defaultMessage: 'Search',
+  },
 });

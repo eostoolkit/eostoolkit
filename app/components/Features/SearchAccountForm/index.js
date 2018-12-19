@@ -47,7 +47,7 @@ const SearchAccountForm = props => {
               <Search />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>
-              <FormattedMessage {...messages.accountFormIndexSearchAccountHeader}/>
+              <FormattedMessage {...messages.accountFormIndexSearchAccountHeader} />
             </h4>
           </CardHeader>
           <CardBody>
@@ -68,7 +68,7 @@ const SearchAccountForm = props => {
               <Search />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>
-              <FormattedMessage {...messages.accountFormIndexSearchAccountHeader}/>
+              <FormattedMessage {...messages.accountFormIndexSearchAccountHeader} />
             </h4>
           </CardHeader>
           <CardBody>

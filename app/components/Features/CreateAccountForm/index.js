@@ -19,6 +19,7 @@ import FormObject from './FormObject';
 
 import { FormattedMessage, injectIntl } from 'react-intl';
 import messages from './messages';
+import commonMessages from '../../messages';
 
 const makeTransaction = values => {
   const transaction = [
@@ -102,7 +103,7 @@ const enhance = compose(
       return Yup.object().shape({
         owner: Yup.string().required(intl.formatMessage(messages.formAccountNameCreatorMessage)),
         name: Yup.string()
-          .required(intl.formatMessage(messages.formAccountNameMessageRequired))
+          .required(intl.formatMessage(commonMessages.formAccountNameRequired))
           .matches(/([a-z1-5]){12,}/, {
             excludeEmptyString: true,
             message: intl.formatMessage(messages.formAccountNameInvalid),
@@ -110,14 +111,14 @@ const enhance = compose(
         ownerKey: Yup.string().required(intl.formatMessage(messages.formOwnerKeyMessage)),
         activeKey: Yup.string().required(intl.formatMessage(messages.formActiveKeyRequired)),
         net: Yup.number()
-          .required(intl.formatMessage(messages.formNETMessageRequired))
-          .positive(intl.formatMessage(messages.formPositiveQuantityRequired)),
+          .required(intl.formatMessage(commonMessages.formNETStakeRequired))
+          .positive(intl.formatMessage(commonMessages.formStakePositiveQuantity)),
         cpu: Yup.number()
-          .required(intl.formatMessage(messages.formCPUMessageRequired))
-          .positive(intl.formatMessage(messages.formPositiveQuantityRequired)),
+          .required(intl.formatMessage(commonMessages.formCPUStakeRequired))
+          .positive(intl.formatMessage(commonMessages.formStakePositiveQuantity)),
         ram: Yup.number()
           .required(intl.formatMessage(messages.formRAMMessageRequired))
-          .positive(intl.formatMessage(messages.formPositiveQuantityRequired))
+          .positive(intl.formatMessage(commonMessages.formStakePositiveQuantity))
           .integer(intl.formatMessage(messages.formRAMMessageInteger)),
       });
     },

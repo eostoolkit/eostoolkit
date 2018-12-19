@@ -74,7 +74,7 @@ const enhance = compose(
       const { intl } = props;
       return Yup.object().shape({
         owner: Yup.string().required(intl.formatMessage(messages.proxyNameRequired)),
-        name: Yup.string().required(intl.formatMessage(messages.proxyAccountRequired)),
+        name: Yup.string().required(intl.formatMessage(commonMessages.formAccountNameRequired)),
       });
     },
   })

@@ -30,8 +30,4 @@ export default defineMessages({
     id: 'app.components.Features.SetProxyForm.proxyNameRequired',
     defaultMessage: 'Proxied name is required',
   },
-  proxyAccountRequired: {
-    id: 'app.components.Features.SetProxyForm.proxyAccountRequired',
-    defaultMessage: 'Account name is required',
-  },
 });

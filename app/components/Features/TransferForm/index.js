@@ -81,7 +81,7 @@ const enhance = compose(
       const { intl } = props;
       return Yup.object().shape({
         owner: Yup.string().required(intl.formatMessage(messages.senderValidation)),
-        name: Yup.string().required(intl.formatMessage(messages.nameValidation)),
+        name: Yup.string().required(intl.formatMessage(commonMessages.formAccountNameRequired)),
         symbol: Yup.string().required(intl.formatMessage(messages.symbolValidation)),
         memo: Yup.string(),
         quantity: Yup.number()

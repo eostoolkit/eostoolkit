@@ -19,6 +19,7 @@ import ChangePermissions from 'components/Information/ChangePermissions';
 import FormObject from './FormObject';
 
 import messages from './messages';
+import commonMessages from '../../messages';
 
 const makeTransaction = (values, intl) => {
   const transaction = [];
@@ -92,7 +93,7 @@ const enhance = compose(
     validationSchema: props => {
       const { intl } = props;
       return Yup.object().shape({
-        owner: Yup.string().required(intl.formatMessage(messages.simplePermissionFormOwnerRequired)),
+        owner: Yup.string().required(intl.formatMessage(commonMessages.formOwnerNameRequired)),
         activeKey: Yup.string(),
         ownerKey: Yup.string(),
       });

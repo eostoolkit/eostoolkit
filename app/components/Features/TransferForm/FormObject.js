@@ -2,6 +2,7 @@ import React from 'react';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
   const { handleSubmit, intl } = props;
@@ -9,7 +10,7 @@ const FormObject = props => {
   const FormData = [
     {
       id: 'name',
-      label: intl.formatMessage(messages.recipientLabel),
+      label: intl.formatMessage(commonMessages.recipientLabel),
       placeholder: intl.formatMessage(messages.recipientPlaceholder),
     },
     {

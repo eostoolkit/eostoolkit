@@ -33,12 +33,12 @@ const FormObject = props => {
     },
     {
       id: 'cpu',
-      label: intl.formatMessage(messages.formCPULabel),
+      label: intl.formatMessage(commonMessages.stakeCPULabel),
       placeholder: intl.formatMessage(messages.formCPUPlaceholder),
     },
     {
       id: 'net',
-      label: intl.formatMessage(messages.formNETLabel),
+      label: intl.formatMessage(commonMessages.stakeNetLabel),
       placeholder: intl.formatMessage(messages.formNETPlaceholder),
     },
     {
@@ -51,13 +51,13 @@ const FormObject = props => {
   const switchData = {
     id: 'transfer',
     label: intl.formatMessage(commonMessages.transferLabel),
-    placeholder: intl.formatMessage(messages.formFransferPlaceholder),
+    placeholder: intl.formatMessage(messages.formTransferPlaceholder),
   };
 
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Create',
+    submitText: intl.formatMessage(messages.submitText),
   };
   return (
     <ToolForm {...formProps}>

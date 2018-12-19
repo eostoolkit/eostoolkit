@@ -14,6 +14,9 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
 
+import messages from '../messages';
+import commonMessages from '../../../messages';
+
 const makeTransaction = values => {
   const transaction = [
     {
@@ -35,20 +38,10 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Owner name is required'),
-  name: Yup.string().required('Account name is required'),
-  net: Yup.number()
-    .required('NET Stake is required')
-    .positive('You must stake a positive quantity'),
-  cpu: Yup.number()
-    .required('CPU Stake is required')
-    .positive('You must stake a positive quantity'),
-});
-
 const DelegateForm = props => {
+  const { intl } = props;
   return (
-    <ToolBody color="warning" icon={Redo} header="Delegate" subheader=" - Stake">
+    <ToolBody color="warning" icon={Redo} header={intl.formatMessage(messages.delegateFormHeader)} subheader={intl.formatMessage(messages.delegateFormSubHeader)}>
       <FormObject {...props} />
     </ToolBody>
   );
@@ -60,7 +53,7 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',
@@ -68,7 +61,19 @@ const enhance = compose(
       net: '0',
       cpu: '0',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      Yup.object().shape({
+        owner: Yup.string().required(intl.formatMessage(commonMessages.formOwnerNameRequired)),
+        name: Yup.string().required(intl.formatMessage(commonMessages.formAccountNameRequired)),
+        net: Yup.number()
+          .required(intl.formatMessage(commonMessages.formNETStakeRequired))
+          .positive(intl.formatMessage(commonMessages.formStakePositiveQuantity)),
+        cpu: Yup.number()
+          .required(intl.formatMessage(commonMessages.formCPUStakeRequired))
+          .positive(intl.formatMessage(commonMessages.formStakePositiveQuantity)),
+      });
+    },
   })
 );
 

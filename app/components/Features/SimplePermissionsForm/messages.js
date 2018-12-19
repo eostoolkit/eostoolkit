@@ -38,10 +38,6 @@ export default defineMessages({
     id: 'app.components.Features.SimplePermissionForm.simplePermissionFormImportantHeader',
     defaultMessage: 'Important',
   },
-  simplePermissionFormOwnerRequired: {
-    id: 'app.components.Features.SimplePermissionForm.simplePermissionFormOwnerRequired',
-    defaultMessage: 'Owner name is required',
-  },
   simplePermissionFormBreakAccountError: {
     id: 'app.components.Features.SimplePermissionForm.simplePermissionFormBreakAccountError',
     defaultMessage: 'This will break your account',

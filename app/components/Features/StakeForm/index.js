@@ -13,7 +13,10 @@ import ToolBody from 'components/Tool/ToolBody';
 import Delegate from './DelegateForm';
 import Undelegate from './UndelegateForm';
 
+import commonMessages from '../../messages';
+
 const StakeForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
@@ -21,7 +24,7 @@ const StakeForm = props => {
         <Undelegate {...props} />
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="info" header="Information">
+        <ToolBody color="info" header={intl.formatMessage(commonMessages.informationHeaderMessage)}>
           <p>Tutorial coming soon</p>
         </ToolBody>
       </ToolSection>
