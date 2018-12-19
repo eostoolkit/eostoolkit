@@ -14,7 +14,7 @@ export default defineMessages({
     id: 'app.components.Features.SetProxyForm.proxyOwnerPlaceholder',
     defaultMessage: 'Account that will be proxied',
   },
-  submitText: {
+  donateText: {
     id: 'app.components.Features.SetProxyForm.submitText',
     defaultMessage: 'Set Proxy',
   },

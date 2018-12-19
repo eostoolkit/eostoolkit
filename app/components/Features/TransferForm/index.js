@@ -85,8 +85,8 @@ const enhance = compose(
         symbol: Yup.string().required(intl.formatMessage(messages.symbolValidation)),
         memo: Yup.string(),
         quantity: Yup.number()
-          .required(intl.formatMessage(messages.quantityValidation))
-          .positive(intl.formatMessage(messages.quantityValidationPositive)),
+          .required(intl.formatMessage(commonMessages.formQuantityRequired))
+          .positive(intl.formatMessage(commonMessages.formPositiveQuantityRequired)),
       });
     },
   })

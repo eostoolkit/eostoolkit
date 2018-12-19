@@ -18,7 +18,7 @@ export default defineMessages({
     id: 'app.components.Features.ResignProxyForm.proxyAccountPlaceholder',
     defaultMessage: 'Account that becomes proxy',
   },
-  submitText: {
+  donateText: {
     id: 'app.components.Features.ResignProxyForm.submitText',
     defaultMessage: 'Resign',
   },

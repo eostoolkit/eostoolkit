@@ -30,7 +30,7 @@ const FormObject = props => {
     },
     {
       id: 'memo',
-      label: intl.formatMessage(messages.memoLabel),
+      label: intl.formatMessage(commonMessages.memoLabel),
       placeholder: intl.formatMessage(messages.memoPlaceholder),
       md: 12,
     },

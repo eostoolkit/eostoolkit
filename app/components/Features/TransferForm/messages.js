@@ -26,14 +26,6 @@ export default defineMessages({
     id: 'app.components.Features.TransferForm.quantityPlaceholder',
     defaultMessage: 'How many Tokens to send',
   },
-  quantityValidation: {
-    id: 'app.components.Features.TransferForm.quantityValidation',
-    defaultMessage: 'Quantity is required',
-  },
-  quantityValidationPositive: {
-    id: 'app.components.Features.TransferForm.quantityValidationPositive',
-    defaultMessage: 'You must send a positive quantity',
-  },
   symbolLabel: {
     id: 'app.components.Features.TransferForm.symbolLabel',
     defaultMessage: 'Symbol',
@@ -45,10 +37,6 @@ export default defineMessages({
   symbolValidation: {
     id: 'app.components.Features.TransferForm.symbolValidation',
     defaultMessage: 'Symbol is required',
-  },
-  memoLabel: {
-    id: 'app.components.Features.TransferForm.memoLabel',
-    defaultMessage: 'Memo',
   },
   memoPlaceholder: {
     id: 'app.components.Features.TransferForm.memoPlaceholder',

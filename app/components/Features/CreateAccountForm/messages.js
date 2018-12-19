@@ -79,7 +79,7 @@ export default defineMessages({
     defaultMessage:
       'ranfer Off: owner retains staking control and voting rights. Transfer On: New account gains staking control and voting rights.',
   },
-  submitText: {
+  donateText: {
     id: 'app.components.Features.CreateAccountForm.submitText',
     defaultMessage: 'Create',
   },
