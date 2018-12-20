@@ -561,4 +561,20 @@ export default defineMessages({
     defaultMessage:
       'This constitution is interim and is intended to remain in effect until a permanent constitution is written and ratified in a referendum.',
   },
+  poorInfoLineOne: {
+    id: 'app.components.Information.PoorInfo.poorInfoLineOne',
+    defaultMessage: 'Every 24 hours 3331 ZKS is made available',
+  },
+  poorInfoLineTwo: {
+    id: 'app.components.Information.PoorInfo.poorInfoLineTwo',
+    defaultMessage: 'Spend POOR, and receive ZKS in ratio based on your spend vs total spend',
+  },
+  poorInfoLineThree: {
+    id: 'app.components.Information.PoorInfo.poorInfoLineThree',
+    defaultMessage: 'Example: If you spend 1000 POOR, and 2000 total POOR is spent, you receive 50% of 3331 ZKS that day',
+  },
+  poorInfoLineFour: {
+    id: 'app.components.Information.PoorInfo.poorInfoLineFour',
+    defaultMessage: 'Spent POOR will be burned from circulation so we can keep supporting new airdrops',
+  },
 });
