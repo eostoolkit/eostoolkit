@@ -10,6 +10,7 @@ import { addLocaleData } from 'react-intl';
 * Import Locale data if specific locales are needed
 * */
 import enLocaleData from 'react-intl/locale-data/en';
+import deLocaleData from 'react-intl/locale-data/de';
 
 import { DEFAULT_LOCALE } from './containers/App/constants'; // eslint-disable-line
 
@@ -17,10 +18,12 @@ import { DEFAULT_LOCALE } from './containers/App/constants'; // eslint-disable-l
 * Import translation files here after translating all application strings in country specific translation json file
 * */
 import enTranslationMessages from './translations/en.json';
+import deTranslationMessages from './translations/de.json';
 
-export const appLocales = ['en'];
+export const appLocales = ['en', 'de'];
 
 addLocaleData(enLocaleData);
+addLocaleData(deLocaleData);
 
 export const formatTranslationMessages = (locale, messages) => {
   const defaultFormattedMessages =
@@ -39,4 +42,5 @@ export const formatTranslationMessages = (locale, messages) => {
 * */
 export const translationMessages = {
   en: formatTranslationMessages('en', enTranslationMessages),
+  de: formatTranslationMessages('de', deTranslationMessages),
 };
