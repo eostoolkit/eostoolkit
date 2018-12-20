@@ -26,22 +26,22 @@ const MinerTable = props => {
       color="warning"
       icon={AccountBalance}
       header={intl.formatMessage(messages.grandpaIndexHeader)}
-      subheader={intl.formatMessage(messages.grandpaMinerTable2SubHeader)}>
+      subheader={intl.formatMessage(messages.grandpaMinerTableSubHeader)}>
       <p>
-        <FormattedMessage {...messages.grandpaMinerTable2InfoText1} />
+        <FormattedMessage {...messages.grandpaMinerTableInfoText1} />
       </p>
       <p>
-        <FormattedMessage {...messages.grandpaMinerTable2InfoText2} />
+        <FormattedMessage {...messages.grandpaMinerTableInfoText2} />
       </p>
       <p>
-        <FormattedMessage {...messages.grandpaMinerTable2InfoText3} />
+        <FormattedMessage {...messages.grandpaMinerTableInfoText3} />
       </p>
       <div className={classes.tableResponsive}>
         <Table className={classes.table}>
           <TableHead className={classes.successRow}>
             <TableRow className={classes.tableRow}>
               <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`} colSpan={2}>
-                <FormattedMessage {...messages.grandpaMinerTable2RoundInfoEnd} />
+                <FormattedMessage {...messages.grandpaMinerTableRoundInfoEnd} />
               </TableCell>
             </TableRow>
           </TableHead>
@@ -49,7 +49,7 @@ const MinerTable = props => {
             <TableRow className={classes.tableRowHover}>
               <TableCell className={classes.tableCell}>
                 <h3>
-                  <FormattedMessage {...messages.grandpaMinerTable2CellJackpot} />
+                  <FormattedMessage {...messages.grandpaMinerTableCellJackpot} />
                 </h3>
               </TableCell>
               <TableCell className={classes.tableCell}>
@@ -58,7 +58,7 @@ const MinerTable = props => {
             </TableRow>
             <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
               <TableCell className={classes.tableCell}>
-                <FormattedMessage {...messages.grandpaMinerTable2CellChiefMiner} />
+                <FormattedMessage {...messages.grandpaMinerTableCellChiefMiner} />
               </TableCell>
               <TableCell className={classes.tableCell}>
                 <h4>{round ? round.current_miner : intl.formatMessage(messages.grandpaLoadingText)}</h4>
@@ -66,7 +66,7 @@ const MinerTable = props => {
             </TableRow>
             <TableRow className={classes.tableRowHover}>
               <TableCell className={classes.tableCell}>
-                <FormattedMessage {...messages.grandpaMinerTable2CellUsurpFee} />
+                <FormattedMessage {...messages.grandpaMinerTableCellUsurpFee} />
               </TableCell>
               <TableCell className={classes.tableCell}>
                 <h4>
@@ -78,7 +78,7 @@ const MinerTable = props => {
             </TableRow>
             <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
               <TableCell className={classes.tableCell}>
-                <FormattedMessage {...messages.grandpaMinerTable2CellMinerChanged} />
+                <FormattedMessage {...messages.grandpaMinerTableCellMinerChanged} />
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {round
@@ -88,7 +88,7 @@ const MinerTable = props => {
             </TableRow>
             <TableRow className={`${classes.tableRowHover}`}>
               <TableCell className={classes.tableCell}>
-                <FormattedMessage {...messages.grandpaMinerTable2CellTeamDivided} />
+                <FormattedMessage {...messages.grandpaMinerTableCellTeamDivided} />
               </TableCell>
               <TableCell className={classes.tableCell}>{`${Number(round ? round.rewards.team_div / 10000 : 0).toFixed(
                 4
@@ -96,7 +96,7 @@ const MinerTable = props => {
             </TableRow>
             <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
               <TableCell className={classes.tableCell}>
-                <FormattedMessage {...messages.grandpaMinerTable2CellCarryForward} />
+                <FormattedMessage {...messages.grandpaMinerTableCellCarryForward} />
               </TableCell>
               <TableCell className={classes.tableCell}>{`${Number(
                 round ? round.rewards.carry_forward / 10000 : 0
@@ -104,7 +104,7 @@ const MinerTable = props => {
             </TableRow>
             <TableRow className={`${classes.tableRowHover}`}>
               <TableCell className={classes.tableCell}>
-                <FormattedMessage {...messages.grandpaMinerTable2CellDeveloperFund} />
+                <FormattedMessage {...messages.grandpaMinerTableCellDeveloperFund} />
               </TableCell>
               <TableCell className={classes.tableCell}>{`${Number(round ? round.rewards.dev_fund / 10000 : 0).toFixed(
                 4

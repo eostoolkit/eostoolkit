@@ -50,92 +50,72 @@ export default defineMessages({
     id: 'app.components.Features.Grandpa.grandpaIndexReferralLinkText',
     defaultMessage: 'Your referral link: ',
   },
-  grandpaMinerTableHeader: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTableHeader',
-    defaultMessage: 'Mining',
+  grandpaMineTableHeader: {
+    id: 'app.components.Features.Grandpa.grandpaMineTableHeader',
+    defaultMessage: 'Quit GrandpaCoins',
+  },
+  grandpaMineTableSubHeader: {
+    id: 'app.components.Features.Grandpa.grandpaMineTableSubHeader',
+    defaultMessage: ' - Get your RAM back!',
+  },
+  grandpaMineTableInfotextOne: {
+    id: 'app.components.Features.Grandpa.grandpaMineTableInfotextOne',
+    defaultMessage: 'Recover your RAM while we improve the game.',
+  },
+  grandpaMineTableInfotextTwo: {
+    id: 'app.components.Features.Grandpa.grandpaMineTableInfotextTwo',
+    defaultMessage: 'Your BTC,ETH, and DOGE will be erased!',
+  },
+  grandpaMineTableButton: {
+    id: 'app.components.Features.Grandpa.grandpaMineTableButton',
+    defaultMessage: 'Quit game and Recover RAM',
   },
   grandpaMinerTableSubHeader: {
     id: 'app.components.Features.Grandpa.grandpaMinerTableSubHeader',
-    defaultMessage: '- You can mine every 12 hours',
-  },
-  grandpaMinerTableYouAreReferredText: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTableYouAreReferredText',
-    defaultMessage: 'You are being referred by',
-  },
-  grandpaMinerTableMinerInfo1: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTableMinerInfo1',
-    defaultMessage: 'First time miners earn 100 coins. Repeat mining earns 5 coins.',
-  },
-  grandpaMinerTableMinerInfo2: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTableMinerInfo2',
-    defaultMessage: 'Referrers get a bonus 5% - The Chief Miner gets a bonus 10%',
-  },
-  grandpaMinerTableSymbol: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTableSymbol',
-    defaultMessage: 'Symbol',
-  },
-  grandpaMinerTableLastMined: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTableLastMined',
-    defaultMessage: 'Last Mined',
-  },
-  grandpaMinerTableCurrentlyMining: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTableCurrentlyMining',
-    defaultMessage: 'Mining',
-  },
-  grandpaMinerTableNeverMined: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTableNeverMined',
-    defaultMessage: 'Never',
-  },
-  grandpaMinerTableMinerIt: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTableMinerIt',
-    defaultMessage: 'Mine it!',
-  },
-  grandpaMinerTable2SubHeader: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTable2SubHeader',
     defaultMessage: "- Let's make these old coins move FAST",
   },
-  grandpaMinerTable2InfoText1: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTable2InfoText1',
+  grandpaMinerTableInfoText1: {
+    id: 'app.components.Features.Grandpa.grandpaMinerTableInfoText1',
     defaultMessage: 'Transfer the highest VOLUME of coins to win the Jackpot!',
   },
-  grandpaMinerTable2InfoText2: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTable2InfoText2',
+  grandpaMinerTableInfoText2: {
+    id: 'app.components.Features.Grandpa.grandpaMinerTableInfoText2',
     defaultMessage: 'Will you win by speed or by being a whale?',
   },
-  grandpaMinerTable2InfoText3: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTable2InfoText3',
+  grandpaMinerTableInfoText3: {
+    id: 'app.components.Features.Grandpa.grandpaMinerTableInfoText3',
     defaultMessage: 'The winning coin gets the Team Dividend divided amongst all holders',
   },
-  grandpaMinerTable2RoundInfoEnd: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTable2RoundInfoEnd',
+  grandpaMinerTableRoundInfoEnd: {
+    id: 'app.components.Features.Grandpa.grandpaMinerTableRoundInfoEnd',
     defaultMessage: 'Round Info - Ends Nov 31 (1:00 UTC)',
   },
-  grandpaMinerTable2CellJackpot: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTable2CellJackpot',
+  grandpaMinerTableCellJackpot: {
+    id: 'app.components.Features.Grandpa.grandpaMinerTableCellJackpot',
     defaultMessage: 'Jackpot',
   },
-  grandpaMinerTable2CellChiefMiner: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTable2CellChiefMiner',
+  grandpaMinerTableCellChiefMiner: {
+    id: 'app.components.Features.Grandpa.grandpaMinerTableCellChiefMiner',
     defaultMessage: 'Chief Miner',
   },
-  grandpaMinerTable2CellUsurpFee: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTable2CellUsurpFee',
+  grandpaMinerTableCellUsurpFee: {
+    id: 'app.components.Features.Grandpa.grandpaMinerTableCellUsurpFee',
     defaultMessage: 'Usurp Fee',
   },
-  grandpaMinerTable2CellMinerChanged: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTable2CellMinerChanged',
+  grandpaMinerTableCellMinerChanged: {
+    id: 'app.components.Features.Grandpa.grandpaMinerTableCellMinerChanged',
     defaultMessage: 'Miner changed on',
   },
-  grandpaMinerTable2CellTeamDivided: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTable2CellTeamDivided',
+  grandpaMinerTableCellTeamDivided: {
+    id: 'app.components.Features.Grandpa.grandpaMinerTableCellTeamDivided',
     defaultMessage: 'Team Dividend',
   },
-  grandpaMinerTable2CellCarryForward: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTable2CellCarryForward',
+  grandpaMinerTableCellCarryForward: {
+    id: 'app.components.Features.Grandpa.grandpaMinerTableCellCarryForward',
     defaultMessage: 'Carry Forward',
   },
-  grandpaMinerTable2CellDeveloperFund: {
-    id: 'app.components.Features.Grandpa.grandpaMinerTable2CellDeveloperFund',
+  grandpaMinerTableCellDeveloperFund: {
+    id: 'app.components.Features.Grandpa.grandpaMinerTableCellDeveloperFund',
     defaultMessage: 'Developer Fund',
   },
   grandpaUsurpFormHeader: {
