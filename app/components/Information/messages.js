@@ -329,39 +329,23 @@ export default defineMessages({
   // Messages for Grandpa component
   grandpaLineOne: {
     id: 'app.components.Information.Granpa.grandpaLineOne',
-    defaultMessage: `Win the jackpot by transferring dusty coins: BTC, ETH, DOGE`,
+    defaultMessage: `GrandpaCoins is suspended while we make game improvements`,
   },
   grandpaLineTwo: {
     id: 'app.components.Information.Granpa.grandpaLineTwo',
-    defaultMessage: `You can mine these coins for FREE every 12 hours. Refer others to earn more, become Chief Miner to earn most!`,
+    defaultMessage: `Winner: geostrategic with DOGE (20747.7272 DOGE)`,
   },
   grandpaLineThree: {
     id: 'app.components.Information.Granpa.grandpaLineThree',
-    defaultMessage: `Chief miner makes 10% bonus of all mining, and 10% fees on all transfers`,
+    defaultMessage: `Velocity: iamskywalker with DOGE (117517 tx)`,
   },
   grandpaLineFour: {
     id: 'app.components.Information.Granpa.grandpaLineFour',
-    defaultMessage: `Referrers make 5% bonus of mining, and 2.5% fees on transfers`,
+    defaultMessage: `Carry forward: ha2temzwgyge for being Top Miner`,
   },
   grandpaLineFive: {
     id: 'app.components.Information.Granpa.grandpaLineFive',
-    defaultMessage: `The last person to transfer a coin makes 2.5% fees on the subsequent transfer`,
-  },
-  grandpaLineSix: {
-    id: 'app.components.Information.Granpa.grandpaLineSix',
-    defaultMessage: `Show the world how fast these coins can go on EOS!`,
-  },
-  grandpaLineSeven: {
-    id: 'app.components.Information.Granpa.grandpaLineSeven',
-    defaultMessage: `Achieve the highest VOLUME with one of the three coins and win the JACKPOT`,
-  },
-  grandpaLineEight: {
-    id: 'app.components.Information.Granpa.grandpaLineEight',
-    defaultMessage: `Consolation prize for highest VELOCITY with one of the three coins (10% of JACKPOT)`,
-  },
-  grandpaLineNine: {
-    id: 'app.components.Information.Granpa.grandpaLineNine',
-    defaultMessage: `The round 1 Prize jackpot has been paid. The round 1 dividend is delayed due to medical reasons.`,
+    defaultMessage: `DOGE Dividends: 194.8803 EOS`,
   },
   blockOneLetterHeader: {
     id: 'app.components.Information.BlockOneLetter.blockOneLetterHeader',
