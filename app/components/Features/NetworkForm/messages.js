@@ -6,8 +6,8 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  selectNetwork: {
-    id: 'app.components.Features.NetworkForm.selectNetwork',
+  selectNetworkText: {
+    id: 'app.components.Features.NetworkForm.selectNetworkText',
     defaultMessage: 'Select a network',
   },
   addNetworkToGit: {

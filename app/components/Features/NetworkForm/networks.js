@@ -11,7 +11,7 @@ import Button from 'components/CustomButtons/Button';
 
 import tableStyle from 'assets/jss/tableStyle';
 
-import messages from '../../messages';
+import messages from './messages';
 
 function NetworksTable({ ...props }) {
   const { classes, networks, active, selectNetwork, intl } = props;
@@ -20,14 +20,30 @@ function NetworksTable({ ...props }) {
       <Table className={classes.table}>
         <TableHead className={classes.successRow}>
           <TableRow className={classes.tableRow}>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>{intl.formatMessage(messages.networkTableColumnName)}</TableCell>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>{intl.formatMessage(messages.networkTableColumnNetwork)}</TableCell>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>{intl.formatMessage(messages.networkTableColumnType)}</TableCell>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>{intl.formatMessage(messages.networkTableColumnAPI)}</TableCell>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>{intl.formatMessage(messages.networkTableColumnHost)}</TableCell>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>{intl.formatMessage(messages.networkTableColumnFailures)}</TableCell>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>{intl.formatMessage(messages.networkTableColumnPing)}</TableCell>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>{intl.formatMessage(messages.networkTableColumnSelect)}</TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>
+              {intl.formatMessage(messages.networkTableColumnName)}
+            </TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>
+              {intl.formatMessage(messages.networkTableColumnNetwork)}
+            </TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>
+              {intl.formatMessage(messages.networkTableColumnType)}
+            </TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>
+              {intl.formatMessage(messages.networkTableColumnAPI)}
+            </TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>
+              {intl.formatMessage(messages.networkTableColumnHost)}
+            </TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>
+              {intl.formatMessage(messages.networkTableColumnFailures)}
+            </TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>
+              {intl.formatMessage(messages.networkTableColumnPing)}
+            </TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>
+              {intl.formatMessage(messages.networkTableColumnSelect)}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -46,7 +62,11 @@ function NetworksTable({ ...props }) {
                       {endpoint.url}:{endpoint.port}
                     </TableCell>
                     <TableCell className={classes.tableCell}>{endpoint.failures}</TableCell>
-                    <TableCell className={classes.tableCell}>{endpoint.ping === -1 ? intl.formatMessage(messages.networkTableUnknownNetworkText) : `${endpoint.ping} ms`}</TableCell>
+                    <TableCell className={classes.tableCell}>
+                      {endpoint.ping === -1
+                        ? intl.formatMessage(messages.networkTableUnknownNetworkText)
+                        : `${endpoint.ping} ms`}
+                    </TableCell>
                     <TableCell className={classes.tableCell}>
                       {active && active.network === network && active.endpoint.name === endpoint.name ? (
                         intl.formatMessage(messages.networkTableCurrentNetworkText)

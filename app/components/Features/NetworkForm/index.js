@@ -28,8 +28,8 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import messages from './messages';
 
 const NetworkForm = props => {
-  const { classes, networks, active, selectNetwork } = props;
-  const tableProps = { networks, active, selectNetwork };
+  const { classes, networks, active, selectNetwork, intl } = props;
+  const tableProps = { networks, active, selectNetwork, selectNetwork };
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={12}>
@@ -39,14 +39,14 @@ const NetworkForm = props => {
               <Settings />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>
-              <FormattedMessage {...messages.selectNetwork} />
+              <FormattedMessage {...messages.selectNetworkText} />
             </h4>
           </CardHeader>
           <CardBody>
             <h6>
               <FormattedHTMLMessage {...messages.addNetworkToGit} />
             </h6>
-            <NetworkTable {...tableProps} />
+            <NetworkTable intl={intl} {...tableProps} />
           </CardBody>
         </Card>
       </GridItem>

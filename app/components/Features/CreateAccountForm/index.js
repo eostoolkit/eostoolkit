@@ -73,7 +73,7 @@ const CreateAccountForm = props => {
       <ToolSection lg={4}>
         <ToolBody color="info" header={intl.formatMessage(commonMessages.tutorialHeaderMessage)}>
           <p>
-            <FormattedMessage {...commonMessages.tutor} />
+            <FormattedMessage {...commonMessages.tutorialHeaderMessage} />
           </p>
         </ToolBody>
       </ToolSection>
