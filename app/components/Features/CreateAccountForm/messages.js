@@ -10,10 +10,6 @@ export default defineMessages({
     id: 'app.components.Features.CreateAccountForm.formHeader',
     defaultMessage: 'Create Account',
   },
-  formTutorialHeader: {
-    id: 'app.components.Features.CreateAccountForm.formTutorialHeader',
-    defaultMessage: 'Tutorial',
-  },
   formAccountName: {
     id: 'app.components.Features.CreateAccountForm.formAccountName',
     defaultMessage: 'New Account Name',

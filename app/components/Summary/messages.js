@@ -23,4 +23,16 @@ export default defineMessages({
     id: 'app.components.Summary.resources.tokenDetailInfoText',
     defaultMessage: 'Token details powered by eosflare and greymass',
   },
+  refundingText: {
+    id: 'app.components.Summary.resources.refundingText',
+    defaultMessage: 'REFUNDING',
+  },
+  noneText: {
+    id: 'app.components.Summary.resources.noneText',
+    defaultMessage: 'None',
+  },
+  tokensText: {
+    id: 'app.components.Summary.resources.tokensText',
+    defaultMessage: 'Tokens',
+  },
 });

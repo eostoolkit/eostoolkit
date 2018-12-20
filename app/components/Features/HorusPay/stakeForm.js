@@ -18,28 +18,26 @@ import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 import ToolSwitch from 'components/Tool/ToolSwitch';
 
-const FormData = [
-  {
-    id: 'from',
-    label: 'Account',
-    placeholder: 'Account that provides the stake',
-  },
-  {
-    id: 'receiver',
-    label: 'Receiver',
-    placeholder: 'Account that receives the stake',
-  },
-  {
-    id: 'stake',
-    label: 'Quantity',
-    placeholder: 'Amount of HORUS to stake',
-    md: 12,
-  },
-];
-
-
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+  const FormData = [
+    {
+      id: 'from',
+      label: 'Account',
+      placeholder: 'Account that provides the stake',
+    },
+    {
+      id: 'receiver',
+      label: 'Receiver',
+      placeholder: 'Account that receives the stake',
+    },
+    {
+      id: 'stake',
+      label: 'Quantity',
+      placeholder: 'Amount of HORUS to stake',
+      md: 12,
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
@@ -55,7 +53,7 @@ const FormObject = props => {
 };
 
 const makeTransaction = values => {
-  const {stake, transfer, ...otherValues} = values;
+  const { stake, transfer, ...otherValues } = values;
   const transaction = [
     {
       account: 'horustokenio',
@@ -71,14 +69,6 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  from: Yup.string().required('Account is required'),
-  receiver: Yup.string().required('Receiver is required'),
-  stake: Yup.number()
-    .required('Stake is required')
-    .positive('You must stake a positive quantity'),
-});
-
 const StakeForm = props => {
   return (
     <ToolBody color="warning" icon={Redo} header="Stake HorusPay" subheader=" - Earn rewards!">
@@ -93,14 +83,23 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       from: props.networkIdentity ? props.networkIdentity.name : '',
       receiver: props.networkIdentity ? props.networkIdentity.name : '',
       stake: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        from: Yup.string().required('Account is required'),
+        receiver: Yup.string().required('Receiver is required'),
+        stake: Yup.number()
+          .required('Stake is required')
+          .positive('You must stake a positive quantity'),
+      });
+    },
   })
 );
 

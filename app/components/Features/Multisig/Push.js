@@ -24,55 +24,64 @@ import ReactFileReader from 'react-file-reader';
 import { makeSelectTransaction } from 'containers/NetworkClient/selectors';
 import { pushTransaction } from 'containers/OfflineClient/actions';
 
-const FormData = [
-  {
-    id: 'signatures',
-    label: 'Paste Signature JSON below',
-    placeholder: 'Paste Signatures Here',
-    multiline: true,
-    rows: 5,
-    md: 12,
-  },
-  {
-    id: 'transaction',
-    label: 'Paste Transaction JSON below',
-    placeholder: 'Paste Transaction JSON Here',
-    multiline: true,
-    rows: 30,
-    md: 12,
-  }
-];
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+  const FormData = [
+    {
+      id: 'signatures',
+      label: intl.formatMessage(messages.multisigPushFormSignatureLabel),
+      placeholder: intl.formatMessage(messages.multisigPushFormSignaturePlaceholder),
+      multiline: true,
+      rows: 5,
+      md: 12,
+    },
+    {
+      id: 'transaction',
+      label: intl.formatMessage(messages.multisigFormTransactionLabel),
+      placeholder: intl.formatMessage(messages.multisigFormTransactionPlaceholder),
+      multiline: true,
+      rows: 30,
+      md: 12,
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Push Transaction',
+    submitText: intl.formatMessage(messages.multisigPushFormSubmitText),
   };
 
   const handleFiles = files => {
     try {
-      var reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = function(e) {
         const values = props.values;
         props.setValues({
           signatures: values.signatures,
           transaction: reader.result,
         });
-      }
+      };
       reader.readAsText(files[0]);
-    } catch(c) {
-      //something went wrong
+    } catch (c) {
+      // something went wrong
     }
-  }
+  };
 
   const handleSigs = files => {
     try {
       const values = props.values;
-      const curr = values.signatures ? values.signatures.replace(/[\n\r]/g,'').trim().split(',') : [];
+      const curr = values.signatures
+        ? values.signatures
+            .replace(/[\n\r]/g, '')
+            .trim()
+            .split(',')
+        : [];
 
-      var reader = new FileReader();
+      const reader = new FileReader();
 
       reader.onload = function(e) {
         curr.push(JSON.parse(reader.result));
@@ -83,25 +92,29 @@ const FormObject = props => {
           signatures,
           transaction: values.transaction,
         });
-      }
+      };
 
       reader.readAsText(files[0]);
-    } catch(c) {
-      //something went wrong
+    } catch (c) {
+      // something went wrong
     }
-  }
+  };
 
   return (
     <ToolForm {...formProps}>
       <ToolSection md={12}>
-        <ReactFileReader handleFiles={handleSigs} fileTypes='.json,.txt'>
-          <Button>Add Signature</Button>
+        <ReactFileReader handleFiles={handleSigs} fileTypes=".json,.txt">
+          <Button>
+            <FormattedMessage {...messages.multisigPushFormAddSignatureButton} />
+          </Button>
         </ReactFileReader>
       </ToolSection>
       <ToolInput {...FormData[0]} {...props} />
       <ToolSection md={12}>
-        <ReactFileReader handleFiles={handleFiles} fileTypes='.json,.txt'>
-          <Button>Load Transaction JSON</Button>
+        <ReactFileReader handleFiles={handleFiles} fileTypes=".json,.txt">
+          <Button>
+            <FormattedMessage {...messages.multisigFormLoadTransactionJSON} />
+          </Button>
         </ReactFileReader>
       </ToolSection>
       <ToolInput {...FormData[1]} {...props} />
@@ -109,29 +122,30 @@ const FormObject = props => {
   );
 };
 
-const validationSchema = Yup.object().shape({
-  transaction: Yup.string().required('Transaction is required'),
-  signatures: Yup.string().required('Signatures is required'),
-});
-
 const MultisigPush = props => {
-  const { transaction } = props;
+  const { transaction, intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
         <ToolBody
           color="warning"
           icon={Send}
-          header="Push Transaction"
-          subheader=" - Push signed transaction to the Network">
+          header={intl.formatMessage(messages.multisigPushFormHeader)}
+          subheader={intl.formatMessage(messages.multisigPushFormSubHeader)}>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="info" header="Tutorial">
-          <p>Enter each signature seperated by commas, or use Add Signature to load each signature file.</p>
-          <p>Load the transaction JSON</p>
-          <p>Click Push Transaction</p>
+        <ToolBody color="info" header={intl.formatMessage(commonMessages.tutorialHeaderMessage)}>
+          <p>
+            <FormattedMessage {...messages.multisigPushFormTutorialLine1} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.multisigPushFormTutorialLine2} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.multisigPushFormTutorialLine3} />
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -144,7 +158,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleTransaction: (data) => dispatch(pushTransaction(data)),
+    handleTransaction: data => dispatch(pushTransaction(data)),
   };
 }
 
@@ -163,7 +177,13 @@ const enhance = compose(
       transaction: '',
       signatures: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        transaction: Yup.string().required(intl.formatMessage(messages.multisigFormTransactionRequired)),
+        signatures: Yup.string().required(intl.formatMessage(messages.multisigFormSignaturesRequired)),
+      });
+    },
   })
 );
 

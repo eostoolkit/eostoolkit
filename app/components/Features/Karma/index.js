@@ -17,7 +17,6 @@ import StakeTable from './stakeTable';
 const Karma = props => {
   return (
     <Tool>
-
       <ToolSection xs={12} lg={6}>
         <StakeTable {...props} />
       </ToolSection>

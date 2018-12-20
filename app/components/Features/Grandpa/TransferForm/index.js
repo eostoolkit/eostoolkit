@@ -14,6 +14,11 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
 
+import { FormattedMessage } from 'react-intl';
+
+import messages from '../messages';
+import commonMessages from '../../../messages';
+
 const makeTransaction = (values, token, networkIdentity) => {
   const transaction = [
     {
@@ -24,29 +29,27 @@ const makeTransaction = (values, token, networkIdentity) => {
         to: values.name,
         memo: values.memo,
         quantity: `${Number(values.quantity)
-            .toFixed(4)
-            .toString()} ${token}`
+          .toFixed(4)
+          .toString()} ${token}`,
       },
     },
   ];
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  memo: Yup.string(),
-  name: Yup.string()
-    .required('Quantity is required'),
-  quantity: Yup.number()
-    .required('Quantity is required')
-    .positive('You must send a positive quantity'),
-});
-
 const BuyRamForm = props => {
+  const { intl } = props;
   return (
-      <ToolBody color="warning" icon={Send} header="Transfer" subheader="- Transfer as much as possible to win!">
-        <p>There is a 15% fee on all transfers. Become Chief Miner to get 10% fees.</p>
-        <FormObject {...props} />
-      </ToolBody>
+    <ToolBody
+      color="warning"
+      icon={Send}
+      header={intl.formatMessage(commonMessages.transferLabel)}
+      subheader={intl.formatMessage(messages.grandpaTransferFormSubHeader)}>
+      <p>
+        <FormattedMessage {...messages.grandpaTransferFormFeeInformation} />
+      </p>
+      <FormObject {...props} />
+    </ToolBody>
   );
 };
 
@@ -56,8 +59,8 @@ const enhance = compose(
       token: 'BTC',
     },
     {
-      handleToken: (token) => (token) => ({
-        token: token,
+      handleToken: token => token => ({
+        token,
       }),
     }
   ),
@@ -78,7 +81,7 @@ const enhance = compose(
       setSubmitting(false);
       const transaction = makeTransaction(values, token, networkIdentity);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       quantity: 1,
@@ -86,7 +89,16 @@ const enhance = compose(
       name: '',
       memo: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        memo: Yup.string(),
+        name: Yup.string().required(intl.formatMessage(commonMessages.formQuantityRequired)),
+        quantity: Yup.number()
+          .required(intl.formatMessage(commonMessages.formQuantityRequired))
+          .positive(intl.formatMessage(commonMessages.formPositiveQuantityRequired)),
+      });
+    },
   })
 );
 

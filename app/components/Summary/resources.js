@@ -50,7 +50,9 @@ function ResourcesTable({ ...props }) {
                 <br />({Number((account.net_limit.used / account.net_limit.max) * 100).toFixed(2)} % used)
               </TableCell>
               <TableCell className={classes.tableCell}>
-                <h6>REFUNDING</h6>
+                <h6>
+                  <FormattedMessage {...messages.refundingText} />
+                </h6>
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {account && account.refund_request ? (
@@ -59,13 +61,17 @@ function ResourcesTable({ ...props }) {
                     <br />NET: {account.refund_request.net_amount}
                   </span>
                 ) : (
-                  <span>None</span>
+                  <span>
+                    <FormattedMessage {...messages.noneText} />
+                  </span>
                 )}
               </TableCell>
             </TableRow>
             <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
               <TableCell className={classes.tableCell}>
-                <h6>Tokens</h6>
+                <h6>
+                  <FormattedMessage {...messages.tokensText} />
+                </h6>
               </TableCell>
               <TableCell className={classes.tableCell} colSpan={9}>
                 <h6>{account.balances.map(bal => `${bal.amount} ${bal.symbol}`).join(', ')}</h6>

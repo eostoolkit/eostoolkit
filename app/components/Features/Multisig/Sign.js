@@ -24,42 +24,48 @@ import ReactFileReader from 'react-file-reader';
 import { makeSelectTransaction } from 'containers/NetworkClient/selectors';
 import { signTransaction } from 'containers/OfflineClient/actions';
 
-const FormData = [
-  {
-    id: 'transaction',
-    label: 'Paste Transaction JSON below',
-    placeholder: 'Paste Transaction JSON Here',
-    multiline: true,
-    rows: 30,
-    md: 12,
-  }
-];
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+  const FormData = [
+    {
+      id: 'transaction',
+      label: intl.formatMessage(messages.multisigFormTransactionLabel),
+      placeholder: intl.formatMessage(messages.multisigFormTransactionPlaceholder),
+      multiline: true,
+      rows: 30,
+      md: 12,
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Sign Transaction',
+    submitText: intl.formatMessage(messages.multisigSignFormSignTransaction),
   };
 
   const handleFiles = files => {
-    var reader = new FileReader();
+    const reader = new FileReader();
     reader.onload = function(e) {
       console.log(reader.result);
       props.setValues({
         transaction: reader.result,
       });
-    }
+    };
     reader.readAsText(files[0]);
     console.log(files);
-  }
+  };
 
   return (
     <ToolForm {...formProps}>
       <ToolSection md={12}>
-        <ReactFileReader handleFiles={handleFiles} fileTypes='.json,.txt'>
-          <Button>Load Transaction JSON</Button>
+        <ReactFileReader handleFiles={handleFiles} fileTypes=".json,.txt">
+          <Button>
+            <FormattedMessage {...messages.multisigFormLoadTransactionJSON} />
+          </Button>
         </ReactFileReader>
       </ToolSection>
       {FormData.map(form => {
@@ -69,32 +75,42 @@ const FormObject = props => {
   );
 };
 
-const validationSchema = Yup.object().shape({
-  transaction: Yup.string().required('Transaction is required'),
-});
-
 const MultisigSign = props => {
-  const { transaction } = props;
+  const { transaction, intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
         <ToolBody
           color="warning"
           icon={Create}
-          header="Sign Transaction"
-          subheader=" - Supply the resulting JSON to the transaction sender">
+          header={intl.formatMessage(messages.multisigSignFormSignTransaction)}
+          subheader={intl.formatMessage(messages.multisigSignFormSignTransactionSubheader)}>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="info" header="Tutorial">
-          <h5>Scatter Desktop is required. Not the Chrome Extension.</h5>
-          <p>Load the Transaction JSON you were provided.</p>
-          <p>Ensure Scatter is connected with the correct account to sign this transaction.</p>
-          <p>Click Sign Transaction</p>
-          <p>Scatter will appear asking you to sign an arbitrary Buffer. This will appear like random numbers. This is acceptable, and matches the JSON you loaded.</p>
-          <p>A dialogue will appear with your Signature, and you will also automatically download a JSON file with this signature.</p>
-          <p>Provide this signature or signature file to the person sending the transaction.</p>
+        <ToolBody color="info" header={intl.formatMessage(commonMessages.tutorialHeaderMessage)}>
+          <h5>
+            <FormattedMessage {...messages.multisigSignFormSignTutorialHeader} />
+          </h5>
+          <p>
+            <FormattedMessage {...messages.multisigSignFormSignTutorialLine1} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.multisigSignFormSignTutorialLine2} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.multisigSignFormSignTutorialLine3} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.multisigSignFormSignTutorialLine4} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.multisigSignFormSignTutorialLine5} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.multisigSignFormSignTutorialLine6} />
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -107,7 +123,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleTransaction: (data) => dispatch(signTransaction(data)),
+    handleTransaction: data => dispatch(signTransaction(data)),
   };
 }
 
@@ -125,7 +141,12 @@ const enhance = compose(
     mapPropsToValues: props => ({
       transaction: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        transaction: Yup.string().required(intl.formatMessage(messages.multisigFormTransactionRequired)),
+      });
+    },
   })
 );
 

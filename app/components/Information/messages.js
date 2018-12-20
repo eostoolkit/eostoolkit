@@ -391,4 +391,190 @@ export default defineMessages({
     defaultMessage:
       'This support would mean the world to us and help us keep creating great tools and contributions for the community.',
   },
+  governanceMainHeader: {
+    id: 'app.components.Information.Governance.governanceMainHeader',
+    defaultMessage:
+      'This Constitution is a multi-party contract entered into by the Members by virtue of their use of this blockchain.',
+  },
+  governanceArticleOneHeader: {
+    id: 'app.components.Information.Governance.governanceArticleOneHeader',
+    defaultMessage: 'Article I - No Initiation of Violence',
+  },
+  governanceArticleOneText: {
+    id: 'app.components.Information.Governance.governanceArticleOneText',
+    defaultMessage:
+      'Members shall not initiate violence or the threat of violence against another Member. Lawful prosecution of crimes with the goal of preserving life, liberty and property does not constitute initiation of violence.',
+  },
+  governanceArticleTwoHeader: {
+    id: 'app.components.Information.Governance.governanceArticleTwoHeader',
+    defaultMessage: 'Article II - No Perjury',
+  },
+  governanceArticleTwoText: {
+    id: 'app.components.Information.Governance.governanceArticleTwoText',
+    defaultMessage:
+      'Members shall be liable for losses caused by false or misleading attestations and shall forfeit any profit gained thereby.',
+  },
+  governanceArticleThreeHeader: {
+    id: 'app.components.Information.Governance.governanceArticleThreeHeader',
+    defaultMessage: 'Article III - Rights',
+  },
+  governanceArticleThreeText: {
+    id: 'app.components.Information.Governance.governanceArticleThreeText',
+    defaultMessage:
+      'The Members grant the right of contract and of private property to each other, therefore no property shall change hands except with the consent of the owner, by a valid Arbitrator’s order, or via community referendum. This Constitution creates no positive rights for or between any Members.',
+  },
+  governanceArticleFourHeader: {
+    id: 'app.components.Information.Governance.governanceArticleFourHeader',
+    defaultMessage: 'Article IV - No Vote Buying',
+  },
+  governanceArticleFourText: {
+    id: 'app.components.Information.Governance.governanceArticleFourText',
+    defaultMessage:
+      'No Member shall offer nor accept anything of value in exchange for a vote of any type, nor shall any Member unduly influence the vote of another.',
+  },
+  governanceArticleFiveHeader: {
+    id: 'app.components.Information.Governance.governanceArticleFiveHeader',
+    defaultMessage: 'Article V - No Fiduciary',
+  },
+  governanceArticleFiveText: {
+    id: 'app.components.Information.Governance.governanceArticleFiveText',
+    defaultMessage:
+      'No Member nor EOS token holder shall have fiduciary responsibility to support the value of the EOS token. The Members do not authorize anyone to hold assets, borrow, nor contract on behalf of EOS token holders collectively. This blockchain has no owners, managers or fiduciaries; therefore, no Member shall have beneficial interest in more than 10% of the EOS token supply.',
+  },
+  governanceArticleSixHeader: {
+    id: 'app.components.Information.Governance.governanceArticleSixHeader',
+    defaultMessage: 'Article VI - Restitution',
+  },
+  governanceArticleSixText: {
+    id: 'app.components.Information.Governance.governanceArticleSixText',
+    defaultMessage:
+      'Each Member agrees that penalties for breach of contract may include, but are not limited to, fines, loss of account, and other restitution.',
+  },
+  governanceArticleSevenHeader: {
+    id: 'app.components.Information.Governance.governanceArticleSevenHeader',
+    defaultMessage: 'Article VII - Open Source',
+  },
+  governanceArticleSevenText: {
+    id: 'app.components.Information.Governance.governanceArticleSevenText',
+    defaultMessage:
+      'Each Member who makes available a smart contract on this blockchain shall be a Developer. Each Developer shall offer their smart contracts via a free and open source license, and each smart contract shall be documented with a Ricardian Contract stating the intent of all parties and naming the Arbitration Forum that will resolve disputes arising from that contract.',
+  },
+  governanceArticleEightHeader: {
+    id: 'app.components.Information.Governance.governanceArticleEightHeader',
+    defaultMessage: 'Article VIII - Language',
+  },
+  governanceArticleEightText: {
+    id: 'app.components.Information.Governance.governanceArticleEightText',
+    defaultMessage:
+      'Multi-lingual contracts must specify one prevailing language in case of dispute and the author of any translation shall be liable for losses due to their false, misleading, or ambiguous attested translations.',
+  },
+  governanceArticleNineHeader: {
+    id: 'app.components.Information.Governance.governanceArticleNineHeader',
+    defaultMessage: 'Article IX - Dispute Resolution',
+  },
+  governanceArticleNineText: {
+    id: 'app.components.Information.Governance.governanceArticleNineText',
+    defaultMessage:
+      'All disputes arising out of or in connection with this Constitution shall be finally settled under the Rules of Dispute Resolution of the EOS Core Arbitration Forum by one or more arbitrators appointed in accordance with the said Rules.',
+  },
+  governanceArticleTenHeader: {
+    id: 'app.components.Information.Governance.governanceArticleTenHeader',
+    defaultMessage: 'Article X - Choice of Law',
+  },
+  governanceArticleTenText: {
+    id: 'app.components.Information.Governance.governanceArticleTenText',
+    defaultMessage:
+      'All disputes arising out of or in connection with this Constitution shall be finally settled under the Rules of Dispute Resolution of the EOS Core Arbitration Forum by one or more arbitrators appointed in accordance with the said Rules.',
+  },
+  governanceArticleElevenHeader: {
+    id: 'app.components.Information.Governance.governanceArticleElevenHeader',
+    defaultMessage: 'Article XI - Amending',
+  },
+  governanceArticleElevelText: {
+    id: 'app.components.Information.Governance.governanceArticleElevelText',
+    defaultMessage:
+      'This Constitution and its subordinate documents shall not be amended except by a vote of the token holders with no less than 15% vote participation among tokens and no fewer than 10% more Yes than No votes, sustained for 30 continuous days within a 120 day period.',
+  },
+  governanceArticleTwelveHeader: {
+    id: 'app.components.Information.Governance.governanceArticleTwelveHeader',
+    defaultMessage: 'Article XII - Publishing',
+  },
+  governanceArticleTwelveText: {
+    id: 'app.components.Information.Governance.governanceArticleTwelveText',
+    defaultMessage:
+      'Members may only publish information to the Blockchain that is within their right to publish. Furthermore, Members voluntarily consent for all Members to permanently and irrevocably retain a copy, analyze, and distribute all broadcast transactions and derivative information.',
+  },
+  governanceArticleThirteenHeader: {
+    id: 'app.components.Information.Governance.governanceArticleThirteenHeader',
+    defaultMessage: 'Article XIII - Informed Consent',
+  },
+  governanceArticleThirteenText: {
+    id: 'app.components.Information.Governance.governanceArticleThirteenText',
+    defaultMessage:
+      'All service providers who produce tools to facilitate the construction and signing of transactions on behalf of other Members shall present to said other Members the full Ricardian contract terms of this Constitution and other referenced contracts. Service providers shall be liable for losses resulting from failure to disclose the full Ricardian contract terms to users.',
+  },
+  governanceArticleFourteenHeader: {
+    id: 'app.components.Information.Governance.governanceArticleFourteenHeader',
+    defaultMessage: 'Article XIV - Severability',
+  },
+  governanceArticleFourteenText: {
+    id: 'app.components.Information.Governance.governanceArticleFourteenText',
+    defaultMessage:
+      'If any part of this Constitution is declared unenforceable or invalid, the remainder will continue to be valid and enforceable.',
+  },
+  governanceArticleFifteenHeader: {
+    id: 'app.components.Information.Governance.governanceArticleFifteenHeader',
+    defaultMessage: 'Article XV - Termination of Agreement',
+  },
+  governanceArticleFifteenText: {
+    id: 'app.components.Information.Governance.governanceArticleFifteenText',
+    defaultMessage:
+      'A Member is automatically released from all revocable obligations under this Constitution 3 years after the last transaction signed by that Member is incorporated into the blockchain. After 3 years of inactivity an account may be put up for auction and the proceeds distributed to all Members according to the system contract provisions then in effect for such redistribution.',
+  },
+
+  governanceArticleSixteenHeader: {
+    id: 'app.components.Information.Governance.governanceArticleSixteenHeader',
+    defaultMessage: 'Article XVI - Developer Liability',
+  },
+  governanceArticleSixteenText: {
+    id: 'app.components.Information.Governance.governanceArticleSixteenText',
+    defaultMessage:
+      'Members agree to hold software developers harmless for unintentional mistakes made in the expression of contractual intent, whether or not said mistakes were due to actual or perceived negligence.',
+  },
+  governanceArticleSeventeenHeader: {
+    id: 'app.components.Information.Governance.governanceArticleSeventeenHeader',
+    defaultMessage: 'Article XVII - Consideration',
+  },
+  governanceArticleSeventeenText: {
+    id: 'app.components.Information.Governance.governanceArticleSeventeenText',
+    defaultMessage:
+      'All rights and obligations under this Constitution are mutual and reciprocal and of equally significant value and cost to all parties.',
+  },
+  governanceArticleEighteenHeader: {
+    id: 'app.components.Information.Governance.governanceArticleEighteenHeader',
+    defaultMessage: 'Article XVIII - Acceptance',
+  },
+  governanceArticleEighteenText: {
+    id: 'app.components.Information.Governance.governanceArticleEighteenText',
+    defaultMessage:
+      'A contract is deemed accepted when a member signs a transaction which incorporates a TAPOS proof of a block whose implied state incorporates an ABI of said contract and said transaction is incorporated into the blockchain.',
+  },
+  governanceArticleNineteenHeader: {
+    id: 'app.components.Information.Governance.governanceArticleNineteenHeader',
+    defaultMessage: 'Article XIX - Counterparts',
+  },
+  governanceArticleNineteenText: {
+    id: 'app.components.Information.Governance.governanceArticleNineteenText',
+    defaultMessage:
+      'This Constitution may be executed in any number of counterparts, each of which when executed and delivered shall constitute a duplicate original, but all counterparts together shall constitute a single agreement.',
+  },
+  governanceArticleTwentyHeader: {
+    id: 'app.components.Information.Governance.governanceArticleTwentyHeader',
+    defaultMessage: 'Article XX - Interim Constitution',
+  },
+  governanceArticleTwentyText: {
+    id: 'app.components.Information.Governance.governanceArticleTwentyText',
+    defaultMessage:
+      'This constitution is interim and is intended to remain in effect until a permanent constitution is written and ratified in a referendum.',
+  },
 });

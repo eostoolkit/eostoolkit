@@ -1,23 +1,21 @@
 import React from 'react';
 import ReactTable from 'react-table';
 
-import Tool from 'components/Tool/Tool';
-import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
-import GridContainer from 'components/Grid/GridContainer';
-import GridItem from 'components/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
 
-import Undo from '@material-ui/icons/Undo';
 import AccountBalance from '@material-ui/icons/AccountBalance';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
+
 const HorusPay = props => {
-  const { stakes, loading, ...clientProps } = props;
+  const { stakes, loading, intl, ...clientProps } = props;
   const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
 
-  const handleClaim = (stake) => {
+  const handleClaim = stake => {
     const transaction = [
       {
         account: 'horustokenio',
@@ -28,10 +26,10 @@ const HorusPay = props => {
         },
       },
     ];
-    pushTransaction(transaction,props.history);
+    pushTransaction(transaction, props.history);
   };
 
-  const handleUnstake = (stake) => {
+  const handleUnstake = stake => {
     const transaction = [
       {
         account: 'horustokenio',
@@ -42,10 +40,10 @@ const HorusPay = props => {
         },
       },
     ];
-    pushTransaction(transaction,props.history);
+    pushTransaction(transaction, props.history);
   };
 
-  const handleRefund = (stake) => {
+  const handleRefund = stake => {
     const transaction = [
       {
         account: 'horustokenio',
@@ -56,34 +54,51 @@ const HorusPay = props => {
         },
       },
     ];
-    pushTransaction(transaction,props.history);
+    pushTransaction(transaction, props.history);
   };
 
   let totalHorusStake = 0;
 
   const data = stakes.map(stake => {
-    if(stake.type==='Stake') totalHorusStake += Number(stake.horus_weight.split(' ')[0]);
-    const refundTime = new Date((stake.time_initial+604800)*1000);
+    if (stake.type === 'Stake') totalHorusStake += Number(stake.horus_weight.split(' ')[0]);
+    const refundTime = new Date((stake.time_initial + 604800) * 1000);
     return {
       ...stake,
-      actions: stake.type === 'Refund' ? (
-        refundTime < Date.now() ? (
-          <div className="actions-right"><Button
-            onClick={() => {handleRefund(stake)}}
-            color="success">Refund</Button></div>
+      actions:
+        stake.type === 'Refund' ? (
+          refundTime < Date.now() ? (
+            <div className="actions-right">
+              <Button
+                onClick={() => {
+                  handleRefund(stake);
+                }}
+                color="success">
+                <FormattedMessage {...messages.horusTableRefundButtonText} />
+              </Button>
+            </div>
+          ) : (
+            <div className="actions-right">
+              <FormattedMessage {...messages.horusTableAvailableOnText} /> {refundTime.toLocaleString()}
+            </div>
+          )
         ) : (
-          <div className="actions-right">Available on {refundTime.toLocaleString()}</div>
-        )
-      ) : (
-        <div className="actions-right">
-          <Button
-            onClick={() => {handleUnstake(stake)}}
-            color="warning">Unstake</Button>{" "}
-          <Button
-            onClick={() => {handleClaim(stake)}}
-            color="success">Claim</Button>
-        </div>
-      ),
+          <div className="actions-right">
+            <Button
+              onClick={() => {
+                handleUnstake(stake);
+              }}
+              color="warning">
+              <FormattedMessage {...messages.horusTableUnstakeButtonText} />
+            </Button>{' '}
+            <Button
+              onClick={() => {
+                handleClaim(stake);
+              }}
+              color="success">
+              <FormattedMessage {...messages.horusTableClaimButtonText} />
+            </Button>
+          </div>
+        ),
     };
   });
 
@@ -91,39 +106,44 @@ const HorusPay = props => {
     <ToolBody
       color="warning"
       icon={AccountBalance}
-      header="Your HorusPay Stakes" subheader=" - These stakes are earning you ECASH">
-      <h3>Total Stake: {Number(totalHorusStake).toFixed(4)} HORUS</h3>
+      header={intl.formatMessage(messages.horusTableHeader)}
+      subheader={intl.formatMessage(messages.horusTableSubHeader)}>
+      <h3>
+        <FormattedMessage {...messages.horusTableTotalStakeText} /> {Number(totalHorusStake).toFixed(4)} HORUS
+      </h3>
       <ReactTable
         data={data}
         filterable
-        noDataText={loading ? (<CircularProgress color="secondary" />) : ('No active stakes found')}
+        noDataText={
+          loading ? <CircularProgress color="secondary" /> : intl.formatMessage(messages.horusTableNoActiveStakes)
+        }
         columns={[
           {
-            Header: 'Type',
+            Header: intl.formatMessage(messages.horusTableColumnType),
             accessor: 'type',
             filterable: false,
           },
           {
-            Header: 'Staked To',
+            Header: intl.formatMessage(messages.horusTableColumnStakedTo),
             accessor: 'to',
             filterable: false,
           },
           {
-            Header: 'Weight',
+            Header: intl.formatMessage(messages.horusTableColumnWeight),
             accessor: 'horus_weight',
             filterable: false,
           },
           {
-            Header: 'Start Time',
+            Header: intl.formatMessage(messages.horusTableColumnStartTime),
             accessor: 'time_initial',
             filterable: false,
             Cell: row => {
-              const date = new Date(row.value*1000);
-              return (`${date.toLocaleString()}`);
-            }
+              const date = new Date(row.value * 1000);
+              return `${date.toLocaleString()}`;
+            },
           },
           {
-            Header: 'Actions',
+            Header: intl.formatMessage(messages.horusTableColumnActions),
             accessor: 'actions',
             filterable: false,
             sortable: false,
@@ -132,7 +152,7 @@ const HorusPay = props => {
         ]}
         defaultPageSize={50}
         pageSize={data.length}
-        showPaginationTop = {false}
+        showPaginationTop={false}
         showPaginationBottom={false}
         className="-striped -highlight"
       />
