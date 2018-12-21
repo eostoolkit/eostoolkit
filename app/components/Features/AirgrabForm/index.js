@@ -37,7 +37,7 @@ const makeTransaction = (values, networkIdentity) => {
   if(values.method === 'open') {
     data = {
       owner: networkIdentity ? networkIdentity.name : '',
-      symbol: `0.0000 ${values.symbol}`,
+      symbol: `4,${values.symbol}`,
       ram_payer: networkIdentity ? networkIdentity.name : '',
     };
   }
@@ -57,10 +57,11 @@ const makeTransaction = (values, networkIdentity) => {
 };
 
 const makeClaim = (values, networkIdentity) => {
-  const data = {
+  let data = {
     owner: networkIdentity ? networkIdentity.name : '',
-    sym: values.data.sym,
   }
+  const type = values.data.hasOwnProperty("sym") ? "sym" : "symbol"
+  data[type] = values.data[type];
   const transaction = [
     {
       account: values.account,
