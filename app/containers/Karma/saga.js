@@ -11,6 +11,14 @@ const stakeTable = {
     limit: 500
 }
 
+const stakeTable2 = {
+    json: true,
+    //scope: scope is the user
+    code: 'therealkarma',
+    table: 'powered',
+    limit: 500
+}
+
 const refundTable = {
     json: true,
     //scope: scope is the user
@@ -35,6 +43,12 @@ function* getStake() {
     }
     const stakes = yield networkReader.getTableRows(stake);
 
+    const stake2 = {
+      ...stakeTable2,
+      scope: currentIdentity.name,
+    }
+    const stakes2 = yield networkReader.getTableRows(stake2);
+
     const refund = {
       ...refundTable,
       scope: currentIdentity.name,
@@ -45,6 +59,14 @@ function* getStake() {
       data.push({
         owner: currentIdentity.name,
         ...row,
+      });
+    });
+
+    stakes2.rows.map(row => {
+      data.push({
+        owner: currentIdentity.name,
+        weight: row.weight,
+        last_claim_time: row.last_claim*24*3600*1000*1000,
       });
     });
 

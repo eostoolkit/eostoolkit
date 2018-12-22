@@ -84,11 +84,7 @@ const Karma = props => {
         {karmaStaked > 0 ? Number(karmaStaked).toFixed(4) : 'None - Power Up to Earn More!'}
       </h3>
       {karmaStaked > 0 ? (
-        claimDate < new Date() ? (
           <Button onClick={() => {handleClaim(hasStaked)}} color="success">Claim</Button>
-        ) : (
-          <p>Claim your rewards on {claimDate.toLocaleString()}</p>
-        )
       ):('')}
 
 
