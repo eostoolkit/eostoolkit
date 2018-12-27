@@ -31,7 +31,7 @@ export default defineMessages({
     defaultMessage: " - You don't want more KARMA?",
   },
   karmaStakeFormHeader: {
-    id: 'app.components.Features.Karma.karmaUnstakeFormHeader',
+    id: 'app.components.Features.Karma.karmaStakeFormHeader',
     defaultMessage: 'Power Up your KARMA',
   },
   karmaStakeFormSubHeader: {

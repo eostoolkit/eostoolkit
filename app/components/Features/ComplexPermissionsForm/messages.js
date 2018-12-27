@@ -15,7 +15,7 @@ export default defineMessages({
     defaultMessage: 'Threshold for this Permission',
   },
   complexPermissionFormPermissionLabel: {
-    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormThresholdLabel',
+    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormPermissionLabel',
     defaultMessage: 'Permission',
   },
   complexPermissionFormPermissionPlaceholder: {
@@ -23,7 +23,7 @@ export default defineMessages({
     defaultMessage: 'Permission to change (i.e. active)',
   },
   complexPermissionFormParentLabel: {
-    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormThresholdLabel',
+    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormParentLabel',
     defaultMessage: 'Parent',
   },
   complexPermissionFormParentPlaceholder: {
@@ -31,7 +31,7 @@ export default defineMessages({
     defaultMessage: 'Parent permission (i.e. owner)',
   },
   complexPermissionFormAuthorityLabel: {
-    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormThresholdLabel',
+    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormAuthorityLabel',
     defaultMessage: 'Authority',
   },
   complexPermissionFormAuthorityPlaceholder: {
@@ -39,7 +39,7 @@ export default defineMessages({
     defaultMessage: 'Public key or Actor@Permission',
   },
   complexPermissionFormWeightLabel: {
-    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormThresholdLabel',
+    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormWeightLabel',
     defaultMessage: 'Weight',
   },
   complexPermissionFormWeightPlaceholder: {

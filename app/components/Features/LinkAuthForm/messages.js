@@ -24,7 +24,7 @@ export default defineMessages({
   },
 
   linkAuthText: {
-    id: 'app.components.Features.LinkAuthForm.unlinkAuthText',
+    id: 'app.components.Features.LinkAuthForm.linkAuthText',
     defaultMessage: 'Link Auth',
   },
   linkAuthAccountPlaceholder: {
