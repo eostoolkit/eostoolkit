@@ -3,21 +3,22 @@ import React from 'react';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
-const FormData = [
-  {
-    id: 'owner',
-    label: 'Claimer',
-    placeholder: 'Account that claims production rewards',
-    md: 12,
-  },
-];
+import messages from './messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+  const FormData = [
+    {
+      id: 'owner',
+      label: intl.formatMessage(messages.claimerLabel),
+      placeholder: intl.formatMessage(messages.claimerPlaceholder),
+      md: 12,
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Claim',
+    submitText: intl.formatMessage(messages.claimerSubmitText),
   };
   return (
     <ToolForm {...formProps}>

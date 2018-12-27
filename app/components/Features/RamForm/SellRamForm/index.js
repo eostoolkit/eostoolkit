@@ -14,6 +14,9 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
 
+import messages from '../messages';
+import commonMessages from '../../../messages';
+
 const makeTransaction = values => {
   const transaction = [
     {
@@ -28,17 +31,10 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Buyer name is required'),
-  ram: Yup.number()
-    .required('RAM quantity is required')
-    .positive('RAM must be a positive quantity')
-    .integer('RAM cannot be fractional'),
-});
-
 const SellRamForm = props => {
+  const { intl } = props;
   return (
-    <ToolBody color="warning" icon={RemoveCircle} header="Sell RAM">
+    <ToolBody color="warning" icon={RemoveCircle} header={intl.formatMessage(messages.sellRamFormHeader)}>
       <FormObject {...props} />
     </ToolBody>
   );
@@ -50,13 +46,22 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',
       ram: '8192',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        owner: Yup.string().required(''),
+        ram: Yup.number()
+          .required(intl.formatMessage(messages.ramQuantityRequired))
+          .positive(intl.formatMessage(commonMessages.formRamPositiveQuantity))
+          .integer(intl.formatMessage(commonMessages.formRamNotFractional)),
+      });
+    },
   })
 );
 

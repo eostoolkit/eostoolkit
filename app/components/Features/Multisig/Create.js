@@ -22,33 +22,37 @@ import ToolInput from 'components/Tool/ToolInput';
 import { makeSelectTransaction } from 'containers/NetworkClient/selectors';
 import { stageTransaction } from 'containers/OfflineClient/actions';
 
-const FormData = [
-  {
-    id: 'transaction',
-    label: 'Transaction Details',
-    placeholder: 'Write your transaction details here',
-    multiline: true,
-    rows: 30,
-    md: 12,
-  },
-  {
-    id: 'actor',
-    label: 'Authorization Account',
-    placeholder: 'Account authorizing this transaction',
-  },
-  {
-    id: 'permission',
-    label: 'Account Permission',
-    placeholder: 'Permission for this authorization',
-  },
-];
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+  const FormData = [
+    {
+      id: 'transaction',
+      label: intl.formatMessage(messages.multisigCreateFormTransactionDetailsText),
+      placeholder: intl.formatMessage(messages.multisigCreateFormTransactionPlaceholder),
+      multiline: true,
+      rows: 30,
+      md: 12,
+    },
+    {
+      id: 'actor',
+      label: intl.formatMessage(messages.multisigCreateFormAuthorizationLabel),
+      placeholder: intl.formatMessage(messages.multisigCreateFormTransactionPlaceholder),
+    },
+    {
+      id: 'permission',
+      label: intl.formatMessage(commonMessages.formAccountPermissionLabel),
+      placeholder: intl.formatMessage(messages.multisigCreateFormPermissionPlaceholder),
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Create JSON',
+    submitText: intl.formatMessage(messages.multisigCreateFormSubmitText),
   };
   return (
     <ToolForm {...formProps}>
@@ -59,33 +63,42 @@ const FormObject = props => {
   );
 };
 
-const validationSchema = Yup.object().shape({
-  actor: Yup.string().required('Account name is required'),
-  permission: Yup.string().required('Permission is required'),
-});
-
 const MultisigCreate = props => {
-  const { transaction } = props;
+  const { transaction, intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
         <ToolBody
           color="warning"
           icon={NoteAdd}
-          header="Create Transaction"
-          subheader=" - Share the resulting JSON for signing">
-          <h5>Transaction details:</h5>
+          header={intl.formatMessage(messages.multisigCreateFormHeader)}
+          subheader={intl.formatMessage(messages.multisigCreateFormSubHeader)}>
+          <h5>
+            <FormattedMessage {...messages.multisigCreateFormTransactionDetailsText} />:
+          </h5>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="info" header="Tutorial">
-          <p>Review the transaction details.</p>
-          <p>Supply the single account name and permission (i.e. owner or active) that will ultimately authorize this transaction.</p>
-          <p>Click Create JSON</p>
-          <p>A dialogue prompt will appear with the Transaction JSON. The JSON will also automatically download as a file.</p>
-          <p>Share this JSON file with each person who has to sign.</p>
-          <p>Each person will sign using the Sign Transaction feature.</p>
+        <ToolBody color="info" header={intl.formatMessage(commonMessages.tutorialHeaderMessage)}>
+          <p>
+            <FormattedMessage {...messages.multisigCreateFormTutorialLine1} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.multisigCreateFormTutorialLine2} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.multisigCreateFormTutorialLine3} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.multisigCreateFormTutorialLine4} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.multisigCreateFormTutorialLine5} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.multisigCreateFormTutorialLine6} />
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -98,7 +111,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleTransaction: (data) => dispatch(stageTransaction(data)),
+    handleTransaction: data => dispatch(stageTransaction(data)),
   };
 }
 
@@ -116,9 +129,17 @@ const enhance = compose(
     mapPropsToValues: props => ({
       actor: '',
       permission: '',
-      transaction: props.transaction ? JSON.stringify(props.transaction,null,2) : 'No transaction available - Switch to multisig mode and use one of the toolkit features.',
+      transaction: props.transaction
+        ? JSON.stringify(props.transaction, null, 2)
+        : props.intl.formatMessage(messages.multisigCreateFormNoTransactionAvailable),
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        actor: Yup.string().required(intl.formatMessage(commonMessages.formAccountRequired)),
+        permission: Yup.string().required(intl.formatMessage(commonMessages.formPermissionRequired)),
+      });
+    },
   })
 );
 

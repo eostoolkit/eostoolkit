@@ -11,35 +11,33 @@ import * as Yup from 'yup';
 
 import Redo from '@material-ui/icons/Redo';
 
-import Tool from 'components/Tool/Tool';
-import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
-import ToolSwitch from 'components/Tool/ToolSwitch';
 
-const FormData = [
-  {
-    id: 'owner',
-    label: 'Account',
-    placeholder: 'Account that provides the stake',
-    lg:12
-  },
-  {
-    id: 'quantity',
-    label: 'Quantity',
-    placeholder: 'Amount of KARMA to POWER UP',
-    lg:12
-  },
-];
-
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+  const FormData = [
+    {
+      id: 'owner',
+      label: intl.formatMessage(commonMessages.formAccountLabel),
+      placeholder: intl.formatMessage(messages.karmaAccountProvideStakePlaceholder),
+      lg: 12,
+    },
+    {
+      id: 'quantity',
+      label: intl.formatMessage(messages.karmaQuantityLabel),
+      placeholder: intl.formatMessage(messages.karmaQuantityPlaceholder),
+      lg: 12,
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Power Up',
+    submitText: intl.formatMessage(messages.karmaStakeFormSubmitText),
   };
   return (
     <ToolForm {...formProps}>
@@ -51,7 +49,7 @@ const FormObject = props => {
 };
 
 const makeTransaction = values => {
-  const {quantity, owner} = values;
+  const { quantity, owner } = values;
   const transaction = [
     {
       account: 'therealkarma',
@@ -67,16 +65,14 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Account is required'),
-  quantity: Yup.number()
-    .required('Quantity is required')
-    .positive('You must provide a positive quantity'),
-});
-
 const StakeForm = props => {
+  const { intl } = props;
   return (
-    <ToolBody color="warning" icon={Redo} header="Power Up your KARMA" subheader=" - Earn more KARMA!">
+    <ToolBody
+      color="warning"
+      icon={Redo}
+      header={intl.formatMessage(messages.karmaStakeFormHeader)}
+      subheader={intl.formatMessage(messages.karmaStakeFormHeader)}>
       <FormObject {...props} />
     </ToolBody>
   );
@@ -88,13 +84,21 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',
       quantity: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        owner: Yup.string().required(intl.formatMessage(commonMessages.formAccountRequired)),
+        quantity: Yup.number()
+          .required(intl.formatMessage(commonMessages.formQuantityRequired))
+          .positive(intl.formatMessage(messages.karmaFormPositiveQuantityRequired)),
+      });
+    },
   })
 );
 

@@ -2,11 +2,14 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectSigner, makeSelectIdentity } from 'containers/NetworkClient/selectors';
 
+import { injectIntl } from 'react-intl';
+import messages from './messages';
+
 const NetworkIdentity = props => {
-  const { signer, identity } = props;
-  if (signer && !identity) return 'Please attach Identity';
+  const { signer, identity, intl } = props;
+  if (signer && !identity) return intl.formatMessage(messages.attachAccountText);
   if (signer && identity) return `${identity.name}@${identity.authority}`;
-  return 'Please install Scatter';
+  return intl.formatMessage(messages.installScatterText);
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -17,4 +20,4 @@ const mapStateToProps = createStructuredSelector({
 export default connect(
   mapStateToProps,
   null
-)(NetworkIdentity);
+)(injectIntl(NetworkIdentity));

@@ -18,68 +18,72 @@ import ToolBody from 'components/Tool/ToolBody';
 import ComplexPermissions from 'components/Information/ComplexPermissions';
 import FormObject from './FormObject';
 
+import messages from './messages';
+import commonMessages from '../../messages';
+
 const makeTransaction = values => {
-
   try {
-    let mixed = [];
-    let keys = [];
-    let accounts = [];
-    let waits = [];
+    const mixed = [];
+    const keys = [];
+    const accounts = [];
+    const waits = [];
 
-    Object.keys(values).filter(v => v.startsWith('auth_value')).map((auth, i) => {
-      if(Number(values[`auth_weight_${i}`]) > 0) {
-        mixed.push({
-          value: values[auth],
-          weight: Number(values[`auth_weight_${i}`])
-        })
-      } else {
-        throw("Weights must be greater than 0");
-      }
-    });
+    Object.keys(values)
+      .filter(v => v.startsWith('auth_value'))
+      .map((auth, i) => {
+        if (Number(values[`auth_weight_${i}`]) > 0) {
+          mixed.push({
+            value: values[auth],
+            weight: Number(values[`auth_weight_${i}`]),
+          });
+        } else {
+          throw 'Weights must be greater than 0';
+        }
+      });
 
     mixed.map(perm => {
-      //is account?
-      if(perm.value.includes('@') || (perm.value.length < 53 && isNaN(perm.value))) {
-        if(perm.value.split('@')[1] === undefined && perm.value.length > 0) throw("Accounts must have @permission appended i.e. account@active")
+      // is account?
+      if (perm.value.includes('@') || (perm.value.length < 53 && isNaN(perm.value))) {
+        if (perm.value.split('@')[1] === undefined && perm.value.length > 0)
+          throw 'Accounts must have @permission appended i.e. account@active';
         accounts.push({
           permission: {
             actor: perm.value.split('@')[0],
             permission: perm.value.split('@')[1],
           },
-          weight: perm.weight
-        })
+          weight: perm.weight,
+        });
         return;
       }
-      if(isNaN(perm.value)) {
-        //is public key
+      if (isNaN(perm.value)) {
+        // is public key
         keys.push({
           key: perm.value,
           weight: perm.weight,
-        })
+        });
       } else {
-        //is wait / delay
+        // is wait / delay
         waits.push({
-          "wait_sec": Number(perm.value),
+          wait_sec: Number(perm.value),
           weight: perm.weight,
-        })
+        });
       }
-      return;
     });
 
     keys.sort((a, b) => a.key.localeCompare(b.key));
     accounts.sort((a, b) => a.permission.actor.localeCompare(b.permission.actor));
-    waits.sort((a, b) => a.wait_sec > b.wait_sec ? 1 : a.wait_sec < b.wait_sec ? -1 : 0);
+    waits.sort((a, b) => (a.wait_sec > b.wait_sec ? 1 : a.wait_sec < b.wait_sec ? -1 : 0));
 
     const authority = {
       threshold: Number(values.threshold),
       keys,
       accounts,
       waits,
-    }
+    };
 
     const transaction = [];
 
-    if(mixed.length === 1 && mixed[0].value === '') {
+    if (mixed.length === 1 && mixed[0].value === '') {
       transaction.push({
         account: 'eosio',
         name: 'deleteauth',
@@ -101,28 +105,29 @@ const makeTransaction = values => {
       });
     }
     return transaction;
-  } catch(err) {
-    return({error: err});
+  } catch (err) {
+    return { error: err };
   }
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Account name is required'),
-  threshold: Yup.number().required('Threshold is required'),
-  permission: Yup.string().required('Permission is required'),
-  parent: Yup.string(),
-});
-
 const ComplexPermissionsForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={12}>
-        <ToolBody color="danger" header="Important" subheader=" - Advanced EOS Users only">
+        <ToolBody
+          color="danger"
+          header={intl.formatMessage(commonMessages.formImportantHeader)}
+          subheader={intl.formatMessage(messages.complexPermissionFormSubheader)}>
           <ComplexPermissions />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={12}>
-        <ToolBody color="warning" icon={PersonAdd} header="Change Permissions" subheader=" - Advanced permission structures">
+        <ToolBody
+          color="warning"
+          icon={PersonAdd}
+          header={intl.formatMessage(commonMessages.formChangePermissionHeader)}
+          subheader={intl.formatMessage(messages.formChangePermissionSubheader)}>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
@@ -133,13 +138,13 @@ const ComplexPermissionsForm = props => {
 const enhance = compose(
   withStateHandlers(
     {
-      inputs: 1
+      inputs: 1,
     },
     {
-      addInputs: ({inputs}) => () => ({
+      addInputs: ({ inputs }) => () => ({
         inputs: inputs + 1,
       }),
-      subInputs: ({inputs}) => () => ({
+      subInputs: ({ inputs }) => () => ({
         inputs: inputs > 1 ? inputs - 1 : inputs,
       }),
     }
@@ -157,7 +162,7 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => {
       return {
@@ -167,9 +172,17 @@ const enhance = compose(
         parent: 'owner',
         auth_value_0: '',
         auth_weight_0: '1',
-      }
+      };
     },
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        owner: Yup.string().required(intl.formatMessage(commonMessages.formAccountNameRequired)),
+        threshold: Yup.number().required(intl.formatMessage(commonMessages.formThresholdRequired)),
+        permission: Yup.string().required(intl.formatMessage(commonMessages.formPermissionRequired)),
+        parent: Yup.string(),
+      });
+    },
   })
 );
 

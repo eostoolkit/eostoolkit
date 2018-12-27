@@ -11,16 +11,17 @@ import * as Yup from 'yup';
 
 // @material-ui/icons
 import CardGiftcard from '@material-ui/icons/CardGiftcard';
-import Favorite from '@material-ui/icons/Favorite';
 
 import Tool from 'components/Tool/Tool';
 import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 
 import Donate from 'components/Information/Donate';
-import BlockOneLetter from 'components/Information/BlockOneLetter';
 
 import FormObject from './FormObject';
+
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const makeTransaction = (values, networkIdentity) => {
   const transaction = [
@@ -40,18 +41,12 @@ const makeTransaction = (values, networkIdentity) => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  memo: Yup.string(),
-  quantity: Yup.number()
-    .required('Quantity is required')
-    .positive('You must send a positive quantity'),
-});
-
 const DonateForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={12}>
-        <ToolBody color="warning" icon={CardGiftcard} header="Donate">
+        <ToolBody color="warning" icon={CardGiftcard} header={intl.formatMessage(messages.donateText)}>
           <Donate />
           <FormObject {...props} />
         </ToolBody>
@@ -66,13 +61,21 @@ const enhance = compose(
       const { pushTransaction, networkIdentity } = props;
       const transaction = makeTransaction(values, networkIdentity);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: () => ({
       quantity: '1',
       memo: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        memo: Yup.string(),
+        quantity: Yup.number()
+          .required(intl.formatMessage(commonMessages.formQuantityRequired))
+          .positive(intl.formatMessage(commonMessages.formPositiveQuantityRequired)),
+      });
+    },
   })
 );
 

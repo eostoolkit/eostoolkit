@@ -5,11 +5,12 @@ import * as Yup from 'yup';
 
 import Undo from '@material-ui/icons/Undo';
 
-import Tool from 'components/Tool/Tool';
-import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
+
+import messages from '../messages';
+import commonMessages from '../../../messages';
 
 const makeTransaction = values => {
   const transaction = [
@@ -31,20 +32,14 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Owner name is required'),
-  name: Yup.string().required('Account name is required'),
-  net: Yup.number()
-    .required('NET Stake is required')
-    .positive('You must unstake a positive quantity'),
-  cpu: Yup.number()
-    .required('CPU Stake is required')
-    .positive('You must unstake a positive quantity'),
-});
-
 const DelegateForm = props => {
+  const { intl } = props;
   return (
-    <ToolBody color="warning" icon={Undo} header="Undelegate" subheader=" - Unstake">
+    <ToolBody
+      color="warning"
+      icon={Undo}
+      header={intl.formatMessage(messages.undelegateFormHeader)}
+      subheader={intl.formatMessage(messages.undelegateFormSubHeader)}>
       <FormObject {...props} />
     </ToolBody>
   );
@@ -56,7 +51,7 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',
@@ -64,7 +59,19 @@ const enhance = compose(
       net: '0',
       cpu: '0',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        owner: Yup.string().required(intl.formatMessage(commonMessages.formOwnerNameRequired)),
+        name: Yup.string().required(intl.formatMessage(commonMessages.formAccountNameRequired)),
+        net: Yup.number()
+          .required(intl.formatMessage(commonMessages.formNETStakeRequired))
+          .positive(intl.formatMessage(messages.undelegateFormUnstakePositiveQuantity)),
+        cpu: Yup.number()
+          .required(intl.formatMessage(commonMessages.formCPUStakeRequired))
+          .positive(intl.formatMessage(messages.undelegateFormUnstakePositiveQuantity)),
+      });
+    },
   })
 );
 

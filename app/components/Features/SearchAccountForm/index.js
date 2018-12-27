@@ -26,6 +26,9 @@ import regularFormsStyle from 'assets/jss/regularFormsStyle';
 import Account from './account';
 import PubicKey from './publicKey';
 
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
+
 const SearchAccountForm = props => {
   const {
     classes,
@@ -43,7 +46,9 @@ const SearchAccountForm = props => {
             <CardIcon color="warning">
               <Search />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Search Account</h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...messages.accountFormIndexSearchAccountHeader} />
+            </h4>
           </CardHeader>
           <CardBody>
             <Formik
@@ -62,7 +67,9 @@ const SearchAccountForm = props => {
             <CardIcon color="warning">
               <Search />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Search Public Key</h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...messages.accountFormIndexSearchAccountHeader} />
+            </h4>
           </CardHeader>
           <CardBody>
             <Formik

@@ -17,6 +17,10 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
 
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+
 const makeTransaction = values => {
   const transaction = [
     {
@@ -34,29 +38,32 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Bidder name is required'),
-  name: Yup.string().required('Premium name is required'),
-  bid: Yup.number()
-    .required('Bid quantity is required')
-    .positive('Bid must be a positive quantity'),
-});
-
 const BidNameForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
-        <ToolBody color="warning" icon={Gavel} header="Bid for Premium Name">
+        <ToolBody color="warning" icon={Gavel} header={intl.formatMessage(messages.bidForPremiumNameHeader)}>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="info" header="Auction Details">
-          <p>Only one Premium Name is awarded per day.</p>
-          <p>The name with the highest bid is the one awarded.</p>
-          <p>Each bid must be 10% greater than the last bid.</p>
-          <p>Your bid is only returned if you are out-bid.</p>
-          <p>Bidding for names consumes your account&apos;s RAM.</p>
+        <ToolBody color="info" header={intl.formatMessage(messages.auctionDetailHeader)}>
+          <p>
+            <FormattedMessage {...messages.bidNameFormText1} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.bidNameFormText2} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.bidNameFormText3} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.bidNameFormText4} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.bidNameFormText5} />
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -69,14 +76,23 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',
       name: '',
       bid: 0,
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        owner: Yup.string().required(intl.formatMessage(messages.formBidderNameRequired)),
+        name: Yup.string().required(intl.formatMessage(messages.formPremiumNameRequired)),
+        bid: Yup.number()
+          .required(intl.formatMessage(messages.formBidQuantityRequired))
+          .positive(intl.formatMessage(messages.formBidQuantityPositiveRequired)),
+      });
+    },
   })
 );
 

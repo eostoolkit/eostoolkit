@@ -3,25 +3,27 @@ import React from 'react';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
-const FormData = [
-  {
-    id: 'quantity',
-    label: 'Quantity (in EOS)',
-    placeholder: 'How much EOS to donate',
-  },
-  {
-    id: 'memo',
-    label: 'Memo',
-    placeholder: 'A note to send us',
-  },
-];
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+  const FormData = [
+    {
+      id: 'quantity',
+      label: intl.formatMessage(messages.donateFormEOSQuantityLabel),
+      placeholder: intl.formatMessage(messages.donateFormEOSQuantityPlaceholder),
+    },
+    {
+      id: 'memo',
+      label: intl.formatMessage(commonMessages.memoLabel),
+      placeholder: intl.formatMessage(messages.donateFormMemoPlaceholder),
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Donate',
+    submitText: intl.formatMessage(messages.donateText),
   };
   return (
     <ToolForm {...formProps}>

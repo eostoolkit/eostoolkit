@@ -24,9 +24,12 @@ import CardBody from 'components/Card/CardBody';
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 import NetworkTable from './networks';
 
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import messages from './messages';
+
 const NetworkForm = props => {
-  const { classes, networks, active, selectNetwork } = props;
-  const tableProps = { networks, active, selectNetwork };
+  const { classes, networks, active, selectNetwork, intl } = props;
+  const tableProps = { networks, active, selectNetwork, selectNetwork };
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={12}>
@@ -35,16 +38,15 @@ const NetworkForm = props => {
             <CardIcon color="warning">
               <Settings />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Select a network</h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...messages.selectNetworkText} />
+            </h4>
           </CardHeader>
           <CardBody>
             <h6>
-              Get your testnet or endpoint added to this list by submitting a pull request to{' '}
-              <a href="https://github.com/eostoolkit/eos-networks" target="new">
-                GitHub
-              </a>
+              <FormattedHTMLMessage {...messages.addNetworkToGit} />
             </h6>
-            <NetworkTable {...tableProps} />
+            <NetworkTable intl={intl} {...tableProps} />
           </CardBody>
         </Card>
       </GridItem>

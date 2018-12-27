@@ -17,21 +17,25 @@ import ToolBody from 'components/Tool/ToolBody';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
-const FormData = [
-  {
-    id: 'owner',
-    label: 'Owner',
-    placeholder: 'Account requesting refund',
-    md: 12,
-  },
-];
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+  const FormData = [
+    {
+      id: 'owner',
+      label: intl.formatMessage(messages.refundFormOwnerLabel),
+      placeholder: intl.formatMessage(messages.refundFormOwnerPlaceholder),
+      md: 12,
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Submit',
+    submitText: intl.formatMessage(commonMessages.submitButtonText),
   };
   return (
     <ToolForm {...formProps}>
@@ -55,27 +59,30 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Account is required'),
-});
-
 const RefundForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
         <ToolBody
           color="warning"
           icon={Undo}
-          header="Refund"
-          subheader=" - Fallback if unstaking doesn't refund automatically">
+          header={intl.formatMessage(messages.refundFormHeader)}
+          subheader={intl.formatMessage(messages.refundFormSubHeader)}>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="info" header="Information">
-          <h5>Refund Stake</h5>
-          <p>This is a fallback function if your refund request does not complete automatically when unstaking EOS.</p>
-          <p>This function requires that 72 hours have passed from the last unstake attempt made.</p>
+        <ToolBody color="info" header={intl.formatMessage(commonMessages.informationHeaderMessage)}>
+          <h5>
+            <FormattedMessage {...messages.refundStakeHeader} />
+          </h5>
+          <p>
+            <FormattedMessage {...messages.refundStakeTextRow1} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.refundStakeTextRow2} />
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -88,12 +95,17 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        owner: Yup.string().required(intl.formatMessage(commonMessages.formAccountRequired)),
+      });
+    },
   })
 );
 

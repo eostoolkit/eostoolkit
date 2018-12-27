@@ -11,17 +11,29 @@ import Button from 'components/CustomButtons/Button';
 
 import tableStyle from 'assets/jss/tableStyle';
 
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+
 function AirgrabTable({ ...props }) {
-  const { classes, handleSubmit, account, claims } = props;
+  const { classes, handleSubmit, account, claims, intl } = props;
   return (
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>
         <TableHead className={classes.successRow}>
           <TableRow className={classes.tableRow}>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Symbol</TableCell>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Description</TableCell>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Website</TableCell>
-            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>Claim</TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>
+              {intl.formatMessage(messages.airgrabTableColumnSymbolHeader)}
+            </TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>
+              {intl.formatMessage(messages.airgrabTableColumnSDescriptionHeader)}
+            </TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>
+              {intl.formatMessage(messages.airgrabTableColumnWebsiteHeader)}
+            </TableCell>
+            <TableCell className={`${classes.tableHeadCell} ${classes.tableHeadFontSize}`}>
+              {intl.formatMessage(messages.airgrabTableColumnGrabHeader)}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -37,13 +49,14 @@ function AirgrabTable({ ...props }) {
                     </a>
                   </TableCell>
                   <TableCell className={classes.tableCell}>
-                    {account && account.balances.find(b=>b.code===row.account) ? (
+                    {account && account.balances.find(b => b.code === row.account) ? (
                       <Button onClick={() => handleSubmit(row)} color="rose">
-                        Claim
+                        <FormattedMessage {...messages.claimTableClaimText} />
                       </Button>
-
                     ) : (
-                      <span>Claim unavailable - You must have the token balance to claim it.</span>
+                      <span>
+                        <FormattedMessage {...messages.claimTableClaimUnavailableText} />
+                      </span>
                     )}
                   </TableCell>
                 </TableRow>
@@ -52,7 +65,7 @@ function AirgrabTable({ ...props }) {
           ) : (
             <TableRow className={classes.tableRowHover}>
               <TableCell className={classes.tableCell} colSpan={3}>
-                No Claimable Tokens
+                <FormattedMessage {...messages.claimTableNoClaimText} />
               </TableCell>
             </TableRow>
           )}

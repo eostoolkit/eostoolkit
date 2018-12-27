@@ -11,13 +11,14 @@ import * as Yup from 'yup';
 
 // @material-ui/icons
 import TrendingUp from '@material-ui/icons/TrendingUp';
-import Favorite from '@material-ui/icons/Favorite';
-
-import Tool from 'components/Tool/Tool';
-import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
+
+import { FormattedMessage } from 'react-intl';
+
+import messages from '../messages';
+import commonMessages from '../../../messages';
 
 const makeTransaction = (values, networkIdentity) => {
   const transaction = [
@@ -37,20 +38,22 @@ const makeTransaction = (values, networkIdentity) => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  memo: Yup.string(),
-  quantity: Yup.number()
-    .required('Quantity is required')
-    .positive('You must send a positive quantity'),
-});
-
 const DonateForm = props => {
+  const { intl } = props;
   return (
-        <ToolBody color="danger" icon={TrendingUp} header="Usurp the Chief" subheader=" - Earn 10% fees from all activity">
-          <p>Pay the Usurp Fee to become Chief Miner!</p>
-          <p>The Chief Miner earns 10% on mining and transfers by all others!</p>
-          <FormObject {...props} />
-        </ToolBody>
+    <ToolBody
+      color="danger"
+      icon={TrendingUp}
+      header={intl.formatMessage(messages.grandpaUsurpFormHeader)}
+      subheader={intl.formatMessage(messages.grandpaUsurpFormSubHeader)}>
+      <p>
+        <FormattedMessage {...messages.grandpaUsurpFormDonateText1} />
+      </p>
+      <p>
+        <FormattedMessage {...messages.grandpaUsurpFormDonateText2} />
+      </p>
+      <FormObject {...props} />
+    </ToolBody>
   );
 };
 
@@ -60,13 +63,21 @@ const enhance = compose(
       const { pushTransaction, networkIdentity } = props;
       const transaction = makeTransaction(values, networkIdentity);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: () => ({
       quantity: '1',
       memo: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        memo: Yup.string(),
+        quantity: Yup.number()
+          .required(intl.formatMessage(commonMessages.formQuantityRequired))
+          .positive(intl.formatMessage(commonMessages.formPositiveQuantityRequired)),
+      });
+    },
   })
 );
 

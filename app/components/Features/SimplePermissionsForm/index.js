@@ -18,10 +18,13 @@ import ToolBody from 'components/Tool/ToolBody';
 import ChangePermissions from 'components/Information/ChangePermissions';
 import FormObject from './FormObject';
 
-const makeTransaction = values => {
+import messages from './messages';
+import commonMessages from '../../messages';
+
+const makeTransaction = (values, intl) => {
   const transaction = [];
   if (values.activeKey === values.owner || values.ownerKey === values.owner) {
-    return { error: 'This will break your account' };
+    return { error: intl.formatMessage(messages.simplePermissionFormBreakAccountError) };
   }
 
   if (values.activeKey) {
@@ -52,22 +55,21 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Owner name is required'),
-  activeKey: Yup.string(),
-  ownerKey: Yup.string(),
-});
-
 const SimplePermissionsForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
-        <ToolBody color="warning" icon={PersonAdd} header="Change Permissions" subheader=" Simple active / owner">
+        <ToolBody
+          color="warning"
+          icon={PersonAdd}
+          header={intl.formatMessage(commonMessages.formChangePermissionHeader)}
+          subheader={intl.formatMessage(messages.simplePermissionFormSubHeader)}>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="danger" header="Important">
+        <ToolBody color="danger" header={intl.formatMessage(commonMessages.formImportantHeader)}>
           <ChangePermissions />
         </ToolBody>
       </ToolSection>
@@ -78,17 +80,24 @@ const SimplePermissionsForm = props => {
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { pushTransaction } = props;
-      const transaction = makeTransaction(values);
+      const { pushTransaction, intl } = props;
+      const transaction = makeTransaction(values, intl);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',
       activeKey: '',
       ownerKey: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        owner: Yup.string().required(intl.formatMessage(commonMessages.formOwnerNameRequired)),
+        activeKey: Yup.string(),
+        ownerKey: Yup.string(),
+      });
+    },
   })
 );
 

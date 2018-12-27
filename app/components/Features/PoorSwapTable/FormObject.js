@@ -3,21 +3,22 @@ import React from 'react';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
-const FormData = [
-  {
-    id: 'quantity',
-    label: 'Quantity (in POOR)',
-    placeholder: 'How much POOR to spend for ZKS',
-    md: 12
-  },
-];
+import messages from './messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+  const FormData = [
+    {
+      id: 'quantity',
+      label: intl.formatMessage(messages.poorInfoFormQuantityLabel),
+      placeholder: intl.formatMessage(messages.poorInfoFormQuantityPlaceholder),
+      md: 12,
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Swap for ZKS',
+    submitText: intl.formatMessage(messages.poorInfoFormSubmitText),
   };
   return (
     <ToolForm {...formProps}>

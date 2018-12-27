@@ -7,34 +7,37 @@ import Button from 'components/CustomButtons/Button';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
-const FormData = [
-  {
-    id: 'name',
-    label: 'Premium Name',
-    placeholder: 'Name to bid for',
-  },
-  {
-    id: 'owner',
-    label: 'Bidder',
-    placeholder: 'Account that bids for the name',
-  },
-  {
-    id: 'bid',
-    label: 'Bid (in EOS)',
-    placeholder: 'Must be 10% greater than last bid',
-  },
-];
-
-const extraButton = () => {
-  return (
-    <a href="https://eospark.com/MainNet/bidaccount" target="new">
-      <Button color="info">Get Bid Prices</Button>
-    </a>
-  );
-};
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+  const FormData = [
+    {
+      id: 'name',
+      label: intl.formatMessage(messages.formPremiumNameLabel),
+      placeholder: intl.formatMessage(messages.formPremiumNamePlaceholder),
+    },
+    {
+      id: 'owner',
+      label: intl.formatMessage(messages.formBidderNameLabel),
+      placeholder: intl.formatMessage(messages.formBidderNamePlaceholder),
+    },
+    {
+      id: 'bid',
+      label: intl.formatMessage(messages.formBidInEOSLabel),
+      placeholder: intl.formatMessage(messages.formBidInEOSPlaceholder),
+    },
+  ];
+  const extraButton = () => {
+    return (
+      <a href="https://eospark.com/MainNet/bidaccount" target="new">
+        <Button color="info">
+          <FormattedMessage {...messages.formGetBidPrice} />
+        </Button>
+      </a>
+    );
+  };
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
@@ -47,7 +50,9 @@ const FormObject = props => {
         return <ToolInput key={form.id} {...form} {...props} />;
       })}
       <GridItem xs={12} sm={12} md={6}>
-        <p>The bid must be 10% greater than the previous bid.</p>
+        <p>
+          <FormattedMessage {...messages.formBidPriceInfo} />
+        </p>
       </GridItem>
     </ToolForm>
   );

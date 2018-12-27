@@ -14,15 +14,19 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import GovernanceDoc from 'components/Information/Governance';
 
-const GovernancePage = () => {
+import { injectIntl } from 'react-intl';
+import messages from './messages';
+
+const GovernancePage = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={12}>
         <ToolBody
           color="warning"
           icon={AccountBalance}
-          header="Governance"
-          subheader=" - By using this tool you agree to the following">
+          header={intl.formatMessage(messages.governancePageHeader)}
+          subheader={intl.formatMessage(messages.governancePageSubHeader)}>
           <GovernanceDoc />
         </ToolBody>
       </ToolSection>
@@ -30,4 +34,4 @@ const GovernancePage = () => {
   );
 };
 
-export default GovernancePage;
+export default (injectIntl(GovernancePage));

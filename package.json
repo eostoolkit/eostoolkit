@@ -10,6 +10,10 @@
     "npm": ">=3",
     "node": ">=5"
   },
+  "babel": {
+    "presets": ["env", "react"],
+    "plugins": ["./node_modules/babel-plugin-react-intl"]
+  },
   "author": "Max Stoiber",
   "license": "MIT",
   "scripts": {
@@ -116,6 +120,7 @@
     "yup": "^0.25.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.2.3",
     "add-asset-html-webpack-plugin": "2.0.1",
     "babel-cli": "6.24.1",
     "babel-core": "6.24.1",

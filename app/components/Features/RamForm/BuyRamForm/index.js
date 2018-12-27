@@ -14,6 +14,9 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
 
+import messages from '../messages';
+import commonMessages from '../../../messages';
+
 const makeTransaction = (values, isEOS) => {
   const type = isEOS
     ? {
@@ -37,25 +40,12 @@ const makeTransaction = (values, isEOS) => {
   return transaction;
 };
 
-const validationSchema = ({ unit: { isEOS } }) => {
-  const eosQuantity = Yup.number().positive('You must pay a positive quantity');
-  const byteQuantity = Yup.number()
-    .positive('RAM must be a positive quantity')
-    .integer('RAM cannot be fractional');
-
-  return Yup.object().shape({
-    owner: Yup.string().required('Payer name is required'),
-    name: Yup.string().required('Account name is required'),
-    byteQuantity: isEOS ? byteQuantity : byteQuantity.required('RAM purchase is required'),
-    eosQuantity: !isEOS ? eosQuantity : eosQuantity.required('RAM purchase is required'),
-  });
-};
-
 const BuyRamForm = props => {
+  const { intl } = props;
   return (
-      <ToolBody color="warning" icon={AddCircle} header="Buy RAM">
-        <FormObject {...props} />
-      </ToolBody>
+    <ToolBody color="warning" icon={AddCircle} header={intl.formatMessage(messages.buyRamHeader)}>
+      <FormObject {...props} />
+    </ToolBody>
   );
 };
 
@@ -90,7 +80,7 @@ const enhance = compose(
       setSubmitting(false);
       const transaction = makeTransaction(values, isEOS);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       byteQuantity: 8192,
@@ -99,7 +89,24 @@ const enhance = compose(
       isEOS: props.unit.isEOS,
       name: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl, isEOS } = props;
+      const eosQuantity = Yup.number().positive(intl.formatMessage(messages.buyRamFormPositiveQuantity));
+      const byteQuantity = Yup.number()
+        .positive(intl.formatMessage(commonMessages.formRamPositiveQuantity))
+        .integer(intl.formatMessage(commonMessages.formRamNotFractional));
+
+      return Yup.object().shape({
+        owner: Yup.string().required(intl.formatMessage(messages.buyRamFormPayerNameRequired)),
+        name: Yup.string().required(intl.formatMessage(commonMessages.formAccountNameRequired)),
+        byteQuantity: isEOS
+          ? byteQuantity
+          : byteQuantity.required(intl.formatMessage(commonMessages.formRAMPurchaseRequired)),
+        eosQuantity: !isEOS
+          ? eosQuantity
+          : eosQuantity.required(intl.formatMessage(commonMessages.formRAMPurchaseRequired)),
+      });
+    },
   })
 );
 

@@ -1,25 +1,35 @@
 import React from 'react';
 
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import messages from './messages';
+
 const LinkAuth = () => {
   return (
     <div>
-      <h5>Link Authorization</h5>
+      <h5>
+        <FormattedMessage {...messages.linkAuthHeaderOne} />
+      </h5>
       <p>
-        You can create special permissions that can access only specific actions. (Use the Advanced Permissions feature)
+        <FormattedMessage {...messages.linkAuthLineOne} />
       </p>
       <p>
-        The default owner and active permissions can do anything - depending the account this can be dangerous.
-        You can create special permissions on your account that are allowed to execute specific contract actions.
+        <FormattedMessage {...messages.linkAuthLineTwo} />
       </p>
       <p>
-        A common use case may be a high value account. The owner and active keys are safely locked away, while you create a <i>transfer</i> permission with multisig requirements.
+        <FormattedHTMLMessage {...messages.linkAuthLineThree} />
       </p>
       <p>
-        You would then link the <i>transfer</i> permission to the eosio.token contract and transfer action.
+        <FormattedHTMLMessage {...messages.linkAuthLineFour} />
       </p>
-      <p>NOTE: Linked auths do not appear on your account - you must use a block explorer to find link auth actions you have done.</p>
-      <h5>Unlink Authorization</h5>
-      <p>If you want to remove a link simply specify the same contract and action.</p>
+      <p>
+        <FormattedMessage {...messages.linkAuthLineFive} />
+      </p>
+      <h5>
+        <FormattedMessage {...messages.linkAuthHeaderTwo} />
+      </h5>
+      <p>
+        <FormattedMessage {...messages.linkAuthLineSix} />
+      </p>
     </div>
   );
 };

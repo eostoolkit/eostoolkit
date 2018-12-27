@@ -17,6 +17,10 @@ import ToolBody from 'components/Tool/ToolBody';
 
 import FormObject from './FormObject';
 
+import { FormattedMessage, injectIntl } from 'react-intl';
+import messages from './messages';
+import commonMessages from '../../messages';
+
 const makeTransaction = values => {
   const transaction = [
     {
@@ -57,39 +61,20 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  owner: Yup.string().required('Creator name is required'),
-  name: Yup.string()
-    .required('Account name is required')
-    .matches(/([a-z1-5]){12,}/, {
-      excludeEmptyString: true,
-      message: 'Invalid account name',
-    }),
-  ownerKey: Yup.string().required('Owner key is required'),
-  activeKey: Yup.string().required('Active key is required'),
-  net: Yup.number()
-    .required('NET Stake is required')
-    .positive('You must stake a positive quantity'),
-  cpu: Yup.number()
-    .required('CPU Stake is required')
-    .positive('You must stake a positive quantity'),
-  ram: Yup.number()
-    .required('RAM purchase is required')
-    .positive('RAM must be a positive quantity')
-    .integer('RAM cannot be fractional'),
-});
-
 const CreateAccountForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
-        <ToolBody color="warning" icon={PersonAdd} header="Create Account">
+        <ToolBody color="warning" icon={PersonAdd} header={intl.formatMessage(messages.formHeader)}>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
-        <ToolBody color="info" header="Tutorial">
-          <p>Tutorial coming soon</p>
+        <ToolBody color="info" header={intl.formatMessage(commonMessages.tutorialHeaderMessage)}>
+          <p>
+            <FormattedMessage {...commonMessages.tutorialHeaderMessage} />
+          </p>
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -102,7 +87,7 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',
@@ -113,8 +98,31 @@ const enhance = compose(
       cpu: '0.1',
       ram: '8192',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        owner: Yup.string().required(intl.formatMessage(messages.formAccountNameCreatorMessage)),
+        name: Yup.string()
+          .required(intl.formatMessage(commonMessages.formAccountNameRequired))
+          .matches(/([a-z1-5]){12,}/, {
+            excludeEmptyString: true,
+            message: intl.formatMessage(messages.formAccountNameInvalid),
+          }),
+        ownerKey: Yup.string().required(intl.formatMessage(messages.formOwnerKeyMessage)),
+        activeKey: Yup.string().required(intl.formatMessage(messages.formActiveKeyRequired)),
+        net: Yup.number()
+          .required(intl.formatMessage(commonMessages.formNETStakeRequired))
+          .positive(intl.formatMessage(commonMessages.formStakePositiveQuantity)),
+        cpu: Yup.number()
+          .required(intl.formatMessage(commonMessages.formCPUStakeRequired))
+          .positive(intl.formatMessage(commonMessages.formStakePositiveQuantity)),
+        ram: Yup.number()
+          .required(intl.formatMessage(commonMessages.formRAMPurchaseRequired))
+          .positive(intl.formatMessage(commonMessages.formRamPositiveQuantity))
+          .integer(intl.formatMessage(commonMessages.formRamNotFractional)),
+      });
+    },
   })
 );
 
-export default enhance(CreateAccountForm);
+export default injectIntl(enhance(CreateAccountForm));

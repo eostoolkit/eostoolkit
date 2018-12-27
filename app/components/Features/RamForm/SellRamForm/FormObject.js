@@ -3,25 +3,26 @@ import React from 'react';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
-const FormData = [
-  {
-    id: 'owner',
-    label: 'Seller',
-    placeholder: 'Account that sells the Ram',
-  },
-  {
-    id: 'ram',
-    label: 'Ram to Sell (in bytes)',
-    placeholder: 'How many bytes to sell',
-  },
-];
+import messages from '../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+  const FormData = [
+    {
+      id: 'owner',
+      label: intl.formatMessage(messages.sellRamFormSellerLabel),
+      placeholder: intl.formatMessage(messages.sellRamFormSellerPlaceholder),
+    },
+    {
+      id: 'ram',
+      label: intl.formatMessage(messages.sellRamFormBytesLabel),
+      placeholder: intl.formatMessage(messages.sellRamFormBytesPlaceholder),
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Sell',
+    submitText: intl.formatMessage(messages.sellRamFormSubmitText),
   };
   return (
     <ToolForm {...formProps}>

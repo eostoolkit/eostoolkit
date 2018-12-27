@@ -6,8 +6,8 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.CreateAccountForm.header',
-    defaultMessage: 'This is the CreateAccountForm component !',
+  reviewSearchTermText: {
+    id: 'app.components.Account.reviewSearchTermText',
+    defaultMessage: 'Please review your search terms',
   },
 });

@@ -18,44 +18,48 @@ import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 import uuidv4 from 'uuid/v4';
 
-const FormData = [
-  {
-    id: 'poster',
-    label: 'Poster',
-    placeholder: 'Account that sends the post',
-  },
-  {
-    id: 'reply_to_poster',
-    label: 'Reply to Poster',
-    placeholder: 'Reply to Poster that sends the post',
-  },
-  {
-    id: 'post_uuid',
-    label: 'Post UUID - optional',
-    placeholder: 'Post UUID - autopopulates if blank',
-  },
-  {
-    id: 'reply_to_post_uuid',
-    label: 'Reply to Post UUID - optional',
-    placeholder: 'Reply UUID - autopopulates if blank',
-  },
-  {
-    id: 'content',
-    label: 'Content',
-    placeholder: 'Post content',
-    multiline: true,
-    rows: 3,
-    md: 12,
-  },
-];
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Post',
+    submitText: intl.formatMessage(messages.formProposalPostSubmitText),
   };
+  const FormData = [
+    {
+      id: 'poster',
+      label: intl.formatMessage(messages.formProposalPosterLabel),
+      placeholder: intl.formatMessage(messages.formProposalPosterPlaceholder),
+    },
+    {
+      id: 'reply_to_poster',
+      label: intl.formatMessage(messages.formProposalPosterReplyLabel),
+      placeholder: intl.formatMessage(messages.formProposalPosterReplyPlaceholder),
+    },
+    {
+      id: 'post_uuid',
+      label: intl.formatMessage(messages.formProposalUUIDPostLabel),
+      placeholder: intl.formatMessage(messages.formProposalUUIDPostPlaceholder),
+    },
+    {
+      id: 'reply_to_post_uuid',
+      label: intl.formatMessage(messages.formProposalUUIDReplyLabel),
+      placeholder: intl.formatMessage(messages.formProposalUUIDReplyPlaceholder),
+    },
+    {
+      id: 'content',
+      label: intl.formatMessage(messages.formProposalPostContentLabel),
+      placeholder: intl.formatMessage(messages.formProposalContentPlaceholder),
+      multiline: true,
+      rows: 3,
+      md: 12,
+    },
+  ];
   return (
     <ToolForm {...formProps}>
       {FormData.map(form => {
@@ -83,26 +87,32 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  poster: Yup.string().required('Account is required'),
-  content: Yup.string().required('Content is required'),
-});
-
 const ForumPostForm = props => {
+  const { intl } = props;
   return (
     <Tool>
       <ToolSection lg={8}>
-        <ToolBody color="warning" icon={Comment} header="FORUM" subheader=" - Post">
+        <ToolBody
+          color="warning"
+          icon={Comment}
+          header={intl.formatMessage(messages.proposalForumUppercaseHeader)}
+          subheader={intl.formatMessage(messages.formForumPostSubheader)}>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection lg={4}>
         <ToolBody color="info" header="Tutorial">
-          <h5>EOSIO Forum Post</h5>
-          <p>This is part of the eosio.forum Referendum project.</p>
-          <p>You can create a forum post, and reply to other posts.</p>
+          <h5>
+            <FormattedMessage {...messages.eosioForumPostHeader} />
+          </h5>
           <p>
-            For more information checkout{' '}
+            <FormattedMessage {...messages.eosioForumPostText1} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.eosioForumPostText2} />
+          </p>
+          <p>
+            <FormattedMessage {...messages.eosioForumStatusTextCheckout} />
             <a href="https://github.com/eoscanada/eosio.forum" target="new">
               Eos Canada GitHub
             </a>
@@ -119,7 +129,7 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       poster: props.networkIdentity ? props.networkIdentity.name : '',
@@ -128,7 +138,13 @@ const enhance = compose(
       post_uuid: '',
       reply_to_post_uuid: '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        poster: Yup.string().required(intl.formatMessage(commonMessages.formAccountRequired)),
+        content: Yup.string().required(intl.formatMessage(commonMessages.formProposalContentRequired)),
+      });
+    },
   })
 );
 

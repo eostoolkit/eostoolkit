@@ -12,13 +12,18 @@ import Button from 'components/CustomButtons/Button';
 import { makeSelectIdentity, makeSelectAccount } from 'containers/NetworkClient/selectors';
 import { pushTransaction as sendTransaction } from 'containers/NetworkClient/actions';
 
-const makeTransaction = (networkIdentity, accountData) => {
+import { FormattedMessage, injectIntl } from 'react-intl';
+
+import messages from './messages';
+import commonMessages from '../../messages';
+
+const makeTransaction = (networkIdentity, accountData, intl) => {
   if (!accountData) {
-    return { error: 'No scatter identity attached' };
+    return { error: intl.formatMessage(commonMessages.errorNoScatterIdentity) };
   }
   const producers = accountData.voter_info ? accountData.voter_info.producers : [];
   if (producers.includes('aus1genereos')) {
-    return { success: 'You already voted for us! Thank you!' };
+    return { success: intl.formatMessage(messages.successAlreadyVoted) };
   }
   if (producers.length > 29) {
     producers.pop();
@@ -40,17 +45,19 @@ const makeTransaction = (networkIdentity, accountData) => {
 };
 
 const VoteUs = props => {
-  const { pushTransaction, networkIdentity, networkAccount, className } = props;
+  const { pushTransaction, networkIdentity, networkAccount, className, intl } = props;
   const handleSubmit = () => {
-    const transaction = makeTransaction(networkIdentity, networkAccount);
-    pushTransaction(transaction,props.history);
+    const transaction = makeTransaction(networkIdentity, networkAccount, intl);
+    pushTransaction(transaction, props.history);
   };
   return (
     <React.Fragment>
       <a href="#" onClick={handleSubmit} className={className}>
-        Built by GenerEOS
+        <FormattedMessage {...messages.buildByGenerEOSText} />
       </a>
-      <Button type="submit" color="success" onClick={handleSubmit} style={{marginTop:'-7px',marginLeft:'10px'}}>Vote</Button>
+      <Button type="submit" color="success" onClick={handleSubmit} style={{ marginTop: '-7px', marginLeft: '10px' }}>
+        <FormattedMessage {...messages.voteButtonText} />
+      </Button>
     </React.Fragment>
   );
 };
@@ -62,11 +69,13 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    pushTransaction: (transaction,history) => dispatch(sendTransaction(transaction,history)),
+    pushTransaction: (transaction, history) => dispatch(sendTransaction(transaction, history)),
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(VoteUs);
+export default injectIntl(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(VoteUs)
+);

@@ -1,26 +1,29 @@
 import React from 'react';
 
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
+
 const BlockOneLetter = () => {
   return (
     <div>
-      <h5>Dear GenerEOS supporters,</h5>
+      <h5>
+        <FormattedMessage {...messages.blockOneLetterHeader} />
+      </h5>
       <p>
-        Block One recently announced that that they will be voting for Block Producers that share the core values
-        necessary to maximize the integrity and potential of the EOS public blockchain network.
+        <FormattedMessage {...messages.blockOneLetterText1} />
       </p>
       <p>
-        They have provided an email for BP&apos;s and token holders to campaign for the Block Producers they believe in.
+        <FormattedMessage {...messages.blockOneLetterText2} />
       </p>
       <p>
-        We would love if you could rally behind us showing your support by sending a passionate email to Block One
-        explaining why they should vote for GenerEOS.
+        <FormattedMessage {...messages.blockOneLetterText3} />
       </p>
       <p>
-        Send your email to - <a href="mailto:bp@eos.io?Subject=I%20Support%20GenerEOS">bp@eos.io</a>
+        <FormattedMessage {...messages.blockOneLetterText4} />{' '}
+        <a href="mailto:bp@eos.io?Subject=I%20Support%20GenerEOS">bp@eos.io</a>
       </p>
       <p>
-        This support would mean the world to us and help us keep creating great tools and contributions for the
-        community.
+        <FormattedMessage {...messages.blockOneLetterText5} />
       </p>
       <p>
         <strong>&hearts;,</strong>

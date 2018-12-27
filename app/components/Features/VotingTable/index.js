@@ -12,8 +12,13 @@ import CheckBoxOff from '@material-ui/icons/CheckBoxOutlineBlank';
 import AssignmentTurnedIn from '@material-ui/icons/AssignmentTurnedIn';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+import commonMessages from '../../messages';
+
 const VotingTable = props => {
-  const { producers, setProducers, selected, ...clientProps } = props;
+  const { producers, setProducers, selected, intl, ...clientProps } = props;
   const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
 
   const selectedProducers = [];
@@ -21,7 +26,7 @@ const VotingTable = props => {
 
   const makeTransaction = () => {
     if (!writerEnabled) {
-      return { error: 'No scatter identity attached' };
+      return { error: intl.formatMessage(commonMessages.errorNoScatterIdentity) };
     }
 
     const transaction = [
@@ -40,7 +45,7 @@ const VotingTable = props => {
 
   const handleSubmit = () => {
     const transaction = makeTransaction();
-    pushTransaction(transaction,props.history);
+    pushTransaction(transaction, props.history);
   };
 
   const handleReset = () => {
@@ -98,13 +103,16 @@ const VotingTable = props => {
         <ToolBody
           color="warning"
           icon={AssignmentTurnedIn}
-          header="Block Producers"
-          subheader=" - Vote and support the community">
+          header={intl.formatMessage(messages.votingTableHeader)}
+          subheader={intl.formatMessage(messages.votingTableSubHeader)}>
           <GridContainer>
             <GridItem xs={12} sm={8}>
               <div>
-                <strong>Selected producers ({selected.length || '0'}/30): </strong>{' '}
-                {selected.length > 0 ? selected.join(', ') : 'None'}
+                <strong>
+                  {' '}
+                  <FormattedMessage {...messages.selectedProducersText} /> ({selected.length || '0'}/30):{' '}
+                </strong>{' '}
+                {selected.length > 0 ? selected.join(', ') : intl.formatMessage(messages.noneSelectedText)}
               </div>
             </GridItem>
             <GridItem xs={12} sm={4}>
@@ -114,7 +122,7 @@ const VotingTable = props => {
                 }}
                 color={'rose'}
                 style={{ float: 'right' }}>
-                Vote
+                <FormattedMessage {...messages.buttonVoteText} />
               </Button>
               <Button
                 onClick={() => {
@@ -122,7 +130,7 @@ const VotingTable = props => {
                 }}
                 color={'warning'}
                 style={{ float: 'right' }}>
-                Reset
+                <FormattedMessage {...messages.buttonResetText} />
               </Button>
             </GridItem>
           </GridContainer>
@@ -132,11 +140,11 @@ const VotingTable = props => {
             noDataText={<CircularProgress color="secondary" />}
             columns={[
               {
-                Header: 'Name',
+                Header: intl.formatMessage(messages.columnNameHeader),
                 accessor: 'owner',
               },
               {
-                Header: 'Website',
+                Header: intl.formatMessage(messages.columnWebsiteHeader),
                 accessor: 'url',
                 Cell: row => (
                   <a href={row.value} target="new">
@@ -147,14 +155,14 @@ const VotingTable = props => {
                 maxWidth: 600,
               },
               {
-                Header: 'Votes',
+                Header: intl.formatMessage(messages.columnVoteHeader),
                 id: 'vote_percent',
                 accessor: d => Number(d.vote_percent).toFixed(3),
                 Cell: row => <span>{row.value} %</span>,
                 width: 100,
               },
               {
-                Header: 'Select',
+                Header: intl.formatMessage(messages.columnVoteHeader),
                 accessor: 'actions',
                 filterable: false,
                 sortable: false,

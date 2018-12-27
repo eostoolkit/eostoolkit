@@ -27,6 +27,8 @@ import saga from './saga';
 
 import sweetAlertStyle from './sweetAlertStyle';
 
+import messages from './messages';
+
 // eslint-disable-next-line react/prefer-stateless-function
 export class Notification extends React.Component {
   render() {
@@ -73,15 +75,15 @@ export class Notification extends React.Component {
           onCancel={() => closeAll()}
           confirmBtnText="Thanks"
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.success}`}>
-            {txid ? (
-              <a href={`https://bloks.io/transaction/${txid}`} target="new">
-                <h6>{txid}</h6>
-              </a>
-            ) : (
-              <pre className={this.props.classes.preXYScrollable}>
-                {message ? `${JSON.stringify(message, null, 2)}` : ''}
-              </pre>
-            )}
+          {txid ? (
+            <a href={`https://bloks.io/transaction/${txid}`} target="new">
+              <h6>{txid}</h6>
+            </a>
+          ) : (
+            <pre className={this.props.classes.preXYScrollable}>
+              {message ? `${JSON.stringify(message, null, 2)}` : ''}
+            </pre>
+          )}
           <p>Thank you for using EOSToolkit.io</p>
           <h6>Your votes support continued development of these tools</h6>
           <h5>
@@ -92,7 +94,10 @@ export class Notification extends React.Component {
     }
     if (failure && writeEnabled) {
       const error = typeof message === 'string' ? JSON.parse(message) : message;
-      if(JSON.stringify(error).includes('you have already signed up') || JSON.stringify(error).includes('User already has a balance')) {
+      if (
+        JSON.stringify(error).includes('you have already signed up') ||
+        JSON.stringify(error).includes('User already has a balance')
+      ) {
         return (
           <SweetAlert
             success
@@ -106,7 +111,7 @@ export class Notification extends React.Component {
             <h5>You have already claimed this Airgrab!</h5>
             <h6>You are all set to receive new drops!</h6>
           </SweetAlert>
-        )
+        );
       }
 
       return (

@@ -11,42 +11,44 @@ import ToolInput from 'components/Tool/ToolInput';
 import buyRamFormStyle from './buyRamFormStyle';
 import { units } from './constants';
 
-const FormData = [
-  {
-    id: 'name',
-    label: 'Receiver',
-    placeholder: 'Account that receives the RAM',
-  },
-  {
-    id: 'owner',
-    label: 'Payer',
-    placeholder: 'Account that pays for the RAM',
-  },
-];
-
-const eosInput = {
-  id: 'eosQuantity',
-  label: `Ram purchase (in ${units.EOS})`,
-  placeholder: 'How much RAM to puchase',
-};
-
-const byteInput = {
-  id: 'byteQuantity',
-  label: `Ram purchase (in ${units.BYTE})`,
-  placeholder: 'How much RAM to puchase',
-};
+import messages from '../messages';
+import commonMessages from '../../../messages';
 
 const FormObject = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit, ...toggleProps } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, intl, ...toggleProps } = props;
   const {
     unit: { isEOS, handleByteUnitChange, handleEOSUnitChange },
     classes,
   } = toggleProps;
 
+  const FormData = [
+    {
+      id: 'name',
+      label: intl.formatMessage(commonMessages.formReceiverLabel),
+      placeholder: intl.formatMessage(messages.buyRamFormReceiverPlaceholder),
+    },
+    {
+      id: 'owner',
+      label: intl.formatMessage(messages.buyRamFormPayerLabel),
+      placeholder: intl.formatMessage(messages.buyRamFormPayerPlaceholder),
+    },
+  ];
+
+  const eosInput = {
+    id: 'eosQuantity',
+    label: intl.formatMessage(messages.buyRamFormEOSInputLabel),
+    placeholder: intl.formatMessage(messages.buyRamFormEOSInputPlaceholder),
+  };
+
+  const byteInput = {
+    id: 'byteQuantity',
+    label: intl.formatMessage(messages.buyRamFormBytesInputLabel),
+    placeholder: intl.formatMessage(messages.buyRamFormEOSInputPlaceholder),
+  };
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Purchase',
+    submitText: intl.formatMessage(messages.buyRamFormSubmitText),
   };
   return (
     <ToolForm {...formProps}>

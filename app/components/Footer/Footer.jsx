@@ -9,8 +9,12 @@ import ListItem from '@material-ui/core/ListItem';
 
 import footerStyle from './footerStyle';
 
+import { injectIntl } from 'react-intl';
+
+import messages from './messages';
+
 function Footer({ ...props }) {
-  const { classes, fluid, white } = props;
+  const { classes, fluid, white, intl } = props;
   const container = cx({
     [classes.container]: !fluid,
     [classes.containerFluid]: fluid,
@@ -32,37 +36,37 @@ function Footer({ ...props }) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a href="https://github.com/generEOS" className={block}>
-                {'GitHub'}
+                {intl.formatMessage(messages.footerGithub)}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://steemit.com/@genereos" target="new" className={block}>
-                {'Steemit'}
+                {intl.formatMessage(messages.footerSteemit)}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://www.facebook.com/generEOS" target="new" className={block}>
-                {'Facebook'}
+                {intl.formatMessage(messages.footerFacebook)}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://www.reddit.com/r/GenerEOS/" target="new" className={block}>
-                {'Reddit'}
+                {intl.formatMessage(messages.footerReddit)}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://twitter.com/genereossydney" target="new" className={block}>
-                {'Twitter'}
+                {intl.formatMessage(messages.footerTwitter)}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://www.youtube.com/channel/UCFHa6AJmcZBjXGILF2EZnHQ" target="new" className={block}>
-                {'YouTube'}
+                {intl.formatMessage(messages.footerYouTube)}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://t.me/generEOS" target="new" className={block}>
-                {'Telegram'}
+                {intl.formatMessage(messages.footerTelegram)}
               </a>
             </ListItem>
           </List>
@@ -72,7 +76,7 @@ function Footer({ ...props }) {
           <a href="https://www.genereos.io" target="new" className={anchor}>
             {'GenerEOS'}
           </a>
-          {', made with love for the EOS Community'}
+          {intl.formatMessage(messages.footerLoveMessage)}
         </p>
       </div>
     </footer>
@@ -86,4 +90,4 @@ Footer.propTypes = {
   rtlActive: PropTypes.bool,
 };
 
-export default withStyles(footerStyle)(Footer);
+export default injectIntl(withStyles(footerStyle)(Footer));

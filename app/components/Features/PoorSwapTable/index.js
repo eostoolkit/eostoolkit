@@ -3,8 +3,6 @@ import ReactTable from 'react-table';
 import Tool from 'components/Tool/Tool';
 import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
-import GridContainer from 'components/Grid/GridContainer';
-import GridItem from 'components/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
 import CompareArrows from '@material-ui/icons/CompareArrows';
 import History from '@material-ui/icons/History';
@@ -16,6 +14,9 @@ import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
 import FormObject from './FormObject';
+
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const makeTransaction = (values, networkIdentity) => {
   const transaction = [
@@ -35,20 +36,13 @@ const makeTransaction = (values, networkIdentity) => {
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  quantity: Yup.number()
-    .required('Quantity is required')
-    .positive('You must send a positive quantity'),
-});
-
 const PoorSwap = props => {
-  const { proxies, ...clientProps } = props;
+  const { proxies, intl, ...clientProps } = props;
   const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
-
 
   const claimTransaction = () => {
     if (!writerEnabled) {
-      return { error: 'No scatter identity attached' };
+      return { error: intl.formatMessage(commonMessages.errorNoScatterIdentity) };
     }
 
     const transaction = [
@@ -60,59 +54,54 @@ const PoorSwap = props => {
         },
       },
     ];
-    pushTransaction(transaction,props.history);
+    pushTransaction(transaction, props.history);
   };
-
 
   return (
     <Tool>
-
       <ToolSection md={12}>
-        <ToolBody
-          color="info"
-          icon={Info}
-          header="Information"
-          >
-          <PoorInfo/>
+        <ToolBody color="info" icon={Info} header={intl.formatMessage(commonMessages.informationHeaderMessage)}>
+          <PoorInfo />
         </ToolBody>
       </ToolSection>
       <ToolSection md={12}>
         <ToolBody
           color="warning"
           icon={CompareArrows}
-          header="POOR Swap"
-          subheader=" - Exchange POOR for ZKS">
+          header={intl.formatMessage(messages.poorInfoPoorSwapHeader)}
+          subheader={intl.formatMessage(messages.poorInfoPoorSwapSubHeader)}>
           <FormObject {...props} />
         </ToolBody>
       </ToolSection>
       <ToolSection md={12}>
-
         <ToolBody
           color="warning"
           icon={History}
-          header="POOR Swap Data"
-          subheader=" - How much POOR is spent each day for ZKS">
-          <Button onClick={() => claimTransaction()} color="rose">Claim ZKS</Button>
+          header={intl.formatMessage(messages.poorInfoPoorSwapToolHeader)}
+          subheader={intl.formatMessage(messages.poorInfoPoorSwapToolHeader)}>
+          <Button onClick={() => claimTransaction()} color="rose">
+            Claim ZKS
+          </Button>
           <ReactTable
             data={proxies}
             filterable
             noDataText={<CircularProgress color="secondary" />}
             columns={[
               {
-                Header: 'Day',
+                Header: intl.formatMessage(messages.poorInfoPoorSwapTableColumnDay),
                 accessor: 'cycle',
-                width:200,
+                width: 200,
               },
               {
-                Header: 'POOR',
+                Header: intl.formatMessage(messages.poorInfoPoorSwapTableColumnPOOR),
                 accessor: 'tokens',
                 headerStyle: { 'text-align': 'left' },
-                style: { 'text-align': 'left' }
+                style: { 'text-align': 'left' },
               },
             ]}
             defaultPageSize={50}
             pageSize={proxies.length}
-            showPaginationTop = {false}
+            showPaginationTop={false}
             showPaginationBottom={false}
             className="-striped -highlight"
           />
@@ -122,19 +111,25 @@ const PoorSwap = props => {
   );
 };
 
-
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
       const { pushTransaction, networkIdentity } = props;
       const transaction = makeTransaction(values, networkIdentity);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: () => ({
       quantity: '1',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        quantity: Yup.number()
+          .required(intl.formatMessage(commonMessages.formQuantityRequired))
+          .positive(intl.formatMessage(commonMessages.formPositiveQuantityRequired)),
+      });
+    },
   })
 );
 

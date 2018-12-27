@@ -9,26 +9,6 @@ import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
 import buyRamFormStyle from './buyRamFormStyle';
-import { units } from './constants';
-
-const FormData = [
-  {
-    id: 'name',
-    label: 'Recipient',
-    placeholder: 'Account that receives the coins',
-  },
-  {
-    id: 'quantity',
-    label: 'Quantity',
-    placeholder: 'Quantity of Tokens',
-  },
-  {
-    id: 'memo',
-    label: 'Memo',
-    placeholder: 'Memo for the recipient',
-    lg:12,
-  },
-];
 
 const FormObject = props => {
   const { values, touched, errors, handleChange, handleBlur, handleSubmit, ...toggleProps } = props;
@@ -37,6 +17,24 @@ const FormObject = props => {
     classes,
   } = toggleProps;
 
+  const FormData = [
+    {
+      id: 'name',
+      label: 'Recipient',
+      placeholder: 'Account that receives the coins',
+    },
+    {
+      id: 'quantity',
+      label: 'Quantity',
+      placeholder: 'Quantity of Tokens',
+    },
+    {
+      id: 'memo',
+      label: 'Memo',
+      placeholder: 'Memo for the recipient',
+      lg: 12,
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',

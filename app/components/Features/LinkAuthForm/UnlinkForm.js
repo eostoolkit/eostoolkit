@@ -8,32 +8,36 @@ import ToolBody from 'components/Tool/ToolBody';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
-const FormData = [
-  {
-    id: 'account',
-    label: 'Account Name',
-    placeholder: 'Account name to unlink',
-    md: 12,
-  },{
-    id: 'code',
-    label: 'Contract Name',
-    placeholder: 'Contract account name (i.e. eosio.token)',
-    md: 6,
-  },{
-    id: 'type',
-    label: 'Contract Action',
-    placeholder: 'Contract action name (i.e. transfer)',
-    md: 6,
-  }
-];
+import messages from './messages';
+import commonMessages from '../../messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Unlink Auth',
+    submitText: intl.formatMessage(messages.unlinkAuthText),
   };
+  const FormData = [
+    {
+      id: 'account',
+      label: intl.formatMessage(commonMessages.formAccountNameText),
+      placeholder: intl.formatMessage(messages.unlinkAuthAccountPlaceholder),
+      md: 12,
+    },
+    {
+      id: 'code',
+      label: intl.formatMessage(messages.formContractNameLabel),
+      placeholder: intl.formatMessage(messages.formContractNamePlaceholder),
+      md: 6,
+    },
+    {
+      id: 'type',
+      label: intl.formatMessage(messages.formContractActionLabel),
+      placeholder: intl.formatMessage(messages.formContractActionPlaceholder),
+      md: 6,
+    },
+  ];
   return (
     <ToolForm {...formProps}>
       {FormData.map(form => {
@@ -49,26 +53,21 @@ const makeTransaction = values => {
       account: 'eosio',
       name: 'unlinkauth',
       data: {
-        ...values
+        ...values,
       },
     },
   ];
   return transaction;
 };
 
-const validationSchema = Yup.object().shape({
-  account: Yup.string().required('Account name is required'),
-  code: Yup.string().required('Contract name is required'),
-  type: Yup.string().required('Action name is required'),
-});
-
 const ResignForm = props => {
+  const { intl } = props;
   return (
     <ToolBody
       color="warning"
       icon={SupervisorAccount}
-      header="Unlink Auth"
-      subheader=" - Remove permissions for certain contract actions">
+      header={intl.formatMessage(messages.unlinkAuthText)}
+      subheader={intl.formatMessage(messages.unlinkAuthSubheader)}>
       <FormObject {...props} />
     </ToolBody>
   );
@@ -80,12 +79,19 @@ const enhance = compose(
       const { pushTransaction } = props;
       const transaction = makeTransaction(values);
       setSubmitting(false);
-      pushTransaction(transaction,props.history);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       account: props.networkIdentity ? props.networkIdentity.name : '',
     }),
-    validationSchema,
+    validationSchema: props => {
+      const { intl } = props;
+      return Yup.object().shape({
+        account: Yup.string().required(intl.formatMessage(commonMessages.formAccountNameRequired)),
+        code: Yup.string().required(intl.formatMessage(messages.formContractNameRequired)),
+        type: Yup.string().required(intl.formatMessage(messages.formAccountNameRequired)),
+      });
+    },
   })
 );
 

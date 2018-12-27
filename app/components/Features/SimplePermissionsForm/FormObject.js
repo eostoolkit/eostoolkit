@@ -3,33 +3,35 @@ import React from 'react';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
 
-const FormData = [
-  {
-    id: 'owner',
-    label: 'Change permission on',
-    placeholder: 'Account whose permissions will change',
-    md: 12,
-  },
-  {
-    id: 'activeKey',
-    label: 'Active Permision (Only complete if you want to change)',
-    placeholder: 'Public key or account name',
-    md: 12,
-  },
-  {
-    id: 'ownerKey',
-    label: 'Owner Permision (Only complete if you want to change)',
-    placeholder: 'Public key or account name',
-    md: 12,
-  },
-];
+import messages from './messages';
 
 const FormObject = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, intl } = props;
+
+  const FormData = [
+    {
+      id: 'owner',
+      label: intl.formatMessage(messages.simplePermissionOwnerLabel),
+      placeholder: intl.formatMessage(messages.simplePermissionOwnerPlaceholder),
+      md: 12,
+    },
+    {
+      id: 'activeKey',
+      label: intl.formatMessage(messages.simplePermissionActiveKeyLabel),
+      placeholder: intl.formatMessage(messages.simplePermissionKeyOrNamePlaceholder),
+      md: 12,
+    },
+    {
+      id: 'ownerKey',
+      label: intl.formatMessage(messages.simplePermissionOwnerKeyLabel),
+      placeholder: intl.formatMessage(messages.simplePermissionKeyOrNamePlaceholder),
+      md: 12,
+    },
+  ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: 'Update',
+    submitText: intl.formatMessage(messages.simplePermissionUpdateText),
   };
   return (
     <ToolForm {...formProps}>
