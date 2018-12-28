@@ -178,7 +178,7 @@ const enhance = compose(
       const { intl } = props;
       return Yup.object().shape({
         owner: Yup.string().required(intl.formatMessage(commonMessages.formAccountNameRequired)),
-        threshold: Yup.number().required(),//intl.formatMessage(commonMessages.formThresholdRequired)), //TODO: figure out why this one fails
+        threshold: Yup.number().required(intl.formatMessage(messages.formThresholdRequired)), // TODO: confirm fix
         permission: Yup.string().required(intl.formatMessage(commonMessages.formPermissionRequired)),
         parent: Yup.string(),
       });
