@@ -229,10 +229,10 @@
   "app.components.Features.Multisig.multisigSignFormSignTutorialLine1": "Load the Transaction JSON you were provided.请加载为你提供的transaction JSON档",
   "app.components.Features.Multisig.multisigSignFormSignTutorialLine2": "Ensure Scatter is connected with the correct account to sign this transaction.请确保Scatter与正确的相关帐户联上以签署此交易",
   "app.components.Features.Multisig.multisigSignFormSignTutorialLine3": "Click Sign Transaction 请按 Sign transaction/签署交易",
-  "app.components.Features.Multisig.multisigSignFormSignTutorialLine4": "Scatter will appear asking you to sign an arbitrary Buffer. This will appear like random numbers. This is acceptable, and matches the JSON you loaded.",Scatter这时会要求你接受并签署一个任意的缓冲区。这是一个看起来像随机的数字。这是可以接受的，并与您加载的JSON档相配合
-  "app.components.Features.Multisig.multisigSignFormSignTutorialLine5": "A dialogue will appear with your Signature, and you will also automatically download a JSON file with this signature.",一个显示你已签名确实的对话框会出现，一个有此签名的JSON文件也会自动下载。
-  "app.components.Features.Multisig.multisigSignFormSignTutorialLine6": "Provide this signature or signature file to the person sending the transaction.",将此签批确认或签名档案提供给送出交易的那方
-  "app.components.Features.NetworkForm.addNetworkToGit": "Get your testnet or endpoint added to this list by submitting a pull request to <a href=\"https://github.com/eostoolkit/eos-networks\" target=\"new\">GitHub</a>",透过提交请求<a href=\"https://github.com/eostoolkit/eos-networks\" target=\"new\">GitHub</a>，以把testnet或端点加到列表里"
+  "app.components.Features.Multisig.multisigSignFormSignTutorialLine4": "Scatter will appear asking you to sign an arbitrary Buffer. This will appear like random numbers. This is acceptable, and matches the JSON you loaded. Scatter这时会要求你接受并签署一个任意的缓冲区。这是一个看起来像随机的数字。这是可以接受的，并与您加载的JSON档相配合",
+  "app.components.Features.Multisig.multisigSignFormSignTutorialLine5": "A dialogue will appear with your Signature, and you will also automatically download a JSON file with this signature. 一个显示你已签名确实的对话框会出现，一个有此签名的JSON文件也会自动下载。",
+  "app.components.Features.Multisig.multisigSignFormSignTutorialLine6": "Provide this signature or signature file to the person sending the transaction.将此签批确认或签名档案提供给送出交易的那方",
+  "app.components.Features.NetworkForm.addNetworkToGit": "Get your testnet or endpoint added to this list by submitting a pull request to <a href=\"https://github.com/eostoolkit/eos-networks\" target=\"new\">GitHub</a> 透过提交请求<a href=\"https://github.com/eostoolkit/eos-networks\" target=\"new\">GitHub</a>，以把testnet或端点加到列表里",
   "app.components.Features.NetworkForm.networkTableColumnAPI": "API",
   "app.components.Features.NetworkForm.networkTableColumnFailures": "Failures 系统故障",
   "app.components.Features.NetworkForm.networkTableColumnHost": "Host 主机",
