@@ -261,7 +261,7 @@
   "app.components.Features.ProxyTable.proxyTableColumnSteemitHeader": "Steemit",
   "app.components.Features.ProxyTable.proxyTableColumnWeChatHeader": "WeChat 微信通信",
   "app.components.Features.ProxyTable.proxyTableHeader": "Registered Proxies 已注册代理",
-  "app.components.Features.ProxyTable.proxyTableInformationHeader": "Click the account name to view more info at bloks.io. Select a proxy to make it your proxy!",按账户名以在bloks.io中查看更多资料。选择一位代理，使其成为你的代理！“，
+  "app.components.Features.ProxyTable.proxyTableInformationHeader": "Click the account name to view more info at bloks.io. Select a proxy to make it your proxy! 按账户名以在bloks.io中查看更多资料。选择一位代理，使其成为你的代理！",
   "app.components.Features.ProxyTable.proxyTableSubHeader": "- Select one to vote for you! 选择一位投票给你",
   "app.components.Features.RamForm.buyRamFormBytesInputLabel": "Ram purchase (in bytes) 购买Ram 记忆体（单位:bytes)",
   "app.components.Features.RamForm.buyRamFormEOSInputLabel": "Ram purchase (in EOS) 购买Ram 记忆体（单位: EOS）",
@@ -427,7 +427,7 @@
   "app.containers.Notification.sendingTitle": "Sending... 发送",
   "app.containers.Notification.successAlreadyAirgrabedMessage": "You have already claimed this Airgrab! 您已经获取此Airgrab",
   "app.containers.Notification.successSetUpToReceiveNewDropsMessage": "You are all set to receive new drops! 您将会收到新的空投 ",
-  "app.containers.Notification.successSupportMessage": "Your votes support continued development of these tools 您的投票将支持我们继续开发这些工具“",
+  "app.containers.Notification.successSupportMessage": "Your votes support continued development of these tools 您的投票将支持我们继续开发这些工具",
   "app.containers.Notification.successThanksMessage": "Thank you for using EOSToolkit.io 感谢您用EOSToolkit.io",
   "app.containers.Notification.successTitle": "Success 成功",
   "app.containers.Notification.transactionDelayNotification": "Your transaction will be sent to the network afterwards 之后您的交易将被发送到网络",
