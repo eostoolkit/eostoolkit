@@ -11,6 +11,13 @@ const airgrabs = [
     url: 'https://www.atidium.io/',
   },
   {
+    symbol: 'BRM',
+    account: 'openbrmeos11',
+    method: 'open',
+    description: 'Very First Open source Billing and Revenue Management on Blockchain. OpenBRM is a carrier-grade billing platform aimed at telecommunications, Subscription, Utilities and logistics organizations.',
+    url: 'https://openbrm.io',
+  },
+  {
     symbol: 'NEB',
     account: 'nebulatokenn',
     method: 'open',
