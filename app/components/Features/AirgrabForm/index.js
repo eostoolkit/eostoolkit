@@ -41,7 +41,7 @@ const makeTransaction = (values, networkIdentity) => {
   if (values.method === 'open') {
     data = {
       owner: networkIdentity ? networkIdentity.name : '',
-      symbol: `4,${values.symbol}`,
+      symbol: values.symbol === 'BRM' ?  `3,${values.symbol}` : `4,${values.symbol}`,
       ram_payer: networkIdentity ? networkIdentity.name : '',
     };
   }
