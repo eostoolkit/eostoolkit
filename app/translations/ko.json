@@ -42,6 +42,7 @@
   "app.components.Features.ClaimRewardsForm.claimerLabel": "청구인",
   "app.components.Features.ClaimRewardsForm.claimerPlaceholder": "생산 보상을 청구하는 계정",
   "app.components.Features.ClaimRewardsForm.claimerSubmitText": "청구",
+
   "app.components.Features.ComplexPermissionForm.complexPermissionFormAccountPlaceholder": "",
   "app.components.Features.ComplexPermissionForm.complexPermissionFormAuthorityLabel": "",
   "app.components.Features.ComplexPermissionForm.complexPermissionFormAuthorityPlaceholder": "",
@@ -57,6 +58,7 @@
   "app.components.Features.ComplexPermissionForm.complexPermissionFormWeightPlaceholder": "",
   "app.components.Features.ComplexPermissionForm.formChangePermissionSubheader": "",
   "app.components.Features.ComplexPermissionForm.formThresholdRequired": "",
+
   "app.components.Features.CreateAccountForm.formAccountName": "새계정명",
   "app.components.Features.CreateAccountForm.formAccountNameCreatorMessage": "생성자명이 필요로 합니다",
   "app.components.Features.CreateAccountForm.formAccountNameInvalid": "잘못된 계정명",
@@ -209,6 +211,7 @@
   "app.components.Features.HorusPay.horusTableSubHeader": "- 해당 스테이크는 ECASH를 배당 받습니다",
   "app.components.Features.HorusPay.horusTableTotalStakeText": "총 스테이크:",
   "app.components.Features.HorusPay.horusTableUnstakeButtonText": "언스테이크",
+
   "app.components.Features.Karma.buildByGenerEOSText": "",
   "app.components.Features.Karma.karmaAccountProvideStakePlaceholder": "",
   "app.components.Features.Karma.karmaFormPositiveQuantityRequired": "",
@@ -239,6 +242,7 @@
   "app.components.Features.LinkAuthForm.unlinkAuthAccountPlaceholder": "",
   "app.components.Features.LinkAuthForm.unlinkAuthSubheader": "",
   "app.components.Features.LinkAuthForm.unlinkAuthText": "",
+
   "app.components.Features.Multisig.multisigCreateFormAuthorizationLabel": "인증 계정",
   "app.components.Features.Multisig.multisigCreateFormAuthorizationPlaceholder": "이 트랜잭션을 승인하는 계정",
   "app.components.Features.Multisig.multisigCreateFormHeader": "트랜잭션 생성",
@@ -407,6 +411,7 @@
   "app.components.Footer.footerTelegram": "텔레그램",
   "app.components.Footer.footerTwitter": "트위터",
   "app.components.Footer.footerYouTube": "유튜브",
+
   "app.components.Information.BlockOneLetter.blockOneLetterHeader": "",
   "app.components.Information.BlockOneLetter.blockOneLetterText1": "",
   "app.components.Information.BlockOneLetter.blockOneLetterText2": "",
@@ -535,6 +540,7 @@
   "app.components.Information.RegProxy.resignProxyLineOne": "",
   "app.components.Information.RegProxy.resignProxyLineThree": "",
   "app.components.Information.RegProxy.resignProxyLineTwo": "",
+
   "app.components.NetworkStatus.Identity.attachAccountText": "계정을 연결해주세요",
   "app.components.NetworkStatus.Identity.installScatterText": "스케터를 설치해주세요",
   "app.components.NetworkStatus.Status.ifAccountNotTickedText": "계정이 선택되지 않은 경우 위의 '계정 선택' 메뉴를 사용해서 스케터 ID를 연결후 아래의 작업을 진행해주세요.",

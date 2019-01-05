@@ -42,6 +42,7 @@
   "app.components.Features.ClaimRewardsForm.claimerLabel": "Claimer 收取者",
   "app.components.Features.ClaimRewardsForm.claimerPlaceholder": "Account that claims production rewards 收取生产奖励的账号",
   "app.components.Features.ClaimRewardsForm.claimerSubmitText": "Claim 收取",
+
   "app.components.Features.ComplexPermissionForm.complexPermissionFormAccountPlaceholder": "",
   "app.components.Features.ComplexPermissionForm.complexPermissionFormAuthorityLabel": "",
   "app.components.Features.ComplexPermissionForm.complexPermissionFormAuthorityPlaceholder": "",
@@ -57,6 +58,7 @@
   "app.components.Features.ComplexPermissionForm.complexPermissionFormWeightPlaceholder": "",
   "app.components.Features.ComplexPermissionForm.formChangePermissionSubheader": "",
   "app.components.Features.ComplexPermissionForm.formThresholdRequired": "",
+
   "app.components.Features.CreateAccountForm.formAccountName": "New Account Name 新账号名称",
   "app.components.Features.CreateAccountForm.formAccountNameCreatorMessage": "Creator name is required 必须填写创建者名称",
   "app.components.Features.CreateAccountForm.formAccountNameInvalid": "Invalid account name 帐户名无效",
@@ -209,6 +211,7 @@
   "app.components.Features.HorusPay.horusTableSubHeader": "- These stakes are earning you ECASH 这些抵押代币正在帮您赚取ECASH",
   "app.components.Features.HorusPay.horusTableTotalStakeText": "Total Stake: 总抵押",
   "app.components.Features.HorusPay.horusTableUnstakeButtonText": "Unstake 解压",
+
   "app.components.Features.Karma.buildByGenerEOSText": "",
   "app.components.Features.Karma.karmaAccountProvideStakePlaceholder": "",
   "app.components.Features.Karma.karmaFormPositiveQuantityRequired": "",
@@ -239,6 +242,7 @@
   "app.components.Features.LinkAuthForm.unlinkAuthAccountPlaceholder": "",
   "app.components.Features.LinkAuthForm.unlinkAuthSubheader": "",
   "app.components.Features.LinkAuthForm.unlinkAuthText": "",
+
   "app.components.Features.Multisig.multisigCreateFormAuthorizationLabel": "Authorization Account 授权帐户",
   "app.components.Features.Multisig.multisigCreateFormAuthorizationPlaceholder": "Account authorizing this transaction 此交易授权账户",
   "app.components.Features.Multisig.multisigCreateFormHeader": "Create Transaction 创建交易",
@@ -407,6 +411,7 @@
   "app.components.Footer.footerTelegram": "Telegram 电报",
   "app.components.Footer.footerTwitter": "Twitter",
   "app.components.Footer.footerYouTube": "YouTube",
+
   "app.components.Information.BlockOneLetter.blockOneLetterHeader": "",
   "app.components.Information.BlockOneLetter.blockOneLetterText1": "",
   "app.components.Information.BlockOneLetter.blockOneLetterText2": "",
@@ -535,6 +540,7 @@
   "app.components.Information.RegProxy.resignProxyLineOne": "",
   "app.components.Information.RegProxy.resignProxyLineThree": "",
   "app.components.Information.RegProxy.resignProxyLineTwo": "",
+
   "app.components.NetworkStatus.Identity.attachAccountText": "Please attach Identity 请附加身份",
   "app.components.NetworkStatus.Identity.installScatterText": "Please install Scatter 请安装Scatter",
   "app.components.NetworkStatus.Status.ifAccountNotTickedText": "If ACCOUNT is not ticked make sure to use the 'Select account' menu above and select a scatter identity and account to perform actions under. 如果未勾选ACCOUNT，请务必使用上面的“选择帐户”菜单，然后选择分散标识和帐户以执行操作。",
