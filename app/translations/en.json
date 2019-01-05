@@ -42,6 +42,7 @@
   "app.components.Features.ClaimRewardsForm.claimerLabel": "Claimer",
   "app.components.Features.ClaimRewardsForm.claimerPlaceholder": "Account that claims production rewards",
   "app.components.Features.ClaimRewardsForm.claimerSubmitText": "Claim",
+
   "app.components.Features.ComplexPermissionForm.complexPermissionFormAccountPlaceholder": "",
   "app.components.Features.ComplexPermissionForm.complexPermissionFormAuthorityLabel": "",
   "app.components.Features.ComplexPermissionForm.complexPermissionFormAuthorityPlaceholder": "",
@@ -57,6 +58,7 @@
   "app.components.Features.ComplexPermissionForm.complexPermissionFormWeightPlaceholder": "",
   "app.components.Features.ComplexPermissionForm.formChangePermissionSubheader": "",
   "app.components.Features.ComplexPermissionForm.formThresholdRequired": "",
+
   "app.components.Features.CreateAccountForm.formAccountName": "New Account Name",
   "app.components.Features.CreateAccountForm.formAccountNameCreatorMessage": "Creator name is required",
   "app.components.Features.CreateAccountForm.formAccountNameInvalid": "Invalid account name",
@@ -209,6 +211,7 @@
   "app.components.Features.HorusPay.horusTableSubHeader": "- These stakes are earning you ECASH",
   "app.components.Features.HorusPay.horusTableTotalStakeText": "Total Stake:",
   "app.components.Features.HorusPay.horusTableUnstakeButtonText": "Unstake",
+
   "app.components.Features.Karma.buildByGenerEOSText": "",
   "app.components.Features.Karma.karmaAccountProvideStakePlaceholder": "",
   "app.components.Features.Karma.karmaFormPositiveQuantityRequired": "",
@@ -239,6 +242,7 @@
   "app.components.Features.LinkAuthForm.unlinkAuthAccountPlaceholder": "",
   "app.components.Features.LinkAuthForm.unlinkAuthSubheader": "",
   "app.components.Features.LinkAuthForm.unlinkAuthText": "",
+
   "app.components.Features.Multisig.multisigCreateFormAuthorizationLabel": "Authorization Account",
   "app.components.Features.Multisig.multisigCreateFormAuthorizationPlaceholder": "Account authorizing this transaction",
   "app.components.Features.Multisig.multisigCreateFormHeader": "Create Transaction",
@@ -407,6 +411,7 @@
   "app.components.Footer.footerTelegram": "Telegram",
   "app.components.Footer.footerTwitter": "Twitter",
   "app.components.Footer.footerYouTube": "YouTube",
+
   "app.components.Information.BlockOneLetter.blockOneLetterHeader": "",
   "app.components.Information.BlockOneLetter.blockOneLetterText1": "",
   "app.components.Information.BlockOneLetter.blockOneLetterText2": "",
@@ -535,6 +540,7 @@
   "app.components.Information.RegProxy.resignProxyLineOne": "",
   "app.components.Information.RegProxy.resignProxyLineThree": "",
   "app.components.Information.RegProxy.resignProxyLineTwo": "",
+
   "app.components.NetworkStatus.Identity.attachAccountText": "Please attach Identity",
   "app.components.NetworkStatus.Identity.installScatterText": "Please install Scatter",
   "app.components.NetworkStatus.Status.ifAccountNotTickedText": "If ACCOUNT is not ticked make sure to use the 'Select account' menu above and select a scatter identity and account to perform actions under.",
