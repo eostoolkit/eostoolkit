@@ -86,9 +86,16 @@ const Karma = props => {
         {karmaStaked > 0 ? Number(karmaStaked).toFixed(4) : intl.formatMessage(messages.karmaTableNoKarmaText)}
       </h3>
       {karmaStaked > 0 ? (
-          <Button onClick={() => {handleClaim(hasStaked)}} color="success">Claim</Button>
-      ):('')}
-
+        <Button
+          onClick={() => {
+            handleClaim(hasStaked);
+          }}
+          color="success">
+          Claim
+        </Button>
+      ) : (
+        ''
+      )}
 
       {karmaRefund > 0 ? (
         <React.Fragment>

@@ -22,10 +22,20 @@ const RegProxy = () => {
         <FormattedMessage {...messages.resignProxyLineThree} />
       </p>
       <p>
-        <FormattedHTMLMessage {...messages.resignProxyLineFour} />
+        <FormattedMessage {...messages.resignProxyLineFour} />
+        <a href="https://www.alohaeos.com/vote/proxy" target="new">
+          Aloha EOS Proxy Research Portal.
+        </a>
       </p>
       <p>
-        <FormattedHTMLMessage {...messages.resignProxyLineFive} />
+        <FormattedMessage {...messages.resignProxyLineFive} />
+        <a href="https://bloks.io/account/regproxyinfo" target="new">
+          regproxyinfo
+        </a>
+        <FormattedMessage {...messages.resignProxyLineFive} />
+        <a href="https://github.com/AlohaEOS/eos-proxyinfo" target="new">
+          GitHub
+        </a>
       </p>
     </div>
   );

@@ -35,7 +35,10 @@ const PoormanInfo = () => {
         <FormattedMessage {...messages.poormanInfoLineEigth} />
       </p>
       <p>
-        <FormattedHTMLMessage {...messages.poormanInfoLineNine} />
+        <FormattedMessage {...messages.poormanInfoLineNine} />
+        <a href="https://github.com/generEOS/poorman.token" target="new">
+          poorman.token Github
+        </a>
       </p>
     </div>
   );

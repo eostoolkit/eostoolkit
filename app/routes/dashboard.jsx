@@ -66,60 +66,64 @@ import {
 import HorusIcon from 'components/Icons/Horus';
 import KarmaIcon from 'components/Icons/Karma';
 
+import { FormattedMessage } from 'react-intl';
+import React from 'react';
+import messags from './messages';
+
 const dashRoutes = [
   { hide: true, path: '/networks', name: 'Network', component: Network },
   {
     path: '/home',
-    name: 'Features',
+    name: <FormattedMessage {...messags.menuFeatures} />,
     icon: Dashboard,
     component: FeaturesPage,
   },
   {
     path: '/community/forum/vote',
-    name: 'Referendum',
+    name: <FormattedMessage {...messags.menuReferendum} />,
     icon: Feedback,
     component: Referendum,
   },
   {
     path: '/poorswap',
-    name: 'PoorSwap',
+    name: <FormattedMessage {...messags.menuPoorSwap} />,
     icon: CompareArrows,
     component: PoorSwap,
   },
   {
     path: '/donate',
-    name: 'Donate',
+    name: <FormattedMessage {...messags.menuDonate} />,
     icon: Favorite,
     component: Donate,
   },
   {
     path: '/governance',
-    name: 'Governance',
+    name: <FormattedMessage {...messags.menuGovernance} />,
     icon: AccountBalance,
     component: GovernancePage,
   },
   {
     collapse: true,
     path: '/dapps',
-    name: 'Dapps',
+    name: <FormattedMessage {...messags.menuDapps} />,
     state: 'openDapps',
     icon: Extension,
     views: [
       {
         path: '/dapps/karma',
-        name: 'KARMA',
+        name: <FormattedMessage {...messags.menuKARMA} />,
         mini: 'K',
         component: Karma,
       },
       {
         path: '/dapps/horuspay',
-        name: 'HorusPay',
+        name: <FormattedMessage {...messags.menuHorusPay} />,
         mini: 'HP',
         component: HorusPay,
       },
       {
         path: '/dapps/grandpacoins',
-        name: 'GrandpaCoins',
+        name: <FormattedMessage {...messags.menuGrandpaCoins} />,
         mini: 'GC',
         component: Grandpa,
       },
@@ -128,68 +132,68 @@ const dashRoutes = [
 
   {
     path: '/airgrab',
-    name: 'Airgrab Tokens',
+    name: <FormattedMessage {...messags.menuAirgrabTokens} />,
     icon: CloudDownload,
     component: Airgrab,
   },
   {
     path: '/search',
-    name: 'Find Accounts',
+    name: <FormattedMessage {...messags.menuFindAccounts} />,
     icon: Search,
     component: SearchAccount,
   },
   {
     path: '/account/create',
-    name: 'Create Account',
+    name: <FormattedMessage {...messags.menuCreateAccount} />,
     icon: PersonAdd,
     component: CreateAccount,
   },
   {
     path: '/transfer',
-    name: 'Transfer Tokens',
+    name: <FormattedMessage {...messags.menuTransferTokens} />,
     icon: Payment,
     component: Transfer,
   },
   {
     collapse: true,
     path: '/account',
-    name: 'Manage Account',
+    name: <FormattedMessage {...messags.menuManageAccount} />,
     state: 'openAccount',
     icon: AssignmentInd,
     views: [
       {
         path: '/account/delegate',
-        name: 'Manage Stake',
+        name: <FormattedMessage {...messags.menuManageStake} />,
         mini: 'MS',
         component: StakeForm,
       },
       {
         path: '/account/ram',
-        name: 'Manage RAM',
+        name: <FormattedMessage {...messags.menuManageRAM} />,
         mini: 'MR',
         component: RamForm,
       },
       {
         path: '/account/permissions',
-        name: 'Manage Permissions',
+        name: <FormattedMessage {...messags.menuManagePermissions} />,
         mini: 'P',
         component: SimplePermissions,
       },
       {
         path: '/account/advanced',
-        name: 'Advanced Permissions',
+        name: <FormattedMessage {...messags.menuAdvancedPermissions} />,
         mini: 'AP',
         component: ComplexPermissions,
       },
       {
         path: '/account/linkauth',
-        name: 'Link Auth',
+        name: <FormattedMessage {...messags.menuLinkAuth} />,
         mini: 'LA',
         component: LinkAuth,
       },
       {
         path: '/account/refund',
-        name: 'Refund Stake',
+        name: <FormattedMessage {...messags.menuRefundStake} />,
         mini: 'RS',
         component: Refund,
       },
@@ -198,37 +202,37 @@ const dashRoutes = [
   {
     collapse: true,
     path: '/vote',
-    name: 'Manage Voting',
+    name: <FormattedMessage {...messags.menuManageVoting} />,
     state: 'openVote',
     icon: AssignmentTurnedIn,
     views: [
       {
         path: '/vote/producers',
-        name: 'Vote Producers',
+        name: <FormattedMessage {...messags.menuVoteProducers} />,
         mini: 'VP',
         component: VotingTable,
       },
       {
         path: '/vote/proxies',
-        name: 'Proxy Information',
+        name: <FormattedMessage {...messags.menuProxyInformation} />,
         mini: 'PI',
         component: ProxyTable,
       },
       {
         path: '/vote/setproxy',
-        name: 'Set Proxy',
+        name: <FormattedMessage {...messags.menuSetProxy} />,
         mini: 'SP',
         component: SetProxy,
       },
       {
         path: '/vote/createproxy',
-        name: 'Create Proxy',
+        name: <FormattedMessage {...messags.menuCreateProxy} />,
         mini: 'CP',
         component: CreateProxy,
       },
       {
         path: '/vote/resignproxy',
-        name: 'Resign Proxy',
+        name: <FormattedMessage {...messags.menuResignProxy} />,
         mini: 'RP',
         component: ResignProxy,
       },
@@ -237,31 +241,31 @@ const dashRoutes = [
   {
     collapse: true,
     path: '/community',
-    name: 'Community Features',
+    name: <FormattedMessage {...messags.menuCommunityFeatures} />,
     state: 'openCommunity',
     icon: Forum,
     views: [
       {
         path: '/community/forum/status',
-        name: 'Forum Status',
+        name: <FormattedMessage {...messags.menuForumStatus} />,
         mini: 'FS',
         component: ForumStatus,
       },
       {
         path: '/community/forum/post',
-        name: 'Forum Post',
+        name: <FormattedMessage {...messags.menuForumPost} />,
         mini: 'FP',
         component: ForumPost,
       },
       {
         path: '/community/forum/proposal',
-        name: 'Forum Proposal',
+        name: <FormattedMessage {...messags.menuForumProposal} />,
         mini: 'Pr',
         component: ForumProposal,
       },
       {
         path: '/community/bidname',
-        name: 'Premium Names',
+        name: <FormattedMessage {...messags.menuPremiumNames} />,
         mini: 'PN',
         component: BidName,
       },
@@ -270,25 +274,25 @@ const dashRoutes = [
   {
     collapse: true,
     path: '/multisig',
-    name: 'Multisig Transactions',
+    name: <FormattedMessage {...messags.menuMultisigTransactions} />,
     state: 'openMultisig',
     icon: VpnKey,
     views: [
       {
         path: '/multisig/create',
-        name: 'Create Transaction',
+        name: <FormattedMessage {...messags.menuCreateTransaction} />,
         mini: 'CT',
         component: MultisigCreate,
       },
       {
         path: '/multisig/sign',
-        name: 'Sign Transaction',
+        name: <FormattedMessage {...messags.menuSignTransaction} />,
         mini: 'ST',
         component: MultisigSign,
       },
       {
         path: '/multisig/push',
-        name: 'Push Transaction',
+        name: <FormattedMessage {...messags.menuPushTransaction} />,
         mini: 'PT',
         component: MultisigPush,
       },
@@ -297,13 +301,13 @@ const dashRoutes = [
   {
     collapse: true,
     path: '/block-producer',
-    name: 'Block Producer',
+    name: <FormattedMessage {...messags.menuBlockProducer} />,
     state: 'openBlockProducer',
     icon: DeveloperBoard,
     views: [
       {
         path: '/block-producer/claim-rewards',
-        name: 'Claim Rewards',
+        name: <FormattedMessage {...messags.menuClaimRewards} />,
         mini: 'CR',
         component: ClaimRewards,
       },

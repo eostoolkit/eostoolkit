@@ -19,10 +19,21 @@ const RegProxy = () => {
         <FormattedMessage {...messages.regProxyHeaderTwo} />
       </h5>
       <p>
-        <FormattedHTMLMessage {...messages.regProxyLineThree} />
+        <FormattedMessage {...messages.regProxyLineThree} />
+        <a href="https://www.alohaeos.com/vote/proxy" target="new">
+          {' '}
+          Aloha EOS Proxy Research Portal.
+        </a>
       </p>
       <p>
-        <FormattedHTMLMessage {...messages.regProxyLineFour} />
+        <FormattedMessage {...messages.regProxyLineFour1} />
+        <a href="https://bloks.io/account/regproxyinfo" target="new">
+          regproxyinfo
+        </a>
+        <FormattedMessage {...messages.regProxyLineFour2} />
+        <a href="https://github.com/AlohaEOS/eos-proxyinfo" target="new">
+          GitHub
+        </a>
       </p>
       <p>
         <FormattedMessage {...messages.regProxyLineFive} />
