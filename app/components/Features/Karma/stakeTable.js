@@ -86,19 +86,13 @@ const Karma = props => {
         {karmaStaked > 0 ? Number(karmaStaked).toFixed(4) : intl.formatMessage(messages.karmaTableNoKarmaText)}
       </h3>
       {karmaStaked > 0 ? (
-        claimDate < new Date() ? (
-          <Button
-            onClick={() => {
-              handleClaim(hasStaked);
-            }}
-            color="success">
-            Claim
-          </Button>
-        ) : (
-          <p>
-            <FormattedMessage {...messages.karmaTableClaimRewardsOn} /> {claimDate.toLocaleString()}
-          </p>
-        )
+        <Button
+          onClick={() => {
+            handleClaim(hasStaked);
+          }}
+          color="success">
+          Claim
+        </Button>
       ) : (
         ''
       )}

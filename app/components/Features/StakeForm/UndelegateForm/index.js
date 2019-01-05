@@ -32,7 +32,7 @@ const makeTransaction = values => {
   return transaction;
 };
 
-const DelegateForm = props => {
+const UndelegateForm = props => {
   const { intl } = props;
   return (
     <ToolBody
@@ -44,6 +44,17 @@ const DelegateForm = props => {
     </ToolBody>
   );
 };
+
+// const validationSchema = Yup.object().shape({
+//   owner: Yup.string().required('Owner name is required'),
+//   name: Yup.string().required('Account name is required'),
+//   net: Yup.number()
+//     .required('NET Stake is required')
+//     .positive('You must unstake a positive quantity'),
+//   cpu: Yup.number()
+//     .required('CPU Stake is required')
+//     .positive('You must unstake a positive quantity'),
+// });
 
 const enhance = compose(
   withFormik({
@@ -75,4 +86,4 @@ const enhance = compose(
   })
 );
 
-export default enhance(DelegateForm);
+export default enhance(UndelegateForm);

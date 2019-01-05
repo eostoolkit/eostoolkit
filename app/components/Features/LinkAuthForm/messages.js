@@ -44,7 +44,7 @@ export default defineMessages({
     defaultMessage: 'Contract account name (i.e. eosio.token)',
   },
   formContractActionLabel: {
-    id: 'app.components.Features.LinkAuthForm.formContractNameLabel',
+    id: 'app.components.Features.LinkAuthForm.formContractActionLabel',
     defaultMessage: 'Contract Action',
   },
   formContractActionPlaceholder: {

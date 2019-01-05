@@ -19,7 +19,7 @@ export default defineMessages({
     defaultMessage: 'Permission',
   },
   complexPermissionFormPermissionPlaceholder: {
-    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormThresholdPlaceholder',
+    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormPermissionPlaceholder',
     defaultMessage: 'Permission to change (i.e. active)',
   },
   complexPermissionFormParentLabel: {
@@ -27,7 +27,7 @@ export default defineMessages({
     defaultMessage: 'Parent',
   },
   complexPermissionFormParentPlaceholder: {
-    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormThresholdPlaceholder',
+    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormParentPlaceholder',
     defaultMessage: 'Parent permission (i.e. owner)',
   },
   complexPermissionFormAuthorityLabel: {
@@ -35,7 +35,7 @@ export default defineMessages({
     defaultMessage: 'Authority',
   },
   complexPermissionFormAuthorityPlaceholder: {
-    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormThresholdPlaceholder',
+    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormAuthorityPlaceholder',
     defaultMessage: 'Public key or Actor@Permission',
   },
   complexPermissionFormWeightLabel: {
@@ -43,7 +43,7 @@ export default defineMessages({
     defaultMessage: 'Weight',
   },
   complexPermissionFormWeightPlaceholder: {
-    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormThresholdPlaceholder',
+    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormWeightPlaceholder',
     defaultMessage: 'Weight for this Permission',
   },
   complexPermissionFormSubmitText: {
@@ -51,7 +51,7 @@ export default defineMessages({
     defaultMessage: 'Update',
   },
   complexPermissionFormSubheader: {
-    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormSubmitText',
+    id: 'app.components.Features.ComplexPermissionForm.complexPermissionFormSubheader',
     defaultMessage: ' - Advanced EOS Users only',
   },
   formThresholdRequired: {

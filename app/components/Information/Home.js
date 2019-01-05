@@ -11,13 +11,25 @@ const Home = () => {
         <FormattedMessage {...messages.homeHeader} />
       </h3>
       <h4>
-        <FormattedHTMLMessage {...messages.scatterInfo} />
+        <FormattedMessage {...messages.scatterInfo1} />
+        <a href="https://get-scatter.com/" target="new">
+          Scatter
+        </a>
+        <FormattedMessage {...messages.scatterInfo2} />
       </h4>
       <h4>
-        <FormattedHTMLMessage {...messages.helpdesk} />
+        <FormattedHTMLMessage {...messages.helpdesk1} />
+        <a href="https://eoshelpdesk.zendesk.com" target="new">
+          EOS Helpdesk
+        </a>
+        <FormattedHTMLMessage {...messages.helpdesk2} />
       </h4>
       <h4>
-        <FormattedHTMLMessage {...messages.telegram} />
+        <FormattedHTMLMessage {...messages.telegram1} />
+        <a href="https://t.me/generEOS" target="new">
+          Telegram
+        </a>
+        <FormattedHTMLMessage {...messages.telegram2} />
       </h4>
       <h4>
         <FormattedMessage {...messages.governanceLinkPart1} /> <NavLink to="/governance">EOS Governance</NavLink>{' '}

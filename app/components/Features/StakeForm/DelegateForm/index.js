@@ -51,6 +51,17 @@ const DelegateForm = props => {
   );
 };
 
+// const validationSchema = Yup.object().shape({
+//   owner: Yup.string().required('Owner name is required'),
+//   name: Yup.string().required('Account name is required'),
+//   net: Yup.number()
+//     .required('NET Stake is required')
+//     .positive('You must stake a positive quantity'),
+//   cpu: Yup.number()
+//     .required('CPU Stake is required')
+//     .positive('You must stake a positive quantity'),
+// });
+
 const enhance = compose(
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
@@ -67,7 +78,7 @@ const enhance = compose(
     }),
     validationSchema: props => {
       const { intl } = props;
-      Yup.object().shape({
+      return Yup.object().shape({
         owner: Yup.string().required(intl.formatMessage(commonMessages.formOwnerNameRequired)),
         name: Yup.string().required(intl.formatMessage(commonMessages.formAccountNameRequired)),
         net: Yup.number()
