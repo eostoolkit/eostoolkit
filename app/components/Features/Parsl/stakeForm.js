@@ -1,6 +1,6 @@
 /**
  *
- * Karma StakeForm
+ * Parsl StakeForm
  *
  */
 
@@ -24,20 +24,20 @@ const FormObject = props => {
     {
       id: 'owner',
       label: intl.formatMessage(commonMessages.formAccountLabel),
-      placeholder: intl.formatMessage(messages.karmaAccountProvideStakePlaceholder),
+      placeholder: intl.formatMessage(messages.parslAccountProvideStakePlaceholder),
       lg: 12,
     },
     {
       id: 'quantity',
-      label: intl.formatMessage(messages.karmaQuantityLabel),
-      placeholder: intl.formatMessage(messages.karmaQuantityPlaceholder),
+      label: intl.formatMessage(messages.parslQuantityLabel),
+      placeholder: intl.formatMessage(messages.parslQuantityPlaceholder),
       lg: 12,
     },
   ];
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: intl.formatMessage(messages.karmaStakeFormSubmitText),
+    submitText: intl.formatMessage(messages.parslStakeFormSubmitText),
   };
   return (
     <ToolForm {...formProps}>
@@ -52,13 +52,13 @@ const makeTransaction = values => {
   const { quantity, owner } = values;
   const transaction = [
     {
-      account: 'therealkarma',
-      name: 'powerup',
+      account: 'parslseed123',
+      name: 'stake',
       data: {
         owner,
         quantity: `${Number(quantity)
           .toFixed(4)
-          .toString()} KARMA`,
+          .toString()} SEED`,
       },
     },
   ];
@@ -71,8 +71,8 @@ const StakeForm = props => {
     <ToolBody
       color="warning"
       icon={Redo}
-      header={intl.formatMessage(messages.karmaStakeFormHeader)}
-      subheader={intl.formatMessage(messages.karmaStakeFormSubHeader)}>
+      header={intl.formatMessage(messages.parslStakeFormHeader)}
+      subheader={intl.formatMessage(messages.parslStakeFormSubHeader)}>
       <FormObject {...props} />
     </ToolBody>
   );
@@ -96,7 +96,7 @@ const enhance = compose(
         owner: Yup.string().required(intl.formatMessage(commonMessages.formAccountRequired)),
         quantity: Yup.number()
           .required(intl.formatMessage(commonMessages.formQuantityRequired))
-          .positive(intl.formatMessage(messages.karmaFormPositiveQuantityRequired)),
+          .positive(intl.formatMessage(messages.parslFormPositiveQuantityRequired)),
       });
     },
   })

@@ -8,7 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import KarmaForm from 'components/Features/Karma';
+import ParslForm from 'components/Features/Parsl';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -18,11 +18,11 @@ import { fetchStake, selectStake } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 
-export class Karma extends React.Component {
+export class Parsl extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    this.props.refreshStake()
+    this.props.refreshStake();
     this.interval = setInterval(() => this.props.refreshStake(), 5000);
   }
 
@@ -38,7 +38,7 @@ export class Karma extends React.Component {
   }
 
   render() {
-    return <KarmaForm {...this.props} />;
+    return <ParslForm {...this.props} />;
   }
 }
 
@@ -60,11 +60,11 @@ const withConnect = connect(
   mapDispatchToProps
 );
 
-const withReducer = injectReducer({ key: 'Karma', reducer });
-const withSaga = injectSaga({ key: 'Karma', saga });
+const withReducer = injectReducer({ key: 'Parsl', reducer });
+const withSaga = injectSaga({ key: 'Parsl', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect
-)(Karma);
+)(Parsl);

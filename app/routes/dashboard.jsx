@@ -40,6 +40,7 @@ import PoorSwap from 'containers/PoorSwap';
 import ProxyTable from 'containers/ProxyInfo';
 import HorusPay from 'containers/HorusPay';
 import Karma from 'containers/Karma';
+import Parsl from 'containers/Parsl';
 import Referendum from 'containers/Referendum';
 import Grandpa from 'containers/Grandpa';
 
@@ -109,6 +110,12 @@ const dashRoutes = [
     state: 'openDapps',
     icon: Extension,
     views: [
+      {
+        path: '/dapps/parsl',
+        name: <FormattedMessage {...messags.menuPARSL} />,
+        mini: 'PS',
+        component: Parsl,
+      },
       {
         path: '/dapps/karma',
         name: <FormattedMessage {...messags.menuKARMA} />,

@@ -30,6 +30,10 @@ export default defineMessages({
     id: 'app.routes.menuDapps',
     defaultMessage: 'Dapps',
   },
+  menuPARSL: {
+    id: 'app.routes.menuPARSL',
+    defaultMessage: 'Parsl SEED',
+  },
   menuKARMA: {
     id: 'app.routes.menuKARMA',
     defaultMessage: 'KARMA',

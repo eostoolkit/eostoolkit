@@ -1,6 +1,6 @@
 /**
  *
- * Karma StakeForm
+ * Parsl StakeForm
  *
  */
 
@@ -9,7 +9,7 @@ import { compose } from 'recompose';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
-import Redo from '@material-ui/icons/Redo';
+import Undo from '@material-ui/icons/Undo';
 
 import ToolBody from 'components/Tool/ToolBody';
 import ToolForm from 'components/Tool/ToolForm';
@@ -20,25 +20,25 @@ import commonMessages from '../../messages';
 
 const FormObject = props => {
   const { handleSubmit, intl } = props;
+  const formProps = {
+    handleSubmit,
+    submitColor: 'rose',
+    submitText: intl.formatMessage(messages.parslUnstakeFormSubmitText),
+  };
   const FormData = [
     {
       id: 'owner',
       label: intl.formatMessage(commonMessages.formAccountLabel),
-      placeholder: intl.formatMessage(messages.karmaAccountProvideStakePlaceholder),
+      placeholder: intl.formatMessage(messages.parslAccountProvideStakePlaceholder),
       lg: 12,
     },
     {
       id: 'quantity',
-      label: intl.formatMessage(messages.karmaQuantityLabel),
-      placeholder: intl.formatMessage(messages.karmaQuantityPlaceholder),
+      label: intl.formatMessage(messages.parslQuantityLabel),
+      placeholder: intl.formatMessage(messages.parslQuantityPlaceholder),
       lg: 12,
     },
   ];
-  const formProps = {
-    handleSubmit,
-    submitColor: 'rose',
-    submitText: intl.formatMessage(messages.karmaStakeFormSubmitText),
-  };
   return (
     <ToolForm {...formProps}>
       {FormData.map(form => {
@@ -52,13 +52,13 @@ const makeTransaction = values => {
   const { quantity, owner } = values;
   const transaction = [
     {
-      account: 'therealkarma',
-      name: 'powerup',
+      account: 'parslseed123',
+      name: 'unstake',
       data: {
         owner,
         quantity: `${Number(quantity)
           .toFixed(4)
-          .toString()} KARMA`,
+          .toString()} SEED`,
       },
     },
   ];
@@ -70,9 +70,9 @@ const StakeForm = props => {
   return (
     <ToolBody
       color="warning"
-      icon={Redo}
-      header={intl.formatMessage(messages.karmaStakeFormHeader)}
-      subheader={intl.formatMessage(messages.karmaStakeFormSubHeader)}>
+      icon={Undo}
+      header={intl.formatMessage(messages.parslUnstakeFormHeader)}
+      subheader={intl.formatMessage(messages.parslUnstakeFormSubHeader)}>
       <FormObject {...props} />
     </ToolBody>
   );
@@ -96,7 +96,7 @@ const enhance = compose(
         owner: Yup.string().required(intl.formatMessage(commonMessages.formAccountRequired)),
         quantity: Yup.number()
           .required(intl.formatMessage(commonMessages.formQuantityRequired))
-          .positive(intl.formatMessage(messages.karmaFormPositiveQuantityRequired)),
+          .positive(intl.formatMessage(messages.parslFormPositiveQuantityRequired)),
       });
     },
   })
