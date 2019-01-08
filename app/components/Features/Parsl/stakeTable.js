@@ -13,12 +13,11 @@ const Parsl = props => {
   const { stakes, loading, intl, ...clientProps } = props;
   const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
 
-  const refundDelay = 3 * 24 * 3600 * 1000; // 3 days for LIVE, 15 minutes for TEST
+  const refundDelay = 7 * 24 * 3600; // 7 days for LIVE, 15 minutes for TEST
 
   let parslLiquid = 0;
   let parslStaked = 0;
   let parslRefund = 0;
-  let claimTime = 0;
   let refundTime = 0;
 
   const hasStaked = stakes.find(s => s.owner !== 'Refunding');
@@ -32,11 +31,10 @@ const Parsl = props => {
     }
     if (hasStaked) {
       parslStaked = Number(hasStaked.weight.split(' ')[0]);
-      claimTime = hasStaked.last_claim_time / 1000 + claimDelay;
     }
     if (hasRefund) {
       parslRefund = Number(hasRefund.weight.split(' ')[0]);
-      refundTime = hasRefund.last_claim_time / 1000 + refundDelay;
+      refundTime = hasRefund.updated_on + refundDelay;
     }
   }
 
