@@ -30,10 +30,12 @@ const Parsl = props => {
       parslLiquid = Number(hasParsl.amount);
     }
     if (hasStaked) {
-      parslStaked = Number(hasStaked.weight.split(' ')[0]);
+      console.log(hasStaked);
+      parslStaked = Number(hasStaked.quantity.split(' ')[0]);
     }
     if (hasRefund) {
-      parslRefund = Number(hasRefund.weight.split(' ')[0]);
+      console.log(hasRefund);
+      parslRefund = Number(hasRefund.quantity.split(' ')[0]);
       refundTime = hasRefund.updated_on + refundDelay;
     }
   }
