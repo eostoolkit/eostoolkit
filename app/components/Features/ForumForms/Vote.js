@@ -19,7 +19,7 @@ const Vote = props => {
   const makeTransaction = (values, vote) => {
     const transaction = [
       {
-        account: 'eosforumrcpp',
+        account: 'eosio.forum',
         name: 'vote',
         data: {
           voter: networkIdentity ? networkIdentity.name : '',

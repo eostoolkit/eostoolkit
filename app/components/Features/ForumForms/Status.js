@@ -53,7 +53,7 @@ const FormObject = props => {
 const makeTransaction = values => {
   const transaction = [
     {
-      account: 'eosforumrcpp',
+      account: 'eosio.forum',
       name: 'status',
       data: {
         ...values,

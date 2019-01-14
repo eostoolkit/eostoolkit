@@ -78,7 +78,7 @@ const makeTransaction = values => {
 
   const transaction = [
     {
-      account: 'eosforumrcpp',
+      account: 'eosio.forum',
       name: 'propose',
       data: {
         ...otherValues,
