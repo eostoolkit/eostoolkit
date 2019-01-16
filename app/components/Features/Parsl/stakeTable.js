@@ -39,7 +39,7 @@ const Parsl = props => {
       refundTime = hasRefund.updated_on + refundDelay;
     }
   }
-{ authorization:[`${account.name}@${account.authority}`] };
+
   const refundDate = new Date(refundTime);
   const totalParsl = parslLiquid;
 
