@@ -50,6 +50,7 @@ const Parsl = props => {
         name: 'refund',
         data: {
           owner: networkIdentity ? networkIdentity.name : '',
+          symbol: '4,SEED'
         },
       },
     ];
