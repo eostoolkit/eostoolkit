@@ -9,16 +9,19 @@
  const zhLocaleData = require('react-intl/locale-data/zh');
  const koLocaleData = require('react-intl/locale-data/ko');
  const viLocaleData = require('react-intl/locale-data/vi');
+ const ruLocaleData = require('react-intl/locale-data/ru');
 
  const enTranslationMessages = require('./translations/en.json');
  const zhTranslationMessages = require('./translations/zh.json');
  const koTranslationMessages = require('./translations/ko.json');
  const viTranslationMessages = require('./translations/vi.json');
+ const ruTranslationMessages = require('./translations/ru.json');
 
  addLocaleData(enLocaleData);
  addLocaleData(zhLocaleData);
  addLocaleData(koLocaleData);
  addLocaleData(viLocaleData);
+ addLocaleData(ruLocaleData);
 
  const DEFAULT_LOCALE = 'en';
 
@@ -28,6 +31,7 @@
    'ko',
    'zh',
    'vi',
+   'ru',
  ];
 
  const formatTranslationMessages = (locale, messages) => {
@@ -46,6 +50,7 @@
    zh: formatTranslationMessages('zh', zhTranslationMessages),
    ko: formatTranslationMessages('ko', koTranslationMessages),
    vi: formatTranslationMessages('vi', viTranslationMessages),
+   ru: formatTranslationMessages('ru', ruTranslationMessages),
  };
 
  exports.appLocales = appLocales;
