@@ -541,8 +541,8 @@
   "app.components.Information.RegProxy.resignProxyLineThree": "",
   "app.components.Information.RegProxy.resignProxyLineTwo": "",
 
-  "app.components.NetworkStatus.Identity.attachAccountText": "Пожалуйста, прикрепите удостоверение личности",
-  "app.components.NetworkStatus.Identity.installScatterText": "Пожалуйста установите Scatter",
+  "app.components.NetworkStatus.Identity.attachAccountText": "Пожалуйста, авторизуйтесь",
+  "app.components.NetworkStatus.Identity.installScatterText": "Установите Scatter",
   "app.components.NetworkStatus.Status.ifAccountNotTickedText": "Если учетная запись не отмечена галочкой, то не забудьте использовать меню 'Select account' выше и выберите Scatter-идентификатор и учетную запись для выполнения действий.",
   "app.components.NetworkStatus.Status.ifReadNotTickedText": "Если флажок READ не установлен, значит доступ к выбранной основной конечной точке сети невозможен. Либо интернет ограничен, либо выбранная конечная точка не работает. Попробуйте выбрать другую конечную точку в меню 'Change network' выше.",
   "app.components.NetworkStatus.Status.ifWriteNotTickedText": "Если доступ на запись не отмечен, убедитесь, что scatter настроен с допустимой сетью, и что сеть также связана с вашим идентификатором scatter.",
@@ -636,8 +636,8 @@
   "app.routes.menuManagePermissions": "Управление разрешениями",
   "app.routes.menuManageRAM": "Управление памятью",
   "app.routes.menuManageStake": "Управление ставками",
-  "app.routes.menuManageVoting": "Управление голосованием",
-  "app.routes.menuMultisigTransactions": "Транзакции с мультиподписью",
+  "app.routes.menuManageVoting": "Голосование",
+  "app.routes.menuMultisigTransactions": "С мультиподписью",
   "app.routes.menuPoorSwap": "Обмен Poor",
   "app.routes.menuPremiumNames": "Премиум имена",
   "app.routes.menuProxyInformation": "Информация о прокси",
@@ -648,7 +648,7 @@
   "app.routes.menuSetProxy": "Установить прокси",
   "app.routes.menuSignTransaction": "Подписать транзакцию",
   "app.routes.menuTransferTokens": "Отправить токены",
-  "app.routes.menuVoteProducers": "Голосование за продюсеров",
+  "app.routes.menuVoteProducers": "Голосование за БП",
 
   "some.id": "Это сообщение по умолчанию"
 }
