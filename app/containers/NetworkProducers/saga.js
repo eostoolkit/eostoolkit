@@ -43,10 +43,12 @@ function* getProducers() {
         key = data.rows.pop().owner;
       }
       data.rows.map(row => {
-        producers.push({
-          ...row,
-          vote_percent: (row.total_votes / total_vote) * 100,
-        });
+        if (row.is_active == "1") {
+          producers.push({
+            ...row,
+            vote_percent: (row.total_votes / total_vote) * 100,
+          });
+        }
       });
     }
     yield put(fetchedProducers(producers));
