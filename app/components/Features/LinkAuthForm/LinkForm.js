@@ -89,14 +89,17 @@ const enhance = compose(
     },
     mapPropsToValues: props => ({
       account: props.networkIdentity ? props.networkIdentity.name : '',
+      code: '',
+      type: '',
+      requirement: '',
     }),
     validationSchema: props => {
       const { intl } = props;
       return Yup.object().shape({
-        account: Yup.string().required(intl.formatMessage(commonMessages.formAccountNameRequired)),
-        code: Yup.string().required(intl.formatMessage(commonMessages.formContractNameRequired)),
-        type: Yup.string().required(intl.formatMessage(commonMessages.formActionNameRequired)),
-        requirement: Yup.string().required(intl.formatMessage(commonMessages.formPermissionRequired)),
+        account: Yup.string().required(),//intl.formatMessage(commonMessages.formAccountNameRequired)),
+        code: Yup.string().required(),//intl.formatMessage(commonMessages.formContractNameRequired)),
+        type: Yup.string().required(),//intl.formatMessage(commonMessages.formActionNameRequired)),
+        requirement: Yup.string().required()//intl.formatMessage(commonMessages.formPermissionRequired)),
       });
     },
   })

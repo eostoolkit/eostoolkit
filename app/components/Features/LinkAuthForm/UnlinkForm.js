@@ -83,13 +83,16 @@ const enhance = compose(
     },
     mapPropsToValues: props => ({
       account: props.networkIdentity ? props.networkIdentity.name : '',
+      code: '',
+      type: '',
     }),
     validationSchema: props => {
       const { intl } = props;
       return Yup.object().shape({
-        account: Yup.string().required(intl.formatMessage(commonMessages.formAccountNameRequired)),
-        code: Yup.string().required(intl.formatMessage(messages.formContractNameRequired)),
-        type: Yup.string().required(intl.formatMessage(messages.formAccountNameRequired)),
+        //TODO: figure out INTL in validation schema
+        account: Yup.string().required(),//intl.formatMessage(commonMessages.formAccountNameRequired)),
+        code: Yup.string().required(),//intl.formatMessage(messages.formContractNameRequired)),
+        type: Yup.string().required(),//intl.formatMessage(messages.formAccountNameRequired)),
       });
     },
   })
