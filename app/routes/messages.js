@@ -38,6 +38,10 @@ export default defineMessages({
     id: 'app.routes.menuKARMA',
     defaultMessage: 'KARMA',
   },
+  menuHireVibes: {
+      id: 'app.routes.menuHireVibes',
+      defaultMessage: 'HireVibes',
+    },
   menuHorusPay: {
     id: 'app.routes.menuHorusPay',
     defaultMessage: 'HorusPay',
