@@ -41,6 +41,7 @@ import ProxyTable from 'containers/ProxyInfo';
 import HorusPay from 'containers/HorusPay';
 import Karma from 'containers/Karma';
 import Parsl from 'containers/Parsl';
+import HireVibes from 'containers/HireVibes';
 import Referendum from 'containers/Referendum';
 import Grandpa from 'containers/Grandpa';
 
@@ -121,6 +122,12 @@ const dashRoutes = [
         name: <FormattedMessage {...messags.menuKARMA} />,
         mini: 'K',
         component: Karma,
+      },
+      {
+        path: '/dapps/hirevibes',
+        name: <FormattedMessage {...messags.menuHireVibes} />,
+        mini: 'HVT',
+        component: HireVibes,
       },
       {
         path: '/dapps/horuspay',
