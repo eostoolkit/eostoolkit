@@ -11,8 +11,13 @@
     "node": ">=5"
   },
   "babel": {
-    "presets": ["env", "react"],
-    "plugins": ["./node_modules/babel-plugin-react-intl"]
+    "presets": [
+      "env",
+      "react"
+    ],
+    "plugins": [
+      "./node_modules/babel-plugin-react-intl"
+    ]
   },
   "author": "Max Stoiber",
   "license": "MIT",
