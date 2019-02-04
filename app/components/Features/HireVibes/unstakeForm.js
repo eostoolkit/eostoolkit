@@ -1,9 +1,16 @@
+/**
+ *
+ * HireVibes StakeForm
+ *
+ */
+
 import React from 'react';
 import { compose } from 'recompose';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
-import SupervisorAccount from '@material-ui/icons/SupervisorAccount';
+import Undo from '@material-ui/icons/Undo';
+
 import ToolBody from 'components/Tool/ToolBody';
 import ToolForm from 'components/Tool/ToolForm';
 import ToolInput from 'components/Tool/ToolInput';
@@ -16,26 +23,20 @@ const FormObject = props => {
   const formProps = {
     handleSubmit,
     submitColor: 'rose',
-    submitText: intl.formatMessage(messages.unlinkAuthText),
+    submitText: intl.formatMessage(messages.hireVibesUnstakeFormSubmitText),
   };
   const FormData = [
     {
-      id: 'account',
-      label: intl.formatMessage(commonMessages.formAccountNameText),
-      placeholder: intl.formatMessage(messages.unlinkAuthAccountPlaceholder),
-      md: 12,
+      id: 'owner',
+      label: intl.formatMessage(commonMessages.formAccountLabel),
+      placeholder: intl.formatMessage(messages.hireVibesAccountProvideStakePlaceholder),
+      lg: 12,
     },
     {
-      id: 'code',
-      label: intl.formatMessage(messages.formContractNameLabel),
-      placeholder: intl.formatMessage(messages.formContractNamePlaceholder),
-      md: 6,
-    },
-    {
-      id: 'type',
-      label: intl.formatMessage(messages.formContractActionLabel),
-      placeholder: intl.formatMessage(messages.formContractActionPlaceholder),
-      md: 6,
+      id: 'quantity',
+      label: intl.formatMessage(messages.hireVibesQuantityLabel),
+      placeholder: intl.formatMessage(messages.hireVibesQuantityPlaceholder),
+      lg: 12,
     },
   ];
   return (
@@ -48,26 +49,30 @@ const FormObject = props => {
 };
 
 const makeTransaction = values => {
+  const { quantity, owner } = values;
   const transaction = [
     {
-      account: 'eosio',
-      name: 'unlinkauth',
+      account: 'hvtstakingio',
+      name: 'powerdown',
       data: {
-        ...values,
+        owner,
+        quantity: `${Number(quantity)
+          .toFixed(4)
+          .toString()} HVT`,
       },
     },
   ];
   return transaction;
 };
 
-const ResignForm = props => {
+const StakeForm = props => {
   const { intl } = props;
   return (
     <ToolBody
       color="warning"
-      icon={SupervisorAccount}
-      header={intl.formatMessage(messages.unlinkAuthText)}
-      subheader={intl.formatMessage(messages.unlinkAuthSubheader)}>
+      icon={Undo}
+      header={intl.formatMessage(messages.hireVibesUnstakeFormHeader)}
+      subheader={intl.formatMessage(messages.hireVibesUnstakeFormSubHeader)}>
       <FormObject {...props} />
     </ToolBody>
   );
@@ -82,20 +87,19 @@ const enhance = compose(
       pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
-      account: props.networkIdentity ? props.networkIdentity.name : '',
-      code: '',
-      type: '',
+      owner: props.networkIdentity ? props.networkIdentity.name : '',
+      quantity: '',
     }),
     validationSchema: props => {
       const { intl } = props;
       return Yup.object().shape({
-        //TODO: figure out INTL in validation schema
-        account: Yup.string().required(),//intl.formatMessage(commonMessages.formAccountNameRequired)),
-        code: Yup.string().required(),//intl.formatMessage(messages.formContractNameRequired)),
-        type: Yup.string().required(),//intl.formatMessage(messages.formAccountNameRequired)),
+        owner: Yup.string().required(intl.formatMessage(commonMessages.formAccountRequired)),
+        quantity: Yup.number()
+          .required(intl.formatMessage(commonMessages.formQuantityRequired))
+          .positive(intl.formatMessage(messages.hireVibesFormPositiveQuantityRequired)),
       });
     },
   })
 );
 
-export default enhance(ResignForm);
+export default enhance(StakeForm);
