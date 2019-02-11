@@ -2,7 +2,7 @@ import { makeSelectReader, makeSelectIdentity } from 'containers/NetworkClient/s
 // import { takeLatest, call, put, select, all, fork, join } from 'redux-saga/effects';
 import { takeLatest, put, select, all } from 'redux-saga/effects';
 import { FETCH_STAKE } from './constants';
-import { fetchedStake } from './actions';
+import { fetchedStake, fetchedRefund } from './actions';
 
 const stakeTable = {
   json: true,
@@ -51,17 +51,19 @@ function* getStake() {
 
     refunds.rows.map(row => {
       data.push({
-        owner: 'Refunding',
+        owner: currentIdentity.name,
         ...row,
       });
       return null;
     });
 
     yield put(fetchedStake(data));
+    // yield put(fetchedRefund(data));
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
     yield put(fetchedStake([]));
+    // yield put(fetchedRefund([]));
   }
 }
 

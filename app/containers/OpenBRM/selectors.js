@@ -20,5 +20,11 @@ const makeSelectStake = () =>
     substate => substate.get('stakes')
   );
 
+const makeSelectRefund = () =>
+  createSelector(
+    selectProxyState,
+    substate => substate.get('refunds')
+  );
+
 export default selectProxyState;
-export { selectProxyState, makeSelectLoading, makeSelectStake };
+export { selectProxyState, makeSelectLoading, makeSelectStake, makeSelectRefund };

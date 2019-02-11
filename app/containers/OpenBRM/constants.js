@@ -4,5 +4,6 @@
  *
  */
 
-export const FETCH_STAKE = 'app/Karma/FETCH_STAKE';
-export const FETCHED_STAKE = 'app/Karma/FETCHED_STAKE';
+export const FETCH_STAKE = 'app/OpenBRM/FETCH_STAKE';
+export const FETCHED_STAKE = 'app/OpenBRM/FETCHED_STAKE';
+export const FETCHED_REFUND = 'app/OpenBRM/FETCHED_REFUND';

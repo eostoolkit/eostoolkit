@@ -13,10 +13,10 @@ import OpenBRMForm from 'components/Features/OpenBRM';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import { makeSelectReaderEnabled, makeSelectWriterEnabled } from 'containers/NetworkClient/selectors';
-import { makeSelectLoading, makeSelectStake } from './selectors';
+import { makeSelectLoading, makeSelectStake, makeSelectRefund } from './selectors';
 // import { makeSelectStake, makeSelectSelection } from './selectors';
 // import { fetchStake, selectStake } from './actions';
-import { fetchStake } from './actions';
+import { fetchStake, fetchRefund } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -48,6 +48,7 @@ const mapStateToProps = createStructuredSelector({
   readerEnabled: makeSelectReaderEnabled(),
   writerEnabled: makeSelectWriterEnabled(),
   stakes: makeSelectStake(),
+  refunds: makeSelectRefund(),
   loading: makeSelectLoading(),
 });
 

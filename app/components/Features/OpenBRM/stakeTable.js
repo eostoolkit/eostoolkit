@@ -10,19 +10,23 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 const OpenBRM = props => {
-  const { stakes, loading, intl, ...clientProps } = props;
+  const { stakes, refunds, loading, intl, ...clientProps } = props;
+  // console.log(props);
   // const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
-  const { networkAccount, networkIdentity, pushTransaction } = clientProps;
+   const { networkAccount, networkIdentity, pushTransaction } = clientProps;
+  // console.log(networkIdentity);
 
   const refundDelay = 10 * 24 * 3600; // 10 days for LIVE, 15 minutes for TEST
 
   let brmLiquid = 0;
-  const brmStaked = 0;
+  // const brmStaked = 0;
+  let brmStaked = 0;
   let brmRefund = 0;
   let refundTime = 0;
 
-  const hasStaked = stakes.find(s => s.owner !== 'Refunding');
-  const hasRefund = stakes.find(s => s.owner === 'Refunding');
+  const hasStaked = stakes.find(s => s.stake_account === networkIdentity.name);
+  const hasRefund = refunds.find(s => s.stake_account === networkIdentity.name);
+  // const hasRefund = 0;
 
   if (networkAccount) {
     const hasBRM = networkAccount.balances.find(b => b.code === 'openbrmeos11');
@@ -31,13 +35,14 @@ const OpenBRM = props => {
       brmLiquid = Number(hasBRM.amount);
     }
     if (hasStaked) {
-      console.log(hasStaked);
-      // brmStaked = Number(hasStaked.quantity.split(' ')[0]);
+      // console.log(hasStaked);
+      brmStaked = Number(hasStaked.staked.split(' ')[0]);
     }
     if (hasRefund) {
-      console.log(hasRefund);
-      brmRefund = Number(hasRefund.quantity.split(' ')[0]);
-      refundTime = hasRefund.updated_on + refundDelay;
+      console.log('theres a refund'); 
+      // console.log(hasRefund);
+      //brmRefund = Number(hasRefund.locked_balance.split(' ')[0]);
+      refundTime = refundDelay;
     }
   }
 
@@ -48,7 +53,7 @@ const OpenBRM = props => {
     const transaction = [
       {
         account: 'openbrmeos11',
-        name: 'lockedbals',
+        name: 'refunds',
         data: {
           owner: networkIdentity ? networkIdentity.name : '',
           sym: '3,BRM',
@@ -70,7 +75,7 @@ const OpenBRM = props => {
         <FormattedMessage {...messages.openBRMTablePoweredUpText} />
       </h4>
       <h3 style={{ marginTop: '-10px' }}>
-        {brmStaked > 0 ? Number(brmStaked).toFixed(4) : intl.formatMessage(messages.openBRMTableNoParslText)}
+        {brmStaked > 0 ? Number(brmStaked).toFixed(3) : intl.formatMessage(messages.openBRMTableNoParslText)}
       </h3>
 
       {brmRefund > 0 ? (

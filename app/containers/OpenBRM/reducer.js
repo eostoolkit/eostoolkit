@@ -5,11 +5,12 @@
  */
 
 import { fromJS } from 'immutable';
-import { FETCH_STAKE, FETCHED_STAKE } from './constants';
+import { FETCH_STAKE, FETCHED_STAKE, FETCHED_REFUND } from './constants';
 
 const initialState = fromJS({
   loading: false,
   stakes: [],
+  refunds: [],
 });
 
 function OpenBRMReducer(state = initialState, action) {
@@ -18,6 +19,8 @@ function OpenBRMReducer(state = initialState, action) {
       return state.set('loading', true);
     case FETCHED_STAKE:
       return state.set('stakes', action.stakes).set('loading', false);
+    case FETCHED_REFUND:
+      return state.set('refunds', action.refunds).set('loading', false);
     default:
       return state;
   }
