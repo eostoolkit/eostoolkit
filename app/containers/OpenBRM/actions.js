@@ -4,7 +4,7 @@
  *
  */
 
-import { FETCH_STAKE, FETCHED_STAKE, FETCHED_REFUND } from './constants';
+import { FETCH_STAKE, FETCHED_STAKE, FETCH_REFUND, FETCHED_REFUND } from './constants';
 
 export function fetchStake() {
   return {

@@ -1,7 +1,7 @@
 import { makeSelectReader, makeSelectIdentity } from 'containers/NetworkClient/selectors';
 // import { takeLatest, call, put, select, all, fork, join } from 'redux-saga/effects';
 import { takeLatest, put, select, all } from 'redux-saga/effects';
-import { FETCH_STAKE } from './constants';
+import { FETCH_STAKE, FETCH_REFUND } from './constants';
 import { fetchedStake, fetchedRefund } from './actions';
 
 const stakeTable = {
@@ -31,23 +31,56 @@ function* getStake() {
 
     const stake = {
       ...stakeTable,
-      scope: currentIdentity.name,
+      scope: 'openbrmeos11',
+      owner: currentIdentity.name,
+      
     };
     const stakes = yield networkReader.getTableRows(stake);
+
+    /*
+    const refund = {
+      ...refundTable,
+      scope: currentIdentity.name,
+    };
+    const refunds = yield networkReader.getTableRows(refund);
+    */
+
+    stakes.rows.map(row => {
+      data.push({
+        owner: 'openbrmeos11',
+        ...row,
+      });
+      return null;
+    });
+
+    /*refunds.rows.map(row => {
+      data.push({
+        owner: currentIdentity.name,
+        ...row,
+      });
+      return null;
+    }); */
+
+    yield put(fetchedStake(data));
+  } catch (err) {
+    console.error('An EOSToolkit error occured - see details below:');
+    console.error(err);
+    yield put(fetchedStake([]));
+  }
+}
+
+//
+function* getRefund() {
+  try {
+    const data = [];
+    const networkReader = yield select(makeSelectReader());
+    const currentIdentity = yield select(makeSelectIdentity());
 
     const refund = {
       ...refundTable,
       scope: currentIdentity.name,
     };
     const refunds = yield networkReader.getTableRows(refund);
-
-    stakes.rows.map(row => {
-      data.push({
-        owner: currentIdentity.name,
-        ...row,
-      });
-      return null;
-    });
 
     refunds.rows.map(row => {
       data.push({
@@ -57,18 +90,18 @@ function* getStake() {
       return null;
     });
 
-    yield put(fetchedStake(data));
-    // yield put(fetchedRefund(data));
+    yield put(fetchedRefund(data));
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
-    yield put(fetchedStake([]));
-    // yield put(fetchedRefund([]));
+    yield put(fetchedRefund([]));
   }
 }
 
+
 function* watchFetchStake() {
   yield takeLatest(FETCH_STAKE, getStake);
+  yield takeLatest(FETCH_REFUND, getRefund);
 }
 
 //

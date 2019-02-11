@@ -25,6 +25,7 @@ export class OpenBRM extends React.Component {
 
   componentDidMount() {
     this.props.refreshStake();
+    this.props.refreshRefund();
     this.interval = setInterval(() => this.props.refreshStake(), 5000);
   }
 
@@ -32,6 +33,7 @@ export class OpenBRM extends React.Component {
     if (this.props.readerEnabled !== nextProps.readerEnabled) {
       // start loading the reader asap
       this.props.refreshStake();
+      this.props.refreshRefund();
     }
   }
 
@@ -55,6 +57,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     refreshStake: () => dispatch(fetchStake()),
+    refreshRefund: () => dispatch(fetchRefund()),
   };
 }
 

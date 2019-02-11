@@ -14,7 +14,6 @@ const OpenBRM = props => {
   // console.log(props);
   // const { networkAccount, networkIdentity, writerEnabled, pushTransaction } = clientProps;
    const { networkAccount, networkIdentity, pushTransaction } = clientProps;
-  // console.log(networkIdentity);
 
   const refundDelay = 10 * 24 * 3600; // 10 days for LIVE, 15 minutes for TEST
 
@@ -35,13 +34,12 @@ const OpenBRM = props => {
       brmLiquid = Number(hasBRM.amount);
     }
     if (hasStaked) {
-      // console.log(hasStaked);
+      console.log(hasStaked);
       brmStaked = Number(hasStaked.staked.split(' ')[0]);
     }
     if (hasRefund) {
-      console.log('theres a refund'); 
-      // console.log(hasRefund);
-      //brmRefund = Number(hasRefund.locked_balance.split(' ')[0]);
+      //console.log(hasRefund);
+      brmRefund = Number(hasRefund.locked_balance.split(' ')[0]);
       refundTime = refundDelay;
     }
   }
@@ -53,10 +51,9 @@ const OpenBRM = props => {
     const transaction = [
       {
         account: 'openbrmeos11',
-        name: 'refunds',
+        name: 'refund',
         data: {
           owner: networkIdentity ? networkIdentity.name : '',
-          sym: '3,BRM',
         },
       },
     ];
