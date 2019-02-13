@@ -25,7 +25,6 @@ const OpenBRM = props => {
 
   const hasStaked = stakes.find(s => s.stake_account === networkIdentity.name);
   const hasRefund = refunds.find(s => s.stake_account === networkIdentity.name);
-  // const hasRefund = 0;
 
   if (networkAccount) {
     const hasBRM = networkAccount.balances.find(b => b.code === 'openbrmeos11');
@@ -38,7 +37,7 @@ const OpenBRM = props => {
       brmStaked = Number(hasStaked.staked.split(' ')[0]);
     }
     if (hasRefund) {
-      //console.log(hasRefund);
+      console.log(hasRefund);
       brmRefund = Number(hasRefund.locked_balance.split(' ')[0]);
       refundTime = refundDelay;
     }
