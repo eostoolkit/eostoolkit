@@ -2,6 +2,18 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   // Messages for HireVibes
+  hireVibesClaimFormSubmitText: {
+    id: 'app.components.Features.HireVibes.hireVibesClaimFormSubmitText',
+    defaultMessage: 'Claim',
+  },
+  hireVibesClaimFormHeader: {
+    id: 'app.components.Features.HireVibes.hireVibesClaimFormHeader',
+    defaultMessage: 'Claim your HVT',
+  },
+  hireVibesClaimFormSubHeader: {
+    id: 'app.components.Features.HireVibes.hireVibesClaimFormSubHeader',
+    defaultMessage: " - You can claim once per day",
+  },
   hireVibesUnstakeFormSubmitText: {
     id: 'app.components.Features.HireVibes.hireVibesUnstakeFormSubmitText',
     defaultMessage: 'Unstake',
