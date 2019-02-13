@@ -29,7 +29,7 @@ const bannerImage = {
 
 function Banner() {
   return (
-    <a href="https://www.eosminerbot.io?ref=eostoolkitmb">
+    <a target="_blank" href="https://www.eosminerbot.io?ref=eostoolkitmb">
       <div style={bannerBackground}>
         <img style={bannerImage} src={eosbotBanner} alt="eosbot-banner" />
       </div>
