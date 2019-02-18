@@ -9,7 +9,7 @@ const stakeTable = {
   // scope: scope is the user
   code: 'openbrmeos11',
   table: 'stakes',
-  limit: 500,
+  limit: 5000,
 };
 
 const refundTable = {
@@ -17,7 +17,7 @@ const refundTable = {
   // scope: scope is the user
   code: 'openbrmeos11',
   table: 'lockedbals',
-  limit: 500,
+  limit: 5000,
 };
 
 //
