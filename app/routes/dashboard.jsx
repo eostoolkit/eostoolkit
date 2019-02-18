@@ -44,6 +44,7 @@ import Parsl from 'containers/Parsl';
 import HireVibes from 'containers/HireVibes';
 import Referendum from 'containers/Referendum';
 import Grandpa from 'containers/Grandpa';
+import OpenBRM from 'containers/OpenBRM';
 
 // @material-ui/icons
 import {
@@ -128,6 +129,12 @@ const dashRoutes = [
         name: <FormattedMessage {...messags.menuHireVibes} />,
         mini: 'HVT',
         component: HireVibes,
+      },
+      {
+        path: '/dapps/openbrm',
+        name: <FormattedMessage {...messags.menuOpenBRM} />,
+        mini: 'BRM',
+        component: OpenBRM,
       },
       {
         path: '/dapps/horuspay',
