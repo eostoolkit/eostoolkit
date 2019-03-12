@@ -13,3 +13,4 @@ const makeSelectOfflineTransaction = () => createSelector(selectState, substate 
 
 export default selectState;
 export { selectState, makeSelectOfflineTransaction };
+cleos set account permission genereos.m claimer '{"threshold":1,"keys":[{"key":"EOS7HGqjWmG8wYUyvMqM9jQktTpuf6WxrfbPE35azMggmkPLNtfZF","weight":1}]}' "active"  -p genereos.m@active
