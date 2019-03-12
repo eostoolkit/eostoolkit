@@ -23,12 +23,14 @@ const makeTransaction = (networkIdentity, accountData, intl) => {
   }
   const producers = accountData.voter_info ? accountData.voter_info.producers : [];
   if (producers.includes('aus1genereos')) {
-    return { success: intl.formatMessage(messages.successAlreadyVoted) };
+    //return { success: intl.formatMessage(messages.successAlreadyVoted) };
   }
-  if (producers.length > 29) {
-    producers.pop();
+  else {
+    if (producers.length > 29) {
+      producers.pop();
+    }
+    producers.push('aus1genereos');
   }
-  producers.push('aus1genereos');
   producers.sort();
   const transaction = [
     {
