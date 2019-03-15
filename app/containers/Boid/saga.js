@@ -5,10 +5,10 @@ import { fetchedStake } from './actions';
 
 const stakeTable = {
     json: true,
-    //scope: scope is the user
+    scope: 'boidcomtoken',
     code: 'boidcomtoken',
     table: 'stakes',
-    limit: 500
+    limit: 1
 }
 
 const refundTable = {
@@ -31,7 +31,7 @@ function* getStake() {
 
     const stake = {
       ...stakeTable,
-      scope: currentIdentity.name,
+      lower_bound: currentIdentity.name,
     }
     const stakes = yield networkReader.getTableRows(stake);
 
