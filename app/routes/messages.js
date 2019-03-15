@@ -46,6 +46,10 @@ export default defineMessages({
       id: 'app.routes.menuBoid',
       defaultMessage: 'Boid',
   },
+  menuPixeos: {
+      id: 'app.routes.menuPixeos',
+      defaultMessage: 'Pixeos',
+  },
   menuOpenBRM: {
       id: 'app.routes.menuOpenBRM',
       defaultMessage: 'OpenBRM',
