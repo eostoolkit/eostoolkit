@@ -31,7 +31,7 @@ const Boid = props => {
     }
     if (hasStaked) {
       console.log(hasStaked);
-      boidStaked = Number(hasStaked.quantity.split(' ')[0]);
+      boidStaked = Number(hasStaked.staked.split(' ')[0]);
     }
     if (hasRefund) {
       console.log(hasRefund);
