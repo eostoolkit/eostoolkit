@@ -30,9 +30,6 @@ const Boid = props => {
       boidLiquid = Number(hasBoid.amount);
     }
     if (hasStaked) {
-      console.log(hasStaked);
-      console.log(hasStaked.owner);
-      console.log(hasStaked.stake_account);
       boidStaked = 0;
       if (hasStaked.owner === hasStaked.stake_account)
       {
