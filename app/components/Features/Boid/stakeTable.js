@@ -31,7 +31,13 @@ const Boid = props => {
     }
     if (hasStaked) {
       console.log(hasStaked);
-      boidStaked = Number(hasStaked.staked.split(' ')[0]);
+      console.log(hasStaked.owner);
+      console.log(hasStaked.stake_account);
+      boidStaked = 0;
+      if (hasStaked.owner === hasStaked.stake_account)
+      {
+        boidStaked = Number(hasStaked.staked.split(' ')[0]);
+      }
     }
     if (hasRefund) {
       console.log(hasRefund);
