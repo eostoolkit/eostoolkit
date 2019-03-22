@@ -30,7 +30,7 @@ const makeClaim = (values, networkIdentity) => {
 };
 
 const Grandpa = props => {
-  const { pushTransaction, networkIdentity, networkAccount, miner, intl } = props;
+  const { pushTransaction, networkIdentity, networkAccount, activeNetwork, miner, intl } = props;
 
   const handleClaims = values => {
     const transaction = makeClaim(values, networkIdentity);
