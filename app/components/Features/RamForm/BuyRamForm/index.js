@@ -22,7 +22,7 @@ const makeTransaction = (values, isEOS) => {
     ? {
       quant: `${Number(values.eosQuantity)
           .toFixed(4)
-          .toString()} EOS`,
+          .toString()} ${values.activeNetwork.network.prefix}`,
     }
     : { bytes: Number(values.byteQuantity) };
 

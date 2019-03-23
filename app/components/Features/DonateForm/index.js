@@ -34,7 +34,7 @@ const makeTransaction = (values, networkIdentity) => {
         memo: values.memo,
         quantity: `${Number(values.quantity)
           .toFixed(4)
-          .toString()} EOS`,
+          .toString()} ${values.activeNetwork.network.prefix}`,
       },
     },
   ];
@@ -63,9 +63,10 @@ const enhance = compose(
       setSubmitting(false);
       pushTransaction(transaction, props.history);
     },
-    mapPropsToValues: () => ({
+    mapPropsToValues: props =>({
       quantity: '1',
       memo: '',
+      activeNetwork:props.activeNetwork?props.activeNetwork: '',
     }),
     validationSchema: props => {
       const { intl } = props;
