@@ -12,9 +12,9 @@ import HelpOutline from '@material-ui/icons/HelpOutline';
 import style from 'assets/jss/regularFormsStyle';
 
 const ToolBody = props => {
-  const { classes, color, icon, header, subheader } = props;
+  const { classes, style, className, backgroundColor, color, icon, header, subheader } = props;
   return (
-    <Card>
+    <Card style={style}>
       <CardHeader color={color || 'info'} icon>
         <CardIcon color={color || 'info'}>{icon ? <props.icon /> : <HelpOutline />}</CardIcon>
         <h4 className={classes.cardIconTitle}>

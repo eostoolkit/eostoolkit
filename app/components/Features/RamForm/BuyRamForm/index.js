@@ -88,6 +88,7 @@ const enhance = compose(
       eosQuantity: 1,
       isEOS: props.unit.isEOS,
       name: '',
+      activeNetwork:props.activeNetwork?props.activeNetwork: '',
     }),
     validationSchema: props => {
       const { intl, isEOS } = props;

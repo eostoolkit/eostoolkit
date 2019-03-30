@@ -64,7 +64,7 @@ export default defineMessages({
   },
   buyRamFormEOSInputLabel: {
     id: 'app.components.Features.RamForm.buyRamFormEOSInputLabel',
-    defaultMessage: 'Ram purchase (in EOS)',
+    defaultMessage: 'Ram purchase (in tokens)',
   },
   buyRamFormEOSInputPlaceholder: {
     id: 'app.components.Features.RamForm.buyRamFormEOSInputPlaceholder',

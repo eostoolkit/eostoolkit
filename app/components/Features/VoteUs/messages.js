@@ -8,7 +8,7 @@ export default defineMessages({
   },
   voteButtonText: {
     id: 'app.components.Features.VoteUs.voteButtonText',
-    defaultMessage: 'Vote',
+    defaultMessage: 'Refresh your Vote',
   },
   buildByGenerEOSText: {
     id: 'app.components.Features.VoteUs.buildByGenerEOSText',

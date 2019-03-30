@@ -97,6 +97,7 @@ const enhance = compose(
       net: '0.1',
       cpu: '0.1',
       ram: '8192',
+      activeNetwork: props.activeNetwork ? props.activeNetwork : '',
     }),
     validationSchema: props => {
       const { intl } = props;

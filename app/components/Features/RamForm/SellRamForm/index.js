@@ -51,6 +51,7 @@ const enhance = compose(
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',
       ram: '8192',
+      activeNetwork:props.activeNetwork?props.activeNetwork: '',
     }),
     validationSchema: props => {
       const { intl } = props;
