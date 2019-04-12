@@ -6,6 +6,23 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
+  // Messages for News component
+  multiChainHeader: {
+    id: 'app.components.Information.News.multiChainHeader',
+    defaultMessage: 'Multi-chain support',
+  },
+  multiChain1: {
+    id: 'app.components.Information.News.multiChain1',
+    defaultMessage: 'We are excited to announce that the toolkit now has multi-chain support. Go to menu ',
+  },
+  multiChain2: {
+    id: 'app.components.Information.News.multiChain2',
+    defaultMessage: ' and select an endpoint for the network you want to interact with. Initially we have listed EOS, Worbli, Telos and MeetOne.',
+  },
+  multiChain3: {
+    id: 'app.components.Information.News.multiChain3',
+    defaultMessage: ' To add a new EOSIO chain / endpoint submit a pull request ',
+  },
   // Messages for Home component
   homeHeader: {
     id: 'app.components.Information.Home.homeHeader',
@@ -17,7 +34,7 @@ export default defineMessages({
   },
   scatterInfo2: {
     id: 'app.components.Information.Home.scatterInfo2',
-    defaultMessage: 'installed to safely and securely send transactions to the EOS Network.',
+    defaultMessage: ' installed to safely and securely send transactions to the EOS Network.',
   },
   helpdesk1: {
     id: 'app.components.Information.Home.helpdeskInfo1',

@@ -22,7 +22,7 @@ const makeTransaction = (values, isEOS) => {
     ? {
       quant: `${Number(values.eosQuantity)
           .toFixed(4)
-          .toString()} EOS`,
+          .toString()} ${values.activeNetwork.network.prefix}`,
     }
     : { bytes: Number(values.byteQuantity) };
 
@@ -88,6 +88,7 @@ const enhance = compose(
       eosQuantity: 1,
       isEOS: props.unit.isEOS,
       name: '',
+      activeNetwork:props.activeNetwork?props.activeNetwork: '',
     }),
     validationSchema: props => {
       const { intl, isEOS } = props;

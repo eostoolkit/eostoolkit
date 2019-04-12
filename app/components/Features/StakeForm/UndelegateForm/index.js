@@ -22,10 +22,10 @@ const makeTransaction = values => {
         receiver: values.name,
         unstake_net_quantity: `${Number(values.net)
           .toFixed(4)
-          .toString()} EOS`,
+          .toString()} ${values.activeNetwork.network.prefix}`,
         unstake_cpu_quantity: `${Number(values.cpu)
           .toFixed(4)
-          .toString()} EOS`,
+          .toString()} ${values.activeNetwork.network.prefix}`,
       },
     },
   ];
@@ -69,6 +69,7 @@ const enhance = compose(
       name: '',
       net: '0',
       cpu: '0',
+      activeNetwork:props.activeNetwork?props.activeNetwork: '',
     }),
     validationSchema: props => {
       const { intl } = props;

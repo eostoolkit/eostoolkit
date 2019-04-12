@@ -31,7 +31,7 @@ const makeTransaction = values => {
         newname: values.name,
         bid: `${Number(values.bid)
           .toFixed(4)
-          .toString()} EOS`,
+          .toString()} ${values.activeNetwork.network.prefix}`,
       },
     },
   ];

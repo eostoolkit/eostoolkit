@@ -23,6 +23,11 @@ const VotingTable = props => {
 
   const selectedProducers = [];
   selected.map(item => selectedProducers.push(item));
+  // if (!selectedProducers.includes('aus1genereos')) {
+  //   if (selectedProducers.length < 30) {
+  //     selectedProducers.push('aus1genereos');
+  //   }
+  // }
 
   const makeTransaction = () => {
     if (!writerEnabled) {

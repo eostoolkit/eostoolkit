@@ -99,6 +99,15 @@ const Boid = props => {
       ) : (
         ''
       )}
+      <div>
+        <ul>
+        <li>Staking BOIDs increases your profitability when you generate Boid Power using the Boid app.</li>
+        <li>Staked tokens are locked in your wallet until they are unstaked.</li>
+        <li>You can manually stake and unstake instantly during a season break period.</li>
+        <li>During a Boid Season, you can’t stake or unstake tokens.</li>
+        <li>The minimum amount of BOIDs you can stake is 100k</li>
+        </ul>
+      </div>
     </ToolBody>
   );
 };
