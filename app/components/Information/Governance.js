@@ -3,132 +3,122 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
+// workaround, adds extra DOM level
+const toParagraphs = (...nodes) => {
+    let key = 0;
+    const children = nodes.reduce((result, node) => (
+        result.concat(
+            typeof node === 'string'
+                ? node
+                    .split('\n')
+                    .map(paragraph => <p key={++key}>{paragraph}</p>)
+                : node
+        )
+    ), []);
+
+    return <span>{children}</span>
+};
+
 const Governance = () => {
   return (
     <div>
-      <h6>
-        <FormattedMessage {...messages.governanceMainHeader} />
-      </h6>
+
+      <h4>
+        <FormattedMessage {...messages.governanceDefinitionsHeader} />
+      </h4>
+      <p>
+        <FormattedMessage {...messages.governanceDefinitionsText}>
+            {toParagraphs}
+        </FormattedMessage>
+      </p>
 
       <h4>
         <FormattedMessage {...messages.governanceArticleOneHeader} />
       </h4>
       <p>
-        <FormattedMessage {...messages.governanceArticleOneText} />
+        <FormattedMessage {...messages.governanceArticleOneText}>
+            {toParagraphs}
+        </FormattedMessage>
       </p>
       <h4>
         <FormattedMessage {...messages.governanceArticleTwoHeader} />
       </h4>
       <p>
-        <FormattedMessage {...messages.governanceArticleTwoText} />
+        <FormattedMessage {...messages.governanceArticleTwoText}>
+            {toParagraphs}
+        </FormattedMessage>
       </p>
       <h4>
         <FormattedMessage {...messages.governanceArticleThreeHeader} />
       </h4>
       <p>
-        <FormattedMessage {...messages.governanceArticleThreeText} />
+        <FormattedMessage {...messages.governanceArticleThreeText}>
+            {toParagraphs}
+        </FormattedMessage>
       </p>
       <h4>
         <FormattedMessage {...messages.governanceArticleFourHeader} />
       </h4>
       <p>
-        <FormattedMessage {...messages.governanceArticleFourText} />
+        <FormattedMessage {...messages.governanceArticleFourText}>
+            {toParagraphs}
+        </FormattedMessage>
       </p>
       <h4>
         <FormattedMessage {...messages.governanceArticleFiveHeader} />
       </h4>
       <p>
-        <FormattedMessage {...messages.governanceArticleFiveText} />
+        <FormattedMessage {...messages.governanceArticleFiveText}>
+            {toParagraphs}
+        </FormattedMessage>
       </p>
       <h4>
         <FormattedMessage {...messages.governanceArticleSixHeader} />
       </h4>
       <p>
-        <FormattedMessage {...messages.governanceArticleSixText} />
+        <FormattedMessage {...messages.governanceArticleSixText}>
+            {toParagraphs}
+        </FormattedMessage>
       </p>
       <h4>
         <FormattedMessage {...messages.governanceArticleSevenHeader} />
       </h4>
       <p>
-        <FormattedMessage {...messages.governanceArticleSevenText} />
+        <FormattedMessage {...messages.governanceArticleSevenText}>
+            {toParagraphs}
+        </FormattedMessage>
       </p>
       <h4>
         <FormattedMessage {...messages.governanceArticleEightHeader} />
       </h4>
       <p>
-        <FormattedMessage {...messages.governanceArticleEightText} />
+        <FormattedMessage {...messages.governanceArticleEightText}>
+            {toParagraphs}
+        </FormattedMessage>
       </p>
       <h4>
         <FormattedMessage {...messages.governanceArticleNineHeader} />
       </h4>
       <p>
-        <FormattedMessage {...messages.governanceArticleNineText} />
+        <FormattedMessage {...messages.governanceArticleNineText}>
+            {toParagraphs}
+        </FormattedMessage>
       </p>
       <h4>
         <FormattedMessage {...messages.governanceArticleTenHeader} />
       </h4>
       <p>
-        <FormattedMessage {...messages.governanceArticleTenText} />
+        <FormattedMessage {...messages.governanceArticleTenText}>
+            {toParagraphs}
+        </FormattedMessage>
       </p>
       <h4>
         <FormattedMessage {...messages.governanceArticleElevenHeader} />
       </h4>
       <p>
-        <FormattedMessage {...messages.governanceArticleElevelText} />
-      </p>
-      <h4>
-        <FormattedMessage {...messages.governanceArticleTwelveHeader} />
-      </h4>
-      <p>
-        <FormattedMessage {...messages.governanceArticleTwelveText} />
-      </p>
-      <h4>
-        <FormattedMessage {...messages.governanceArticleThirteenHeader} />
-      </h4>
-      <p>
-        <FormattedMessage {...messages.governanceArticleThirteenText} />
-      </p>
-      <h4>
-        <FormattedMessage {...messages.governanceArticleFourteenHeader} />
-      </h4>
-      <p>
-        <FormattedMessage {...messages.governanceArticleFourteenText} />
-      </p>
-      <h4>
-        <FormattedMessage {...messages.governanceArticleFifteenHeader} />
-      </h4>
-      <p>
-        <FormattedMessage {...messages.governanceArticleFifteenText} />
-      </p>
-      <h4>
-        <FormattedMessage {...messages.governanceArticleSixteenHeader} />
-      </h4>
-      <p>
-        <FormattedMessage {...messages.governanceArticleSixteenText} />
-      </p>
-      <h4>
-        <FormattedMessage {...messages.governanceArticleSeventeenHeader} />
-      </h4>
-      <p>
-        <FormattedMessage {...messages.governanceArticleSeventeenText} />
-      </p>
-      <h4>
-        <FormattedMessage {...messages.governanceArticleEighteenHeader} />
-      </h4>
-      <p>
-        <FormattedMessage {...messages.governanceArticleEighteenText} />
-      </p>
-      <h4>
-        <FormattedMessage {...messages.governanceArticleNineteenHeader} />
-      </h4>
-      <p>
-        <FormattedMessage {...messages.governanceArticleNineteenText} />
-      </p>
-      <h4>
-        <FormattedMessage {...messages.governanceArticleTwentyHeader} />
-      </h4>
-      <p>
-        <FormattedMessage {...messages.governanceArticleTwentyText} />
+        <FormattedMessage {...messages.governanceArticleElevelText}>
+            {toParagraphs}
+        </FormattedMessage>
       </p>
     </div>
   );

@@ -392,7 +392,7 @@
   "app.components.Features.TransferForm.symbolValidation": "Yêu cầu nhập ký hiệu",
   "app.components.Features.VoteUs.buildByGenerEOSText": "Được tạo bởi GenerEOS",
   "app.components.Features.VoteUs.successAlreadyVoted": "Bạn đã bỏ phiếu cho chúng tôi! Cám ơn!",
-  "app.components.Features.VoteUs.voteButtonText": "Bỏ Phiếu",
+  "app.components.Features.VoteUs.voteButtonText": "Bỏ Phiếu GenerEOS",
   "app.components.Features.VotingTable.buttonResetText": "Chọn Lại",
   "app.components.Features.VotingTable.buttonVoteText": "Bỏ Phiếu",
   "app.components.Features.VotingTable.columnNameHeader": "Tên",
