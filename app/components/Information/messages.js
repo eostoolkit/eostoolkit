@@ -394,190 +394,112 @@ export default defineMessages({
     defaultMessage:
       'This support would mean the world to us and help us keep creating great tools and contributions for the community.',
   },
-  governanceMainHeader: {
-    id: 'app.components.Information.Governance.governanceMainHeader',
-    defaultMessage:
-      'This Constitution is a multi-party contract entered into by the Members by virtue of their use of this blockchain.',
+  governanceDefinitionsHeader: {
+    id: 'app.components.Information.Governance.governanceDefinitionsHeader',
+    defaultMessage: 'Definitions',
+  },
+  governanceDefinitionsText: {
+    id: 'app.components.Information.Governance.governanceDefinitionsText',
+    defaultMessage: 'All capitalized, italicized, or inline code terms in The EOS User Agreement will be given the same effect and meaning as in Definitions. \n \n - EOS User Agreement: This document (EUA) \n \n - Chain ID: chain_id - aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906 \n \n - User: Any person or organization of persons who maintain(s) direct or indirect ownership of an EOS account, or EOS-based property connected to an EOS account. \n \n - Ownership: Direct or indirect access to an EOS account through one or more valid permissions checks. Ownership may be partially shared between Users through the use of multi-signature permissions. \n \n - Block Producer: Users who have called regproducer and receive rewards from eosio.vpay. \n \n - eosio.prods: An EOS account with a dynamic permissions structure that can assume the privileges of the eosio account when 15/21 Block Producers agree to do so. \n \n - Network Funds: Tokens contained within the following accounts: eosio.names, eosio.ramfee, eosio.saving. \n \n - Governing Documents: regproducer is considered a governing document. \n \n - On-Chain: Any transaction, smart contract, or Ricardian contract which is located within a block that is irreversible and appended to the EOS blockchain chain_id. \n \n - EOS-based Property: Anything that requires a valid permission in order to directly manipulate, alter, transfer, influence, or otherwise effect on the EOS Blockchain \n \n - Call: To submit an action to the EOS Blockchain chain_id. \n \n - Authorizations & Permissions: Permissions are arbitrary names used to define the requirements for a transaction sent on behalf of that permission. Permissions can be assigned for authority over specific contract actions. \n \n - Ricardian Contract: A contract that places the defining elements of a legal agreement in a format that can be expressed and executed in software.',
   },
   governanceArticleOneHeader: {
     id: 'app.components.Information.Governance.governanceArticleOneHeader',
-    defaultMessage: 'Article I - No Initiation of Violence',
+    defaultMessage: 'Article I -  User Acknowledgement of Risks',
   },
   governanceArticleOneText: {
     id: 'app.components.Information.Governance.governanceArticleOneText',
     defaultMessage:
-      'Members shall not initiate violence or the threat of violence against another Member. Lawful prosecution of crimes with the goal of preserving life, liberty and property does not constitute initiation of violence.',
+      'If User loses access to their EOS account on chain_id and has not taken appropriate measures to secure access to their EOS account by other means, the User acknowledges and agrees that that EOS account will become inaccessible. Users acknowledge that the User has an adequate understanding of the risks, usage and intricacies of cryptographic tokens and blockchain-based software. The User acknowledges and agrees that the User is using the EOS blockchain at their sole risk.',
   },
-  governanceArticleTwoHeader: {
+  governanceArticleTwoHeader : {
     id: 'app.components.Information.Governance.governanceArticleTwoHeader',
-    defaultMessage: 'Article II - No Perjury',
+    defaultMessage: 'Article II - Special User Types',
   },
   governanceArticleTwoText: {
     id: 'app.components.Information.Governance.governanceArticleTwoText',
     defaultMessage:
-      'Members shall be liable for losses caused by false or misleading attestations and shall forfeit any profit gained thereby.',
+      'Users who call regproducer agree to, and are bound by, the regproducer Ricardian Contract.',
   },
   governanceArticleThreeHeader: {
     id: 'app.components.Information.Governance.governanceArticleThreeHeader',
-    defaultMessage: 'Article III - Rights',
+    defaultMessage: 'Article III - Consent of the EUA',
   },
   governanceArticleThreeText: {
     id: 'app.components.Information.Governance.governanceArticleThreeText',
     defaultMessage:
-      'The Members grant the right of contract and of private property to each other, therefore no property shall change hands except with the consent of the owner, by a valid Arbitrator’s order, or via community referendum. This Constitution creates no positive rights for or between any Members.',
+      'The nature of the EOS User Agreement is such that it serves as a description of the current EOS Mainnet governance functions that are in place. These functions, enforced by code, do not require the consent of Users as these functions are inherent and systemic to the EOS Mainnet itself.',
   },
   governanceArticleFourHeader: {
     id: 'app.components.Information.Governance.governanceArticleFourHeader',
-    defaultMessage: 'Article IV - No Vote Buying',
+    defaultMessage: 'Article IV - Governing Documents',
   },
   governanceArticleFourText: {
     id: 'app.components.Information.Governance.governanceArticleFourText',
     defaultMessage:
-      'No Member shall offer nor accept anything of value in exchange for a vote of any type, nor shall any Member unduly influence the vote of another.',
+      'Any modifications to the EUA and governing documents may be made by eosio.prods. It is admonished that a statement be crafted and issued through eosio.prods via eosio.forum referendum contract describing such a modification in advance.',
   },
   governanceArticleFiveHeader: {
     id: 'app.components.Information.Governance.governanceArticleFiveHeader',
-    defaultMessage: 'Article V - No Fiduciary',
+    defaultMessage: 'Article V - Native Unit of Value',
   },
   governanceArticleFiveText: {
     id: 'app.components.Information.Governance.governanceArticleFiveText',
     defaultMessage:
-      'No Member nor EOS token holder shall have fiduciary responsibility to support the value of the EOS token. The Members do not authorize anyone to hold assets, borrow, nor contract on behalf of EOS token holders collectively. This blockchain has no owners, managers or fiduciaries; therefore, no Member shall have beneficial interest in more than 10% of the EOS token supply.',
+      'The native unit of value on EOS chain_id shall be the EOS token as defined and created by the eosio.token smart contract.',
   },
   governanceArticleSixHeader: {
     id: 'app.components.Information.Governance.governanceArticleSixHeader',
-    defaultMessage: 'Article VI - Restitution',
+    defaultMessage: 'Article VI - Maintaining the EOS blockchain',
   },
   governanceArticleSixText: {
     id: 'app.components.Information.Governance.governanceArticleSixText',
     defaultMessage:
-      'Each Member agrees that penalties for breach of contract may include, but are not limited to, fines, loss of account, and other restitution.',
+      'eosio.prods will maintain the active blockchain codebase which includes, but is not limited to, the implementation of all modifications of all features, optimizations, and upgrades: present and future.',
   },
   governanceArticleSevenHeader: {
     id: 'app.components.Information.Governance.governanceArticleSevenHeader',
-    defaultMessage: 'Article VII - Open Source',
+    defaultMessage: 'Article VII - Network Funds',
   },
   governanceArticleSevenText: {
     id: 'app.components.Information.Governance.governanceArticleSevenText',
     defaultMessage:
-      'Each Member who makes available a smart contract on this blockchain shall be a Developer. Each Developer shall offer their smart contracts via a free and open source license, and each smart contract shall be documented with a Ricardian Contract stating the intent of all parties and naming the Arbitration Forum that will resolve disputes arising from that contract.',
+      'It is admonished that any altering of the state of any tokens contained within network fund accounts, or altering any pre-existing code that directly or indirectly governs the allocation, fulfillment, or distribution of any network funds be preceded by a statement crafted and issued by eosio.prods to the eosio.forum referendum system contract describing the effect in advance.',
   },
   governanceArticleEightHeader: {
     id: 'app.components.Information.Governance.governanceArticleEightHeader',
-    defaultMessage: 'Article VIII - Language',
+    defaultMessage: 'Article VIII - Freedom of Account Creation',
   },
   governanceArticleEightText: {
     id: 'app.components.Information.Governance.governanceArticleEightText',
     defaultMessage:
-      'Multi-lingual contracts must specify one prevailing language in case of dispute and the author of any translation shall be liable for losses due to their false, misleading, or ambiguous attested translations.',
+      'Any current or future User is able to create an EOS Account without the permission by any other User. eosio.prods may never affect an EOS User Account(s) without valid permission(s) which have been shared with eosio.prods by an EOS account. eosio.prods may charge a fee for any actions that are requested by other Users pertaining to an EOS account where permissions are shared.',
   },
   governanceArticleNineHeader: {
     id: 'app.components.Information.Governance.governanceArticleNineHeader',
-    defaultMessage: 'Article IX - Dispute Resolution',
+    defaultMessage: 'Article IX - No Fiduciary',
   },
   governanceArticleNineText: {
     id: 'app.components.Information.Governance.governanceArticleNineText',
     defaultMessage:
-      'All disputes arising out of or in connection with this Constitution shall be finally settled under the Rules of Dispute Resolution of the EOS Core Arbitration Forum by one or more arbitrators appointed in accordance with the said Rules.',
+      'No User shall have a fiduciary purpose to support the value of the EOS token. No User can authorize anyone to hold assets, borrow, speak, contract on behalf of other EOS Users or the EOS blockchain chain_id collectively. This EOS blockchain shall have no owners, managers, or fiduciaries.',
   },
   governanceArticleTenHeader: {
     id: 'app.components.Information.Governance.governanceArticleTenHeader',
-    defaultMessage: 'Article X - Choice of Law',
+    defaultMessage: 'Article X - User Security',
   },
   governanceArticleTenText: {
     id: 'app.components.Information.Governance.governanceArticleTenText',
     defaultMessage:
-      'All disputes arising out of or in connection with this Constitution shall be finally settled under the Rules of Dispute Resolution of the EOS Core Arbitration Forum by one or more arbitrators appointed in accordance with the said Rules.',
+      'All items pertaining to personal account security, including but not limited to the safekeeping of private keys, is solely the responsibility of the User to secure.',
   },
   governanceArticleElevenHeader: {
     id: 'app.components.Information.Governance.governanceArticleElevenHeader',
-    defaultMessage: 'Article XI - Amending',
+    defaultMessage: 'Article XI - eosio.prods Limited Liability',
   },
   governanceArticleElevelText: {
     id: 'app.components.Information.Governance.governanceArticleElevelText',
     defaultMessage:
-      'This Constitution and its subordinate documents shall not be amended except by a vote of the token holders with no less than 15% vote participation among tokens and no fewer than 10% more Yes than No votes, sustained for 30 continuous days within a 120 day period.',
-  },
-  governanceArticleTwelveHeader: {
-    id: 'app.components.Information.Governance.governanceArticleTwelveHeader',
-    defaultMessage: 'Article XII - Publishing',
-  },
-  governanceArticleTwelveText: {
-    id: 'app.components.Information.Governance.governanceArticleTwelveText',
-    defaultMessage:
-      'Members may only publish information to the Blockchain that is within their right to publish. Furthermore, Members voluntarily consent for all Members to permanently and irrevocably retain a copy, analyze, and distribute all broadcast transactions and derivative information.',
-  },
-  governanceArticleThirteenHeader: {
-    id: 'app.components.Information.Governance.governanceArticleThirteenHeader',
-    defaultMessage: 'Article XIII - Informed Consent',
-  },
-  governanceArticleThirteenText: {
-    id: 'app.components.Information.Governance.governanceArticleThirteenText',
-    defaultMessage:
-      'All service providers who produce tools to facilitate the construction and signing of transactions on behalf of other Members shall present to said other Members the full Ricardian contract terms of this Constitution and other referenced contracts. Service providers shall be liable for losses resulting from failure to disclose the full Ricardian contract terms to users.',
-  },
-  governanceArticleFourteenHeader: {
-    id: 'app.components.Information.Governance.governanceArticleFourteenHeader',
-    defaultMessage: 'Article XIV - Severability',
-  },
-  governanceArticleFourteenText: {
-    id: 'app.components.Information.Governance.governanceArticleFourteenText',
-    defaultMessage:
-      'If any part of this Constitution is declared unenforceable or invalid, the remainder will continue to be valid and enforceable.',
-  },
-  governanceArticleFifteenHeader: {
-    id: 'app.components.Information.Governance.governanceArticleFifteenHeader',
-    defaultMessage: 'Article XV - Termination of Agreement',
-  },
-  governanceArticleFifteenText: {
-    id: 'app.components.Information.Governance.governanceArticleFifteenText',
-    defaultMessage:
-      'A Member is automatically released from all revocable obligations under this Constitution 3 years after the last transaction signed by that Member is incorporated into the blockchain. After 3 years of inactivity an account may be put up for auction and the proceeds distributed to all Members according to the system contract provisions then in effect for such redistribution.',
-  },
-  governanceArticleSixteenHeader: {
-    id: 'app.components.Information.Governance.governanceArticleSixteenHeader',
-    defaultMessage: 'Article XVI - Developer Liability',
-  },
-  governanceArticleSixteenText: {
-    id: 'app.components.Information.Governance.governanceArticleSixteenText',
-    defaultMessage:
-      'Members agree to hold software developers harmless for unintentional mistakes made in the expression of contractual intent, whether or not said mistakes were due to actual or perceived negligence.',
-  },
-  governanceArticleSeventeenHeader: {
-    id: 'app.components.Information.Governance.governanceArticleSeventeenHeader',
-    defaultMessage: 'Article XVII - Consideration',
-  },
-  governanceArticleSeventeenText: {
-    id: 'app.components.Information.Governance.governanceArticleSeventeenText',
-    defaultMessage:
-      'All rights and obligations under this Constitution are mutual and reciprocal and of equally significant value and cost to all parties.',
-  },
-  governanceArticleEighteenHeader: {
-    id: 'app.components.Information.Governance.governanceArticleEighteenHeader',
-    defaultMessage: 'Article XVIII - Acceptance',
-  },
-  governanceArticleEighteenText: {
-    id: 'app.components.Information.Governance.governanceArticleEighteenText',
-    defaultMessage:
-      'A contract is deemed accepted when a member signs a transaction which incorporates a TAPOS proof of a block whose implied state incorporates an ABI of said contract and said transaction is incorporated into the blockchain.',
-  },
-  governanceArticleNineteenHeader: {
-    id: 'app.components.Information.Governance.governanceArticleNineteenHeader',
-    defaultMessage: 'Article XIX - Counterparts',
-  },
-  governanceArticleNineteenText: {
-    id: 'app.components.Information.Governance.governanceArticleNineteenText',
-    defaultMessage:
-      'This Constitution may be executed in any number of counterparts, each of which when executed and delivered shall constitute a duplicate original, but all counterparts together shall constitute a single agreement.',
-  },
-  governanceArticleTwentyHeader: {
-    id: 'app.components.Information.Governance.governanceArticleTwentyHeader',
-    defaultMessage: 'Article XX - Interim Constitution',
-  },
-  governanceArticleTwentyText: {
-    id: 'app.components.Information.Governance.governanceArticleTwentyText',
-    defaultMessage:
-      'This constitution is interim and is intended to remain in effect until a permanent constitution is written and ratified in a referendum.',
+      'The User acknowledges and agrees that, to the fullest extent permitted by any applicable law, this disclaimer of liability applies to any and all damages or injury whatsoever caused by or related to risks of, use of, or inability to use, the EOS token or the EOS blockchain chain_id under any cause of action whatsoever of any kind in any jurisdiction, including, without limitation, actions for breach of warranty, breach of contract or tort (including negligence) and that eosio.prods, nor the individual permissions that operate it, shall not be liable for any indirect, incidental, special, exemplary or consequential damages, including for loss of profits, goodwill or data.',
   },
   poorInfoLineOne: {
     id: 'app.components.Information.PoorInfo.poorInfoLineOne',
