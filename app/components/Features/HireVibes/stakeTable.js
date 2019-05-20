@@ -24,7 +24,7 @@ const HireVibes = props => {
   const hasRefund = stakes.find(s => s.owner === 'Refunding');
 
   if (networkAccount) {
-    const hasHireVibes = networkAccount.balances.find(b => b.code === 'hvtstakingio');
+    const hasHireVibes = networkAccount.balances.find(b => b.code === 'hirevibeshvt');
 
     if (hasHireVibes) {
       hireVibesLiquid = Number(hasHireVibes.amount);
@@ -63,7 +63,7 @@ const HireVibes = props => {
       icon={AccountBalance}
       header={intl.formatMessage(messages.hireVibesTableHeader)}
       subheader={intl.formatMessage(messages.hireVibesTableSubHeader)}>
-      <h3>Unclaimed HireVibes HVT</h3>
+      <h3>Liquid HireVibes HVT</h3>
       <h2 style={{ marginTop: '-10px' }}>{Number(totalHireVibes).toFixed(4)}</h2>
       <h4 style={{ marginTop: '-10px' }}>
         <FormattedMessage {...messages.hireVibesTablePoweredUpText} />

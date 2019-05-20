@@ -5,6 +5,8 @@
  */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+// @material-ui/core components
+import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
 import Info from '@material-ui/icons/Info';
 import Favorite from '@material-ui/icons/Favorite';
@@ -13,15 +15,27 @@ import ToolSection from 'components/Tool/ToolSection';
 import ToolBody from 'components/Tool/ToolBody';
 import dashboardRoutes from 'routes/dashboard';
 import HomeDoc from 'components/Information/Home';
+import News from 'components/Information/News';
 
 import { injectIntl } from 'react-intl';
 import messages from './messages';
 
 const FeaturesPage = props => {
-  const { intl } = props;
+  const { classes, backgroundColor, intl } = props;
 
   return (
     <Tool>
+      <ToolSection lg={12}>
+        <ToolBody
+          style={{background:'lightgreen'}}
+          color="warning"
+          icon={Info}
+          header={intl.formatMessage(messages.toolkitNewsHeader)}
+          subheader={intl.formatMessage(messages.toolkitNewsSubHeader)}>
+          <News style={{background:'lightgreen'}} />
+        </ToolBody>
+      </ToolSection>
+
       <ToolSection lg={12}>
         <ToolBody
           color="info"
@@ -67,4 +81,4 @@ const FeaturesPage = props => {
   );
 };
 
-export default injectIntl(FeaturesPage);
+export default withStyles(withStyles)(FeaturesPage);

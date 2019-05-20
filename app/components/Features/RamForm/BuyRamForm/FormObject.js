@@ -59,7 +59,7 @@ const FormObject = props => {
         <span className={classes.radioLabel}>Purchase unit:</span>
         <FormControlLabel
           control={<Radio checked={isEOS} color="primary" onChange={handleEOSUnitChange} />}
-          label="EOS"
+          label="tokens"
         />
         <FormControlLabel
           control={<Radio checked={!isEOS} color="primary" onChange={handleByteUnitChange} />}

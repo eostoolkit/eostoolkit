@@ -41,7 +41,19 @@ export default defineMessages({
   menuHireVibes: {
       id: 'app.routes.menuHireVibes',
       defaultMessage: 'HireVibes',
-    },
+  },
+  menuBoid: {
+      id: 'app.routes.menuBoid',
+      defaultMessage: 'Boid',
+  },
+  menuPixeos: {
+      id: 'app.routes.menuPixeos',
+      defaultMessage: 'Pixeos',
+  },
+  menuOpenBRM: {
+      id: 'app.routes.menuOpenBRM',
+      defaultMessage: 'OpenBRM',
+  },
   menuHorusPay: {
     id: 'app.routes.menuHorusPay',
     defaultMessage: 'HorusPay',

@@ -18,7 +18,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 const MinerTable = props => {
-  const { miner, loading, classes, intl, ...clientProps } = props;
+  const { miner, loading, classes, intl, activeNetwork,...clientProps } = props;
   const round = miner ? miner.round : null;
 
   return (
@@ -53,7 +53,7 @@ const MinerTable = props => {
                 </h3>
               </TableCell>
               <TableCell className={classes.tableCell}>
-                <h3>{`${Number(round ? round.rewards.jackpot / 10000 : 0).toFixed(4)} EOS`}</h3>
+                <h3>{`${Number(round ? round.rewards.jackpot / 10000 : 0).toFixed(4)} ${activeNetwork.network.prefix}`}</h3>
               </TableCell>
             </TableRow>
             <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
@@ -71,7 +71,7 @@ const MinerTable = props => {
               <TableCell className={classes.tableCell}>
                 <h4>
                   {round
-                    ? `${(Number(round.current_fee.split(' ')[0]) * 1.25).toFixed(4)} EOS`
+                    ? `${(Number(round.current_fee.split(' ')[0]) * 1.25).toFixed(4)} ${activeNetwork.network.prefix}`
                     : intl.formatMessage(messages.grandpaLoadingText)}
                 </h4>
               </TableCell>
@@ -92,7 +92,7 @@ const MinerTable = props => {
               </TableCell>
               <TableCell className={classes.tableCell}>{`${Number(round ? round.rewards.team_div / 10000 : 0).toFixed(
                 4
-              )} EOS`}</TableCell>
+              )} ${activeNetwork.network.prefix}`}</TableCell>
             </TableRow>
             <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
               <TableCell className={classes.tableCell}>
@@ -100,7 +100,7 @@ const MinerTable = props => {
               </TableCell>
               <TableCell className={classes.tableCell}>{`${Number(
                 round ? round.rewards.carry_forward / 10000 : 0
-              ).toFixed(4)} EOS`}</TableCell>
+              ).toFixed(4)} ${activeNetwork.network.prefix}`}</TableCell>
             </TableRow>
             <TableRow className={`${classes.tableRowHover}`}>
               <TableCell className={classes.tableCell}>
@@ -108,7 +108,7 @@ const MinerTable = props => {
               </TableCell>
               <TableCell className={classes.tableCell}>{`${Number(round ? round.rewards.dev_fund / 10000 : 0).toFixed(
                 4
-              )} EOS`}</TableCell>
+              )} ${activeNetwork.network.prefix}`}</TableCell>
             </TableRow>
           </TableBody>
         </Table>

@@ -392,7 +392,7 @@
   "app.components.Features.TransferForm.symbolValidation": "Необходим символ",
   "app.components.Features.VoteUs.buildByGenerEOSText": "Создан GenerEOS",
   "app.components.Features.VoteUs.successAlreadyVoted": "Вы уже проголосовали за нас! Спасибо!",
-  "app.components.Features.VoteUs.voteButtonText": "Голосовать",
+  "app.components.Features.VoteUs.voteButtonText": "Голосовать GenerEOS",
   "app.components.Features.VotingTable.buttonResetText": "Сброс",
   "app.components.Features.VotingTable.buttonVoteText": "Голосовать",
   "app.components.Features.VotingTable.columnNameHeader": "Имя",

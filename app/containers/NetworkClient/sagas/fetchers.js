@@ -139,20 +139,25 @@ export function* fetchTokens(reader) {
   try {
     const data = yield fetch(tokensUrl);
     const list = yield data.json();
+    const activeNetwork = yield select(makeSelectActiveNetwork());
 
+    console.log(activeNetwork);
     const tokenList = [
       {
-        symbol: "EOS",
+        symbol: activeNetwork.network.prefix,
         account: "eosio.token"
       },
       ...list
     ]
+    console.log(tokenList);
     const info = yield all(
       tokenList.map(token => {
         return fork(fetchTokenInfo, reader, token.account, token.symbol);
       })
     );
+    console.log(info);
     const tokens = yield join(...info);
+    console.log(tokens);
     return tokens;
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
@@ -258,68 +263,102 @@ function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
 }
 
+function convertFinalData({account, balance}) {
+  let amount = 0;
+  let symbol = '';
+
+  if(balance){
+    let balList = balance.split(' ');
+    if(balList.length === 2){
+      symbol = balList[1]
+      amount = balList[0];
+    }
+  }
+  return { amount, code: account, symbol }
+}
+
 function* getAccountDetail(reader, name) {
   try {
     const account = yield reader.getAccount(name);
-    //const tokens = yield select(makeSelectTokens());
-    // const tokenData = yield all(
-    //   tokens.map(token => {
-    //     return fork(getCurrency, reader, token.account, name);
-    //   })
-    // );
-    //
-    // const currencies = yield join(...tokenData);
-    // const balances = currencies.reduce((a, b) => a.concat(b), []);//.filter( onlyUnique );
-    // const unique = [...new Set(balances.map(item => item.balance))];
-    // const final = unique.map(bal => {
-    //   const tokenFind = tokens.find(t=>t.symbol === bal.split(' ')[1]);
-    //   return {
-    //     account: tokenFind ? tokenFind.account : 'grandpacoins',
-    //     balance: bal,
-    //   }
-    //
-    // });
+    const activeNetwork = yield select(makeSelectActiveNetwork());
 
-    let body = {account:account.account_name};
+    if(activeNetwork.network.prefix === "EOS") {
 
-    try {
-      const flare = yield fetch('https://api-pub.eosflare.io/v1/eosflare/get_account',{
+      let body = {account:account.account_name};
+
+      try {
+        const flare = yield fetch('https://api-pub.eosflare.io/v1/eosflare/get_account',{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+          body:JSON.stringify(body),
+        });
+        const flareData = yield flare.json();
+
+        if(flareData.account) {
+          let tokens = flareData.account.tokens.map(token=>{
+            return `${token.contract}:${token.symbol}`;
+          });
+          tokens.unshift('eosio.token:EOS');
+          body = {
+            ...body,
+            tokens,
+          }
+        }
+      } catch(err) {}
+
+      const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances',{
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
         },
         body:JSON.stringify(body),
       });
-      const flareData = yield flare.json();
+      const list = yield data.json();
+      //console.log(list);
 
-      if(flareData.account) {
-        let tokens = flareData.account.tokens.map(token=>{
-          return `${token.contract}:${token.symbol}`;
-        });
-        tokens.unshift('eosio.token:EOS');
-        body = {
-          ...body,
-          tokens,
+      console.log("account: ", account);
+      console.log("list: ", list);
+
+      //yield spawn(fetchLatency);
+      return {
+        ...account,
+        balances: list,
+      };
+
+    } else {
+      const tokens = yield fetchTokens(reader);
+      //const tokens = yield select(makeSelectTokens());
+      const tokenData = yield all(
+        tokens.map(token => {
+          return fork(getCurrency, reader, token.account, name);
+        })
+      );
+
+      const currencies = yield join(...tokenData);
+      const balances = currencies.reduce((a, b) => a.concat(b), []);//.filter( onlyUnique );
+      const unique = [...new Set(balances.map(item => item.balance))];
+      const final = unique.map(bal =>
+      {
+        const tokenFind = tokens.find(t=>t.symbol === bal.split(' ')[1]);
+
+        return {
+          account: tokenFind ? tokenFind.account : 'grandpacoins',
+          balance: bal,
         }
-      }
-    } catch(err) {}
+      });
 
-    const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances',{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
-      body:JSON.stringify(body),
-    });
-    const list = yield data.json();
-    //console.log(list);
+      let finalTokenList = final.map(convertFinalData);
 
+      //yield spawn(fetchLatency);
+      return {
+        ...account,
+        balances: finalTokenList,
+      };
 
-    //yield spawn(fetchLatency);
-    return {
-      ...account,
-      balances: list,
-    };
+    }
+
   } catch (c) {
     console.log(c);
     return null;
