@@ -11,10 +11,11 @@ import {
   SET_NETWORK,
   SET_IDENTITY,
   PUSH_TRANSACTION,
+  LOAD_REX,
 } from '../constants';
 
 import { buildDispatcher, writerDispatcher, accountDispatcher } from './dispatcher';
-import { fetchNetworks, fetchAccount } from './fetchers';
+import { fetchNetworks, fetchAccount, getRexInfo } from './fetchers';
 import { destroyIdentity } from './destroyers';
 import { pushTransaction } from './transaction';
 
@@ -52,6 +53,11 @@ function* watchTransaction() {
   yield takeLatest(PUSH_TRANSACTION, pushTransaction);
 }
 
+// load accounts is triggered by the account dispatcher
+function* watchRex() {
+  yield takeLatest(LOAD_REX, getRexInfo);
+}
+
 export default function* rootSaga() {
   yield all([
     watchForClientBuild(),
@@ -61,5 +67,6 @@ export default function* rootSaga() {
     watchLoadAccount(),
     watchLogout(),
     watchTransaction(),
+    watchRex(),
   ]);
 }

@@ -1,18 +1,24 @@
-//import Ping from 'ping.js';
+// import Ping from 'ping.js';
 import Ping from 'utils/ping';
 import { orderBy } from 'lodash';
 import { put, all, join, fork, select, call, spawn } from 'redux-saga/effects';
 import { tokensUrl, networksUrl, claimsUrl } from 'remoteConfig';
 
-import { loadedNetworks, updateNetworks, loadedAccount, setNetwork } from '../actions';
-import { makeSelectIdentity, makeSelectReader, makeSelectTokens, makeSelectNetworks, makeSelectActiveNetwork } from '../selectors';
+import { loadedNetworks, updateNetworks, loadedAccount, setNetwork, loadedRex } from '../actions';
+import {
+  makeSelectIdentity,
+  makeSelectReader,
+  makeSelectTokens,
+  makeSelectNetworks,
+  makeSelectActiveNetwork,
+} from '../selectors';
 
 /*
-*
-* NETWORKS
-* Get available networks
-*
-*/
+ *
+ * NETWORKS
+ * Get available networks
+ *
+ */
 
 // fetch networks and select defaultNetwork
 export function* fetchNetworks() {
@@ -28,12 +34,12 @@ export function* fetchNetworks() {
           ...endpoint,
           failures: 0,
           ping: -1,
-        }
-      })
+        };
+      });
       return {
         ...networkDetails,
         endpoints: endpointDetails,
-      }
+      };
     });
 
     // get default
@@ -53,19 +59,18 @@ export function* fetchNetworks() {
   }
 }
 
-
 function* makeEndpointsLatency(endpoint) {
-  const {ping, ...endpointDetails} = endpoint;
+  const { ping, ...endpointDetails } = endpoint;
 
   try {
     return {
       ...endpointDetails,
-      ping: yield call(Ping,`${endpoint.protocol}://${endpoint.url}:${endpoint.port}/v1/chain/get_info`)
+      ping: yield call(Ping, `${endpoint.protocol}://${endpoint.url}:${endpoint.port}/v1/chain/get_info`),
     };
   } catch (c) {
     return {
       ...endpointDetails,
-      ping: 5000
+      ping: 5000,
     };
   }
 }
@@ -73,35 +78,36 @@ function* makeEndpointsLatency(endpoint) {
 export function* fetchLatency() {
   try {
     // fetch the remote network list
-    let networks = yield select(makeSelectNetworks());
+    const networks = yield select(makeSelectNetworks());
     const active = yield select(makeSelectActiveNetwork());
 
-    const activeIndex = networks.findIndex(network=>{
+    const activeIndex = networks.findIndex(network => {
       return network.chainId === active.network.chainId;
     });
 
     let endpoints = networks[activeIndex].endpoints;
 
-    const latencies = yield all(endpoints.map(endpoint => {
-      return fork(makeEndpointsLatency,endpoint)
-    }));
+    const latencies = yield all(
+      endpoints.map(endpoint => {
+        return fork(makeEndpointsLatency, endpoint);
+      })
+    );
 
     endpoints = yield join(...latencies);
     networks[activeIndex].endpoints = endpoints;
     yield put(updateNetworks(networks));
 
-    const sorted = orderBy(endpoints, ['failures','ping'], 'asc');
+    const sorted = orderBy(endpoints, ['failures', 'ping'], 'asc');
     const best = sorted[0];
 
-    if(active.endpoint.name !== best.name) {
+    if (active.endpoint.name !== best.name) {
       const activeNetwork = {
         network: networks[activeIndex],
         endpoint: best,
       };
 
-      yield put(setNetwork(activeNetwork,false));
+      yield put(setNetwork(activeNetwork, false));
     }
-
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
@@ -109,11 +115,11 @@ export function* fetchLatency() {
 }
 
 /*
-*
-* TOKENS
-* Get tokens and stats
-*
-*/
+ *
+ * TOKENS
+ * Get tokens and stats
+ *
+ */
 
 function* fetchTokenInfo(reader, account, symbol) {
   try {
@@ -145,10 +151,10 @@ export function* fetchTokens(reader) {
     const tokenList = [
       {
         symbol: activeNetwork.network.prefix,
-        account: "eosio.token"
+        account: 'eosio.token',
       },
-      ...list
-    ]
+      ...list,
+    ];
     console.log(tokenList);
     const info = yield all(
       tokenList.map(token => {
@@ -179,11 +185,11 @@ export function* fetchClaims() {
 }
 
 /*
-*
-* IDENTITY
-* Get signer identity
-*
-*/
+ *
+ * IDENTITY
+ * Get signer identity
+ *
+ */
 
 export function* fetchIdentity(signer, activeNetwork) {
   try {
@@ -224,11 +230,11 @@ export function* fetchIdentity(signer, activeNetwork) {
 }
 
 /*
-*
-* ACCOUNT
-* Load account(s) that has been selected as identity
-*
-*/
+ *
+ * ACCOUNT
+ * Load account(s) that has been selected as identity
+ *
+ */
 
 function* getCurrency(reader, token, name) {
   try {
@@ -241,16 +247,16 @@ function* getCurrency(reader, token, name) {
     });
     return currencies;
   } catch (c) {
-    let networks = yield select(makeSelectNetworks());
+    const networks = yield select(makeSelectNetworks());
     const active = yield select(makeSelectActiveNetwork());
 
-    const activeIndex = networks.findIndex(network=>{
+    const activeIndex = networks.findIndex(network => {
       return network.chainId === active.network.chainId;
-    })
+    });
 
-    const endpointIndex = networks[activeIndex].endpoints.findIndex(endpoint=>{
+    const endpointIndex = networks[activeIndex].endpoints.findIndex(endpoint => {
       return endpoint.name === active.endpoint.name;
-    })
+    });
 
     networks[activeIndex].endpoints[endpointIndex].failures += 1;
 
@@ -260,21 +266,21 @@ function* getCurrency(reader, token, name) {
 }
 
 function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
+  return self.indexOf(value) === index;
 }
 
-function convertFinalData({account, balance}) {
+function convertFinalData({ account, balance }) {
   let amount = 0;
   let symbol = '';
 
-  if(balance){
-    let balList = balance.split(' ');
-    if(balList.length === 2){
-      symbol = balList[1]
+  if (balance) {
+    const balList = balance.split(' ');
+    if (balList.length === 2) {
+      symbol = balList[1];
       amount = balList[0];
     }
   }
-  return { amount, code: account, symbol }
+  return { amount, code: account, symbol };
 }
 
 function* getAccountDetail(reader, name) {
@@ -282,83 +288,77 @@ function* getAccountDetail(reader, name) {
     const account = yield reader.getAccount(name);
     const activeNetwork = yield select(makeSelectActiveNetwork());
 
-    if(activeNetwork.network.prefix === "EOS") {
-
-      let body = {account:account.account_name};
+    if (activeNetwork.network.prefix === 'EOS') {
+      let body = { account: account.account_name };
 
       try {
-        const flare = yield fetch('https://api-pub.eosflare.io/v1/eosflare/get_account',{
-          method: "POST",
+        const flare = yield fetch('https://api-pub.eosflare.io/v1/eosflare/get_account', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json; charset=utf-8",
+            'Content-Type': 'application/json; charset=utf-8',
           },
-          body:JSON.stringify(body),
+          body: JSON.stringify(body),
         });
         const flareData = yield flare.json();
 
-        if(flareData.account) {
-          let tokens = flareData.account.tokens.map(token=>{
+        if (flareData.account) {
+          const tokens = flareData.account.tokens.map(token => {
             return `${token.contract}:${token.symbol}`;
           });
           tokens.unshift('eosio.token:EOS');
           body = {
             ...body,
             tokens,
-          }
+          };
         }
-      } catch(err) {}
+      } catch (err) {}
 
-      const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances',{
-        method: "POST",
+      const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json; charset=utf-8",
+          'Content-Type': 'application/json; charset=utf-8',
         },
-        body:JSON.stringify(body),
+        body: JSON.stringify(body),
       });
       const list = yield data.json();
-      //console.log(list);
+      // console.log(list);
 
-      console.log("account: ", account);
-      console.log("list: ", list);
+      console.log('account: ', account);
+      console.log('list: ', list);
 
-      //yield spawn(fetchLatency);
+      // yield spawn(fetchLatency);
       return {
         ...account,
         balances: list,
       };
-
-    } else {
-      const tokens = yield fetchTokens(reader);
-      //const tokens = yield select(makeSelectTokens());
-      const tokenData = yield all(
-        tokens.map(token => {
-          return fork(getCurrency, reader, token.account, name);
-        })
-      );
-
-      const currencies = yield join(...tokenData);
-      const balances = currencies.reduce((a, b) => a.concat(b), []);//.filter( onlyUnique );
-      const unique = [...new Set(balances.map(item => item.balance))];
-      const final = unique.map(bal =>
-      {
-        const tokenFind = tokens.find(t=>t.symbol === bal.split(' ')[1]);
-
-        return {
-          account: tokenFind ? tokenFind.account : 'grandpacoins',
-          balance: bal,
-        }
-      });
-
-      let finalTokenList = final.map(convertFinalData);
-
-      //yield spawn(fetchLatency);
-      return {
-        ...account,
-        balances: finalTokenList,
-      };
-
     }
+    const tokens = yield fetchTokens(reader);
+    // const tokens = yield select(makeSelectTokens());
+    const tokenData = yield all(
+      tokens.map(token => {
+        return fork(getCurrency, reader, token.account, name);
+      })
+    );
 
+    const currencies = yield join(...tokenData);
+    const balances = currencies.reduce((a, b) => a.concat(b), []); // .filter( onlyUnique );
+    const unique = [...new Set(balances.map(item => item.balance))];
+    const final = unique.map(bal => {
+      const tokenFind = tokens.find(t => t.symbol === bal.split(' ')[1]);
+
+      return {
+        account: tokenFind ? tokenFind.account : 'grandpacoins',
+        balance: bal,
+      };
+    });
+
+    const finalTokenList = final.map(convertFinalData);
+
+    // yield spawn(fetchLatency);
+    return {
+      ...account,
+      balances: finalTokenList,
+    };
   } catch (c) {
     console.log(c);
     return null;
@@ -378,5 +378,34 @@ export function* fetchAccount() {
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
+  }
+}
+
+export function* getRexInfo(reader, name) {
+  try {
+    const account = yield reader.getAccount(name);
+    const body = {
+      code: 'eosio',
+      json: true,
+      scope: 'eosio',
+      table: 'rexbal',
+      upper_bound: account.account_name,
+      lower_bound: account.account_name,
+    };
+    const data = yield fetch('https://eos.greymass.com/v1/chain/get_table_rows', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify(body),
+    });
+    const rex = yield data.json();
+
+    console.log('rex: ', rex);
+
+    yield put(loadedRex(rex));
+  } catch (c) {
+    console.log(c);
+    return null;
   }
 }
