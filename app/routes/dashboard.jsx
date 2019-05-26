@@ -15,6 +15,7 @@ import BidName from 'components/Features/BidNameForm';
 import Airgrab from 'components/Features/AirgrabForm';
 import Donate from 'components/Features/DonateForm';
 import VotingTable from 'containers/NetworkProducers';
+import RexForm from 'components/Features/Rex';
 
 // EOSIO FORUM
 import ForumStatus from 'components/Features/ForumForms/Status';
@@ -66,7 +67,7 @@ import {
   Games,
   Feedback,
   Extension,
-  CompareArrows
+  CompareArrows,
 } from '@material-ui/icons';
 import HorusIcon from 'components/Icons/Horus';
 import KarmaIcon from 'components/Icons/Karma';
@@ -115,6 +116,12 @@ const dashRoutes = [
     icon: Extension,
     views: [
       {
+        path: '/dapps/rex',
+        name: <FormattedMessage {...messags.menuRex} />,
+        mini: 'REX',
+        component: RexForm,
+      },
+      {
         path: '/dapps/parsl',
         name: <FormattedMessage {...messags.menuPARSL} />,
         mini: 'PS',
@@ -162,7 +169,7 @@ const dashRoutes = [
         mini: 'GC',
         component: Grandpa,
       },
-    ]
+    ],
   },
 
   {
