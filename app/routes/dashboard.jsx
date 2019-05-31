@@ -68,6 +68,7 @@ import {
   Feedback,
   Extension,
   CompareArrows,
+  CloudUpload
 } from '@material-ui/icons';
 import HorusIcon from 'components/Icons/Horus';
 import KarmaIcon from 'components/Icons/Karma';
@@ -89,6 +90,12 @@ const dashRoutes = [
     name: <FormattedMessage {...messags.menuReferendum} />,
     icon: Feedback,
     component: Referendum,
+  },
+  {
+    path: '/dapps/rex',
+    name: <FormattedMessage {...messags.menuRex} />,
+    icon: CloudUpload,
+    component: RexForm,
   },
   {
     path: '/poorswap',
@@ -115,12 +122,6 @@ const dashRoutes = [
     state: 'openDapps',
     icon: Extension,
     views: [
-      {
-        path: '/dapps/rex',
-        name: <FormattedMessage {...messags.menuRex} />,
-        mini: 'REX',
-        component: RexForm,
-      },
       {
         path: '/dapps/parsl',
         name: <FormattedMessage {...messags.menuPARSL} />,

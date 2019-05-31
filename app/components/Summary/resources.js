@@ -13,7 +13,8 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 function ResourcesTable({ ...props }) {
-  const { classes, account } = props;
+  const { classes, account, rex } = props;
+  console.log(rex);
   return (
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>
@@ -32,7 +33,8 @@ function ResourcesTable({ ...props }) {
                 <h6>RAM</h6>
               </TableCell>
               <TableCell className={classes.tableCell}>
-                {account.ram_usage} bytes used<br />
+                {account.ram_usage} bytes used
+                <br />
                 {account.ram_quota} bytes owned
               </TableCell>
               <TableCell className={classes.tableCell}>
@@ -58,7 +60,8 @@ function ResourcesTable({ ...props }) {
                 {account && account.refund_request ? (
                   <span>
                     CPU: {account.refund_request.cpu_amount}
-                    <br />NET: {account.refund_request.net_amount}
+                    <br />
+                    NET: {account.refund_request.net_amount}
                   </span>
                 ) : (
                   <span>
@@ -77,6 +80,43 @@ function ResourcesTable({ ...props }) {
                 <h6>{account.balances.map(bal => `${bal.amount} ${bal.symbol}`).join(', ')}</h6>
               </TableCell>
             </TableRow>
+            {rex ? (
+              <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
+                <TableCell className={classes.tableCell}>
+                  <h6>
+                    <FormattedMessage {...messages.rexText} />
+                  </h6>
+                </TableCell>
+                <TableCell className={classes.tableCell} colSpan={2}>
+                  <h6>{rex.rex_balance}</h6>
+                </TableCell>
+                <TableCell className={classes.tableCell} colSpan={5}>
+                  <h6>
+                    <FormattedMessage {...messages.maturingText} />
+                    {rex.rex_maturities
+                      .map((mature, index) => `: ${index + 1}: ${mature.first.slice(0, 10)} ${mature.second} REX`)
+                      .join(', ')}
+                  </h6>
+                </TableCell>
+                <TableCell className={classes.tableCell} colSpan={2}>
+                  <h6>
+                    <FormattedMessage {...messages.voteStakeText} />
+                    {`: ${rex.vote_stake}`}
+                  </h6>
+                </TableCell>
+              </TableRow>
+            ) : (
+              <TableRow className={`${classes.tableStripedRow} ${classes.tableRowHover}`}>
+                <TableCell className={classes.tableCell}>
+                  <h6>
+                    <FormattedMessage {...messages.rexText} />
+                  </h6>
+                </TableCell>
+                <TableCell className={classes.tableCell}>
+                  <h6>-</h6>
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         ) : (
           <TableBody>

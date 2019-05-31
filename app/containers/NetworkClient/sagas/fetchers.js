@@ -287,7 +287,6 @@ function* getAccountDetail(reader, name) {
   try {
     const account = yield reader.getAccount(name);
     const activeNetwork = yield select(makeSelectActiveNetwork());
-
     if (activeNetwork.network.prefix === 'EOS') {
       let body = { account: account.account_name };
 
@@ -311,7 +310,9 @@ function* getAccountDetail(reader, name) {
             tokens,
           };
         }
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
 
       const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances', {
         method: 'POST',
@@ -381,9 +382,12 @@ export function* fetchAccount() {
   }
 }
 
-export function* getRexInfo(reader, name) {
+export function* fetchRexInfo() {
+  const reader = yield select(makeSelectReader());
+  const identity = yield select(makeSelectIdentity());
+  if (reader === null || reader === undefined || identity === null || identity === undefined) return;
   try {
-    const account = yield reader.getAccount(name);
+    const account = yield reader.getAccount(identity.name);
     const body = {
       code: 'eosio',
       json: true,
@@ -392,20 +396,13 @@ export function* getRexInfo(reader, name) {
       upper_bound: account.account_name,
       lower_bound: account.account_name,
     };
-    const data = yield fetch('https://eos.greymass.com/v1/chain/get_table_rows', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify(body),
-    });
-    const rex = yield data.json();
+    const data = yield reader.getTableRows(body);
+    const rex = yield data.rows[0];
 
     console.log('rex: ', rex);
 
     yield put(loadedRex(rex));
   } catch (c) {
     console.log(c);
-    return null;
   }
 }

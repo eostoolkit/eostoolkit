@@ -1,4 +1,4 @@
-import { takeLatest, all } from 'redux-saga/effects';
+import { takeLatest, all, put, call, takeEvery } from 'redux-saga/effects';
 
 import {
   SET_SIGNER,
@@ -11,13 +11,16 @@ import {
   SET_NETWORK,
   SET_IDENTITY,
   PUSH_TRANSACTION,
-  LOAD_REX,
+  TRIGGER_UPDATE_REX,
 } from '../constants';
 
 import { buildDispatcher, writerDispatcher, accountDispatcher } from './dispatcher';
-import { fetchNetworks, fetchAccount, getRexInfo } from './fetchers';
+import { fetchNetworks, fetchAccount, fetchRexInfo } from './fetchers';
+import { triggerUpdateRex } from '../actions';
 import { destroyIdentity } from './destroyers';
 import { pushTransaction } from './transaction';
+
+const UPDATE_INTERVAL = 10 * 1000;
 
 // client (re)build can be triggered by signer set, networks loaded, or user request
 function* watchForClientBuild() {
@@ -53,9 +56,21 @@ function* watchTransaction() {
   yield takeLatest(PUSH_TRANSACTION, pushTransaction);
 }
 
-// load accounts is triggered by the account dispatcher
-function* watchRex() {
-  yield takeLatest(LOAD_REX, getRexInfo);
+const wait = ms =>
+  new Promise(resolve => {
+    setTimeout(() => resolve(), ms);
+  });
+
+function* chainUpdateTimer() {
+  yield put(triggerUpdateRex());
+  while (true) {
+    yield call(wait, UPDATE_INTERVAL);
+    yield put(triggerUpdateRex());
+  }
+}
+
+function* watchUpdateRex() {
+  yield takeEvery(TRIGGER_UPDATE_REX, fetchRexInfo);
 }
 
 export default function* rootSaga() {
@@ -67,6 +82,7 @@ export default function* rootSaga() {
     watchLoadAccount(),
     watchLogout(),
     watchTransaction(),
-    watchRex(),
+    chainUpdateTimer(),
+    watchUpdateRex(),
   ]);
 }
