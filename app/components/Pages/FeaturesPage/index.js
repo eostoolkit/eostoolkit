@@ -27,12 +27,12 @@ const FeaturesPage = props => {
     <Tool>
       <ToolSection lg={12}>
         <ToolBody
-          style={{background:'lightgreen'}}
-          color="warning"
-          icon={Info}
+          style={{background:'bisque'}}
+          color="rose"
+          icon={Favorite}
           header={intl.formatMessage(messages.toolkitNewsHeader)}
           subheader={intl.formatMessage(messages.toolkitNewsSubHeader)}>
-          <News style={{background:'lightgreen'}} />
+          <News style={{background:'bisque'}} />
         </ToolBody>
       </ToolSection>
 
