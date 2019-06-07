@@ -35,4 +35,16 @@ export default defineMessages({
     id: 'app.components.Summary.resources.tokensText',
     defaultMessage: 'Tokens',
   },
+  rexText: {
+    id: 'app.components.Summary.resources.rexText',
+    defaultMessage: 'Rex',
+  },
+  maturingText: {
+    id: 'app.components.Summary.resources.maturingText',
+    defaultMessage: 'Maturing',
+  },
+  voteStakeText: {
+    id: 'app.components.Summary.resources.voteStakeText',
+    defaultMessage: 'Vote Stake',
+  },
 });

@@ -12,6 +12,8 @@ import {
   SET_IDENTITY,
   PUSH_TRANSACTION,
   TOGGLE_OFFLINE,
+  LOADED_REX,
+  TRIGGER_UPDATE_REX,
 } from './constants';
 
 export function setSigner(networkSigner) {
@@ -92,7 +94,7 @@ export function setIdentity() {
   };
 }
 
-export function pushTransaction(transaction,history) {
+export function pushTransaction(transaction, history) {
   return {
     type: PUSH_TRANSACTION,
     transaction,
@@ -103,5 +105,18 @@ export function pushTransaction(transaction,history) {
 export function toggleOffline() {
   return {
     type: TOGGLE_OFFLINE,
+  };
+}
+
+export function loadedRex(rex) {
+  return {
+    type: LOADED_REX,
+    rex,
+  };
+}
+
+export function triggerUpdateRex() {
+  return {
+    type: TRIGGER_UPDATE_REX,
   };
 }
