@@ -28,7 +28,7 @@ export default defineMessages({
   },
   pixeosUnstakeFormSubHeader: {
     id: 'app.components.Features.Pixeos.pixeosUnstakeFormSubHeader',
-    defaultMessage: " - You will get less RewardDROPS",
+    defaultMessage: ' - You will get less RewardDROPS',
   },
   pixeosStakeFormHeader: {
     id: 'app.components.Features.Pixeos.pixeosStakeFormHeader',
@@ -53,10 +53,6 @@ export default defineMessages({
   pixeosTableNoPixeosText: {
     id: 'app.components.Features.Pixeos.pixeosTableNoPixeosText',
     defaultMessage: 'None',
-  },
-  pixeosTableLoadingText: {
-    id: 'app.components.Features.Pixeos.pixeosTableNoPixeosText',
-    defaultMessage: 'Retrieving your stake',
   },
   pixeosTablePoweredUpText: {
     id: 'app.components.Features.Pixeos.pixeosTablePoweredUpText',

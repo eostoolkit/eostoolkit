@@ -1,10 +1,10 @@
 import React from 'react';
-import { createBrowserHistory } from 'history';
 import { Router, Route, Switch } from 'react-router-dom';
 
 import indexRoutes from 'routes/index';
 
 import './material-dashboard-pro-react.css';
+import { createBrowserHistory } from 'history';
 
 const hist = createBrowserHistory();
 

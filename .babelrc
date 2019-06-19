@@ -1,18 +1,19 @@
 {
   "plugins": [
-    "styled-components"
+    "styled-components",
+    "@babel/plugin-syntax-dynamic-import",
+    "babel-plugin-react-intl",
+    "@babel/plugin-proposal-class-properties"
   ],
   "presets": [
     [
-      "env",
+      "@babel/preset-react",
       {
         "targets": {
           "browsers": ["last 2 versions"]
         }
       }
     ],
-    "react",
-    "stage-0"
   ],
   "env": {
     "production": {

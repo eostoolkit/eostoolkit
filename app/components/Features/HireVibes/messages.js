@@ -12,7 +12,7 @@ export default defineMessages({
   },
   hireVibesClaimFormSubHeader: {
     id: 'app.components.Features.HireVibes.hireVibesClaimFormSubHeader',
-    defaultMessage: " - You can claim once per day",
+    defaultMessage: ' - You can claim once per day',
   },
   hireVibesUnstakeFormSubmitText: {
     id: 'app.components.Features.HireVibes.hireVibesUnstakeFormSubmitText',
@@ -40,7 +40,7 @@ export default defineMessages({
   },
   hireVibesUnstakeFormSubHeader: {
     id: 'app.components.Features.HireVibes.hireVibesUnstakeFormSubHeader',
-    defaultMessage: " - You will get less RewardDROPS",
+    defaultMessage: ' - You will get less RewardDROPS',
   },
   hireVibesStakeFormHeader: {
     id: 'app.components.Features.HireVibes.hireVibesStakeFormHeader',
@@ -65,10 +65,6 @@ export default defineMessages({
   hireVibesTableNoHireVibesText: {
     id: 'app.components.Features.HireVibes.hireVibesTableNoHireVibesText',
     defaultMessage: 'None',
-  },
-  hireVibesTableLoadingText: {
-    id: 'app.components.Features.HireVibes.hireVibesTableNoHireVibesText',
-    defaultMessage: 'Retrieving your stake',
   },
   hireVibesTablePoweredUpText: {
     id: 'app.components.Features.HireVibes.hireVibesTablePoweredUpText',
