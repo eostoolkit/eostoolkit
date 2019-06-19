@@ -28,7 +28,7 @@ export default defineMessages({
   },
   parslUnstakeFormSubHeader: {
     id: 'app.components.Features.Parsl.parslUnstakeFormSubHeader',
-    defaultMessage: " - You will get less RewardDROPS",
+    defaultMessage: ' - You will get less RewardDROPS',
   },
   parslStakeFormHeader: {
     id: 'app.components.Features.Parsl.parslStakeFormHeader',
@@ -53,10 +53,6 @@ export default defineMessages({
   parslTableNoParslText: {
     id: 'app.components.Features.Parsl.parslTableNoParslText',
     defaultMessage: 'None',
-  },
-  parslTableLoadingText: {
-    id: 'app.components.Features.Parsl.parslTableNoParslText',
-    defaultMessage: 'Retrieving your stake',
   },
   parslTablePoweredUpText: {
     id: 'app.components.Features.Parsl.parslTablePoweredUpText',

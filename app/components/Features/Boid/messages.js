@@ -28,7 +28,7 @@ export default defineMessages({
   },
   boidUnstakeFormSubHeader: {
     id: 'app.components.Features.Boid.boidUnstakeFormSubHeader',
-    defaultMessage: " - You will get less RewardDROPS",
+    defaultMessage: ' - You will get less RewardDROPS',
   },
   boidStakeFormHeader: {
     id: 'app.components.Features.Boid.boidStakeFormHeader',
@@ -53,10 +53,6 @@ export default defineMessages({
   boidTableNoBoidText: {
     id: 'app.components.Features.Boid.boidTableNoBoidText',
     defaultMessage: 'None',
-  },
-  boidTableLoadingText: {
-    id: 'app.components.Features.Boid.boidTableNoBoidText',
-    defaultMessage: 'Retrieving your stake',
   },
   boidTablePoweredUpText: {
     id: 'app.components.Features.Boid.boidTablePoweredUpText',

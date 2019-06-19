@@ -6,14 +6,14 @@
  */
 
 // Needed for redux-saga es6 generator support
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter } from 'connected-react-router'
+import { createBrowserHistory } from 'history';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
@@ -30,7 +30,7 @@ import '!file-loader?name=[name].[ext]!./images/icon-96x96.png';
 import '!file-loader?name=[name].[ext]!./images/icon-144x144.png';
 import '!file-loader?name=[name].[ext]!./images/icon-152x152.png';
 import '!file-loader?name=[name].[ext]!./images/icon-192x192.png';
-import '!file-loader?name=[name].[ext]!./manifest.json';
+// import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
@@ -41,7 +41,7 @@ import { translationMessages } from './i18n';
 
 // Create redux store with history
 const initialState = {};
-const history = createHistory();
+const history = createBrowserHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
