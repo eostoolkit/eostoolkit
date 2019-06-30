@@ -1,4 +1,3 @@
-import Eos from 'eosjs';
 import { put, select, call } from 'redux-saga/effects';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
 import { push } from 'react-router-redux';

@@ -10,7 +10,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import ScatterJS from 'scatterjs-core';
-import ScatterEOS from 'scatterjs-plugin-eosjs';
+import ScatterEOS from 'scatterjs-plugin-eosjs2';
 import { setSigner, loadNetworks, loadAccount } from './actions';
 import saga from './sagas/watchers';
 
@@ -26,7 +26,9 @@ export class NetworkClient extends React.Component {
     this.props.loadNetworks();
 
     ScatterJS.plugins( new ScatterEOS() );
+    console.log("@@@ Connecting to Scatter");
     ScatterJS.scatter.connect('EOSToolkit').then(connected => {
+      console.log("@@@ Connecting to Scatter, result", connect);
       if(connected){
           this.props.setSigner(ScatterJS.scatter);
           window.ScatterJS = null;

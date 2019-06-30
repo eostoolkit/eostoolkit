@@ -34,14 +34,14 @@ function* getStake() {
       lower_bound: currentIdentity.name,
       upper_bound: currentIdentity.name,
     }
-    const stakes = yield networkReader.getTableRows(stake);
+    const stakes = yield networkReader.get_table_rows(stake);
 
     const refund = {
       ...refundTable,
       lower_bound: currentIdentity.name,
       upper_bound: currentIdentity.name,
     }
-    const refunds = yield networkReader.getTableRows(refund);
+    const refunds = yield networkReader.get_table_rows(refund);
 
     stakes.rows.map(row => {
       data.push({

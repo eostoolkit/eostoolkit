@@ -21,7 +21,7 @@ function* getProxies() {
 
     const networkReader = yield select(makeSelectReader());
 
-    const data = yield networkReader.getTableRows(proxyTable);
+    const data = yield networkReader.get_table_rows(proxyTable);
     data.rows.map(row => {
       proxies.push({
         ...row,

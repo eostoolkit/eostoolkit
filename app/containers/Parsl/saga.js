@@ -33,13 +33,13 @@ function* getStake() {
       ...stakeTable,
       scope: currentIdentity.name,
     }
-    const stakes = yield networkReader.getTableRows(stake);
+    const stakes = yield networkReader.get_table_rows(stake);
 
     const refund = {
       ...refundTable,
       scope: currentIdentity.name,
     }
-    const refunds = yield networkReader.getTableRows(refund);
+    const refunds = yield networkReader.get_table_rows(refund);
 
     stakes.rows.map(row => {
       data.push({

@@ -31,7 +31,7 @@ function* getStats(token,round,balance) {
       ...statsTable,
       scope: token
     };
-    const tokenTable = yield networkReader.getTableRows(table);
+    const tokenTable = yield networkReader.get_table_rows(table);
     const tokenRow = tokenTable.rows[0];
     const { last_transfer, supply } = tokenRow;
     const roundVelocity = tokenRow.most_velocity.find(r=>r.mining_round === round);
@@ -71,7 +71,7 @@ function* getMiner() {
     const networkReader = yield select(makeSelectReader());
     const currentIdentity = yield select(makeSelectIdentity());
 
-    const minerData = yield networkReader.getTableRows(minerTable);
+    const minerData = yield networkReader.get_table_rows(minerTable);
     const { rewards, ...other} = minerData.rows[0];
     const rewardData = rewards.find(r=>r.mining_round === other.mining_round);
 
@@ -80,7 +80,7 @@ function* getMiner() {
       scope: currentIdentity.name
     }
 
-    const accountData = yield networkReader.getTableRows(table);
+    const accountData = yield networkReader.get_table_rows(table);
     //console.log(accountData);
 
     const tokenList = ['BTC','ETH','DOGE'];

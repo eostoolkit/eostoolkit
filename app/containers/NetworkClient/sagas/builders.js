@@ -1,4 +1,4 @@
-import Eos from 'eosjs';
+import { Api, JsonRpc, RpcError } from 'eosjs';
 import { put, call } from 'redux-saga/effects';
 import { fetchTokens, fetchClaims, fetchIdentity } from './fetchers';
 import { enableReader, enableWriter, disableWriter } from '../actions';
@@ -13,19 +13,23 @@ import { enableReader, enableWriter, disableWriter } from '../actions';
 // this is triggered by the buildDispatcher
 export function* buildReader(activeNetwork) {
   try {
+    const httpEndpoint = `${activeNetwork.endpoint.protocol}://${activeNetwork.endpoint.url}:${activeNetwork.endpoint.port}`;
+    const rpc = new JsonRpc(httpEndpoint);
+    
     const networkOptions = {
-      broadcast: false,
-      sign: false,
+      rpc: rpc,
       chainId: activeNetwork.network.chainId,
-      keyPrefix: activeNetwork.network.prefix || 'EOS',
-      httpEndpoint: `${activeNetwork.endpoint.protocol}://${activeNetwork.endpoint.url}:${activeNetwork.endpoint.port}`,
+      
+      // broadcast: false,
+      // sign: false,
+      // keyPrefix: activeNetwork.network.prefix || 'EOS',
     };
 
-    const networkReader = yield Eos(networkOptions);
+    //const networkReader = yield Api(networkOptions);
     const tokens = [];//yield call(fetchTokens, networkReader);
     const claims = yield call(fetchClaims);
 
-    yield put(enableReader(networkReader, tokens, claims));
+    yield put(enableReader(rpc, tokens, claims));
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
@@ -58,7 +62,7 @@ export function* buildWriter(signer, activeNetwork) {
       keyPrefix: activeNetwork.network.prefix || 'EOS'
     };
     const protocol = activeNetwork.endpoint.protocol;
-    const networkWriter = signer.eos(signerClientConfig, Eos, networkOptions, protocol);
+    const networkWriter = signer.eos(signerClientConfig, Api, networkOptions, protocol);
     const identity = yield call(fetchIdentity, signer, activeNetwork);
 
     if (identity) {
