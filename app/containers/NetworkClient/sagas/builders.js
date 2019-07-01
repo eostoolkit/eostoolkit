@@ -46,23 +46,30 @@ export function* buildReader(activeNetwork) {
 // this is triggered by the buildDispatcher
 export function* buildWriter(signer, activeNetwork) {
   try {
+    const httpEndpoint = `${activeNetwork.endpoint.protocol}://${activeNetwork.endpoint.url}:${activeNetwork.endpoint.port}`;
+    const rpc = new JsonRpc(httpEndpoint);
+
     const signerClientConfig = {
       protocol: activeNetwork.endpoint.protocol,
       blockchain: activeNetwork.network.network,
       host: activeNetwork.endpoint.url,
       port: activeNetwork.endpoint.port,
       chainId: activeNetwork.network.chainId,
-      keyPrefix: activeNetwork.network.prefix || 'EOS'
+      // keyPrefix: activeNetwork.network.prefix || 'EOS'
     };
 
     const networkOptions = {
-      broadcast: true,
-      sign: true,
-      chainId: activeNetwork.network.chainId,
-      keyPrefix: activeNetwork.network.prefix || 'EOS'
+      // broadcast: true,
+      // sign: true,
+      // chainId: activeNetwork.network.chainId,
+      // keyPrefix: activeNetwork.network.prefix || 'EOS',
+      rpc: rpc
     };
+    console.log("@@@ signerClientConfig", signerClientConfig);
+    console.log("@@@ signer", signer);
     const protocol = activeNetwork.endpoint.protocol;
-    const networkWriter = signer.eos(signerClientConfig, Api, networkOptions, protocol);
+    //const networkWriter = signer.eos(signerClientConfig, Api, networkOptions, protocol);
+    const networkWriter = signer.eos(signerClientConfig, Api, networkOptions);
     const identity = yield call(fetchIdentity, signer, activeNetwork);
 
     if (identity) {

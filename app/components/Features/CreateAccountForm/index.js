@@ -54,7 +54,7 @@ const makeTransaction = values => {
         stake_cpu_quantity: `${Number(values.cpu)
           .toFixed(4)
           .toString()} ${values.activeNetwork.network.prefix}`,
-        transfer: values.transfer ? 1 : 0,
+        transfer: values.transfer ? true : false,
       },
     },
   ];

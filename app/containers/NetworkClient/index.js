@@ -28,7 +28,7 @@ export class NetworkClient extends React.Component {
     ScatterJS.plugins( new ScatterEOS() );
     console.log("@@@ Connecting to Scatter");
     ScatterJS.scatter.connect('EOSToolkit').then(connected => {
-      console.log("@@@ Connecting to Scatter, result", connect);
+      console.log("@@@ Connecting to Scatter, scatter", ScatterJS.scatter);
       if(connected){
           this.props.setSigner(ScatterJS.scatter);
           window.ScatterJS = null;
