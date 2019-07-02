@@ -63,7 +63,8 @@ export function* buildWriter(signer, activeNetwork) {
       // sign: true,
       // chainId: activeNetwork.network.chainId,
       // keyPrefix: activeNetwork.network.prefix || 'EOS',
-      rpc: rpc
+      rpc: rpc,
+      beta3: true
     };
     console.log("@@@ signerClientConfig", signerClientConfig);
     console.log("@@@ signer", signer);
