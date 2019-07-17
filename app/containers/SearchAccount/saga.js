@@ -77,7 +77,7 @@ function* performSearchPubkey() {
   const publicKey = yield select(makeSelectSearchPubkey());
   yield put(lookupLoading());
   try {
-    const res = yield networkReader.get_key_accounts(publicKey);
+    const res = yield networkReader.history_get_key_accounts(publicKey);
     const details = yield all(
       res.account_names.map(accountName => {
         return fork(getAccountDetail, accountName);
