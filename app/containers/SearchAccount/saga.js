@@ -25,7 +25,7 @@ function* getCurrency(token, name) {
 function* getAccountDetail(name) {
   try {
     const networkReader = yield select(makeSelectReader());
-    const account = yield networkReader.getAccount(name);
+    const account = yield networkReader.get_account(name);
 
     let body = {account:account.account_name};
     try {
@@ -77,7 +77,7 @@ function* performSearchPubkey() {
   const publicKey = yield select(makeSelectSearchPubkey());
   yield put(lookupLoading());
   try {
-    const res = yield networkReader.getKeyAccounts(publicKey);
+    const res = yield networkReader.get_key_accounts(publicKey);
     const details = yield all(
       res.account_names.map(accountName => {
         return fork(getAccountDetail, accountName);
