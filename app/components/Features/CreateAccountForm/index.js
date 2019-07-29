@@ -29,8 +29,24 @@ const makeTransaction = values => {
       data: {
         creator: values.owner,
         name: values.name,
-        owner: values.ownerKey,
-        active: values.activeKey,
+        owner: {
+          threshold: 1,
+          keys: [{
+            key: values.ownerKey,
+            weight: 1
+          }],
+          accounts: [],
+          waits: []
+        },
+        active: {
+          threshold: 1,
+          keys: [{
+            key: values.activeKey,
+            weight: 1
+          }],
+          accounts: [],
+          waits: []
+        },
       },
     },
     {
