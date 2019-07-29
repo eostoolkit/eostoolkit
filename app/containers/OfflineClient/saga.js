@@ -30,7 +30,6 @@ export function* stageTransaction(action) {
         authorization: [{actor: action.data.actor, permission: action.data.permission}],
       };
     });
-    console.log("@@@ offline network api.transaction");
     const res = yield networkWriter.transact({ actions },{broadcast: false, sign: false,  blocksBehind: 3, expireSeconds: 3600});
     const data = JSON.stringify(res.transaction.transaction, null, 2);
     const filename = `tx-${action.data.actor}-${(new Date()).getTime()}.json`;
@@ -100,7 +99,6 @@ export function* pushTransaction(action) {
       transaction: JSON.parse(action.data.transaction),
       signatures
     }
-    console.log("@@@ offline network api.pushTransaction");
     const res = yield networkReader.push_transaction(transaction);
     yield put(successNotification({TransactionId: res.transaction_id}));
 

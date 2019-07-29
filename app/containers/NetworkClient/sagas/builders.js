@@ -66,8 +66,6 @@ export function* buildWriter(signer, activeNetwork) {
       rpc: rpc,
       beta3: true
     };
-    console.log("@@@ signerClientConfig", signerClientConfig);
-    console.log("@@@ signer", signer);
     const protocol = activeNetwork.endpoint.protocol;
     //const networkWriter = signer.eos(signerClientConfig, Api, networkOptions, protocol);
     const networkWriter = signer.eos(signerClientConfig, Api, networkOptions);

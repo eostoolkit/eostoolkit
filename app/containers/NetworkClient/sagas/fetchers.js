@@ -192,7 +192,6 @@ export function* fetchClaims() {
  */
 
 export function* fetchIdentity(signer, activeNetwork) {
-  console.log("@@@ fetching Identity, signer", signer, "active network", activeNetwork);
   try {
     const currentIdentity = yield select(makeSelectIdentity());
     // build a network to suggest
@@ -216,7 +215,6 @@ export function* fetchIdentity(signer, activeNetwork) {
         },
       ],
     });
-    console.log("fetch Identity, id", id);
 
     const match = id && id.accounts.find(x => x.blockchain === activeNetwork.network.network);
 

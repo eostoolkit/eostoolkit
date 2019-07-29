@@ -35,9 +35,7 @@ export function* pushTransaction(action) {
           authorization: [{ actor:networkIdentity.name, permission:networkIdentity.authority }],
         };
       });
-      console.log(`Attempting to send tx to scatterzzzz: ${JSON.stringify(actions, null, 2)}`);
       const res = yield networkWriter.transact({ actions }, {blocksBehind: 3, expireSeconds: 30});
-      console.log("@@@ result of transaction to eos ", res);
       yield put(successNotification({TransactionId: res.transaction_id}));
       //wait for block to be committed
       yield sleep(1000);

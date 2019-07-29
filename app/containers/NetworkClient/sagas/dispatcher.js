@@ -11,20 +11,15 @@ import { loadAccount, disableWriter } from '../actions';
 */
 
 export function* buildDispatcher() {
-  console.log("@@@@ build Dispatcher Main");
-
   const signer = yield select(makeSelectSigner());
   const network = yield select(makeSelectActiveNetwork());
   // build only dispatches if we do have networks and signer
-  console.log("@@@@ build Dispatcher network", network, "signer", signer);
   if (network) {
-    console.log("@@@@ build Dispatcher Reader", network);
     yield spawn(buildReader, network);
   }
 
   
   if (signer.identity && network) {
-    console.log("@@@@ build Dispatcher Writer - temporarily disable it", signer);
     //yield spawn(buildWriter, signer, network);
     yield put(disableWriter());
   } else {
