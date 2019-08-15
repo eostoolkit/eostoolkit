@@ -58,9 +58,17 @@ export default defineMessages({
     id: 'app.components.Features.OpenBRM.openBRMTableNoOpenBRMText',
     defaultMessage: 'Retrieving your stake',
   },
+  openBRMTableLiquidText: {
+    id: 'app.components.Features.OpenBRM.openBRMTableLiquidText',
+    defaultMessage: 'Liquid tokens',
+  },
+  openBRMTableNoLiquidText: {
+    id: 'app.components.Features.OpenBRM.openBRMTableNoLiquidText',
+    defaultMessage: 'No liquid tokens',
+  },
   openBRMTablePoweredUpText: {
     id: 'app.components.Features.OpenBRM.openBRMTablePoweredUpText',
-    defaultMessage: 'Staked BRM',
+    defaultMessage: 'Staked tokens',
   },
   openBRMTableRefundingHeader: {
     id: 'app.components.Features.OpenBRM.openBRMTableRefundingHeader',

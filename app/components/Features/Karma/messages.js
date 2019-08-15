@@ -58,6 +58,14 @@ export default defineMessages({
     id: 'app.components.Features.Karma.karmaTablePoweredUpText',
     defaultMessage: 'Powered Up',
   },
+  karmaTableLiquidText: {
+    id: 'app.components.Features.Karma.karmaTableLiquidText',
+    defaultMessage: 'Liquid tokens',
+  },
+  karmaTableNoLiquidText: {
+    id: 'app.components.Features.Karma.karmaTableNoLiquidText',
+    defaultMessage: 'No liquid tokens',
+  },
   karmaTableClaimRewardsOn: {
     id: 'app.components.Features.Karma.karmaTableClaimRewardsOn',
     defaultMessage: 'Claim your rewards on ',

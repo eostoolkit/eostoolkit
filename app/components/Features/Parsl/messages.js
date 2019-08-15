@@ -54,13 +54,21 @@ export default defineMessages({
     id: 'app.components.Features.Parsl.parslTableNoParslText',
     defaultMessage: 'None',
   },
+  parslTableLiquidText: {
+    id: 'app.components.Features.Parsl.parslTableLiquidText',
+    defaultMessage: 'Liquid tokens',
+  },
+  parslTableNoLiquidText: {
+    id: 'app.components.Features.Parsl.parslTableNoLiquidText',
+    defaultMessage: 'No liquid tokens',
+  },
   parslTableLoadingText: {
     id: 'app.components.Features.Parsl.parslTableNoParslText',
     defaultMessage: 'Retrieving your stake',
   },
   parslTablePoweredUpText: {
     id: 'app.components.Features.Parsl.parslTablePoweredUpText',
-    defaultMessage: 'Staked SEED',
+    defaultMessage: 'Staked tokens',
   },
   parslTableRefundingHeader: {
     id: 'app.components.Features.Parsl.parslTableRefundingHeader',

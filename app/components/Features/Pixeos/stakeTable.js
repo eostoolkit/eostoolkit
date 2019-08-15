@@ -19,6 +19,7 @@ const Pixeos = props => {
   let pixeosStaked = 0;
   let pixeosRefund = 0;
   let refundTime = 0;
+  let totalPixeos = 0;
 
   console.log(stakes);
   console.log(networkAccount);
@@ -29,7 +30,7 @@ const Pixeos = props => {
     const hasPixeos = networkAccount.balances.find(b => b.code === 'pixeos1token');
 
     if (hasPixeos) {
-      pixeosLiquid = Number(hasPixeos.amount);
+      totalPixeos = Number(hasPixeos.amount);
     }
     if (hasStaked) {
       pixeosStaked = Number(hasStaked.staked_pixeos.split(' ')[0]);
@@ -43,7 +44,7 @@ const Pixeos = props => {
   const refundDate = new Date(refundTime)
   refundDate.setSeconds( refundDate.getSeconds() + refundDelay );
 
-  const totalPixeos = pixeosLiquid;
+  pixeosLiquid = totalPixeos - pixeosStaked;
 
   const handleRefund = stake => {
     const transaction = [
@@ -67,7 +68,8 @@ const Pixeos = props => {
       subheader={intl.formatMessage(messages.pixeosTableSubHeader)}>
       <h3>Total Pixeos</h3>
       <h2 style={{ marginTop: '-10px' }}>{Number(totalPixeos).toFixed(4)}</h2>
-      <h4 style={{ marginTop: '-10px' }}>
+
+      <h4>
         <FormattedMessage {...messages.pixeosTablePoweredUpText} />
       </h4>
       <h3 style={{ marginTop: '-10px' }}>
@@ -75,25 +77,40 @@ const Pixeos = props => {
           Number(pixeosStaked).toFixed(4) : intl.formatMessage(messages.pixeosTableNoPixeosText)}
       </h3>
 
+      {pixeosLiquid > 0 ? (
+        <React.Fragment>
+          <h4>
+            <FormattedMessage {...messages.pixeosTableLiquidText} />
+          </h4>
+          <h3 style={{ marginTop: '-10px' }}>
+            {pixeosLiquid > 0 ?
+              Number(pixeosLiquid).toFixed(4) : intl.formatMessage(messages.pixeosTableNoPixeosText)}
+          </h3>
+        </React.Fragment>
+      ) : (
+        ''
+      )}
+
       {pixeosRefund > 0 ? (
         <React.Fragment>
           <h4>
             <FormattedMessage {...messages.pixeosTableRefundingHeader} />
           </h4>
-          {refundDate < new Date() ? (
-            <Button
-              onClick={() => {
-                handleRefund(hasRefund);
-              }}
-              color="success">
-              Refund
-            </Button>
-          ) : (
-            <p style={{ marginTop: '-10px' }}>
-              <FormattedMessage {...messages.pixeosTableAvailableOnText} /> {refundDate.toLocaleString()}
-            </p>
-          )}
-          <h3 style={{ marginTop: '-10px' }}>{Number(pixeosRefund).toFixed(4)}</h3>
+          <h3 style={{ marginTop: '-10px' }}>{Number(pixeosRefund).toFixed(4)}
+            {refundDate < new Date() ? (
+              <Button
+                onClick={() => {
+                  handleRefund(hasRefund);
+                }}
+                color="success">
+                Refund
+              </Button>
+            ) : (
+              <p style={{ marginTop: '-10px' }}>
+                <FormattedMessage {...messages.pixeosTableAvailableOnText} /> {refundDate.toLocaleString()}
+              </p>
+            )}
+          </h3>
         </React.Fragment>
       ) : (
         ''
