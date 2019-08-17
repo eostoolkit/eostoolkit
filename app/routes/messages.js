@@ -30,6 +30,10 @@ export default defineMessages({
     id: 'app.routes.menuDapps',
     defaultMessage: 'Dapps',
   },
+  menuRex: {
+    id: 'app.routes.menuRex',
+    defaultMessage: 'Rex',
+  },
   menuPARSL: {
     id: 'app.routes.menuPARSL',
     defaultMessage: 'Parsl SEED',
@@ -39,20 +43,20 @@ export default defineMessages({
     defaultMessage: 'KARMA',
   },
   menuHireVibes: {
-      id: 'app.routes.menuHireVibes',
-      defaultMessage: 'HireVibes',
+    id: 'app.routes.menuHireVibes',
+    defaultMessage: 'HireVibes',
   },
   menuBoid: {
-      id: 'app.routes.menuBoid',
-      defaultMessage: 'Boid',
+    id: 'app.routes.menuBoid',
+    defaultMessage: 'Boid',
   },
   menuPixeos: {
-      id: 'app.routes.menuPixeos',
-      defaultMessage: 'Pixeos',
+    id: 'app.routes.menuPixeos',
+    defaultMessage: 'Pixeos',
   },
   menuOpenBRM: {
-      id: 'app.routes.menuOpenBRM',
-      defaultMessage: 'OpenBRM',
+    id: 'app.routes.menuOpenBRM',
+    defaultMessage: 'OpenBRM',
   },
   menuHorusPay: {
     id: 'app.routes.menuHorusPay',

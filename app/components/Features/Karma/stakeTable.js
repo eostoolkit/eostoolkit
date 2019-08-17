@@ -79,20 +79,35 @@ const Karma = props => {
       subheader={intl.formatMessage(messages.karmaTableSubHeader)}>
       <h3>Total KARMA</h3>
       <h2 style={{ marginTop: '-10px' }}>{Number(totalKarma).toFixed(4)}</h2>
-      <h4 style={{ marginTop: '-10px' }}>
+      
+      <h4>
         <FormattedMessage {...messages.karmaTablePoweredUpText} />
       </h4>
       <h3 style={{ marginTop: '-10px' }}>
         {karmaStaked > 0 ? Number(karmaStaked).toFixed(4) : intl.formatMessage(messages.karmaTableNoKarmaText)}
+        {karmaStaked > 0 ? (
+          <Button
+            onClick={() => {
+              handleClaim(hasStaked);
+            }}
+            color="success">
+            Claim
+          </Button>
+        ) : (
+          ''
+        )}
       </h3>
-      {karmaStaked > 0 ? (
-        <Button
-          onClick={() => {
-            handleClaim(hasStaked);
-          }}
-          color="success">
-          Claim
-        </Button>
+
+      {karmaLiquid > 0 ? (
+        <React.Fragment>
+          <h4>
+            <FormattedMessage {...messages.karmaTableLiquidText} />
+          </h4>
+          <h3 style={{ marginTop: '-10px' }}>
+            {karmaLiquid > 0 ?
+              Number(karmaLiquid).toFixed(4) : intl.formatMessage(messages.karmaTableNoLiquidText)}
+          </h3>
+        </React.Fragment>
       ) : (
         ''
       )}

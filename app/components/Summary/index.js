@@ -18,7 +18,8 @@ import { compose } from "redux";
 import { createStructuredSelector } from "reselect";
 import {
   makeSelectActiveNetwork,
-  makeSelectAccount
+  makeSelectAccount,
+  makeSelectRex,
 } from "containers/NetworkClient/selectors";
 
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -40,7 +41,7 @@ import { injectIntl, FormattedMessage } from "react-intl";
 import messages from "./messages";
 
 function Summary(props) {
-  const { classes, account, network, intl } = props;
+  const { classes, account, network, intl, rex} = props;
   return (
     <div>
       <GridContainer>
@@ -58,7 +59,7 @@ function Summary(props) {
               </h5>
             </CardHeader>
             <CardBody>
-              <ResourceTable account={account} />
+              <ResourceTable account={account} rex={rex} />
               <Warning>
                 <h6>
                   <Announcement />{" "}
@@ -78,7 +79,8 @@ function Summary(props) {
 
 const mapStateToProps = createStructuredSelector({
   account: makeSelectAccount(),
-  network: makeSelectActiveNetwork()
+  network: makeSelectActiveNetwork(),
+  rex: makeSelectRex(),
 });
 
 function mapDispatchToProps() {

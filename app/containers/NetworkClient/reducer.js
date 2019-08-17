@@ -12,6 +12,7 @@ import {
   SET_IDENTITY,
   PUSH_TRANSACTION,
   TOGGLE_OFFLINE,
+  LOADED_REX,
 } from './constants';
 
 const initialState = fromJS({
@@ -31,6 +32,7 @@ const initialState = fromJS({
   offlineMode: false,
   override: true,
   networkTime: 0,
+  rex: null,
 });
 
 function clientReducer(state = initialState, action) {
@@ -85,6 +87,8 @@ function clientReducer(state = initialState, action) {
       return state.set('transaction', action.transaction);
     case TOGGLE_OFFLINE:
       return state.set('offlineMode', !state.get('offlineMode'));
+    case LOADED_REX:
+      return state.set('rex', action.rex);
     default:
       return state;
   }

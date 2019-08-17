@@ -9,15 +9,15 @@ export default defineMessages({
   // Messages for News component
   multiChainHeader: {
     id: 'app.components.Information.News.multiChainHeader',
-    defaultMessage: 'Multi-chain support',
+    defaultMessage: 'Improved token support',
   },
   multiChain1: {
     id: 'app.components.Information.News.multiChain1',
-    defaultMessage: 'We are excited to announce that the toolkit now has multi-chain support. Go to menu ',
+    defaultMessage: 'We have added REX token info and also improved the dApp sections for Karma, Parsl, Pixeos, Hirevibes, OpenBRM, BOID. You can now also interact with BOS.  Go to menu ',
   },
   multiChain2: {
     id: 'app.components.Information.News.multiChain2',
-    defaultMessage: ' and select an endpoint for the network you want to interact with. Initially we have listed EOS, Worbli, Telos and MeetOne.',
+    defaultMessage: ' and select an endpoint for the network you want to interact with. Initially we have listed EOS, Worbli, MeetOne, Telos and BOS.',
   },
   multiChain3: {
     id: 'app.components.Information.News.multiChain3',
