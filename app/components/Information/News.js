@@ -10,7 +10,7 @@ const News = () => {
     <div>
       <h3>
         <FormattedMessage {...messages.multiChainHeader} />
-      </h3>
+      </h3> 
       <h4>
         <FormattedMessage {...messages.multiChain1} />
         <a href="/networks" target="_self">
