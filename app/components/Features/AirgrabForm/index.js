@@ -32,6 +32,12 @@ const makeTransaction = (values, networkIdentity) => {
       quantity: `0.0000 ${values.symbol}`,
     };
   }
+  if (values.method === 'airgrab2' && values.symbol === 'SOV') {
+    data = {
+      owner: networkIdentity ? networkIdentity.name : '',
+      value: `0.0000 ${values.symbol}`,
+    };
+  }
   if (values.method === 'signup' && values.symbol === 'SEED') {
     data = {
       owner: networkIdentity ? networkIdentity.name : '',

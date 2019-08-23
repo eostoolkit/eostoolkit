@@ -3,13 +3,13 @@
 //
 
 const airgrabs = [
-  // {
-  //   symbol: 'XBL',
-  //   account: 'billionairet',
-  //   method: 'open',
-  //   description: 'The Billionaire Token - the first super-deflationary, gaming and gambling token. The Airgrab will end on the 12th of March 2019! Everyone who had more than 100 EOS in their wallets on the 20th of January 2019 is eligible to Airgrab XBL. The ratio is 0.00122 to 1 - this means that for every 1000 EOS, you will receive 1.22 XBL.',
-  //   url: 'https://BillionaireToken.com',
-  // },
+  {
+   symbol: 'SOV',
+   account: 'sovmintofeos',
+   method: 'airgrab2',
+   description: 'SOV - the first self-deflationary token on EOS the first variable rate self-deflationary cryptocurrency.',
+   url: 'https://www.soveos.one',
+   },
   // {
   //     symbol: 'ATD',
   //     account: 'eosatidiumio',
