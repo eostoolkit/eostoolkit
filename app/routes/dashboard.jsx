@@ -98,6 +98,12 @@ const dashRoutes = [
   //   component: RexForm,
   // },
   {
+    path: '/dapps/rex',
+    name: <FormattedMessage {...messags.menuRex} />,
+    icon: CloudUpload,
+    component: RexForm,
+  },
+  {
     path: '/poorswap',
     name: <FormattedMessage {...messags.menuPoorSwap} />,
     icon: CompareArrows,

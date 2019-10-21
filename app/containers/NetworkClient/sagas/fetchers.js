@@ -124,7 +124,7 @@ export function* fetchLatency() {
 function* fetchTokenInfo(reader, account, symbol) {
   try {
     if (symbol === 'OCT') throw { message: 'OCT has no STATS table - please fix!' };
-    const stats = yield reader.getCurrencyStats(account, symbol);
+    const stats = yield reader.get_currency_stats(account, symbol);
     const split = stats[symbol].max_supply.split(' ')[0].split('.');
     const precision = split.length > 1 ? split[1].length : 0;
     return {
@@ -238,7 +238,7 @@ export function* fetchIdentity(signer, activeNetwork) {
 
 function* getCurrency(reader, token, name) {
   try {
-    const currency = yield reader.getCurrencyBalance(token, name);
+    const currency = yield reader.get_currency_balance(token, name);
     const currencies = currency.map(c => {
       return {
         account: token,
@@ -285,7 +285,7 @@ function convertFinalData({ account, balance }) {
 
 function* getAccountDetail(reader, name) {
   try {
-    const account = yield reader.getAccount(name);
+    const account = yield reader.get_account(name);
     const activeNetwork = yield select(makeSelectActiveNetwork());
     if (activeNetwork.network.prefix === 'EOS') {
       let body = { account: account.account_name };
@@ -387,7 +387,7 @@ export function* fetchRexInfo() {
   const identity = yield select(makeSelectIdentity());
   if (reader === null || reader === undefined || identity === null || identity === undefined) return;
   try {
-    const account = yield reader.getAccount(identity.name);
+    const account = yield reader.get_account(identity.name);
     const body = {
       code: 'eosio',
       json: true,
@@ -396,7 +396,7 @@ export function* fetchRexInfo() {
       upper_bound: account.account_name,
       lower_bound: account.account_name,
     };
-    const data = yield reader.getTableRows(body);
+    const data = yield reader.get_table_rows(body);
     const rex = yield data.rows[0];
 
     console.log('rex: ', rex);

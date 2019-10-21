@@ -1,4 +1,4 @@
-import { makeSelectReader, makeSelectTransaction, makeSelectSigner, makeSelectIdentity, makeSelectActiveNetwork } from 'containers/NetworkClient/selectors';
+import { makeSelectReader, makeSelectWriter, makeSelectTransaction, makeSelectSigner, makeSelectIdentity, makeSelectActiveNetwork } from 'containers/NetworkClient/selectors';
 import { takeLatest, call, put, select, all, fork, join } from 'redux-saga/effects';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
 import fileDownload from 'js-file-download';
@@ -10,10 +10,11 @@ export function* stageTransaction(action) {
   yield put(loadingNotification());
   try {
     const transaction = JSON.parse(action.data.transaction);//yield select(makeSelectTransaction());
-    const networkReader = yield select(makeSelectReader());
+    //const networkReader = yield select(makeSelectReader()); //changed this from reader to writter, others please verify
+    const networkWriter = yield select(makeSelectWriter());
 
-    if (!networkReader || !transaction ) {
-      throw { message: 'Reader is not enabled - check your network connection' };
+    if (!networkWriter || !transaction ) {
+      throw { message: 'Writer is not enabled - check your network connection' };
     }
     if (transaction.error) {
       throw { message: transaction.error };
@@ -29,7 +30,7 @@ export function* stageTransaction(action) {
         authorization: [{actor: action.data.actor, permission: action.data.permission}],
       };
     });
-    const res = yield networkReader.transaction({ actions },{broadcast: false, sign: false, expireInSeconds: 3600});
+    const res = yield networkWriter.transact({ actions },{broadcast: false, sign: false,  blocksBehind: 3, expireSeconds: 3600});
     const data = JSON.stringify(res.transaction.transaction, null, 2);
     const filename = `tx-${action.data.actor}-${(new Date()).getTime()}.json`;
 
@@ -98,7 +99,7 @@ export function* pushTransaction(action) {
       transaction: JSON.parse(action.data.transaction),
       signatures
     }
-    const res = yield networkReader.pushTransaction(transaction);
+    const res = yield networkReader.push_transaction(transaction);
     yield put(successNotification({TransactionId: res.transaction_id}));
 
   } catch (err) {

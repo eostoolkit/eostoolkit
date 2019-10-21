@@ -34,11 +34,11 @@ function* getProducers() {
     let data = { more: true };
 
     const networkReader = yield select(makeSelectReader());
-    const global = yield networkReader.getTableRows(globalTable());
+    const global = yield networkReader.get_table_rows(globalTable());
     const total_vote = global.rows[0].total_producer_vote_weight;
 
     while (data.more) {
-      data = yield networkReader.getTableRows(producerTable(key));
+      data = yield networkReader.get_table_rows(producerTable(key));
       if(data.more) {
         key = data.rows.pop().owner;
       }

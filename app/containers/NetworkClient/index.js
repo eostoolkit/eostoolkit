@@ -10,7 +10,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import ScatterJS from 'scatterjs-core';
-import ScatterEOS from 'scatterjs-plugin-eosjs';
+import ScatterEOS from 'scatterjs-plugin-eosjs2';
 import { setSigner, loadNetworks, loadAccount } from './actions';
 import saga from './sagas/watchers';
 

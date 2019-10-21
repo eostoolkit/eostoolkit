@@ -31,7 +31,7 @@ const HorusPay = props => {
         data: {
           voter: networkIdentity ? networkIdentity.name : '',
           proxy,
-          producers: null,
+          producers: [],
         },
       },
     ];

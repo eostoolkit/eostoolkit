@@ -29,8 +29,24 @@ const makeTransaction = values => {
       data: {
         creator: values.owner,
         name: values.name,
-        owner: values.ownerKey,
-        active: values.activeKey,
+        owner: {
+          threshold: 1,
+          keys: [{
+            key: values.ownerKey,
+            weight: 1
+          }],
+          accounts: [],
+          waits: []
+        },
+        active: {
+          threshold: 1,
+          keys: [{
+            key: values.activeKey,
+            weight: 1
+          }],
+          accounts: [],
+          waits: []
+        },
       },
     },
     {
@@ -54,7 +70,7 @@ const makeTransaction = values => {
         stake_cpu_quantity: `${Number(values.cpu)
           .toFixed(4)
           .toString()} ${values.activeNetwork.network.prefix}`,
-        transfer: values.transfer ? 1 : 0,
+        transfer: values.transfer ? true : false,
       },
     },
   ];
