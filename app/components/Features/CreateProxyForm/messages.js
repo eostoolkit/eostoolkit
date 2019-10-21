@@ -63,11 +63,11 @@ export default defineMessages({
   },
   formProxyWebsite1024Label: {
     id: 'app.components.Features.CreateProxyForm.formProxyWebsite1024Label',
-    defaultMessage: 'Background (1024 char allowed)',
+    defaultMessage: 'Website URL (1024 char allowed)',
   },
   formProxyWebsite1024Placeholder: {
     id: 'app.components.Features.CreateProxyForm.formProxyWebsite1024Placeholder',
-    defaultMessage: 'Background information / who is the proxy?',
+    defaultMessage: 'URL to the Proxy Website',
   },
   formProxyLogo256Label: {
     id: 'app.components.Features.CreateProxyForm.formProxyLogo256Label',

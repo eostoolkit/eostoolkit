@@ -91,6 +91,12 @@ const dashRoutes = [
     icon: Feedback,
     component: Referendum,
   },
+  // {
+  //   path: '/dapps/rex',
+  //   name: <FormattedMessage {...messags.menuRex} />,
+  //   icon: CloudUpload,
+  //   component: RexForm,
+  // },
   {
     path: '/dapps/rex',
     name: <FormattedMessage {...messags.menuRex} />,

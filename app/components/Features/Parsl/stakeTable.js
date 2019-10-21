@@ -15,7 +15,7 @@ const Parsl = props => {
 
   const refundDelay = 7 * 24 * 3600; // 7 days for LIVE, 15 minutes for TEST
 
-  let parslLiquid = 0;
+  let totalParsl = 0;
   let parslStaked = 0;
   let parslRefund = 0;
   let refundTime = 0;
@@ -27,7 +27,7 @@ const Parsl = props => {
     const hasParsl = networkAccount.balances.find(b => b.code === 'parslseed123');
 
     if (hasParsl) {
-      parslLiquid = Number(hasParsl.amount);
+      totalParsl = Number(hasParsl.amount);
     }
     if (hasStaked) {
       console.log(hasStaked);
@@ -41,7 +41,7 @@ const Parsl = props => {
   }
 
   const refundDate = new Date(refundTime);
-  const totalParsl = parslLiquid;
+  const parslLiquid = totalParsl - parslStaked - parslRefund;
 
   const handleRefund = stake => {
     const transaction = [
@@ -65,7 +65,7 @@ const Parsl = props => {
       subheader={intl.formatMessage(messages.parslTableSubHeader)}>
       <h3>Total Parsl SEED</h3>
       <h2 style={{ marginTop: '-10px' }}>{Number(totalParsl).toFixed(4)}</h2>
-      <h4 style={{ marginTop: '-10px' }}>
+      <h4>
         <FormattedMessage {...messages.parslTablePoweredUpText} />
       </h4>
       <h3 style={{ marginTop: '-10px' }}>
@@ -73,25 +73,40 @@ const Parsl = props => {
           Number(parslStaked).toFixed(4) : intl.formatMessage(messages.parslTableNoParslText)}
       </h3>
 
+      {parslLiquid > 0 ? (
+        <React.Fragment>
+          <h4>
+            <FormattedMessage {...messages.parslTableLiquidText} />
+          </h4>
+          <h3 style={{ marginTop: '-10px' }}>
+            {parslLiquid > 0 ?
+              Number(parslLiquid).toFixed(4) : intl.formatMessage(messages.parslTableNoLiquidText)}
+          </h3>
+        </React.Fragment>
+      ) : (
+        ''
+      )}
+
       {parslRefund > 0 ? (
         <React.Fragment>
           <h4>
             <FormattedMessage {...messages.parslTableRefundingHeader} />
           </h4>
-          {refundDate < new Date() ? (
-            <Button
-              onClick={() => {
-                handleRefund(hasRefund);
-              }}
-              color="success">
-              Refund
-            </Button>
-          ) : (
-            <p style={{ marginTop: '-10px' }}>
-              <FormattedMessage {...messages.parslTableAvailableOnText} /> {new Date(refundTime).toLocaleString()}
-            </p>
-          )}
-          <h3 style={{ marginTop: '-10px' }}>{Number(parslRefund).toFixed(4)}</h3>
+          <h3 style={{ marginTop: '-10px' }}>{Number(parslRefund).toFixed(4)}
+            {refundDate < new Date() ? (
+              <Button
+                onClick={() => {
+                  handleRefund(hasRefund);
+                }}
+                color="success">
+                Refund
+              </Button>
+            ) : (
+              <p style={{ marginTop: '-10px' }}>
+                <FormattedMessage {...messages.parslTableAvailableOnText} /> {new Date(refundTime).toLocaleString()}
+              </p>
+            )}
+          </h3>
         </React.Fragment>
       ) : (
         ''

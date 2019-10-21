@@ -8,18 +8,17 @@ import messages from './messages';
 const News = () => {
   return (
     <div>
-      <h3>Happy first birthday EOS !!!</h3>
+      <h3>
+        <FormattedMessage {...messages.multiChainHeader} />
+      </h3> 
       <h4>
-        Team GenerEOS has compiled a birthday video message from the EOS community - for the EOS community.
-        We received so many amazing video submissions from around the world and it was fun putting it all together.
-        Now watch for yourself!  <a href="https://twitter.com/GenerEOSAus/status/1134685685216993280" target="new">
-          [Twitter announcement]
-        </a><br/>
-        <br/>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/nqSSZ_cftj8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <FormattedMessage {...messages.multiChain1} />
+        <a href="/networks" target="_self">
+          [Change Network]
+        </a>
+        <FormattedMessage {...messages.multiChain2} />
       </h4>
-
-
+    
       <h3>Thank you contributers !!!!</h3>
       <h4>
         The eostoolkit was the first open source tool built by the community - for the community.
@@ -35,23 +34,13 @@ const News = () => {
           [eostoolkit repository on github]
         </a>
       </h4>
-
-      <h3>
-        <FormattedMessage {...messages.multiChainHeader} />
-      </h3>
-      <h4>
-        <FormattedMessage {...messages.multiChain1} />
-        <a href="/networks" target="_self">
-          [Change Network]
-        </a>
-        <FormattedMessage {...messages.multiChain2} />
-      </h4>
-      <h6 color="grey">
+  
+      <h5 color="grey">
         <FormattedMessage {...messages.multiChain3} />
         <a href="https://github.com/eostoolkit/eos-networks/blob/master/networks.json" target="new">
           here
         </a>
-      </h6>
+      </h5>
     </div>
   );
 };

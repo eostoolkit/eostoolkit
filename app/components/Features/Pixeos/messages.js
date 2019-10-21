@@ -19,7 +19,7 @@ export default defineMessages({
     defaultMessage: 'Quantity',
   },
   pixeosQuantityPlaceholder: {
-    id: 'app.components.Features.Pixeos.buildByGenerEOSText',
+    id: 'app.components.Features.Pixeos.pixeosQuantityPlaceholder',
     defaultMessage: 'Amount of Pixeos tokens to Stake',
   },
   pixeosUnstakeFormHeader: {
@@ -60,7 +60,11 @@ export default defineMessages({
   },
   pixeosTablePoweredUpText: {
     id: 'app.components.Features.Pixeos.pixeosTablePoweredUpText',
-    defaultMessage: 'Staked Pixeos tokens',
+    defaultMessage: 'Staked tokens',
+  },
+  pixeosTableLiquidText: {
+    id: 'app.components.Features.Pixeos.pixeosTableLiquidText',
+    defaultMessage: 'Liquid tokens',
   },
   pixeosTableRefundingHeader: {
     id: 'app.components.Features.Pixeos.pixeosTableRefundingHeader',

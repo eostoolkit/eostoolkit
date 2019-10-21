@@ -44,7 +44,7 @@ const OpenBRM = props => {
   }
 
   const refundDate = new Date(refundTime);
-  const totalBRM = brmLiquid;
+  const totalBRM = brmLiquid + brmStaked + brmRefund;
 
   const handleRefund = stake => {
     const transaction = [
@@ -67,32 +67,48 @@ const OpenBRM = props => {
       subheader={intl.formatMessage(messages.openBRMTableSubHeader)}>
       <h3>Total BRM</h3>
       <h2 style={{ marginTop: '-10px' }}>{Number(totalBRM).toFixed(3)}</h2>
-      <h4 style={{ marginTop: '-10px' }}>
+
+      <h4>
         <FormattedMessage {...messages.openBRMTablePoweredUpText} />
       </h4>
       <h3 style={{ marginTop: '-10px' }}>
         {brmStaked > 0 ? Number(brmStaked).toFixed(3) : intl.formatMessage(messages.openBRMTableNoParslText)}
       </h3>
 
+      {brmLiquid > 0 ? (
+        <React.Fragment>
+          <h4>
+            <FormattedMessage {...messages.openBRMTableLiquidText} />
+          </h4>
+          <h3 style={{ marginTop: '-10px' }}>
+            {brmLiquid > 0 ?
+              Number(brmLiquid).toFixed(4) : intl.formatMessage(messages.openBRMTableNoLiquidText)}
+          </h3>
+        </React.Fragment>
+      ) : (
+        ''
+      )}
+
       {brmRefund > 0 ? (
         <React.Fragment>
           <h4>
             <FormattedMessage {...messages.openBRMTableRefundingHeader} />
           </h4>
-          {refundDate < new Date() ? (
-            <Button
-              onClick={() => {
-                handleRefund(hasRefund);
-              }}
-              color="success">
-              Refund
-            </Button>
-          ) : (
-            <p style={{ marginTop: '-10px' }}>
-              <FormattedMessage {...messages.openBRMTableAvailableOnText} /> {new Date(refundTime).toLocaleString()}
-            </p>
-          )}
-          <h3 style={{ marginTop: '-10px' }}>{Number(brmRefund).toFixed(3)}</h3>
+          <h3 style={{ marginTop: '-10px' }}>{Number(brmRefund).toFixed(3)}
+            {refundDate < new Date() ? (
+              <Button
+                onClick={() => {
+                  handleRefund(hasRefund);
+                }}
+                color="success">
+                Refund
+              </Button>
+            ) : (
+              <p style={{ marginTop: '-10px' }}>
+                <FormattedMessage {...messages.openBRMTableAvailableOnText} /> {new Date(refundTime).toLocaleString()}
+              </p>
+            )}
+          </h3>
         </React.Fragment>
       ) : (
         ''

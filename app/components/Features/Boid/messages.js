@@ -58,9 +58,17 @@ export default defineMessages({
     id: 'app.components.Features.Boid.boidTableNoBoidText',
     defaultMessage: 'Retrieving your stake',
   },
+  boidTableLiquidText: {
+    id: 'app.components.Features.Boid.boidTableLiquidText',
+    defaultMessage: 'Liquid tokens',
+  },
+  boidTableNoLiquidText: {
+    id: 'app.components.Features.Boid.boidTableNoLiquidText',
+    defaultMessage: 'No liquid tokens',
+  },
   boidTablePoweredUpText: {
     id: 'app.components.Features.Boid.boidTablePoweredUpText',
-    defaultMessage: 'Staked BOID',
+    defaultMessage: 'Staked tokens',
   },
   boidTableRefundingHeader: {
     id: 'app.components.Features.Boid.boidTableRefundingHeader',

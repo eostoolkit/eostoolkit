@@ -44,7 +44,7 @@ const Boid = props => {
   }
 
   const refundDate = new Date(refundTime);
-  const totalBoid = boidLiquid;
+  const totalBoid = boidLiquid + boidStaked + boidRefund;
 
   const handleRefund = stake => {
     const transaction = [
@@ -68,7 +68,8 @@ const Boid = props => {
       subheader={intl.formatMessage(messages.boidTableSubHeader)}>
       <h3>Total BOID</h3>
       <h2 style={{ marginTop: '-10px' }}>{Number(totalBoid).toFixed(4)}</h2>
-      <h4 style={{ marginTop: '-10px' }}>
+
+      <h4>
         <FormattedMessage {...messages.boidTablePoweredUpText} />
       </h4>
       <h3 style={{ marginTop: '-10px' }}>
@@ -76,11 +77,26 @@ const Boid = props => {
           Number(boidStaked).toFixed(4) : intl.formatMessage(messages.boidTableNoBoidText)}
       </h3>
 
+      {boidLiquid > 0 ? (
+        <React.Fragment>
+          <h4>
+            <FormattedMessage {...messages.boidTableLiquidText} />
+          </h4>
+          <h3 style={{ marginTop: '-10px' }}>
+            {boidLiquid > 0 ?
+              Number(boidLiquid).toFixed(4) : intl.formatMessage(messages.boidTableNoLiquidText)}
+          </h3>
+        </React.Fragment>
+      ) : (
+        ''
+      )}
+
       {boidRefund > 0 ? (
         <React.Fragment>
           <h4>
             <FormattedMessage {...messages.boidTableRefundingHeader} />
           </h4>
+          <h3 style={{ marginTop: '-10px' }}>{Number(boidRefund).toFixed(4)}
           {refundDate < new Date() ? (
             <Button
               onClick={() => {
@@ -94,7 +110,7 @@ const Boid = props => {
               <FormattedMessage {...messages.boidTableAvailableOnText} /> {new Date(refundTime).toLocaleString()}
             </p>
           )}
-          <h3 style={{ marginTop: '-10px' }}>{Number(boidRefund).toFixed(4)}</h3>
+          </h3>
         </React.Fragment>
       ) : (
         ''

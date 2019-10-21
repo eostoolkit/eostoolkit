@@ -66,13 +66,22 @@ export default defineMessages({
     id: 'app.components.Features.HireVibes.hireVibesTableNoHireVibesText',
     defaultMessage: 'None',
   },
+  hireVibesTableLiquidText: {
+    id: 'app.components.Features.HireVibes.hireVibesTableLiquidText',
+    defaultMessage: 'Liquid tokens',
+  },
+  hireVibesTableNoLiquidText: {
+    id: 'app.components.Features.HireVibes.hireVibesTableNoLiquidText',
+    defaultMessage: 'No liquid tokens',
+  },
+
   hireVibesTableLoadingText: {
     id: 'app.components.Features.HireVibes.hireVibesTableNoHireVibesText',
     defaultMessage: 'Retrieving your stake',
   },
   hireVibesTablePoweredUpText: {
     id: 'app.components.Features.HireVibes.hireVibesTablePoweredUpText',
-    defaultMessage: 'Staked HVT',
+    defaultMessage: 'Staked tokens',
   },
   hireVibesTableRefundingHeader: {
     id: 'app.components.Features.HireVibes.hireVibesTableRefundingHeader',

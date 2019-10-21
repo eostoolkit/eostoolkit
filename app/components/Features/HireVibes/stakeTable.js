@@ -41,7 +41,7 @@ const HireVibes = props => {
   }
 
   const refundDate = new Date(refundTime);
-  const totalHireVibes = hireVibesLiquid;
+  const totalHireVibes = hireVibesLiquid + hireVibesStaked + hireVibesRefund ;
 
   const handleRefund = stake => {
     const transaction = [
@@ -63,15 +63,30 @@ const HireVibes = props => {
       icon={AccountBalance}
       header={intl.formatMessage(messages.hireVibesTableHeader)}
       subheader={intl.formatMessage(messages.hireVibesTableSubHeader)}>
-      <h3>Liquid HireVibes HVT</h3>
+      <h3>Total HireVibes HVT</h3>
       <h2 style={{ marginTop: '-10px' }}>{Number(totalHireVibes).toFixed(4)}</h2>
-      <h4 style={{ marginTop: '-10px' }}>
+
+      <h4>
         <FormattedMessage {...messages.hireVibesTablePoweredUpText} />
       </h4>
       <h3 style={{ marginTop: '-10px' }}>
         {hireVibesStaked > 0 ?
           Number(hireVibesStaked).toFixed(4) : intl.formatMessage(messages.hireVibesTableNoHireVibesText)}
       </h3>
+
+      {hireVibesLiquid > 0 ? (
+        <React.Fragment>
+          <h4>
+            <FormattedMessage {...messages.hireVibesTableLiquidText} />
+          </h4>
+          <h3 style={{ marginTop: '-10px' }}>
+            {hireVibesLiquid > 0 ?
+              Number(hireVibesLiquid).toFixed(4) : intl.formatMessage(messages.hireVibesTableNoLiquidText)}
+          </h3>
+        </React.Fragment>
+      ) : (
+        ''
+      )}
 
       {hireVibesRefund > 0 ? (
         <React.Fragment>
