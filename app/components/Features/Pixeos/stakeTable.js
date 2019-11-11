@@ -21,8 +21,6 @@ const Pixeos = props => {
   let refundTime = 0;
   let totalPixeos = 0;
 
-  console.log(stakes);
-  console.log(networkAccount);
   const hasStaked = stakes.find(s => s.owner !== 'Refunding');
   const hasRefund = stakes.find(s => s.owner === 'Refunding');
 
@@ -37,7 +35,7 @@ const Pixeos = props => {
 
       pixeosRefund = Number(hasStaked.unstaking_pixeos.split(' ')[0]);
       refundTime = new Date(hasStaked.unstake_date);
-      console.log(refundTime);
+      //console.log(refundTime);
     }
   }
 
@@ -45,6 +43,15 @@ const Pixeos = props => {
   refundDate.setSeconds( refundDate.getSeconds() + refundDelay );
 
   pixeosLiquid = totalPixeos - pixeosStaked;
+
+  if (refundDate <= new Date()) {
+    // pixeos unstaking is weird.
+    // it stays listed under table 'stakes.unstaking_pixeos' even though the refunding date is passed.
+    // it is implicitly regarded as 'liquid' if the date has passed, so need to overwrite here.
+    pixeosLiquid += pixeosRefund;
+    totalPixeos  += pixeosRefund;
+    pixeosRefund = 0;
+  }
 
   const handleRefund = stake => {
     const transaction = [
@@ -96,21 +103,16 @@ const Pixeos = props => {
           <h4>
             <FormattedMessage {...messages.pixeosTableRefundingHeader} />
           </h4>
-          <h3 style={{ marginTop: '-10px' }}>{Number(pixeosRefund).toFixed(4)}
-            {refundDate < new Date() ? (
-              <Button
-                onClick={() => {
-                  handleRefund(hasRefund);
-                }}
-                color="success">
-                Refund
-              </Button>
-            ) : (
+          <h3 style={{ marginTop: '-10px' }}>
+            {Number(pixeosRefund).toFixed(4)}
+          </h3>
+          <h4>
+            {refundDate > new Date() ? (
               <p style={{ marginTop: '-10px' }}>
                 <FormattedMessage {...messages.pixeosTableAvailableOnText} /> {refundDate.toLocaleString()}
               </p>
-            )}
-          </h3>
+            ):(<p/>)}
+          </h4>
         </React.Fragment>
       ) : (
         ''

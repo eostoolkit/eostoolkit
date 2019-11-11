@@ -48,6 +48,8 @@ function* getStake() {
         owner: currentIdentity.name,
         ...row,
       });
+      console.log("Pixeos stakes: ");
+      console.log(row);
     });
 
     refunds.rows.map(row => {
@@ -55,6 +57,8 @@ function* getStake() {
         owner: 'Refunding',
         ...row,
       });
+      console.log("Pixeos refunds: ");
+      console.log(row);
     });
 
 
