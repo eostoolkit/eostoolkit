@@ -72,6 +72,6 @@ export default defineMessages({
   },
   pixeosTableAvailableOnText: {
     id: 'app.components.Features.Pixeos.pixeosTableAvailableOnText',
-    defaultMessage: 'Available on ',
+    defaultMessage: 'Pixeos automatically refunds your tokens after 24 hours, on ',
   },
 });
