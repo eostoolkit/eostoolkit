@@ -22,8 +22,8 @@ const FormObject = props => {
   ];
   const formProps = {
     handleSubmit,
-    submitColor: 'rose',
-    submitText: intl.formatMessage(messages.donateText),
+    submitColor: 'success',
+    submitText: intl.formatMessage(messages.donateButton),
   };
   return (
     <ToolForm {...formProps}>

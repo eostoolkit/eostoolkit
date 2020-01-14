@@ -7,7 +7,7 @@ const Donate = () => {
   return (
     <div>
       <h5>
-        <FormattedMessage {...messages.donateHeader} />
+        <FormattedHTMLMessage {...messages.donateHeader} />
       </h5>
       <p>
         <FormattedHTMLMessage {...messages.donateLineOne} />
@@ -16,18 +16,13 @@ const Donate = () => {
         <FormattedHTMLMessage {...messages.donateLineTwo} />
       </p>
       <p>
-        <FormattedMessage {...messages.donateLineThree} />
+        <FormattedHTMLMessage {...messages.donateLineThree} />
       </p>
       <p>
         <FormattedHTMLMessage {...messages.donateLineFour} />
       </p>
       <p>
         <FormattedHTMLMessage {...messages.donateLineFive} />
-      </p>
-      <p>
-        <strong>&hearts;,</strong>
-        <br />
-        Nathan Rempel, Team GenerEOS
       </p>
     </div>
   );

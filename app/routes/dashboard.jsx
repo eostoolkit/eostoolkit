@@ -98,12 +98,6 @@ const dashRoutes = [
   //   component: RexForm,
   // },
   {
-    path: '/dapps/rex',
-    name: <FormattedMessage {...messags.menuRex} />,
-    icon: CloudUpload,
-    component: RexForm,
-  },
-  {
     path: '/poorswap',
     name: <FormattedMessage {...messags.menuPoorSwap} />,
     icon: CompareArrows,
@@ -362,7 +356,7 @@ const dashRoutes = [
       },
     ],
   },
-  { redirect: true, path: '/', pathTo: '/home', name: 'Home' },
+  { redirect: true, path: '/', pathTo: '/donate', name: 'Home' },
   { redirect: true, path: '/account/buyram', pathTo: '/account/ram', name: 'Buy RAM' },
   { redirect: true, path: '/account/sellram', pathTo: '/account/ram', name: 'Sell RAM' },
   { redirect: true, path: '/karma', pathTo: '/dapps/karma', name: 'Karma' },

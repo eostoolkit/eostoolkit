@@ -30,11 +30,11 @@ const makeTransaction = (values, networkIdentity) => {
       name: 'transfer',
       data: {
         from: networkIdentity ? networkIdentity.name : '',
-        to: 'myeostoolkit',
+        to: 'aussiedonate',
         memo: values.memo,
         quantity: `${Number(values.quantity)
           .toFixed(4)
-          .toString()} ${values.activeNetwork.network.prefix}`,
+          .toString()} EOS`,
       },
     },
   ];
@@ -46,9 +46,13 @@ const DonateForm = props => {
   return (
     <Tool>
       <ToolSection lg={12}>
-        <ToolBody color="warning" icon={CardGiftcard} header={intl.formatMessage(messages.donateText)}>
+        <ToolBody color="warning"
+                  icon={CardGiftcard}
+                  header={intl.formatMessage(messages.donateText)}
+                  style={{backgroundImage:
+                   'linear-gradient(10deg, #ff0000 0%, #ffed00 74%)' }}>
           <Donate />
-          <FormObject {...props} />
+          <FormObject submitColor="success" submitText="Donate"  {...props} />
         </ToolBody>
       </ToolSection>
     </Tool>
@@ -64,8 +68,8 @@ const enhance = compose(
       pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props =>({
-      quantity: '1',
-      memo: '',
+      quantity: '5',
+      memo: 'Donation - Australian Bushfire Relief',
       activeNetwork:props.activeNetwork?props.activeNetwork: '',
     }),
     validationSchema: props => {
