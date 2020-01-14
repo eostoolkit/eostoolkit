@@ -16,6 +16,10 @@ export default defineMessages({
   },
   donateText: {
     id: 'app.components.Features.DonateForm.donateText',
+    defaultMessage: 'Australian Bushfire Relief',
+  },
+  donateButton: {
+    id: 'app.components.Features.DonateForm.donateButton',
     defaultMessage: 'Donate',
   },
 });

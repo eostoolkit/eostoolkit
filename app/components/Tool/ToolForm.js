@@ -15,7 +15,7 @@ const DefaultSubmit = props => {
         {extraButtons ? <props.extraButtons /> : ''}
       </GridItem>
       <GridItem xs={12 - (xs || 0)} sm={12 - (sm || 0)} md={12 - (md || lg || 4)} lg={12 - (lg || md || 4)}>
-        {noDisclaimer ? '' : <Disclaimer />}        
+        {noDisclaimer ? '' : <Disclaimer />}
       </GridItem>
     </React.Fragment>
   );

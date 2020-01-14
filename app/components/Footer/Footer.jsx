@@ -55,7 +55,7 @@ function Footer({ ...props }) {
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <a href="https://twitter.com/genereossydney" target="new" className={block}>
+              <a href="https://twitter.com/GenerEOSAus" target="new" className={block}>
                 {intl.formatMessage(messages.footerTwitter)}
               </a>
             </ListItem>
