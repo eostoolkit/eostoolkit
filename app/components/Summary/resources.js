@@ -91,11 +91,11 @@ function ResourcesTable({ ...props }) {
                   <h6>{rex.rex_balance}</h6>
                 </TableCell>
                 <TableCell className={classes.tableCell} colSpan={5}>
-                  {rex.rex_maturities.length > 1 ? (
+                  {rex.rex_maturities.length > 0 ? (
                   <h6>
                     <FormattedMessage {...messages.maturingText} />
                     {rex.rex_maturities
-                      .map((mature, index) => `: ${index + 1}: ${mature.first.slice(0, 10)} ${mature.second} REX`)
+                      .map((mature, index) => `: ${index + 1}: ${mature.key.slice(0, 10)} ${mature.value} REX`)
                       .join(', ')}
                   </h6>
                 ) : (
