@@ -10,24 +10,23 @@ import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
 // @material-ui/icons
-import CardGiftcard from '@material-ui/icons/CardGiftcard';
+// import CardGiftcard from '@material-ui/icons/CardGiftcard';
 
 import Tool from 'components/Tool/Tool';
-import ToolSection from 'components/Tool/ToolSection';
-import ToolBody from 'components/Tool/ToolBody';
+// import ToolSection from 'components/Tool/ToolSection';
+// import ToolBody from 'components/Tool/ToolBody';
 import GridItem from "components/Grid/GridItem";
 
-import Donate from 'components/Information/Donate';
+// import Donate from 'components/Information/Donate';
 
-import FormObject from './FormObject';
+// import FormObject from './FormObject';
 
-import messages from './messages';
+// import messages from './messages';
 import commonMessages from '../../messages';
 import genpoolWeb from '../../../assets/img/genpool.png';
 
 const bannerBackground = {
   margin: '15px 0',
-  padding: '20px',
   boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.14);',
   width: '100%;',
   display: 'flex;',
@@ -43,11 +42,8 @@ const bannerImage = {
   justifyContent: 'center',
   width: '100%',
   maxHeight: '500px',
-  // maxWidth: '900px',
   position: 'relative',
-  // top: '60%',
   borderRadius: 6,
-  // transform: 'translateY(-50%)',
 };
 
 const makeTransaction = (values, networkIdentity) => {
