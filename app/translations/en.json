@@ -103,7 +103,7 @@
   "app.components.Features.DonateForm.donateFormEOSQuantityLabel": "Quantity (in EOS)",
   "app.components.Features.DonateForm.donateFormEOSQuantityPlaceholder": "How much EOS to donate",
   "app.components.Features.DonateForm.donateFormMemoPlaceholder": "A note to send us",
-  "app.components.Features.DonateForm.donateText": "Australian Bushfire Relief",
+  "app.components.Features.DonateForm.donateText": "Donate",
   "app.components.Features.ForumForms.eosioForumPostHeader": "EOSIO Forum Post",
   "app.components.Features.ForumForms.eosioForumPostText1": "This is part of the eosio.forum Referendum project.",
   "app.components.Features.ForumForms.eosioForumPostText2": "You can create a forum post, and reply to other posts.",

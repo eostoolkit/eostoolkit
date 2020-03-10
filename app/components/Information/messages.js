@@ -167,30 +167,30 @@ export default defineMessages({
   // Messages for Donate component
   donateHeader: {
     id: 'app.components.Information.Donate.donateHeader',
-    defaultMessage: 'Dear global community,',
+    defaultMessage: 'Dear EOSToolkit supporters,',
   },
   donateLineOne: {
     id: 'app.components.Information.Donate.donateLineOne',
     defaultMessage:
-      'Australia is currently experiencing catastrophic fire conditions. The fires have been out of control for several months and it is getting worse.',
+      'The <strong>EOSToolkit</strong> was made out of love prior to the launch of the EOS mainnet thanks to long hours late into the night and a staunch belief in making EOS accessible to everyone.',
   },
   donateLineTwo: {
     id: 'app.components.Information.Donate.donateLineTwo',
     defaultMessage:
-      'Many people have lost their lifes and homes. Thousands of animals have been killed and lost their habitats.',
+      'Thanks to your support and votes <strong>Team GenerEOS</strong> now receives block rewards and this helps fund further development of the eostoolkit and other EOS projects.',
   },
   donateLineThree: {
     id: 'app.components.Information.Donate.donateLineThree',
-    defaultMessage: 'Australia needs your help.',
+    defaultMessage: 'However, the goal of GenerEOS is to give back to the community.',
   },
   donateLineFour: {
     id: 'app.components.Information.Donate.donateLineFour',
     defaultMessage:
-      '100% of your donation will be going towards the World Wildlife Fund and Australian Red Cross.',
+      'By donating you will be supporting development of the <strong>EOSToolkit</strong> directly, while allowing GenerEOS to give even more back to those who need it most.',
   },
   donateLineFive: {
     id: 'app.components.Information.Donate.donateLineFive',
-    defaultMessage: "For more details regarding the donations check EOSWriter.io and follow us on Twitter.",
+    defaultMessage: "We hope you love the <strong>EOSToolkit</strong> as much as I've loved making it.",
   },
   // Messages for LinkAuth component
   linkAuthHeaderOne: {
