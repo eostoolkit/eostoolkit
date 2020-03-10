@@ -10,18 +10,18 @@ import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
 // @material-ui/icons
-// import CardGiftcard from '@material-ui/icons/CardGiftcard';
+import CardGiftcard from '@material-ui/icons/CardGiftcard';
 
 import Tool from 'components/Tool/Tool';
-// import ToolSection from 'components/Tool/ToolSection';
-// import ToolBody from 'components/Tool/ToolBody';
+import ToolSection from 'components/Tool/ToolSection';
+import ToolBody from 'components/Tool/ToolBody';
 import GridItem from "components/Grid/GridItem";
 
-// import Donate from 'components/Information/Donate';
+import Donate from 'components/Information/Donate';
 
-// import FormObject from './FormObject';
+import FormObject from './FormObject';
 
-// import messages from './messages';
+import messages from './messages';
 import commonMessages from '../../messages';
 import genpoolWeb from '../../../assets/img/genpool.png';
 
@@ -53,7 +53,7 @@ const makeTransaction = (values, networkIdentity) => {
       name: 'transfer',
       data: {
         from: networkIdentity ? networkIdentity.name : '',
-        to: 'aussiedonate',
+        to: 'aus1genereos',
         memo: values.memo,
         quantity: `${Number(values.quantity)
           .toFixed(4)
@@ -75,6 +75,16 @@ const DonateForm = props => {
           </div>
         </a>
       </GridItem>
+      <ToolSection lg={12}>
+        <ToolBody color="warning"
+                  icon={CardGiftcard}
+                  header={intl.formatMessage(messages.donateText)}
+                  style={{backgroundImage:
+                   'linear-gradient(10deg, #ff0000 0%, #ffed00 74%)' }}>
+          <Donate />
+          <FormObject submitColor="success" submitText="Donate"  {...props} />
+        </ToolBody>
+      </ToolSection>
     </Tool>
   );
 };
@@ -88,7 +98,7 @@ const enhance = compose(
       pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props =>({
-      quantity: '5',
+      quantity: '1',
       memo: 'Donation - Australian Bushfire Relief',
       activeNetwork:props.activeNetwork?props.activeNetwork: '',
     }),
