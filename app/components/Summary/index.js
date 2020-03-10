@@ -32,7 +32,6 @@ import Card from "components/Card/Card";
 import CardIcon from "components/Card/CardIcon";
 import CardBody from "components/Card/CardBody";
 import CardHeader from "components/Card/CardHeader";
-// import Banner from "components/Banner/Banner";
 
 import ResourceTable from "./resources";
 import userProfileStyles from "./comingSoon";
