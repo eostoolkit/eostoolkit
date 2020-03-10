@@ -7,7 +7,7 @@ const Donate = () => {
   return (
     <div>
       <h5>
-        <FormattedHTMLMessage {...messages.donateHeader} />
+        <FormattedMessage  {...messages.donateHeader} />
       </h5>
       <p>
         <FormattedHTMLMessage {...messages.donateLineOne} />
@@ -16,7 +16,7 @@ const Donate = () => {
         <FormattedHTMLMessage {...messages.donateLineTwo} />
       </p>
       <p>
-        <FormattedHTMLMessage {...messages.donateLineThree} />
+        <FormattedMessage  {...messages.donateLineThree} />
       </p>
       <p>
         <FormattedHTMLMessage {...messages.donateLineFour} />
