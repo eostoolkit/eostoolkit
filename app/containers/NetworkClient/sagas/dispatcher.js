@@ -20,8 +20,8 @@ export function* buildDispatcher() {
 
   
   if (signer.identity && network) {
-    //yield spawn(buildWriter, signer, network);
-    yield put(disableWriter());
+    yield spawn(buildWriter, signer, network);
+    // yield put(disableWriter());
   } else {
     yield put(disableWriter());
   }
