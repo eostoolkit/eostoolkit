@@ -58,9 +58,16 @@ export function* fetchNetworks(filter) {
 
     // get default
     let network = networks.find(n => n.network === defaultNetwork && n.type === defaultType);
-    let endpoint = network.endpoints.find(e => e.name === defaultName);
+    let endpoint
+    if(network){
+      endpoint = network.endpoints.find(e => e.name === defaultName);
 
-    if(!endpoint){
+      if(!endpoint){
+        network = networks.find(n => n.network === 'eos' && n.type === 'mainnet');
+        endpoint = network.endpoints.find(e => e.name === 'Greymass');
+      }
+
+    }else{
       network = networks.find(n => n.network === 'eos' && n.type === 'mainnet');
       endpoint = network.endpoints.find(e => e.name === 'Greymass');
     }
