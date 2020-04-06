@@ -21,7 +21,20 @@ import {
  */
 
 // fetch networks and select defaultNetwork
-export function* fetchNetworks() {
+export function* fetchNetworks(filter) {
+  let defaultNetwork = 'eos'
+  let defaultType = 'mainnet'
+  if(filter.has('network')){
+    defaultNetwork = filter.get('network')
+
+  }else if(filter.has('type')){
+    defaultType = filter.get('type')
+
+  }
+
+  console.log('tam network', defaultNetwork)
+  console.log('tam type', defaultType)
+  
   try {
     // fetch the remote network list
     const data = yield fetch(networksUrl);
@@ -41,6 +54,8 @@ export function* fetchNetworks() {
         endpoints: endpointDetails,
       };
     });
+
+    console.log('tam', networks)
 
     // get default
     const network = networks.find(n => n.network === 'eos' && n.type === 'mainnet');

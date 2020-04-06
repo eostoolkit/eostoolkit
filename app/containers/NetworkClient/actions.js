@@ -23,9 +23,10 @@ export function setSigner(networkSigner) {
   };
 }
 
-export function loadNetworks() {
+export function loadNetworks(filter) {
   return {
     type: LOAD_NETWORKS,
+    filter,
   };
 }
 
