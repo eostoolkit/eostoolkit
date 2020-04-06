@@ -24,16 +24,17 @@ import {
 export function* fetchNetworks(filter) {
   let defaultNetwork = 'eos'
   let defaultType = 'mainnet'
-  if(filter.has('network')){
-    defaultNetwork = filter.get('network')
+  let defaultName = 'Greymass'
 
-  }else if(filter.has('type')){
-    defaultType = filter.get('type')
-
+  if(filter.filter.has('network') && filter.filter.has('type') && filter.filter.has('api')){
+    defaultNetwork = filter.filter.get('network')
+    defaultType = filter.filter.get('type')
+    defaultName = filter.filter.get('api')
   }
 
   console.log('tam network', defaultNetwork)
   console.log('tam type', defaultType)
+  console.log('tam api', defaultName )
   
   try {
     // fetch the remote network list
@@ -55,11 +56,11 @@ export function* fetchNetworks(filter) {
       };
     });
 
-    console.log('tam', networks)
-
     // get default
-    const network = networks.find(n => n.network === 'eos' && n.type === 'mainnet');
-    const endpoint = network.endpoints.find(e => e.name === 'Greymass');
+    const network = networks.find(n => n.network === defaultNetwork && n.type === defaultType);
+    const endpoint = network.endpoints.find(e => e.name === defaultName);
+
+    console.log('tam network', networks)
 
     // build activeNetwork
     const activeNetwork = {
