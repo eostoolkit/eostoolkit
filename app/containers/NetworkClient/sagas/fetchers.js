@@ -57,10 +57,16 @@ export function* fetchNetworks(filter) {
     });
 
     // get default
-    const network = networks.find(n => n.network === defaultNetwork && n.type === defaultType);
-    const endpoint = network.endpoints.find(e => e.name === defaultName);
+    let network = networks.find(n => n.network === defaultNetwork && n.type === defaultType);
+    let endpoint = network.endpoints.find(e => e.name === defaultName);
+
+    if(!endpoint){
+      network = networks.find(n => n.network === 'eos' && n.type === 'mainnet');
+      endpoint = network.endpoints.find(e => e.name === 'Greymass');
+    }
 
     console.log('tam network', networks)
+    console.log('tam endpoint', endpoint)
 
     // build activeNetwork
     const activeNetwork = {
