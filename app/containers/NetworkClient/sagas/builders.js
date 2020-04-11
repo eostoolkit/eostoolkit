@@ -36,6 +36,17 @@ export function* buildReader(activeNetwork) {
   }
 }
 
+// this is triggered by the buildDispatcher
+export function* storageReader(activeNetwork) {
+  try {
+    const endpointStorage = activeNetwork.network.name + '@_' + activeNetwork.network.network + '@_' + activeNetwork.network.type + '@_' + activeNetwork.endpoint.name
+    localStorage.setItem('networkStorage', endpointStorage)
+  } catch (err) {
+    console.error('An EOSToolkit error occured - see details below:');
+    console.error(err);
+  }
+}
+
 /*
 *
 * BUILD WRITER

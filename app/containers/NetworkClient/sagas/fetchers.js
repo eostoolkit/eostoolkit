@@ -22,19 +22,38 @@ import {
 
 // fetch networks and select defaultNetwork
 export function* fetchNetworks(filter) {
+  //default network
+  let defaultNameNetwork = 'EOS Mainnet'
   let defaultNetwork = 'eos'
   let defaultType = 'mainnet'
   let defaultName = 'Greymass'
 
-  if(filter.filter.has('network') && filter.filter.has('type') && filter.filter.has('api')){
+  //get network saving in localstorage
+  const networkStorage = localStorage.getItem('networkStorage')
+
+  //if user provides full filter
+  if(filter.filter.has('name') && filter.filter.has('network') && filter.filter.has('type') && filter.filter.has('api')) {
+    defaultNameNetwork = filter.filter.get('name')
     defaultNetwork = filter.filter.get('network')
     defaultType = filter.filter.get('type')
     defaultName = filter.filter.get('api')
-  }
 
-  console.log('tam network', defaultNetwork)
-  console.log('tam type', defaultType)
-  console.log('tam api', defaultName )
+  }else if(filter.filter.has('name')){//if user only provides name of network
+    defaultNameNetwork = filter.filter.get('name')
+
+  }else if(networkStorage){//if user doesn't provide filter of network, get in localstorage
+    const nameStr = networkStorage.split('@_')[0]
+    const networkStr = networkStorage.split('@_')[1]
+    const typeStr = networkStorage.split('@_')[2]
+    const apiStr = networkStorage.split('@_')[3]
+
+    if(networkStr && typeStr && apiStr && nameStr){
+      defaultNameNetwork = nameStr
+      defaultNetwork = networkStr
+      defaultType = typeStr
+      defaultName = apiStr
+    }
+  }
   
   try {
     // fetch the remote network list
@@ -56,15 +75,13 @@ export function* fetchNetworks(filter) {
       };
     });
 
-    // get default
-    let network = networks.find(n => n.network === defaultNetwork && n.type === defaultType);
+    let network = networks.find(n => n.name.toLowerCase() === defaultNameNetwork.toLowerCase());
     let endpoint
-    if(network){
-      endpoint = network.endpoints.find(e => e.name === defaultName);
 
+    if(network){
+      endpoint = network.endpoints.find(e => e.name.toLowerCase() === defaultName.toLowerCase());
       if(!endpoint){
-        network = networks.find(n => n.network === 'eos' && n.type === 'mainnet');
-        endpoint = network.endpoints.find(e => e.name === 'Greymass');
+        endpoint = network.endpoints[0];
       }
 
     }else{
@@ -72,9 +89,9 @@ export function* fetchNetworks(filter) {
       endpoint = network.endpoints.find(e => e.name === 'Greymass');
     }
 
-    console.log('tam network', networks)
-    console.log('tam endpoint', endpoint)
-
+    //update on local
+    const endpointStorage = defaultNameNetwork + '@_' + defaultNetwork + '@_' + defaultType + '@_' + defaultName
+    localStorage.setItem('networkStorage', endpointStorage)
     // build activeNetwork
     const activeNetwork = {
       network,

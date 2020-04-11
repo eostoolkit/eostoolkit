@@ -1,5 +1,5 @@
 import { put, select, spawn } from 'redux-saga/effects';
-import { buildReader, buildWriter } from './builders';
+import { buildReader, buildWriter, storageReader } from './builders';
 import { makeSelectSigner, makeSelectActiveNetwork, makeSelectReader, makeSelectWriter } from '../selectors';
 import { loadAccount, disableWriter } from '../actions';
 
@@ -16,6 +16,7 @@ export function* buildDispatcher() {
   // build only dispatches if we do have networks and signer
   if (network) {
     yield spawn(buildReader, network);
+    yield spawn(storageReader, network);
   }
 
   
