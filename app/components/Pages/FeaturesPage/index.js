@@ -16,15 +16,35 @@ import ToolBody from 'components/Tool/ToolBody';
 import dashboardRoutes from 'routes/dashboard';
 import HomeDoc from 'components/Information/Home';
 import News from 'components/Information/News';
+import GridItem from "components/Grid/GridItem";
 
 import { injectIntl } from 'react-intl';
 import messages from './messages';
+import genpoolWeb from '../../../assets/img/genpool.png';
+
+const bannerBackground = {
+  boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.14)',
+  width: '100%',
+};
+
+const bannerImage = {
+  margin: '0 auto',
+  borderRadius: 6,
+  width: '100%',
+};
 
 const FeaturesPage = props => {
   const { classes, backgroundColor, intl } = props;
 
   return (
     <Tool>
+      <GridItem xs={12} sm={12} md={12} lg={12}>
+        <div style={bannerBackground}>
+          <a target="_blank" href="https://genpool.io/">
+            <img style={bannerImage} src={genpoolWeb} alt="eosbot-banner" />
+          </a>
+        </div>
+      </GridItem>
       <ToolSection lg={12}>
         <ToolBody
           style={{background:'bisque'}}
