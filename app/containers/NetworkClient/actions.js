@@ -14,7 +14,9 @@ import {
   TOGGLE_OFFLINE,
   LOADED_REX,
   TRIGGER_UPDATE_REX,
-} from './constants';
+  TRIGGER_FETCH_TOKEN_LIST,
+  UPDATE_TOKEN_LIST,
+} from "./constants";
 
 export function setSigner(networkSigner) {
   return {
@@ -81,7 +83,7 @@ export function loadedAccount(networkAccount) {
   };
 }
 
-export function setNetwork(networkSelected,override) {
+export function setNetwork(networkSelected, override) {
   return {
     type: SET_NETWORK,
     networkSelected,
@@ -119,5 +121,18 @@ export function loadedRex(rex) {
 export function triggerUpdateRex() {
   return {
     type: TRIGGER_UPDATE_REX,
+  };
+}
+
+export function triggerFetchTokenList() {
+  return {
+    type: TRIGGER_FETCH_TOKEN_LIST,
+  };
+}
+
+export function updateTokenList(data) {
+  return {
+    type: UPDATE_TOKEN_LIST,
+    tokens: data,
   };
 }

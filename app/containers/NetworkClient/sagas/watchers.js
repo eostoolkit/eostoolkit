@@ -1,4 +1,4 @@
-import { takeLatest, all, put, call, takeEvery } from 'redux-saga/effects';
+import { takeLatest, all, put, call, takeEvery } from "redux-saga/effects";
 
 import {
   SET_SIGNER,
@@ -12,19 +12,32 @@ import {
   SET_IDENTITY,
   PUSH_TRANSACTION,
   TRIGGER_UPDATE_REX,
-} from '../constants';
+  TRIGGER_FETCH_TOKEN_LIST,
+} from "../constants";
 
-import { buildDispatcher, writerDispatcher, accountDispatcher } from './dispatcher';
-import { fetchNetworks, fetchAccount, fetchRexInfo } from './fetchers';
-import { triggerUpdateRex } from '../actions';
-import { destroyIdentity } from './destroyers';
-import { pushTransaction } from './transaction';
+import {
+  buildDispatcher,
+  writerDispatcher,
+  accountDispatcher,
+} from "./dispatcher";
+import {
+  fetchNetworks,
+  fetchAccount,
+  fetchRexInfo,
+  fetchTokenList,
+} from "./fetchers";
+import { triggerUpdateRex } from "../actions";
+import { destroyIdentity } from "./destroyers";
+import { pushTransaction } from "./transaction";
 
 const UPDATE_INTERVAL = 10 * 1000;
 
 // client (re)build can be triggered by signer set, networks loaded, or user request
 function* watchForClientBuild() {
-  yield takeLatest([SET_SIGNER, LOADED_NETWORKS, SET_NETWORK, SET_IDENTITY], buildDispatcher);
+  yield takeLatest(
+    [SET_SIGNER, LOADED_NETWORKS, SET_NETWORK, SET_IDENTITY],
+    buildDispatcher
+  );
 }
 
 function* watchForLink() {
@@ -56,8 +69,8 @@ function* watchTransaction() {
   yield takeLatest(PUSH_TRANSACTION, pushTransaction);
 }
 
-const wait = ms =>
-  new Promise(resolve => {
+const wait = (ms) =>
+  new Promise((resolve) => {
     setTimeout(() => resolve(), ms);
   });
 
@@ -73,6 +86,10 @@ function* watchUpdateRex() {
   yield takeEvery(TRIGGER_UPDATE_REX, fetchRexInfo);
 }
 
+function* watchTriggerTokenList() {
+  yield takeEvery(TRIGGER_FETCH_TOKEN_LIST, fetchTokenList);
+}
+
 export default function* rootSaga() {
   yield all([
     watchForClientBuild(),
@@ -84,5 +101,6 @@ export default function* rootSaga() {
     watchTransaction(),
     chainUpdateTimer(),
     watchUpdateRex(),
+    watchTriggerTokenList(),
   ]);
 }
