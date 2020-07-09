@@ -178,4 +178,8 @@ export default defineMessages({
     id: 'app.routes.menuClaimRewards',
     defaultMessage: 'Claim Rewards',
   },
+  menuTokenPrices: {
+    id: 'app.routes.TokenPrices',
+    defaultMessage: 'Token Prices',
+  },
 });
