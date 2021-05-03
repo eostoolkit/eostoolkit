@@ -19,7 +19,7 @@ import { AddBox, ExitToApp, SettingsApplications, Autorenew } from '@material-ui
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { makeSelectOffline, makeSelectIdentity } from 'containers/NetworkClient/selectors';
-import { setIdentity, disableWriter, toggleOffline } from 'containers/NetworkClient/actions';
+import { setIdentity, enableWriter, disableWriter, toggleOffline } from 'containers/NetworkClient/actions';
 import NetworkIdentity from 'components/NetworkStatus/Identity';
 import NetworkStatus from 'components/NetworkStatus/Status';
 import VoteUs from 'components/Features/VoteUs';
@@ -34,6 +34,9 @@ import sidebarStyle from './sidebarStyle';
 
 import { injectIntl } from 'react-intl';
 import messages from './messages';
+
+import { initAccessContext } from "eos-transit";
+import scatter from "eos-transit-scatter-provider";
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -81,6 +84,62 @@ class Sidebar extends React.Component {
     const photo = `${classes.photo} ${cx({
       [classes.photoRTL]: rtlActive,
     })}`;
+
+    const accessContext = initAccessContext({
+      appName: "EOSToolkit",
+      network: {
+        host: "eos.greymass.com",
+        port: 80,
+        protocol: "http",
+        chainId:
+          "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906",
+      },
+      walletProviders: [scatter()],
+    });
+  
+    const login = async (index) => {
+      try {
+        const walletProviders = accessContext.getWalletProviders();
+  
+        const selectedProvider = walletProviders[index];
+  
+        const wallet = accessContext.initWallet(selectedProvider);
+  
+        await wallet.connect();
+  
+        await wallet.login();
+
+        const networkWriter = wallet.eosApi;
+
+        const identity = {
+          name: wallet.auth.accountName,
+          authority: wallet.auth.permission
+        }
+
+        this.props.onLogin(networkWriter, identity);
+      } catch (error) {
+        alert(error);
+      }
+    };
+
+    const logout = async (index) => {
+        try {
+          const walletProviders = accessContext.getWalletProviders();
+  
+          const selectedProvider = walletProviders[index];
+    
+          const wallet = accessContext.initWallet(selectedProvider);
+
+          await wallet.connect();
+    
+          await wallet.logout();
+
+          this.props.onLogout();
+        }catch(error) {
+          alert(error);
+        }
+    }
+
     const user = (
       <div className={userWrapperClass}>
         <div className={photo}>
@@ -99,7 +158,7 @@ class Sidebar extends React.Component {
               />
             </NavLink>
           </ListItem>
-          <ListItem className={classes.item} onClick={this.props.identity ? this.props.onLogout : this.props.onLogin}>
+          <ListItem className={classes.item} onClick={this.props.identity ? () => logout(0) : () => login(0)}>
             <NavLink to="#" className={`${classes.itemLink}`}>
               <ListItemIcon className={classes.itemIconMini}>
                 {this.props.identity ? <ExitToApp /> : <AddBox />}
@@ -360,9 +419,9 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onLogin: () => dispatch(setIdentity()),
     onLogout: () => dispatch(disableWriter()),
     toggleOffline: () => dispatch(toggleOffline()),
+    onLogin: (networkWriter, identity) => dispatch(enableWriter({ networkWriter, identity }, true)),
   };
 }
 
