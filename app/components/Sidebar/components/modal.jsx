@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import scatter from '../../../assets/img/scatter.png';
+import ledger from '../../../assets/img/ledger.png';
+import lynx from '../../../assets/img/lynx.png';
+import meetone from '../../../assets/img/meetone.png';
+import tockenpocket from '../../../assets/img/tockenpocket.png';
 
 const Wrapper = styled.div`
     position: fixed; 
@@ -26,29 +31,11 @@ const ModalWrapper = styled.div`
 
 const ModalHeader = styled.div`
     width: 100%;
-    background-color: #120a8f;
+    background-color: rgb(22, 32, 44);
     padding: 20px;
     display: grid;
     place-items: center;
     position: relative;
-`;
-
-const ModalTitle = styled.h1`
-    font-size: 24px;
-    font-weight: bold;
-    color: #FFFFFF;
-    font-family: sans-serif;
-`;
-
-const ModalContent = styled.div`
-    width: 100%;
-    min-height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 20px 40px;
-    gap: 20px;
 `;
 
 const Close = styled.div`
@@ -70,10 +57,81 @@ const Close = styled.div`
     }
 `;
 
+const ModalTitle = styled.h1`
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-family: sans-serif;
+`;
+
+const ModalContent = styled.div`
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px 60px;
+    gap: 20px;
+`;
+
+const Provider = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 12px;
+    cursor: pointer;
+`;
+
+const Icon = styled.img`
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+`;
+
+const Text = styled.h1`
+    font-size: 16px;
+    font-family: sans-serif;
+    color: #000;
+`;
+
 class Modal extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    list = [
+        {
+            key: 1,
+            img: scatter,
+            name: 'Scatter',
+            index: 0,
+        },
+        {
+            key: 2,
+            img: tockenpocket,
+            name: 'TokenPocket',
+            index: 1,
+        },
+        {
+            key: 3,
+            img: ledger,
+            name: 'Ledger',
+            index: 0,
+        },
+        {
+            key: 4,
+            img: lynx,
+            name: 'EOS lynx',
+            index: 0,
+        },
+        {
+            key: 5,
+            img: meetone,
+            name: 'Meetone',
+            index: 0,
+        },
+    ];
 
     render() {
         return(
@@ -86,12 +144,12 @@ class Modal extends React.Component {
                                 <Close onClick={this.props.onClose}>&times;</Close>
                             </ModalHeader>
                             <ModalContent>
-                                <h1 style={{ color: '#3333' }}>1</h1>
-                                <h1 style={{ color: '#3333' }}>2</h1>
-                                <h1 style={{ color: '#3333' }}>3</h1>
-                                <h1 style={{ color: '#3333' }}>4</h1>
-                                <h1 style={{ color: '#3333' }}>5</h1>
-                                <h1 style={{ color: '#3333' }}>6</h1>
+                                {this.list.map(item => (
+                                    <Provider key={item.key} onClick={() => this.props.login(item.index)}>
+                                        <Icon src={item.img} alt="scatter" />
+                                        <Text>{item.name}</Text>
+                                    </Provider>
+                                ))}
                             </ModalContent>
                         </ModalWrapper>
                     </Wrapper>
@@ -108,6 +166,7 @@ Modal.defaultProps = {
 Modal.propTypes = {
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
 };
 
 export default Modal;
