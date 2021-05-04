@@ -19,7 +19,7 @@ import { AddBox, ExitToApp, SettingsApplications, Autorenew } from '@material-ui
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { makeSelectOffline, makeSelectIdentity } from 'containers/NetworkClient/selectors';
-import { setIdentity, enableWriter, disableWriter, toggleOffline } from 'containers/NetworkClient/actions';
+import { enableWriter, disableWriter, toggleOffline, setSigner } from 'containers/NetworkClient/actions';
 import NetworkIdentity from 'components/NetworkStatus/Identity';
 import NetworkStatus from 'components/NetworkStatus/Status';
 import VoteUs from 'components/Features/VoteUs';
@@ -38,6 +38,8 @@ import messages from './messages';
 import { initAccessContext } from "eos-transit";
 import scatter from "eos-transit-scatter-provider";
 
+import Modal from './components/modal';
+
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -50,6 +52,7 @@ class Sidebar extends React.Component {
       openMultisig: this.activeRoute('/multisig'),
       openBlockProducer: this.activeRoute('/block-producer'),
       miniActive: true,
+      isOpen: false,
     };
     this.activeRoute.bind(this);
   }
@@ -100,22 +103,16 @@ class Sidebar extends React.Component {
     const login = async (index) => {
       try {
         const walletProviders = accessContext.getWalletProviders();
-  
         const selectedProvider = walletProviders[index];
-  
         const wallet = accessContext.initWallet(selectedProvider);
-  
         await wallet.connect();
-  
         await wallet.login();
-
         const networkWriter = wallet.eosApi;
-
         const identity = {
           name: wallet.auth.accountName,
           authority: wallet.auth.permission
-        }
-
+        };
+        this.props.setSigner(wallet.auth);
         this.props.onLogin(networkWriter, identity);
       } catch (error) {
         alert(error);
@@ -125,23 +122,21 @@ class Sidebar extends React.Component {
     const logout = async (index) => {
         try {
           const walletProviders = accessContext.getWalletProviders();
-  
           const selectedProvider = walletProviders[index];
-    
           const wallet = accessContext.initWallet(selectedProvider);
-
-          await wallet.connect();
-    
+          await wallet.disconnect();
           await wallet.logout();
-
           this.props.onLogout();
         }catch(error) {
           alert(error);
         }
     }
 
+    console.log(this.state.isOpen);
+
     const user = (
       <div className={userWrapperClass}>
+        <Modal isOpen={this.state.isOpen} onClose={() => this.setState({ isOpen: false })} />
         <div className={photo}>
           <img src={avatar} className={classes.avatarImg} alt="..." />
         </div>
@@ -158,7 +153,9 @@ class Sidebar extends React.Component {
               />
             </NavLink>
           </ListItem>
-          <ListItem className={classes.item} onClick={this.props.identity ? () => logout(0) : () => login(0)}>
+          {/* () => this.setState({ isOpen: true }) */}
+          {/* this.props.identity ? () => logout(0) : () => login(0) */}
+          <ListItem className={classes.item} onClick={() => this.setState({ isOpen: true })}>
             <NavLink to="#" className={`${classes.itemLink}`}>
               <ListItemIcon className={classes.itemIconMini}>
                 {this.props.identity ? <ExitToApp /> : <AddBox />}
@@ -422,6 +419,7 @@ function mapDispatchToProps(dispatch) {
     onLogout: () => dispatch(disableWriter()),
     toggleOffline: () => dispatch(toggleOffline()),
     onLogin: (networkWriter, identity) => dispatch(enableWriter({ networkWriter, identity }, true)),
+    setSigner: signer => dispatch(setSigner(signer))
   };
 }
 
