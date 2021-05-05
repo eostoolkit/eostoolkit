@@ -76,6 +76,8 @@
     ]
   },
   "dependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
     "@material-ui/core": "^1.2.1",
     "@material-ui/icons": "^1.1.0",
     "babel-polyfill": "6.23.0",
