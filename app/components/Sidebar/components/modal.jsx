@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import scatter from '../../../assets/img/scatter.png';
-import ledger from '../../../assets/img/ledger.png';
+import anchor from '../../../assets/img/anchor.png';
+import simpleos from '../../../assets/img/simpleos.png';
 import lynx from '../../../assets/img/lynx.png';
-import meetone from '../../../assets/img/meetone.png';
 import tockenpocket from '../../../assets/img/tockenpocket.png';
+// import ledger from '../../../assets/img/ledger.png';
 
 const Wrapper = styled.div`
     position: fixed; 
@@ -18,6 +19,10 @@ const Wrapper = styled.div`
     overflow: auto; 
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
+
+    @media screen and (max-width: 576px) {
+        padding-top: 20px;
+    }
 `;
 
 const ModalWrapper = styled.div`
@@ -27,6 +32,11 @@ const ModalWrapper = styled.div`
     width: 80%;
     border: none;
     outline: none;
+
+    @media screen and (max-width: 576px) {
+        margin: 0;
+        width: 100%;
+    }
 `;
 
 const ModalHeader = styled.div`
@@ -55,6 +65,11 @@ const Close = styled.div`
         text-decoration: none;
         cursor: pointer;
     }
+
+    @media screen and (max-width: 576px) {
+        top: 12px;
+        right: 12px;
+    }
 `;
 
 const ModalTitle = styled.h1`
@@ -73,6 +88,12 @@ const ModalContent = styled.div`
     flex-wrap: wrap;
     padding: 20px 60px;
     gap: 20px;
+
+    @media screen and (max-width: 576px) {
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px 0;
+    }
 `;
 
 const Provider = styled.div`
@@ -109,27 +130,27 @@ class Modal extends React.Component {
         },
         {
             key: 2,
-            img: tockenpocket,
-            name: 'TokenPocket',
+            img: anchor,
+            name: 'Anchor',
             index: 1,
         },
         {
             key: 3,
-            img: ledger,
-            name: 'Ledger',
-            index: 0,
-        },
-        {
-            key: 4,
-            img: lynx,
-            name: 'EOS lynx',
-            index: 0,
+            img: simpleos,
+            name: 'SimplEOS',
+            index: 2,
         },
         {
             key: 5,
-            img: meetone,
-            name: 'Meetone',
-            index: 0,
+            img: lynx,
+            name: 'EOS lynx',
+            index: 3,
+        },
+        {
+            key: 4,
+            img: tockenpocket,
+            name: 'TokenPocket',
+            index: 4,
         },
     ];
 

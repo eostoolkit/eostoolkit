@@ -35,9 +35,13 @@ import sidebarStyle from './sidebarStyle';
 import { injectIntl } from 'react-intl';
 import messages from './messages';
 
-import { initAccessContext } from "eos-transit";
-import scatter from "eos-transit-scatter-provider";
-import tokenPocket from "eos-transit-tokenpocket-provider";
+import { initAccessContext } from 'eos-transit';
+import scatter from 'eos-transit-scatter-provider';
+import anchor from 'eos-transit-anchorlink-provider';
+import simpleos from 'eos-transit-simpleos-provider';
+import lynx from 'eos-transit-lynx-provider';
+import tokenpocket from 'eos-transit-tokenpocket-provider';
+// import ledger from 'eos-transit-ledger-provider';
 
 import Modal from './components/modal';
 
@@ -90,18 +94,30 @@ class Sidebar extends React.Component {
     })}`;
 
     const accessContext = initAccessContext({
-      appName: "EOSToolkit",
+      appName: 'EOSToolkit',
       network: {
-        host: "eos.greymass.com",
+        host: 'eos.greymass.com',
         port: 80,
-        protocol: "http",
-        chainId:
-          "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906",
+        protocol: 'http',
+        chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
       },
-      walletProviders: [scatter(), tokenPocket()],
+      walletProviders: [
+        scatter(),
+        anchor('EOSToolkit'),
+        simpleos(),
+        lynx(),
+        tokenpocket(),
+        // ledger({
+        //   exchangeTimeout: 30000,
+        //   transport: 'TransportWebusb',
+        //   name: 'Ledger Nano S Web USB',
+        //   shortName: 'Ledger Nano S Web USB',
+        //   id: 'ledgeruwebusb',
+        // }),
+      ],
     });
-  
-    const login = async (index) => {
+
+    const login = async index => {
       try {
         const walletProviders = accessContext.getWalletProviders();
         const selectedProvider = walletProviders[index];
@@ -111,7 +127,7 @@ class Sidebar extends React.Component {
         const networkWriter = wallet.eosApi;
         const identity = {
           name: wallet.auth.accountName,
-          authority: wallet.auth.permission
+          authority: wallet.auth.permission,
         };
         this.props.setSigner(wallet.auth);
         this.props.onLogin(networkWriter, identity);
@@ -121,27 +137,18 @@ class Sidebar extends React.Component {
       }
     };
 
-    const logout = async (index) => {
-        try {
-          const walletProviders = accessContext.getWalletProviders();
-          const selectedProvider = walletProviders[index];
-          const wallet = accessContext.initWallet(selectedProvider);
-          await wallet.connect();
-          await wallet.logout();
-          this.props.onLogout();
-        }catch(error) {
-          alert(error);
-        }
-    }
+    const logout = async () => {
+      this.props.onLogout();
+    };
 
     const user = (
       <div className={userWrapperClass}>
         <Modal isOpen={this.state.isOpen} onClose={() => this.setState({ isOpen: false })} login={login} />
-        <div className={photo}>
+        {/* <div className={photo}>
           <img src={avatar} className={classes.avatarImg} alt="..." />
-        </div>
+        </div> */}
         <List className={classes.list}>
-          <ListItem className={`${classes.item} ${classes.userItem}`}>
+          {/* <ListItem className={`${classes.item} ${classes.userItem}`}>
             <NavLink
               to={'#'}
               className={`${classes.itemLink} ${classes.userCollapseButton}`}
@@ -152,8 +159,10 @@ class Sidebar extends React.Component {
                 className={`${itemText} ${classes.userItemText}`}
               />
             </NavLink>
-          </ListItem>
-          <ListItem className={classes.item} onClick={this.props.identity ? () => logout(0) : () => this.setState({ isOpen: true })}>
+          </ListItem> */}
+          <ListItem
+            className={classes.item}
+            onClick={this.props.identity ? () => logout() : () => this.setState({ isOpen: true })}>
             <NavLink to="#" className={`${classes.itemLink}`}>
               <ListItemIcon className={classes.itemIconMini}>
                 {this.props.identity ? <ExitToApp /> : <AddBox />}
@@ -417,14 +426,8 @@ function mapDispatchToProps(dispatch) {
     onLogout: () => dispatch(disableWriter()),
     toggleOffline: () => dispatch(toggleOffline()),
     onLogin: (networkWriter, identity) => dispatch(enableWriter({ networkWriter, identity }, true)),
-    setSigner: signer => dispatch(setSigner(signer))
+    setSigner: signer => dispatch(setSigner(signer)),
   };
 }
 
-export default compose(
-  withStyles(sidebarStyle),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(injectIntl(Sidebar));
+export default compose(withStyles(sidebarStyle), connect(mapStateToProps, mapDispatchToProps))(injectIntl(Sidebar));
