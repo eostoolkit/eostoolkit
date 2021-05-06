@@ -131,6 +131,8 @@ class Sidebar extends React.Component {
         };
         this.props.setSigner(wallet.auth);
         this.props.onLogin(networkWriter, identity);
+        console.log({networkWriter, identity})
+        console.log({wallet})
         this.setState({ isOpen: false });
       } catch (error) {
         alert(error);
@@ -425,7 +427,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onLogout: () => dispatch(disableWriter()),
     toggleOffline: () => dispatch(toggleOffline()),
-    onLogin: (networkWriter, identity) => dispatch(enableWriter({ networkWriter, identity }, true)),
+    onLogin: (networkWriter, identity) => dispatch(enableWriter(networkWriter, identity)),
     setSigner: signer => dispatch(setSigner(signer)),
   };
 }

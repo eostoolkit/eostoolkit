@@ -81,7 +81,7 @@ export function* buildWriter(signer, activeNetwork) {
     //const networkWriter = signer.eos(signerClientConfig, Api, networkOptions, protocol);
     const networkWriter = signer.eos(signerClientConfig, Api, networkOptions);
     const identity = yield call(fetchIdentity, signer, activeNetwork);
-
+    console.log("Identity Builder", identity)
     if (identity) {
       yield put(enableWriter(networkWriter, identity));
     } else {

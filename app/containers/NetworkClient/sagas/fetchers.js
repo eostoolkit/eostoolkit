@@ -346,21 +346,27 @@ function* getAccountDetail(reader, name) {
         });
         const flareData = yield flare.json();
 
+        console.log({flareData})
+
         if (flareData.account) {
           const tokens = flareData.account.tokens.map(token => {
-            return `${token.contract}:${token.symbol}`;
+            return {
+              code: token.contract,
+              symbol: `${token.precision} ${token.symbol}`,
+            };
           });
           tokens.unshift('eosio.token:EOS');
           body = {
             ...body,
-            tokens,
+            code: flareData.account.tokens[0].contract,
+            symbol: `${flareData.account.tokens[0].precision} ${flareData.account.tokens[0].symbol}`,
           };
         }
       } catch (err) {
         console.log(err);
       }
 
-      const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances', {
+      const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balance', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
@@ -369,7 +375,7 @@ function* getAccountDetail(reader, name) {
       });
       const list = yield data.json();
       // console.log(list);
-
+      console.log({data})
       console.log('account: ', account);
       console.log('list: ', list);
 
@@ -415,6 +421,7 @@ function* getAccountDetail(reader, name) {
 export function* fetchAccount() {
   const reader = yield select(makeSelectReader());
   const identity = yield select(makeSelectIdentity());
+  console.log({identity});
   try {
     if (identity && identity.name) {
       const account = yield call(getAccountDetail, reader, identity.name);

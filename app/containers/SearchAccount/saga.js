@@ -45,18 +45,20 @@ function* getAccountDetail(name) {
         tokens.unshift('eosio.token:EOS');
         body = {
           ...body,
-          tokens,
+          code: flareData.account.tokens[0],
+          symbol: `${flareData.account.tokens[0].precision} ${flareData.account.tokens[0].symbol}`,
         }
       }
     } catch(err) {}
 
-    const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances',{
+    const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balance',{
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
       },
       body:JSON.stringify(body),
     });
+    console.log({data})
     const list = yield data.json();
     return {
       ...account,
