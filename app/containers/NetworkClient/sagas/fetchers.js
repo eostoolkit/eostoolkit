@@ -338,7 +338,7 @@ function* getAccountDetail(reader, name) {
     const account = yield reader.get_account(name);
     const activeNetwork = yield select(makeSelectActiveNetwork());
     if (activeNetwork.network.prefix === 'EOS') {
-      let body = { account: account.account_name };
+      const body = { account: account.account_name };
 
       try {
         const flare = yield fetch('https://api-pub.eosflare.io/v1/eosflare/get_account', {
@@ -353,41 +353,61 @@ function* getAccountDetail(reader, name) {
         console.log({ flareData });
 
         if (flareData.account) {
-          const tokens = flareData.account.tokens.map(token => {
-            return {
-              code: token.contract,
-              symbol: `${token.symbol}`,
-            };
-          });
-          tokens.unshift('eosio.token:EOS');
-          body = {
-            ...body,
-            code: 'eosio.token',
+          const array = [];
+
+          yield flareData.account.tokens.unshift({
+            contract: 'eosio.token',
             symbol: 'EOS',
+          });
+
+          yield flareData.account.tokens.map(function*(token) {
+            const tokenInfos = {
+              ...body,
+              code: token.contract,
+              symbol: token.symbol,
+            };
+
+            const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balance', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+              },
+              body: JSON.stringify(tokenInfos),
+            });
+
+            return array.push(yield data.json());
+          });
+
+          return {
+            ...account,
+            balances: array,
           };
+          // tokens.unshift('eosio.token:EOS');
+          // body = {
+          //   ...body,
+          //   code: flareData.account.tokens[0].contract,
+          //   symbol: flareData.account.tokens[0].symbol,
+          // };
         }
       } catch (err) {
         console.log(err);
       }
 
-      const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balance', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-        body: JSON.stringify(body),
-      });
-      const list = yield data.json();
-      // console.log(list);
-      console.log({ data });
-      console.log('account: ', account);
-      console.log('list: ', list);
+      // const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balance', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json; charset=utf-8',
+      //   },
+      //   body: JSON.stringify(body),
+      // });
+      // const list = yield data.json();
+      // console.log('Foton list', list);
+      // // console.log(list);
+      // console.log({ data });
+      // console.log('account: ', account);
+      // console.log('list: ', list);
 
       // yield spawn(fetchLatency);
-      return {
-        ...account,
-        balances: list,
-      };
     }
     const tokens = yield fetchTokens(reader);
     // const tokens = yield select(makeSelectTokens());
