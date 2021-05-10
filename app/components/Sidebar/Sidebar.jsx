@@ -18,7 +18,7 @@ import Collapse from '@material-ui/core/Collapse';
 import { AddBox, ExitToApp, SettingsApplications, Autorenew } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { makeSelectOffline, makeSelectIdentity } from 'containers/NetworkClient/selectors';
+import { makeSelectOffline, makeSelectIdentity, makeSelectActiveNetwork } from 'containers/NetworkClient/selectors';
 import { enableWriter, disableWriter, toggleOffline, setSigner } from 'containers/NetworkClient/actions';
 import NetworkIdentity from 'components/NetworkStatus/Identity';
 import NetworkStatus from 'components/NetworkStatus/Status';
@@ -97,10 +97,10 @@ class Sidebar extends React.Component {
     const accessContext = initAccessContext({
       appName: 'EOSToolkit',
       network: {
-        host: 'eos.greymass.com',
-        port: 80,
-        protocol: 'http',
-        chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
+        host: this.props.chain && this.props.chain.endpoint.url,
+        port: this.props.chain && this.props.chain.endpoint.port,
+        protocol: this.props.chain && this.props.chain.endpoint.protocol,
+        chainId: this.props.chain && this.props.chain.network.chainId,
       },
       walletProviders: [
         scatter(),
@@ -133,8 +133,6 @@ class Sidebar extends React.Component {
         this.setState({ wallet: wallet });
         this.props.setSigner(wallet.auth);
         this.props.onLogin(networkWriter, identity);
-        console.log({networkWriter, identity})
-        console.log({wallet})
         this.setState({ isOpen: false });
       } catch (error) {
         alert(error);
@@ -426,6 +424,7 @@ Sidebar.propTypes = {
 const mapStateToProps = createStructuredSelector({
   offlineMode: makeSelectOffline(),
   identity: makeSelectIdentity(),
+  chain: makeSelectActiveNetwork(),
 });
 
 function mapDispatchToProps(dispatch) {
