@@ -97,10 +97,10 @@ class Sidebar extends React.Component {
     const accessContext = initAccessContext({
       appName: 'EOSToolkit',
       network: {
-        host: this.props.test && this.props.test.endpoint.url,
-        port: this.props.test && this.props.test.endpoint.port,
-        protocol: this.props.test && this.props.test.endpoint.protocol,
-        chainId: this.props.test && this.props.test.network.chainId,
+        host: this.props.chain && this.props.chain.endpoint.url,
+        port: this.props.chain && this.props.chain.endpoint.port,
+        protocol: this.props.chain && this.props.chain.endpoint.protocol,
+        chainId: this.props.chain && this.props.chain.network.chainId,
       },
       walletProviders: [
         scatter(),
@@ -133,8 +133,6 @@ class Sidebar extends React.Component {
         this.setState({ wallet: wallet });
         this.props.setSigner(wallet.auth);
         this.props.onLogin(networkWriter, identity);
-        console.log({ networkWriter, identity });
-        console.log({ wallet });
         this.setState({ isOpen: false });
       } catch (error) {
         alert(error);
@@ -426,7 +424,7 @@ Sidebar.propTypes = {
 const mapStateToProps = createStructuredSelector({
   offlineMode: makeSelectOffline(),
   identity: makeSelectIdentity(),
-  test: makeSelectActiveNetwork(),
+  chain: makeSelectActiveNetwork(),
 });
 
 function mapDispatchToProps(dispatch) {
