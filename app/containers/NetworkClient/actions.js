@@ -81,7 +81,7 @@ export function loadedAccount(networkAccount) {
   };
 }
 
-export function setNetwork(networkSelected,override) {
+export function setNetwork(networkSelected, override) {
   return {
     type: SET_NETWORK,
     networkSelected,

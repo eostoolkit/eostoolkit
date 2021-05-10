@@ -65,8 +65,8 @@ function clientReducer(state = initialState, action) {
     case LOADED_ACCOUNT:
       return state.set('networkAccount', action.networkAccount).set('accountLoading', false);
     case SET_NETWORK:
-      const validTime = (state.get('networkTime') + (1000*30)) < Date.now(); //wait 30 seconds between swaps
-      if(action.override || (!state.get('override') && validTime)) {
+      const validTime = state.get('networkTime') + 1000 * 30 < Date.now(); //wait 30 seconds between swaps
+      if (action.override || (!state.get('override') && validTime)) {
         return state
           .set('networkSelected', action.networkSelected)
           .set('networkReader', null)

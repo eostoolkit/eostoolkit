@@ -122,10 +122,8 @@ const makeSelectAccountEnabled = () =>
     selectClientState,
     substate => {
       if (!substate) return false;
-      console.log({substate});
       const loading = substate.get('accountLoading');
       const account = substate.get('networkAccount');
-      console.log('Account', account);
       return account !== null && !loading;
     }
   );
