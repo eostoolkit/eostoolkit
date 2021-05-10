@@ -58,6 +58,7 @@ class Sidebar extends React.Component {
       openBlockProducer: this.activeRoute('/block-producer'),
       miniActive: true,
       isOpen: false,
+      wallet: {},
     };
     this.activeRoute.bind(this);
   }
@@ -129,6 +130,7 @@ class Sidebar extends React.Component {
           name: wallet.auth.accountName,
           authority: wallet.auth.permission,
         };
+        this.setState({ wallet: wallet });
         this.props.setSigner(wallet.auth);
         this.props.onLogin(networkWriter, identity);
         console.log({networkWriter, identity})
@@ -139,7 +141,10 @@ class Sidebar extends React.Component {
       }
     };
 
-    const logout = async () => {
+    const logout = async wallet => {
+      await wallet.logout();
+      await wallet.disconnect();
+      this.setState({ wallet: {} });
       this.props.onLogout();
     };
 
@@ -164,7 +169,7 @@ class Sidebar extends React.Component {
           </ListItem> */}
           <ListItem
             className={classes.item}
-            onClick={this.props.identity ? () => logout() : () => this.setState({ isOpen: true })}>
+            onClick={this.props.identity ? () => logout(this.state.wallet) : () => this.setState({ isOpen: true })}>
             <NavLink to="#" className={`${classes.itemLink}`}>
               <ListItemIcon className={classes.itemIconMini}>
                 {this.props.identity ? <ExitToApp /> : <AddBox />}
