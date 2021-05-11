@@ -7,6 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { makeSelectWriter, makeSelectFlareDataTokens } from 'containers/NetworkClient/selectors';
 import { compose } from 'recompose';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
@@ -21,28 +22,9 @@ import FormObject from './FormObject';
 import messages from './messages';
 import commonMessages from '../../messages';
 
-const makeTransaction = (values, networkAccount) => {
-  const token = networkAccount.balances.find(tk => tk.symbol === values.symbol);
-  const precision = token.amount.split('.')[1] ? token.amount.split('.')[1].length : 0;
-  const transaction = [
-    {
-      account: token.code || 'eosio.token',
-      name: 'transfer',
-      data: {
-        from: values.owner,
-        to: values.name,
-        memo: values.memo,
-        quantity: `${Number(values.quantity)
-          .toFixed(precision)
-          .toString()} ${values.symbol}`,
-      },
-    },
-  ];
-  return transaction;
-};
-
 const TransferForm = props => {
   const { intl } = props;
+
   return (
     <Tool>
       <ToolSection lg={12}>
@@ -54,21 +36,59 @@ const TransferForm = props => {
   );
 };
 
-// const mapStateToProps = createStructuredSelector({
-//   eosTokens: selectTokens(),
-// });
+const mapStateToProps = createStructuredSelector({
+  networkWriter: makeSelectWriter(),
+  tokens: makeSelectFlareDataTokens(),
+});
 
 const enhance = compose(
-  // connect(
-  //   mapStateToProps,
-  //   null
-  // ),
+  connect(mapStateToProps),
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { pushTransaction, networkAccount } = props;
-      const transaction = makeTransaction(values, networkAccount);
+      const { networkIdentity, networkWriter, tokens } = props;
+
+      const token = tokens.find(tk => tk.symbol === values.symbol);
+
+      networkWriter.eosApi
+        .transact(
+          {
+            actions: [
+              {
+                account: token.contract || 'eosio.token',
+                name: 'transfer',
+                authorization: [
+                  {
+                    actor: networkIdentity.name,
+                    permission: networkIdentity.authority,
+                  },
+                ],
+                data: {
+                  from: values.owner,
+                  to: values.name,
+                  quantity: `${Number(values.quantity)
+                    .toFixed(4)
+                    .toString()} ${values.symbol}`,
+                  memo: values.memo,
+                },
+              },
+            ],
+          },
+          {
+            broadcast: true,
+            blocksBehind: 3,
+            expireSeconds: 60,
+          }
+        )
+        .then(result => {
+          console.log('Transaction success!', result);
+          return result;
+        })
+        .catch(error => {
+          console.error('Transaction error :(', error);
+          throw error;
+        });
+
       setSubmitting(false);
-      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',

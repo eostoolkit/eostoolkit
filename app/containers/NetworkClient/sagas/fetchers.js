@@ -4,7 +4,7 @@ import { orderBy } from 'lodash';
 import { put, all, join, fork, select, call, spawn } from 'redux-saga/effects';
 import { tokensUrl, networksUrl, claimsUrl } from 'remoteConfig';
 
-import { loadedNetworks, updateNetworks, loadedAccount, setNetwork, loadedRex } from '../actions';
+import { loadedNetworks, updateNetworks, loadedAccount, setNetwork, loadedRex, setTokens } from '../actions';
 import {
   makeSelectIdentity,
   makeSelectReader,
@@ -359,6 +359,8 @@ function* getAccountDetail(reader, name) {
             contract: 'eosio.token',
             symbol: 'EOS',
           });
+
+          yield put(setTokens(flareData.account.tokens));
 
           yield flareData.account.tokens.map(function*(token) {
             const tokenInfos = {

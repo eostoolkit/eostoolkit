@@ -14,6 +14,8 @@ import {
   TOGGLE_OFFLINE,
   LOADED_REX,
   TRIGGER_UPDATE_REX,
+  TOKENS,
+  UNSET_TOKENS,
 } from './constants';
 
 export function setSigner(networkSigner) {
@@ -119,5 +121,18 @@ export function loadedRex(rex) {
 export function triggerUpdateRex() {
   return {
     type: TRIGGER_UPDATE_REX,
+  };
+}
+
+export function setTokens(flareDataTokens) {
+  return {
+    type: TOKENS,
+    flareDataTokens,
+  };
+}
+
+export function unsetTokens() {
+  return {
+    type: UNSET_TOKENS,
   };
 }
