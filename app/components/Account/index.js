@@ -40,10 +40,14 @@ const Account = props => {
             <CardIcon color="rose">
               <Person />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}><FormattedMessage { ...generalMessages.invalidNotFoundText } /></h4>
+            <h4 className={classes.cardIconTitle}>
+              <FormattedMessage {...generalMessages.invalidNotFoundText} />
+            </h4>
           </CardHeader>
           <CardBody>
-            <h5><FormattedMessage { ...messages.reviewSearchTermText } /></h5>
+            <h5>
+              <FormattedMessage {...messages.reviewSearchTermText} />
+            </h5>
           </CardBody>
         </Card>
       </GridItem>
