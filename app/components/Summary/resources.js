@@ -22,7 +22,6 @@ const TokensWrapper = styled.div`
 
 function ResourcesTable({ ...props }) {
   const { classes, account, rex } = props;
-  console.log(rex);
 
   return (
     <div className={classes.tableResponsive}>
@@ -85,9 +84,9 @@ function ResourcesTable({ ...props }) {
               </TableCell>
               <TableCell className={classes.tableCell} colSpan={9}>
                 <TokensWrapper>
-                  {/* {account.balances.map(balance => (
+                  {account.balances.map(balance => (
                     <h6 key={balance}>{balance}</h6>
-                  ))} */}
+                  ))}
                 </TokensWrapper>
               </TableCell>
             </TableRow>

@@ -22,16 +22,16 @@ import {
 
 // fetch networks and select defaultNetwork
 export function* fetchNetworks(filter) {
-  //default network
+  // default network
   let defaultNameNetwork = 'EOS Mainnet';
   let defaultNetwork = 'eos';
   let defaultType = 'mainnet';
   let defaultName = 'Greymass';
 
-  //get network saving in localstorage
+  // get network saving in localstorage
   const networkStorage = localStorage.getItem('networkStorage');
 
-  //if user provides full filter
+  // if user provides full filter
   if (
     filter.filter.has('name') &&
     filter.filter.has('network') &&
@@ -43,10 +43,10 @@ export function* fetchNetworks(filter) {
     defaultType = filter.filter.get('type');
     defaultName = filter.filter.get('api');
   } else if (filter.filter.has('name')) {
-    //if user only provides name of network
+    // if user only provides name of network
     defaultNameNetwork = filter.filter.get('name');
   } else if (networkStorage) {
-    //if user doesn't provide filter of network, get in localstorage
+    // if user doesn't provide filter of network, get in localstorage
     const nameStr = networkStorage.split('@_')[0];
     const networkStr = networkStorage.split('@_')[1];
     const typeStr = networkStorage.split('@_')[2];
@@ -93,8 +93,8 @@ export function* fetchNetworks(filter) {
       endpoint = network.endpoints.find(e => e.name === 'Greymass');
     }
 
-    //update on local
-    const endpointStorage = defaultNameNetwork + '@_' + defaultNetwork + '@_' + defaultType + '@_' + defaultName;
+    // update on local
+    const endpointStorage = `${defaultNameNetwork}@_${defaultNetwork}@_${defaultType}@_${defaultName}`;
     localStorage.setItem('networkStorage', endpointStorage);
     // build activeNetwork
     const activeNetwork = {
@@ -377,7 +377,13 @@ function* getAccountDetail(reader, name) {
               body: JSON.stringify(tokenInfos),
             });
 
-            return array.push(yield data.json());
+            const balance = yield data.json();
+
+            if (Array.isArray(balance)) {
+              return array.push(balance);
+            }
+
+            return null;
           });
 
           return {
