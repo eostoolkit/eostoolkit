@@ -58,7 +58,7 @@ export class Notification extends React.Component {
           confirmBtnText="Hide"
           // onCancel={() => closeAll()}
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.info}`}>
-          <h5>Scatter should appear shortly to confirm this action.</h5>
+          <h5>Your Wallet provider should appear shortly to confirm this action.</h5>
           <h6>Your transaction will be sent to the network afterwards</h6>
         </SweetAlert>
       );
@@ -124,9 +124,7 @@ export class Notification extends React.Component {
           confirmBtnText="Close"
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.danger}`}>
           <h6>Transaction has failed</h6>
-          <pre className={this.props.classes.preXYScrollable}>
-            {message ? `Details:\n${JSON.stringify(error, replaceErrors, 2)}` : ''}
-          </pre>
+          <div>{message ? `Error: ${error.message}` : ''}</div>
         </SweetAlert>
       );
     }

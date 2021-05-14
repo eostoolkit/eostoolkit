@@ -13,11 +13,13 @@ export default defineMessages({
   },
   multiChain1: {
     id: 'app.components.Information.News.multiChain1',
-    defaultMessage: 'We have added REX token info and also improved the dApp sections for Karma, Parsl, Pixeos, Hirevibes, OpenBRM, BOID. You can now also interact with BOS.  Go to menu ',
+    defaultMessage:
+      'We have added REX token info and also improved the dApp sections for Karma, Parsl, Pixeos, Hirevibes, OpenBRM, BOID. You can now also interact with BOS.  Go to menu ',
   },
   multiChain2: {
     id: 'app.components.Information.News.multiChain2',
-    defaultMessage: ' and select an endpoint for the network you want to interact with. Initially we have listed EOS, Worbli, MeetOne, Telos and BOS.',
+    defaultMessage:
+      ' and select an endpoint for the network you want to interact with. Initially we have listed EOS, Worbli, MeetOne, Telos and BOS.',
   },
   multiChain3: {
     id: 'app.components.Information.News.multiChain3',
@@ -84,16 +86,16 @@ export default defineMessages({
   },
   changePermissionsLineThree: {
     id: 'app.components.Information.ChangePermissions.changePermissionsLineThree',
-    defaultMessage: 'To change only active permission select youraccount@active for your Scatter identity',
+    defaultMessage: 'To change only active permission select youraccount@active for your wallet identity',
   },
   changePermissionsLineFour: {
     id: 'app.components.Information.ChangePermissions.changePermissionsLineFour',
-    defaultMessage: 'To change any permission select youraccount@owner for your Scatter identity',
+    defaultMessage: 'To change any permission select youraccount@owner for your wallet identity',
   },
   changePermissionsLineFive: {
     id: 'app.components.Information.ChangePermissions.changePermissionsLineFive',
     defaultMessage:
-      'If you change your active permission you have to update your scatter identity to use this new key pair',
+      'If you change your active permission you have to update your wallet identity to use this new key pair',
   },
   changePermissionsLineSix: {
     id: 'app.components.Information.ChangePermissions.changePermissionsLineSix',
@@ -400,7 +402,8 @@ export default defineMessages({
   },
   governanceDefinitionsText: {
     id: 'app.components.Information.Governance.governanceDefinitionsText',
-    defaultMessage: 'All capitalized, italicized, or inline code terms in The EOS User Agreement will be given the same effect and meaning as in Definitions. \n \n - EOS User Agreement: This document (EUA) \n \n - Chain ID: chain_id - aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906 \n \n - User: Any person or organization of persons who maintain(s) direct or indirect ownership of an EOS account, or EOS-based property connected to an EOS account. \n \n - Ownership: Direct or indirect access to an EOS account through one or more valid permissions checks. Ownership may be partially shared between Users through the use of multi-signature permissions. \n \n - Block Producer: Users who have called regproducer and receive rewards from eosio.vpay. \n \n - eosio.prods: An EOS account with a dynamic permissions structure that can assume the privileges of the eosio account when 15/21 Block Producers agree to do so. \n \n - Network Funds: Tokens contained within the following accounts: eosio.names, eosio.ramfee, eosio.saving. \n \n - Governing Documents: regproducer is considered a governing document. \n \n - On-Chain: Any transaction, smart contract, or Ricardian contract which is located within a block that is irreversible and appended to the EOS blockchain chain_id. \n \n - EOS-based Property: Anything that requires a valid permission in order to directly manipulate, alter, transfer, influence, or otherwise effect on the EOS Blockchain \n \n - Call: To submit an action to the EOS Blockchain chain_id. \n \n - Authorizations & Permissions: Permissions are arbitrary names used to define the requirements for a transaction sent on behalf of that permission. Permissions can be assigned for authority over specific contract actions. \n \n - Ricardian Contract: A contract that places the defining elements of a legal agreement in a format that can be expressed and executed in software.',
+    defaultMessage:
+      'All capitalized, italicized, or inline code terms in The EOS User Agreement will be given the same effect and meaning as in Definitions. \n \n - EOS User Agreement: This document (EUA) \n \n - Chain ID: chain_id - aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906 \n \n - User: Any person or organization of persons who maintain(s) direct or indirect ownership of an EOS account, or EOS-based property connected to an EOS account. \n \n - Ownership: Direct or indirect access to an EOS account through one or more valid permissions checks. Ownership may be partially shared between Users through the use of multi-signature permissions. \n \n - Block Producer: Users who have called regproducer and receive rewards from eosio.vpay. \n \n - eosio.prods: An EOS account with a dynamic permissions structure that can assume the privileges of the eosio account when 15/21 Block Producers agree to do so. \n \n - Network Funds: Tokens contained within the following accounts: eosio.names, eosio.ramfee, eosio.saving. \n \n - Governing Documents: regproducer is considered a governing document. \n \n - On-Chain: Any transaction, smart contract, or Ricardian contract which is located within a block that is irreversible and appended to the EOS blockchain chain_id. \n \n - EOS-based Property: Anything that requires a valid permission in order to directly manipulate, alter, transfer, influence, or otherwise effect on the EOS Blockchain \n \n - Call: To submit an action to the EOS Blockchain chain_id. \n \n - Authorizations & Permissions: Permissions are arbitrary names used to define the requirements for a transaction sent on behalf of that permission. Permissions can be assigned for authority over specific contract actions. \n \n - Ricardian Contract: A contract that places the defining elements of a legal agreement in a format that can be expressed and executed in software.',
   },
   governanceArticleOneHeader: {
     id: 'app.components.Information.Governance.governanceArticleOneHeader',
@@ -411,14 +414,13 @@ export default defineMessages({
     defaultMessage:
       'If User loses access to their EOS account on chain_id and has not taken appropriate measures to secure access to their EOS account by other means, the User acknowledges and agrees that that EOS account will become inaccessible. Users acknowledge that the User has an adequate understanding of the risks, usage and intricacies of cryptographic tokens and blockchain-based software. The User acknowledges and agrees that the User is using the EOS blockchain at their sole risk.',
   },
-  governanceArticleTwoHeader : {
+  governanceArticleTwoHeader: {
     id: 'app.components.Information.Governance.governanceArticleTwoHeader',
     defaultMessage: 'Article II - Special User Types',
   },
   governanceArticleTwoText: {
     id: 'app.components.Information.Governance.governanceArticleTwoText',
-    defaultMessage:
-      'Users who call regproducer agree to, and are bound by, the regproducer Ricardian Contract.',
+    defaultMessage: 'Users who call regproducer agree to, and are bound by, the regproducer Ricardian Contract.',
   },
   governanceArticleThreeHeader: {
     id: 'app.components.Information.Governance.governanceArticleThreeHeader',

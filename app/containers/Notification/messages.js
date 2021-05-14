@@ -7,7 +7,7 @@ export default defineMessages({
   },
   scatterShouldAppearMessage: {
     id: 'app.containers.Notification.scatterShouldAppearMessage',
-    defaultMessage: 'Scatter should appear shortly to confirm this action.',
+    defaultMessage: 'Your Wallet provider should appear shortly to confirm this action.',
   },
   transactionDelayNotification: {
     id: 'app.containers.Notification.transactionDelayNotification',
@@ -47,6 +47,6 @@ export default defineMessages({
   },
   failureScatterFailed: {
     id: 'app.containers.Notification.failureScatterFailed',
-    defaultMessage: 'You must install and connect Scatter',
+    defaultMessage: 'You must install and connect in some wallet provider',
   },
 });

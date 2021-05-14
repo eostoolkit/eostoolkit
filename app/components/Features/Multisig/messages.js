@@ -131,7 +131,7 @@ export default defineMessages({
 
   multisigSignFormSignTutorialHeader: {
     id: 'app.components.Features.Multisig.multisigSignFormSignTutorialHeader',
-    defaultMessage: 'Scatter Desktop is required. Not the Chrome Extension.',
+    defaultMessage: 'Some Wallet Provider is required. Not the Chrome Extension.',
   },
   multisigSignFormSignTutorialLine1: {
     id: 'app.components.Features.Multisig.multisigSignFormSignTutorialLine1',
@@ -139,7 +139,7 @@ export default defineMessages({
   },
   multisigSignFormSignTutorialLine2: {
     id: 'app.components.Features.Multisig.multisigSignFormSignTutorialLine2',
-    defaultMessage: 'Ensure Scatter is connected with the correct account to sign this transaction.',
+    defaultMessage: 'Ensure your wallet is connected with the correct account to sign this transaction.',
   },
   multisigSignFormSignTutorialLine3: {
     id: 'app.components.Features.Multisig.multisigSignFormSignTutorialLine3',
@@ -147,11 +147,13 @@ export default defineMessages({
   },
   multisigSignFormSignTutorialLine4: {
     id: 'app.components.Features.Multisig.multisigSignFormSignTutorialLine4',
-    defaultMessage: 'Scatter will appear asking you to sign an arbitrary Buffer. This will appear like random numbers. This is acceptable, and matches the JSON you loaded.',
+    defaultMessage:
+      'Your wallet will appear asking you to sign an arbitrary Buffer. This will appear like random numbers. This is acceptable, and matches the JSON you loaded.',
   },
   multisigSignFormSignTutorialLine5: {
     id: 'app.components.Features.Multisig.multisigSignFormSignTutorialLine5',
-    defaultMessage: 'A dialogue will appear with your Signature, and you will also automatically download a JSON file with this signature.',
+    defaultMessage:
+      'A dialogue will appear with your Signature, and you will also automatically download a JSON file with this signature.',
   },
   multisigSignFormSignTutorialLine6: {
     id: 'app.components.Features.Multisig.multisigSignFormSignTutorialLine6',
