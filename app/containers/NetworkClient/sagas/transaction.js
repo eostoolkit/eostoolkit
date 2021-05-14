@@ -1,7 +1,5 @@
-import { RpcError } from 'eosjs';
-import { put, select, call } from 'redux-saga/effects';
+import { put, select } from 'redux-saga/effects';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
-import { push } from 'react-router-redux';
 import { makeSelectIdentity, makeSelectWriter, makeSelectTransaction, makeSelectOffline } from '../selectors';
 import { loadAccount } from '../actions';
 
@@ -20,7 +18,7 @@ export function* pushTransaction(action) {
       const transaction = yield select(makeSelectTransaction());
       const networkWriter = yield select(makeSelectWriter());
       if (!networkWriter || !transaction || !networkIdentity) {
-        throw { message: 'Writing is not enabled - check your Scatter connection' };
+        throw { message: 'Writing is not enabled - check your Wallet Provider connection' };
       }
       if (transaction.error) {
         throw { message: transaction.error };

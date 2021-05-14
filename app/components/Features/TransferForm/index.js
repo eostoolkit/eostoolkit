@@ -7,7 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectWriter, makeSelectFlareDataTokens } from 'containers/NetworkClient/selectors';
+import { makeSelectFlareDataTokens } from 'containers/NetworkClient/selectors';
 import { compose } from 'recompose';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
@@ -22,9 +22,28 @@ import FormObject from './FormObject';
 import messages from './messages';
 import commonMessages from '../../messages';
 
+const makeTransaction = (values, tokens) => {
+  const token = tokens.find(tk => tk.symbol === values.symbol);
+
+  const transaction = [
+    {
+      account: token.contract || 'eosio.token',
+      name: 'transfer',
+      data: {
+        from: values.owner,
+        to: values.name,
+        quantity: `${Number(values.quantity)
+          .toFixed(4)
+          .toString()} ${values.symbol}`,
+        memo: values.memo,
+      },
+    },
+  ];
+  return transaction;
+};
+
 const TransferForm = props => {
   const { intl } = props;
-
   return (
     <Tool>
       <ToolSection lg={12}>
@@ -37,7 +56,6 @@ const TransferForm = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  networkWriter: makeSelectWriter(),
   tokens: makeSelectFlareDataTokens(),
 });
 
@@ -45,50 +63,10 @@ const enhance = compose(
   connect(mapStateToProps),
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { networkIdentity, networkWriter, tokens } = props;
-
-      const token = tokens.find(tk => tk.symbol === values.symbol);
-
-      networkWriter.eosApi
-        .transact(
-          {
-            actions: [
-              {
-                account: token.contract || 'eosio.token',
-                name: 'transfer',
-                authorization: [
-                  {
-                    actor: networkIdentity.name,
-                    permission: networkIdentity.authority,
-                  },
-                ],
-                data: {
-                  from: values.owner,
-                  to: values.name,
-                  quantity: `${Number(values.quantity)
-                    .toFixed(4)
-                    .toString()} ${values.symbol}`,
-                  memo: values.memo,
-                },
-              },
-            ],
-          },
-          {
-            broadcast: true,
-            blocksBehind: 3,
-            expireSeconds: 60,
-          }
-        )
-        .then(result => {
-          console.log('Transaction success!', result);
-          return result;
-        })
-        .catch(error => {
-          console.error('Transaction error :(', error);
-          throw error;
-        });
-
+      const { pushTransaction, tokens } = props;
+      const transaction = makeTransaction(values, tokens);
       setSubmitting(false);
+      pushTransaction(transaction, props.history);
     },
     mapPropsToValues: props => ({
       owner: props.networkIdentity ? props.networkIdentity.name : '',
