@@ -25,6 +25,10 @@ module.exports = require('./webpack.base.babel')({
   context: process.cwd(),
   entry: dllConfig.dlls ? dllConfig.dlls : dllPlugin.entry(pkg),
   devtool: 'eval',
+  babelQuery: {
+    presets: ['@babel/preset-env'],
+    plugins: ['@babel/plugin-proposal-object-rest-spread'],
+  },
   output: {
     filename: '[name].dll.js',
     path: outputPath,

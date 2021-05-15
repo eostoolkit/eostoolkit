@@ -12,7 +12,7 @@ export default defineMessages({
   },
   installScatterText: {
     id: 'app.components.NetworkStatus.Identity.installScatterText',
-    defaultMessage: 'Please install Scatter',
+    defaultMessage: 'Please install Some Wallet provider',
   },
   ifReadNotTickedText: {
     id: 'app.components.NetworkStatus.Status.ifReadNotTickedText',
@@ -22,11 +22,11 @@ export default defineMessages({
   ifWriteNotTickedText: {
     id: 'app.components.NetworkStatus.Status.ifWriteNotTickedText',
     defaultMessage:
-      'If WRITE access is not ticked, make sure scatter is configured with a valid network and that network is also linked to your scatter identity.',
+      'If WRITE access is not ticked, make sure your wallet provider is configured with a valid network and that network is also linked to your wallet identity.',
   },
   ifAccountNotTickedText: {
     id: 'app.components.NetworkStatus.Status.ifAccountNotTickedText',
     defaultMessage:
-      "If ACCOUNT is not ticked make sure to use the 'Select account' menu above and select a scatter identity and account to perform actions under.",
+      "If ACCOUNT is not ticked make sure to use the 'Select account' menu above and select a wallet identity and account to perform actions under.",
   },
 });

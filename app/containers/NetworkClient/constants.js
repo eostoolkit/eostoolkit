@@ -34,3 +34,6 @@ export const TOGGLE_OFFLINE = 'app/NetworkClient/TOGGLE_OFFLINE';
 // get REX information
 export const LOADED_REX = 'app/NetworkClient/LOADED_REX';
 export const TRIGGER_UPDATE_REX = 'app/NetworkClient/TRIGGER_UPDATE_REX';
+
+export const TOKENS = 'app/NetworkClient/TOKENS';
+export const UNSET_TOKENS = 'app/NetworkClient/UNSET_TOKENS';

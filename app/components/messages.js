@@ -68,7 +68,7 @@ export default defineMessages({
   },
   errorNoScatterIdentity: {
     id: 'app.components.general.errorNoScatterIdentity',
-    defaultMessage: 'No scatter identity attached',
+    defaultMessage: 'No identity attached',
   },
   formProxyNameRequired: {
     id: 'app.components.general.formProxyNameRequired',

@@ -10,7 +10,7 @@ import { compose } from 'recompose';
 import { injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import routes from 'routes/dashboard';
-import { makeSelectAccount, makeSelectIdentity,makeSelectActiveNetwork } from 'containers/NetworkClient/selectors';
+import { makeSelectAccount, makeSelectIdentity, makeSelectActiveNetwork } from 'containers/NetworkClient/selectors';
 import { pushTransaction } from 'containers/NetworkClient/actions';
 import { stageTransaction } from 'containers/OfflineClient/actions';
 
@@ -49,15 +49,9 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    pushTransaction: (transaction,history) => dispatch(pushTransaction(transaction,history)),
+    pushTransaction: (transaction, history) => dispatch(pushTransaction(transaction, history)),
     stageTransaction: transaction => dispatch(stageTransaction(transaction)),
   };
 }
 
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  injectIntl
-)(Connector);
+export default compose(connect(mapStateToProps, mapDispatchToProps), injectIntl)(Connector);

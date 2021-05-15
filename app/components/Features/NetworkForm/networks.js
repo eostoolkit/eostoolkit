@@ -15,6 +15,12 @@ import messages from './messages';
 
 function NetworksTable({ ...props }) {
   const { classes, networks, active, selectNetwork, intl } = props;
+
+  const handleChangeNetwork = (network, endpoint) => {
+    localStorage.clear();
+    selectNetwork(network, endpoint);
+  };
+
   return (
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>
@@ -71,7 +77,7 @@ function NetworksTable({ ...props }) {
                       {active && active.network === network && active.endpoint.name === endpoint.name ? (
                         intl.formatMessage(messages.networkTableCurrentNetworkText)
                       ) : (
-                        <Button onClick={() => selectNetwork(network, endpoint)} color="info">
+                        <Button onClick={() => handleChangeNetwork(network, endpoint)} color="info">
                           Select
                         </Button>
                       )}

@@ -7,6 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { makeSelectFlareDataTokens } from 'containers/NetworkClient/selectors';
 import { compose } from 'recompose';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
@@ -21,20 +22,20 @@ import FormObject from './FormObject';
 import messages from './messages';
 import commonMessages from '../../messages';
 
-const makeTransaction = (values, networkAccount) => {
-  const token = networkAccount.balances.find(tk => tk.symbol === values.symbol);
-  const precision = token.amount.split('.')[1] ? token.amount.split('.')[1].length : 0;
+const makeTransaction = (values, tokens) => {
+  const token = tokens.find(tk => tk.symbol === values.symbol);
+
   const transaction = [
     {
-      account: token.code || 'eosio.token',
+      account: token.contract || 'eosio.token',
       name: 'transfer',
       data: {
         from: values.owner,
         to: values.name,
-        memo: values.memo,
         quantity: `${Number(values.quantity)
-          .toFixed(precision)
+          .toFixed(4)
           .toString()} ${values.symbol}`,
+        memo: values.memo,
       },
     },
   ];
@@ -54,19 +55,16 @@ const TransferForm = props => {
   );
 };
 
-// const mapStateToProps = createStructuredSelector({
-//   eosTokens: selectTokens(),
-// });
+const mapStateToProps = createStructuredSelector({
+  tokens: makeSelectFlareDataTokens(),
+});
 
 const enhance = compose(
-  // connect(
-  //   mapStateToProps,
-  //   null
-  // ),
+  connect(mapStateToProps),
   withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { pushTransaction, networkAccount } = props;
-      const transaction = makeTransaction(values, networkAccount);
+      const { pushTransaction, tokens } = props;
+      const transaction = makeTransaction(values, tokens);
       setSubmitting(false);
       pushTransaction(transaction, props.history);
     },

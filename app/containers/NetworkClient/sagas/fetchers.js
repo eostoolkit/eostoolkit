@@ -4,7 +4,7 @@ import { orderBy } from 'lodash';
 import { put, all, join, fork, select, call, spawn } from 'redux-saga/effects';
 import { tokensUrl, networksUrl, claimsUrl } from 'remoteConfig';
 
-import { loadedNetworks, updateNetworks, loadedAccount, setNetwork, loadedRex } from '../actions';
+import { loadedNetworks, updateNetworks, loadedAccount, setNetwork, loadedRex, setTokens } from '../actions';
 import {
   makeSelectIdentity,
   makeSelectReader,
@@ -22,39 +22,44 @@ import {
 
 // fetch networks and select defaultNetwork
 export function* fetchNetworks(filter) {
-  //default network
-  let defaultNameNetwork = 'EOS Mainnet'
-  let defaultNetwork = 'eos'
-  let defaultType = 'mainnet'
-  let defaultName = 'Greymass'
+  // default network
+  let defaultNameNetwork = 'EOS Mainnet';
+  let defaultNetwork = 'eos';
+  let defaultType = 'mainnet';
+  let defaultName = 'Greymass';
 
-  //get network saving in localstorage
-  const networkStorage = localStorage.getItem('networkStorage')
+  // get network saving in localstorage
+  const networkStorage = localStorage.getItem('networkStorage');
 
-  //if user provides full filter
-  if(filter.filter.has('name') && filter.filter.has('network') && filter.filter.has('type') && filter.filter.has('api')) {
-    defaultNameNetwork = filter.filter.get('name')
-    defaultNetwork = filter.filter.get('network')
-    defaultType = filter.filter.get('type')
-    defaultName = filter.filter.get('api')
+  // if user provides full filter
+  if (
+    filter.filter.has('name') &&
+    filter.filter.has('network') &&
+    filter.filter.has('type') &&
+    filter.filter.has('api')
+  ) {
+    defaultNameNetwork = filter.filter.get('name');
+    defaultNetwork = filter.filter.get('network');
+    defaultType = filter.filter.get('type');
+    defaultName = filter.filter.get('api');
+  } else if (filter.filter.has('name')) {
+    // if user only provides name of network
+    defaultNameNetwork = filter.filter.get('name');
+  } else if (networkStorage) {
+    // if user doesn't provide filter of network, get in localstorage
+    const nameStr = networkStorage.split('@_')[0];
+    const networkStr = networkStorage.split('@_')[1];
+    const typeStr = networkStorage.split('@_')[2];
+    const apiStr = networkStorage.split('@_')[3];
 
-  }else if(filter.filter.has('name')){//if user only provides name of network
-    defaultNameNetwork = filter.filter.get('name')
-
-  }else if(networkStorage){//if user doesn't provide filter of network, get in localstorage
-    const nameStr = networkStorage.split('@_')[0]
-    const networkStr = networkStorage.split('@_')[1]
-    const typeStr = networkStorage.split('@_')[2]
-    const apiStr = networkStorage.split('@_')[3]
-
-    if(networkStr && typeStr && apiStr && nameStr){
-      defaultNameNetwork = nameStr
-      defaultNetwork = networkStr
-      defaultType = typeStr
-      defaultName = apiStr
+    if (networkStr && typeStr && apiStr && nameStr) {
+      defaultNameNetwork = nameStr;
+      defaultNetwork = networkStr;
+      defaultType = typeStr;
+      defaultName = apiStr;
     }
   }
-  
+
   try {
     // fetch the remote network list
     const data = yield fetch(networksUrl);
@@ -76,22 +81,21 @@ export function* fetchNetworks(filter) {
     });
 
     let network = networks.find(n => n.name.toLowerCase() === defaultNameNetwork.toLowerCase());
-    let endpoint
+    let endpoint;
 
-    if(network){
+    if (network) {
       endpoint = network.endpoints.find(e => e.name.toLowerCase() === defaultName.toLowerCase());
-      if(!endpoint){
+      if (!endpoint) {
         endpoint = network.endpoints[0];
       }
-
-    }else{
+    } else {
       network = networks.find(n => n.network === 'eos' && n.type === 'mainnet');
       endpoint = network.endpoints.find(e => e.name === 'Greymass');
     }
 
-    //update on local
-    const endpointStorage = defaultNameNetwork + '@_' + defaultNetwork + '@_' + defaultType + '@_' + defaultName
-    localStorage.setItem('networkStorage', endpointStorage)
+    // update on local
+    const endpointStorage = `${defaultNameNetwork}@_${defaultNetwork}@_${defaultType}@_${defaultName}`;
+    localStorage.setItem('networkStorage', endpointStorage);
     // build activeNetwork
     const activeNetwork = {
       network,
@@ -334,7 +338,7 @@ function* getAccountDetail(reader, name) {
     const account = yield reader.get_account(name);
     const activeNetwork = yield select(makeSelectActiveNetwork());
     if (activeNetwork.network.prefix === 'EOS') {
-      let body = { account: account.account_name };
+      const body = { account: account.account_name };
 
       try {
         const flare = yield fetch('https://api-pub.eosflare.io/v1/eosflare/get_account', {
@@ -346,38 +350,72 @@ function* getAccountDetail(reader, name) {
         });
         const flareData = yield flare.json();
 
+        console.log({ flareData });
+
         if (flareData.account) {
-          const tokens = flareData.account.tokens.map(token => {
-            return `${token.contract}:${token.symbol}`;
+          const array = [];
+
+          yield flareData.account.tokens.unshift({
+            contract: 'eosio.token',
+            symbol: 'EOS',
           });
-          tokens.unshift('eosio.token:EOS');
-          body = {
-            ...body,
-            tokens,
+
+          yield put(setTokens(flareData.account.tokens));
+
+          yield flareData.account.tokens.map(function*(token) {
+            const tokenInfos = {
+              ...body,
+              code: token.contract,
+              symbol: token.symbol,
+            };
+
+            const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balance', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+              },
+              body: JSON.stringify(tokenInfos),
+            });
+
+            const balance = yield data.json();
+
+            if (Array.isArray(balance)) {
+              return array.push(balance);
+            }
+
+            return null;
+          });
+
+          return {
+            ...account,
+            balances: array,
           };
+          // tokens.unshift('eosio.token:EOS');
+          // body = {
+          //   ...body,
+          //   code: flareData.account.tokens[0].contract,
+          //   symbol: flareData.account.tokens[0].symbol,
+          // };
         }
       } catch (err) {
         console.log(err);
       }
 
-      const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balances', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-        body: JSON.stringify(body),
-      });
-      const list = yield data.json();
-      // console.log(list);
-
-      console.log('account: ', account);
-      console.log('list: ', list);
+      // const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balance', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json; charset=utf-8',
+      //   },
+      //   body: JSON.stringify(body),
+      // });
+      // const list = yield data.json();
+      // console.log('Foton list', list);
+      // // console.log(list);
+      // console.log({ data });
+      // console.log('account: ', account);
+      // console.log('list: ', list);
 
       // yield spawn(fetchLatency);
-      return {
-        ...account,
-        balances: list,
-      };
     }
     const tokens = yield fetchTokens(reader);
     // const tokens = yield select(makeSelectTokens());
@@ -415,6 +453,7 @@ function* getAccountDetail(reader, name) {
 export function* fetchAccount() {
   const reader = yield select(makeSelectReader());
   const identity = yield select(makeSelectIdentity());
+  console.log({ identity });
   try {
     if (identity && identity.name) {
       const account = yield call(getAccountDetail, reader, identity.name);

@@ -58,7 +58,7 @@ export class Notification extends React.Component {
           confirmBtnText="Hide"
           // onCancel={() => closeAll()}
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.info}`}>
-          <h5>Scatter should appear shortly to confirm this action.</h5>
+          <h5>Your Wallet provider should appear shortly to confirm this action.</h5>
           <h6>Your transaction will be sent to the network afterwards</h6>
         </SweetAlert>
       );
@@ -124,9 +124,7 @@ export class Notification extends React.Component {
           confirmBtnText="Close"
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.danger}`}>
           <h6>Transaction has failed</h6>
-          <pre className={this.props.classes.preXYScrollable}>
-            {message ? `Details:\n${JSON.stringify(error, replaceErrors, 2)}` : ''}
-          </pre>
+          <div>{message ? `Error: ${error.message}` : ''}</div>
         </SweetAlert>
       );
     }
@@ -141,12 +139,7 @@ export class Notification extends React.Component {
           confirmBtnText="Close"
           // onCancel={() => closeAll()}
           confirmBtnCssClass={`${this.props.classes.button} ${this.props.classes.danger}`}>
-          <h5>You must install and connect Scatter</h5>
-          <h5>
-            <a href={`https://get-scatter.com/`} target="new">
-              Get Scatter
-            </a>
-          </h5>
+          <h5>You must install and connect in some Wallet Provider</h5>
         </SweetAlert>
       );
     }
@@ -172,17 +165,9 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const styles = withStyles(sweetAlertStyle);
 const withReducer = injectReducer({ key: 'notification', reducer });
 const withSaga = injectSaga({ key: 'notification', saga });
 
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-  styles
-)(Notification);
+export default compose(withReducer, withSaga, withConnect, styles)(Notification);

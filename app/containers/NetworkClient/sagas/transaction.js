@@ -1,17 +1,15 @@
-import {RpcError} from 'eosjs';
-import { put, select, call } from 'redux-saga/effects';
+import { put, select } from 'redux-saga/effects';
 import { failureNotification, loadingNotification, successNotification } from 'containers/Notification/actions';
-import { push } from 'react-router-redux';
 import { makeSelectIdentity, makeSelectWriter, makeSelectTransaction, makeSelectOffline } from '../selectors';
 import { loadAccount } from '../actions';
 
-function *sleep(time) {
+function* sleep(time) {
   yield new Promise(resolve => setTimeout(resolve, time));
 }
 
 export function* pushTransaction(action) {
   const offlineMode = yield select(makeSelectOffline());
-  if(offlineMode) {
+  if (offlineMode) {
     yield action.history.push('/multisig/create');
   } else {
     yield put(loadingNotification());
@@ -20,7 +18,7 @@ export function* pushTransaction(action) {
       const transaction = yield select(makeSelectTransaction());
       const networkWriter = yield select(makeSelectWriter());
       if (!networkWriter || !transaction || !networkIdentity) {
-        throw { message: 'Writing is not enabled - check your Scatter connection' };
+        throw { message: 'Writing is not enabled - check your Wallet Provider connection' };
       }
       if (transaction.error) {
         throw { message: transaction.error };
@@ -32,11 +30,11 @@ export function* pushTransaction(action) {
       const actions = transaction.map(tx => {
         return {
           ...tx,
-          authorization: [{ actor:networkIdentity.name, permission:networkIdentity.authority }],
+          authorization: [{ actor: networkIdentity.name, permission: networkIdentity.authority }],
         };
       });
-      const res = yield networkWriter.transact({ actions }, {blocksBehind: 3, expireSeconds: 30});
-      yield put(successNotification({TransactionId: res.transaction_id}));
+      const res = yield networkWriter.eosApi.transact({ actions }, { blocksBehind: 3, expireSeconds: 30 });
+      yield put(successNotification({ TransactionId: res.transaction_id }));
       //wait for block to be committed
       yield sleep(1000);
       yield put(loadAccount());

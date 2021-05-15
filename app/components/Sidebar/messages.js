@@ -8,11 +8,11 @@ import { defineMessages } from 'react-intl';
 export default defineMessages({
   attachAccount: {
     id: 'app.components.Sidebar.attachAccount',
-    defaultMessage: 'Attach Account',
+    defaultMessage: 'Login',
   },
   detachAccount: {
     id: 'app.components.Sidebar.detachAccount',
-    defaultMessage: 'Detach Account',
+    defaultMessage: 'Logout',
   },
   changeNetwork: {
     id: 'app.components.Sidebar.changeNetwork',
