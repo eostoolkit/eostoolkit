@@ -29,7 +29,7 @@ import messages from './messages';
 
 const NetworkForm = props => {
   const { classes, networks, active, selectNetwork, intl } = props;
-  const tableProps = { networks, active, selectNetwork, selectNetwork };
+  const tableProps = { networks, active, selectNetwork };
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} lg={12}>
