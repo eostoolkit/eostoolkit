@@ -1,17 +1,11 @@
 // import Ping from 'ping.js';
 import Ping from 'utils/ping';
 import { orderBy } from 'lodash';
-import { put, all, join, fork, select, call, spawn } from 'redux-saga/effects';
+import { put, all, join, fork, select, call } from 'redux-saga/effects';
 import { tokensUrl, networksUrl, claimsUrl } from 'remoteConfig';
 
 import { loadedNetworks, updateNetworks, loadedAccount, setNetwork, loadedRex, setTokens } from '../actions';
-import {
-  makeSelectIdentity,
-  makeSelectReader,
-  makeSelectTokens,
-  makeSelectNetworks,
-  makeSelectActiveNetwork,
-} from '../selectors';
+import { makeSelectIdentity, makeSelectReader, makeSelectNetworks, makeSelectActiveNetwork } from '../selectors';
 
 /*
  *
@@ -337,113 +331,121 @@ function* getAccountDetail(reader, name) {
   try {
     const account = yield reader.get_account(name);
     const activeNetwork = yield select(makeSelectActiveNetwork());
-    if (activeNetwork.network.prefix === 'EOS') {
-      const body = { account: account.account_name };
+    console.log(activeNetwork.network.prefix);
 
+    if (activeNetwork.network.prefix === 'EOS') {
       try {
-        const flare = yield fetch('https://api-pub.eosflare.io/v1/eosflare/get_account', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-          },
-          body: JSON.stringify(body),
-        });
+        const flare = yield fetch(`https://api.light.xeos.me/api/account/eos/${account.account_name}`);
+
         const flareData = yield flare.json();
 
-        console.log({ flareData });
-
-        if (flareData.account) {
+        if (flareData) {
           const array = [];
 
-          yield flareData.account.tokens.unshift({
-            contract: 'eosio.token',
-            symbol: 'EOS',
-          });
+          yield put(setTokens(flareData.balances));
 
-          yield put(setTokens(flareData.account.tokens));
-
-          yield flareData.account.tokens.map(function*(token) {
-            const tokenInfos = {
-              ...body,
-              code: token.contract,
-              symbol: token.symbol,
-            };
-
-            const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balance', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-              },
-              body: JSON.stringify(tokenInfos),
-            });
-
-            const balance = yield data.json();
-
-            if (Array.isArray(balance)) {
-              return array.push(balance);
+          yield flareData.balances.map(tk => {
+            if (tk.amount) {
+              return array.push(`${Number(tk.amount).toFixed(tk.decimals)} ${tk.currency}`);
             }
-
-            return null;
           });
 
           return {
             ...account,
             balances: array,
           };
-          // tokens.unshift('eosio.token:EOS');
-          // body = {
-          //   ...body,
-          //   code: flareData.account.tokens[0].contract,
-          //   symbol: flareData.account.tokens[0].symbol,
-          // };
         }
       } catch (err) {
         console.log(err);
       }
-
-      // const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balance', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json; charset=utf-8',
-      //   },
-      //   body: JSON.stringify(body),
-      // });
-      // const list = yield data.json();
-      // console.log('Foton list', list);
-      // // console.log(list);
-      // console.log({ data });
-      // console.log('account: ', account);
-      // console.log('list: ', list);
-
-      // yield spawn(fetchLatency);
     }
-    const tokens = yield fetchTokens(reader);
-    // const tokens = yield select(makeSelectTokens());
-    const tokenData = yield all(
-      tokens.map(token => {
-        return fork(getCurrency, reader, token.account, name);
-      })
-    );
 
-    const currencies = yield join(...tokenData);
-    const balances = currencies.reduce((a, b) => a.concat(b), []); // .filter( onlyUnique );
-    const unique = [...new Set(balances.map(item => item.balance))];
-    const final = unique.map(bal => {
-      const tokenFind = tokens.find(t => t.symbol === bal.split(' ')[1]);
+    if (activeNetwork.network.prefix === 'TLOS') {
+      try {
+        const flare = yield fetch(`https://api.light.xeos.me/api/account/telos/${account.account_name}`);
 
-      return {
-        account: tokenFind ? tokenFind.account : 'grandpacoins',
-        balance: bal,
-      };
-    });
+        const flareData = yield flare.json();
 
-    const finalTokenList = final.map(convertFinalData);
+        if (flareData) {
+          const array = [];
 
-    // yield spawn(fetchLatency);
-    return {
-      ...account,
-      balances: finalTokenList,
-    };
+          yield put(setTokens(flareData.balances));
+
+          yield flareData.balances.map(tk => {
+            if (tk.amount) {
+              return array.push(`${Number(tk.amount).toFixed(tk.decimals)} ${tk.currency}`);
+            }
+          });
+
+          return {
+            ...account,
+            balances: array,
+          };
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    if (activeNetwork.network.prefix === 'JUNGLE') {
+      try {
+        const flare = yield fetch(
+          `https://lightapi.eosgeneva.io/api/account/${activeNetwork.network.prefix.toLowerCase()}/${
+            account.account_name
+          }`
+        );
+
+        const flareData = yield flare.json();
+
+        if (flareData) {
+          const array = [];
+
+          yield put(setTokens(flareData.balances));
+
+          yield flareData.balances.map(tk => {
+            if (tk.amount) {
+              return array.push(`${Number(tk.amount).toFixed(tk.decimals)} ${tk.currency}`);
+            }
+          });
+
+          return {
+            ...account,
+            balances: array,
+          };
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    try {
+      const flare = yield fetch(
+        `https://lightapi.eosamsterdam.net/api/account/${activeNetwork.network.prefix.toLowerCase()}/${
+          account.account_name
+        }`
+      );
+
+      const flareData = yield flare.json();
+
+      if (flareData) {
+        const array = [];
+
+        yield put(setTokens(flareData.balances));
+
+        yield flareData.balances.map(tk => {
+          if (tk.amount) {
+            return array.push(`${Number(tk.amount).toFixed(tk.decimals)} ${tk.currency}`);
+          }
+        });
+
+        return {
+          ...account,
+          balances: array,
+        };
+      }
+    } catch (err) {
+      console.log(err);
+    }
   } catch (c) {
     console.log(c);
     return null;
@@ -453,7 +455,6 @@ function* getAccountDetail(reader, name) {
 export function* fetchAccount() {
   const reader = yield select(makeSelectReader());
   const identity = yield select(makeSelectIdentity());
-  console.log({ identity });
   try {
     if (identity && identity.name) {
       const account = yield call(getAccountDetail, reader, identity.name);
