@@ -24,7 +24,7 @@ const makeTransaction = (networkIdentity, accountData, activeNetwork, intl) => {
 
   const producers = accountData.voter_info ? accountData.voter_info.producers : [];
 
-  if (activeNetwork.network.prefix === "EOS") {
+  if (activeNetwork.network.prefix === 'EOS') {
     if (!producers.includes('aus1genereos')) {
       if (producers.length > 29) {
         producers.pop();
@@ -32,8 +32,7 @@ const makeTransaction = (networkIdentity, accountData, activeNetwork, intl) => {
       //console.log("add aus1genereos");
       producers.push('aus1genereos');
     }
-  }
-  else if (activeNetwork.network.prefix === "MEETONE") {
+  } else if (activeNetwork.network.prefix === 'MEETONE') {
     if (!producers.includes('genereos.m')) {
       if (producers.length > 29) {
         producers.pop();
@@ -88,9 +87,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default injectIntl(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(VoteUs)
-);
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(VoteUs));

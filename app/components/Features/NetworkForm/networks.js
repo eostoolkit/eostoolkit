@@ -48,13 +48,7 @@ function NetworksTable({ ...props }) {
                   <TableRow className={classes.tableRowHover} key={endpoint.name}>
                     <TableCell className={classes.tableCell}>{network.name}</TableCell>
                     <TableCell className={classes.tableCell}>Light API</TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {network.name === 'EOS' && 'https://api.light.xeos.me/api/account/eos/'}
-                      {network.name.includes('TELOS') && 'https://api.light.xeos.me/api/account/telos/'}
-                      {network.name.includes('Kylin') && 'https://lightapi.eosamsterdam.net/api/account/kylin/'}
-                      {network.name === 'WAX' && 'https://lightapi.eosamsterdam.net/api/account/wax/'}
-                      {network.name === 'BOS' && 'https://lightapi.eosamsterdam.net/api/account/bos/'}
-                    </TableCell>
+                    <TableCell className={classes.tableCell}>{endpoint.url}</TableCell>
                     <TableCell className={classes.tableCell}>
                       {active && active.network === network && active.endpoint.name === endpoint.name ? (
                         intl.formatMessage(messages.networkTableCurrentNetworkText)

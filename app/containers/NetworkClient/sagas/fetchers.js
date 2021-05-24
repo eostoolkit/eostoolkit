@@ -2,7 +2,7 @@
 import Ping from 'utils/ping';
 import { orderBy } from 'lodash';
 import { put, all, join, fork, select, call } from 'redux-saga/effects';
-import { tokensUrl, networksUrl, claimsUrl } from 'remoteConfig';
+import { tokensUrl, claimsUrl, lightAPI } from 'remoteConfig';
 
 import { loadedNetworks, updateNetworks, loadedAccount, setNetwork, loadedRex, setTokens } from '../actions';
 import { makeSelectIdentity, makeSelectReader, makeSelectNetworks, makeSelectActiveNetwork } from '../selectors';
@@ -56,11 +56,40 @@ export function* fetchNetworks(filter) {
 
   try {
     // fetch the remote network list
-    const data = yield fetch(networksUrl);
+    const data = yield fetch(lightAPI);
     const rawNetworks = yield data.json();
 
-    const networks = rawNetworks.map(network => {
+    const networkData = Object.keys(rawNetworks['api-endpoints'])
+      .map(key => {
+        const apiData = rawNetworks['api-endpoints'][key];
+
+        const networks = apiData.networks.map(network => ({ ...rawNetworks.networks[network], network }));
+
+        return networks.map(network => {
+          return {
+            name: network.description,
+            description: network.description,
+            chainId: network.chainid,
+            prefix: network.systoken,
+            apiPrefix: network.network,
+            network: 'eos',
+            endpoints: [
+              {
+                name: 'Light API',
+                protocol: 'https',
+                port: 443,
+                url: key.replace('https://', ''),
+                description: 'Light API',
+              },
+            ],
+          };
+        });
+      })
+      .flat();
+
+    const networks = networkData.map(network => {
       const { endpoints, ...networkDetails } = network;
+
       const endpointDetails = endpoints.map(endpoint => {
         return {
           ...endpoint,
@@ -73,6 +102,8 @@ export function* fetchNetworks(filter) {
         endpoints: endpointDetails,
       };
     });
+
+    console.log({networks})
 
     let network = networks.find(n => n.name.toLowerCase() === defaultNameNetwork.toLowerCase());
     let endpoint;
@@ -103,60 +134,60 @@ export function* fetchNetworks(filter) {
   }
 }
 
-function* makeEndpointsLatency(endpoint) {
-  const { ping, ...endpointDetails } = endpoint;
+// function* makeEndpointsLatency(endpoint) {
+//   const { ping, ...endpointDetails } = endpoint;
 
-  try {
-    return {
-      ...endpointDetails,
-      ping: yield call(Ping, `${endpoint.protocol}://${endpoint.url}:${endpoint.port}/v1/chain/get_info`),
-    };
-  } catch (c) {
-    return {
-      ...endpointDetails,
-      ping: 5000,
-    };
-  }
-}
+//   try {
+//     return {
+//       ...endpointDetails,
+//       ping: yield call(Ping, `${endpoint.protocol}://${endpoint.url}:${endpoint.port}/v1/chain/get_info`),
+//     };
+//   } catch (c) {
+//     return {
+//       ...endpointDetails,
+//       ping: 5000,
+//     };
+//   }
+// }
 
-export function* fetchLatency() {
-  try {
-    // fetch the remote network list
-    const networks = yield select(makeSelectNetworks());
-    const active = yield select(makeSelectActiveNetwork());
+// export function* fetchLatency() {
+//   try {
+//     // fetch the remote network list
+//     const networks = yield select(makeSelectNetworks());
+//     const active = yield select(makeSelectActiveNetwork());
 
-    const activeIndex = networks.findIndex(network => {
-      return network.chainId === active.network.chainId;
-    });
+//     const activeIndex = networks.findIndex(network => {
+//       return network.chainId === active.network.chainId;
+//     });
 
-    let endpoints = networks[activeIndex].endpoints;
+//     let endpoints = networks[activeIndex].endpoints;
 
-    const latencies = yield all(
-      endpoints.map(endpoint => {
-        return fork(makeEndpointsLatency, endpoint);
-      })
-    );
+//     const latencies = yield all(
+//       endpoints.map(endpoint => {
+//         return fork(makeEndpointsLatency, endpoint);
+//       })
+//     );
 
-    endpoints = yield join(...latencies);
-    networks[activeIndex].endpoints = endpoints;
-    yield put(updateNetworks(networks));
+//     endpoints = yield join(...latencies);
+//     networks[activeIndex].endpoints = endpoints;
+//     yield put(updateNetworks(networks));
 
-    const sorted = orderBy(endpoints, ['failures', 'ping'], 'asc');
-    const best = sorted[0];
+//     const sorted = orderBy(endpoints, ['failures', 'ping'], 'asc');
+//     const best = sorted[0];
 
-    if (active.endpoint.name !== best.name) {
-      const activeNetwork = {
-        network: networks[activeIndex],
-        endpoint: best,
-      };
+//     if (active.endpoint.name !== best.name) {
+//       const activeNetwork = {
+//         network: networks[activeIndex],
+//         endpoint: best,
+//       };
 
-      yield put(setNetwork(activeNetwork, false));
-    }
-  } catch (err) {
-    console.error('An EOSToolkit error occured - see details below:');
-    console.error(err);
-  }
-}
+//       yield put(setNetwork(activeNetwork, false));
+//     }
+//   } catch (err) {
+//     console.error('An EOSToolkit error occured - see details below:');
+//     console.error(err);
+//   }
+// }
 
 /*
  *
@@ -331,7 +362,8 @@ function* getAccountDetail(reader, name) {
   try {
     const account = yield reader.get_account(name);
     const activeNetwork = yield select(makeSelectActiveNetwork());
-    console.log(activeNetwork.network.prefix);
+
+    console.log('ACTIVE NETWORK', activeNetwork);
 
     if (activeNetwork.network.prefix === 'EOS') {
       try {

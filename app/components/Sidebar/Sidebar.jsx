@@ -117,6 +117,8 @@ class Sidebar extends React.Component {
       ],
     });
 
+    console.log({accessContext})
+
     const login = async index => {
       try {
         const walletProviders = accessContext.getWalletProviders();
