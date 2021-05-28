@@ -53,12 +53,33 @@ class NetworksSelect extends React.Component {
       name: 'EOS',
       asset: Eos,
       endpoint: {
-        url: 'eos.greymass.com',
-        port: 403,
+        description: 'API Node',
+        failures: 0,
+        name: 'Greymass',
+        ping: -1,
+        port: 443,
         protocol: 'https',
+        url: 'eos.greymass.com',
       },
       network: {
         chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
+        description: 'The EOS Mainnet',
+        endpoints: [
+          {
+            description: 'API Node',
+            failures: 0,
+            name: 'Greymass',
+            ping: -1,
+            port: 443,
+            protocol: 'https',
+            url: 'eos.greymass.com',
+          },
+        ],
+        name: 'EOS',
+        network: 'eos',
+        owner: 'The EOS community',
+        prefix: 'EOS',
+        type: 'mainnet',
       },
     },
     {
@@ -129,9 +150,9 @@ class NetworksSelect extends React.Component {
     },
   ];
 
-  handleChangeNetwork(api) {
+  handleChangeNetwork(network, endpoint) {
     localStorage.clear();
-    this.props.selectNetwork(api);
+    this.props.selectNetwork(network, endpoint);
   }
 
   render() {
@@ -140,7 +161,7 @@ class NetworksSelect extends React.Component {
         <Select>
           <SelectContent>
             {this.coins.map(coin => (
-              <Option key={coin.id} onClick={() => this.handleChangeNetwork(coin.api)}>
+              <Option key={coin.id} onClick={() => this.handleChangeNetwork(coin.network, coin.endpoint)}>
                 <OptionImage src={coin.asset} alt="asset" />
                 {coin.name}
               </Option>

@@ -93,6 +93,8 @@ class Sidebar extends React.Component {
       [classes.photoRTL]: rtlActive,
     })}`;
 
+    console.log(this.props.chain);
+
     const accessContext = initAccessContext({
       appName: 'EOSToolkit',
       network: {

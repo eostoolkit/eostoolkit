@@ -392,7 +392,7 @@ function* getAccountDetail(reader, name) {
       }
     }
 
-    if (activeNetwork.network.prefix === 'TLOS') {
+    if (activeNetwork.network.prefix === 'TELOS') {
       try {
         const flare = yield fetch(`https://api.light.xeos.me/api/account/telos/${account.account_name}`);
 
