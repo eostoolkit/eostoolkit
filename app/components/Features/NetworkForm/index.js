@@ -23,6 +23,7 @@ import CardBody from 'components/Card/CardBody';
 
 import regularFormsStyle from 'assets/jss/regularFormsStyle';
 import NetworkTable from './networks';
+import NetworksSelect from './NetworksSelect';
 
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import messages from './messages';
@@ -46,7 +47,8 @@ const NetworkForm = props => {
             <h6>
               <FormattedHTMLMessage {...messages.addNetworkToGit} />
             </h6>
-            <NetworkTable intl={intl} {...tableProps} />
+            {/* <NetworkTable intl={intl} {...tableProps} /> */}
+            <NetworksSelect selectNetwork={selectNetwork} />
           </CardBody>
         </Card>
       </GridItem>

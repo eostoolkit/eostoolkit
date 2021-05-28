@@ -1,10 +1,7 @@
-// import Ping from 'ping.js';
-import Ping from 'utils/ping';
-import { orderBy } from 'lodash';
 import { put, all, join, fork, select, call } from 'redux-saga/effects';
 import { tokensUrl, claimsUrl, lightAPI } from 'remoteConfig';
 
-import { loadedNetworks, updateNetworks, loadedAccount, setNetwork, loadedRex, setTokens } from '../actions';
+import { loadedNetworks, updateNetworks, loadedAccount, loadedRex, setTokens } from '../actions';
 import { makeSelectIdentity, makeSelectReader, makeSelectNetworks, makeSelectActiveNetwork } from '../selectors';
 
 /*
@@ -103,8 +100,6 @@ export function* fetchNetworks(filter) {
       };
     });
 
-    console.log({networks})
-
     let network = networks.find(n => n.name.toLowerCase() === defaultNameNetwork.toLowerCase());
     let endpoint;
 
@@ -120,11 +115,39 @@ export function* fetchNetworks(filter) {
 
     // update on local
     const endpointStorage = `${defaultNameNetwork}@_${defaultNetwork}@_${defaultType}@_${defaultName}`;
+
     localStorage.setItem('networkStorage', endpointStorage);
     // build activeNetwork
     const activeNetwork = {
-      network,
-      endpoint,
+      endpoint: {
+        description: 'API Node',
+        failures: 0,
+        name: 'Greymass',
+        ping: -1,
+        port: 443,
+        protocol: 'https',
+        url: 'eos.greymass.com',
+      },
+      network: {
+        chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
+        description: 'The EOS Mainnet',
+        endpoints: [
+          {
+            description: 'API Node',
+            failures: 0,
+            name: 'Greymass',
+            ping: -1,
+            port: 443,
+            protocol: 'https',
+            url: 'eos.greymass.com',
+          },
+        ],
+        name: 'EOS',
+        network: 'eos',
+        owner: 'The EOS community',
+        prefix: 'EOS',
+        type: 'mainnet',
+      },
     };
 
     yield put(loadedNetworks(networks, activeNetwork));
