@@ -117,7 +117,7 @@ class Sidebar extends React.Component {
       ],
     });
 
-    console.log({accessContext})
+    console.log(this.props.chain);
 
     const login = async index => {
       try {
