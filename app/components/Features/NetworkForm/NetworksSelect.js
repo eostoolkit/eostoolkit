@@ -1,13 +1,18 @@
+/* eslint-disable react/no-did-mount-set-state */
+/* eslint-disable no-undef */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Eos from '../../../assets/img/blockchains/EOS-icon.png';
-import Telos from '../../../assets/img/blockchains/telos-icon.png';
-import Jungle from '../../../assets/img/blockchains/jungle-icon.png';
-import Proton from '../../../assets/img/blockchains/proton-icon.png';
-import Xec from '../../../assets/img/blockchains/xec-icon.png';
-import Bos from '../../../assets/img/blockchains/Bos-icon.png';
-import Wax from '../../../assets/img/blockchains/Wax-icon.png';
+
+import { ArrowDropDown } from '@material-ui/icons';
+
+import EOS from '../../../assets/img/blockchains/EOS-icon.png';
+import TELOS from '../../../assets/img/blockchains/telos-icon.png';
+import JUNGLE from '../../../assets/img/blockchains/jungle-icon.png';
+import PROTON from '../../../assets/img/blockchains/proton-icon.png';
+import XEC from '../../../assets/img/blockchains/xec-icon.png';
+import BOS from '../../../assets/img/blockchains/Bos-icon.png';
+import WAX from '../../../assets/img/blockchains/Wax-icon.png';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -21,13 +26,35 @@ const SelectContent = styled.div`
   align-items: baseline;
   justify-content: baseline;
   padding: 20px 0;
+  row-gap: 8px;
+`;
+
+const Dropdown = styled.div`
+  display: flex;
+  align-items: baseline;
+  justify-content: baseline;
+  padding: 20px 0;
   row-gap: 16px;
 `;
 
-const Option = styled.div`
+const DropdownDisplay = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   column-gap: 16px;
+`;
+
+const Option = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  padding: 8px;
+  border-radius: 2px;
+
+  &:hover {
+    background-color: #eeeeee;
+  }
 `;
 
 const OptionImage = styled.img`
@@ -46,12 +73,30 @@ class NetworksSelect extends React.Component {
     super(props);
   }
 
-  // eslint-disable-next-line no-undef
+  state = {
+    isVisible: false,
+    name: 'EOS',
+    asset: EOS,
+  };
+
+  componentDidMount() {
+    const networkStorage = localStorage.getItem('networkStorage');
+    const nameStr = networkStorage.split('@_')[0];
+
+    const coin = this.coins.filter(c => c.name === nameStr);
+
+    this.setState({
+      isVisible: this.state.isVisible,
+      name: nameStr,
+      asset: coin[0].asset,
+    });
+  }
+
   coins = [
     {
       id: 1,
       name: 'EOS',
-      asset: Eos,
+      asset: EOS,
       endpoint: {
         description: 'API Node',
         failures: 0,
@@ -80,12 +125,13 @@ class NetworksSelect extends React.Component {
         owner: 'The EOS community',
         prefix: 'EOS',
         type: 'mainnet',
+        asset: EOS,
       },
     },
     {
       id: 2,
       name: 'TELOS',
-      asset: Telos,
+      asset: TELOS,
       endpoint: {
         description: 'Load balancer of various public nodes provided by the Telos Foundation',
         failures: 0,
@@ -114,12 +160,13 @@ class NetworksSelect extends React.Component {
         owner: 'TELOS',
         prefix: 'TELOS',
         type: 'mainnet',
+        asset: TELOS,
       },
     },
     {
       id: 3,
-      name: 'Jungle',
-      asset: Jungle,
+      name: 'JUNGLE',
+      asset: JUNGLE,
       endpoint: {
         description: 'Jungle',
         failures: 0,
@@ -148,12 +195,13 @@ class NetworksSelect extends React.Component {
         owner: 'JUNGLE',
         prefix: 'JUNGLE',
         type: 'mainnet',
+        asset: JUNGLE,
       },
     },
     {
       id: 4,
-      name: 'Proton',
-      asset: Proton,
+      name: 'PROTON',
+      asset: PROTON,
       endpoint: {
         description: 'Proton',
         failures: 0,
@@ -182,12 +230,13 @@ class NetworksSelect extends React.Component {
         owner: 'PROTON',
         prefix: 'PROTON',
         type: 'mainnet',
+        asset: PROTON,
       },
     },
     {
       id: 5,
-      name: 'Xec',
-      asset: Xec,
+      name: 'XEC',
+      asset: XEC,
       endpoint: {
         description: 'Xec',
         failures: 0,
@@ -216,12 +265,13 @@ class NetworksSelect extends React.Component {
         owner: 'XEC',
         prefix: 'XEC',
         type: 'mainnet',
+        asset: XEC,
       },
     },
     {
       id: 6,
-      name: 'Bos',
-      asset: Bos,
+      name: 'BOS',
+      asset: BOS,
       endpoint: {
         description: 'Bos',
         failures: 0,
@@ -250,12 +300,13 @@ class NetworksSelect extends React.Component {
         owner: 'BOS',
         prefix: 'BOS',
         type: 'mainnet',
+        asset: BOS,
       },
     },
     {
       id: 7,
       name: 'WAX',
-      asset: Wax,
+      asset: WAX,
       endpoint: {
         description: 'Wax',
         failures: 0,
@@ -284,6 +335,7 @@ class NetworksSelect extends React.Component {
         owner: 'WAX',
         prefix: 'WAX',
         type: 'mainnet',
+        asset: WAX,
       },
     },
   ];
@@ -291,20 +343,40 @@ class NetworksSelect extends React.Component {
   handleChangeNetwork(network, endpoint) {
     localStorage.clear();
     this.props.selectNetwork(network, endpoint);
+    this.setState({
+      isVisible: this.state.isVisible,
+      name: network.name,
+      asset: network.asset,
+    });
   }
+
+  handleDropdownVisible = () => {
+    this.setState({
+      isVisible: !this.state.isVisible,
+    });
+  };
 
   render() {
     return (
       <Wrapper>
         <Select onClick={() => this.handleDropdownVisible()}>
-          <SelectContent>
-            {this.coins.map(coin => (
-              <Option key={coin.id} onClick={() => this.handleChangeNetwork(coin.network, coin.endpoint)}>
-                <OptionImage src={coin.asset} alt="asset" />
-                {coin.name}
-              </Option>
-            ))}
-          </SelectContent>
+          <Dropdown>
+            <DropdownDisplay onClick={() => this.handleDropdownVisible()}>
+              <OptionImage src={this.state.asset} alt="asset" />
+              {this.state.name}
+            </DropdownDisplay>
+            <ArrowDropDown color="#000" />
+          </Dropdown>
+          {this.state.isVisible && (
+            <SelectContent>
+              {this.coins.map(coin => (
+                <Option key={coin.id} onClick={() => this.handleChangeNetwork(coin.network, coin.endpoint)}>
+                  <OptionImage src={coin.asset} alt="asset" />
+                  {coin.name}
+                </Option>
+              ))}
+            </SelectContent>
+          )}
         </Select>
       </Wrapper>
     );

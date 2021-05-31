@@ -45,6 +45,39 @@ import tokenpocket from 'eos-transit-tokenpocket-provider';
 
 import Modal from './components/modal';
 
+const defaultNetwork = {
+  id: 1,
+  name: 'EOS',
+  endpoint: {
+    description: 'API Node',
+    failures: 0,
+    name: 'Greymass',
+    ping: -1,
+    port: 443,
+    protocol: 'https',
+    url: 'eos.greymass.com',
+  },
+  network: {
+    chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
+    description: 'The EOS Mainnet',
+    endpoints: [
+      {
+        description: 'API Node',
+        failures: 0,
+        name: 'Greymass',
+        ping: -1,
+        port: 443,
+        protocol: 'https',
+        url: 'eos.greymass.com',
+      },
+    ],
+    name: 'EOS',
+    network: 'eos',
+    owner: 'The EOS community',
+    prefix: 'EOS',
+    type: 'mainnet',
+  },
+};
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -93,8 +126,6 @@ class Sidebar extends React.Component {
       [classes.photoRTL]: rtlActive,
     })}`;
 
-    console.log(this.props.chain);
-
     const accessContext = initAccessContext({
       appName: 'EOSToolkit',
       network: {
@@ -118,8 +149,6 @@ class Sidebar extends React.Component {
         // }),
       ],
     });
-
-    console.log(this.props.chain);
 
     const login = async index => {
       try {
@@ -426,7 +455,7 @@ Sidebar.propTypes = {
 const mapStateToProps = createStructuredSelector({
   offlineMode: makeSelectOffline(),
   identity: makeSelectIdentity(),
-  chain: makeSelectActiveNetwork(),
+  chain: makeSelectActiveNetwork() || defaultNetwork,
 });
 
 function mapDispatchToProps(dispatch) {
