@@ -38,23 +38,24 @@ const FeaturesPage = props => {
 
   return (
     <Tool>
-      <GridItem xs={12} sm={12} md={12} lg={12}>
-        <div style={bannerBackground}>
-          <a target="_blank" href="https://genpool.io/">
-            <img style={bannerImage} src={genpoolWeb} alt="eosbot-banner" />
-          </a>
-        </div>
-      </GridItem>
       <ToolSection lg={12}>
         <ToolBody
-          style={{background:'bisque'}}
+          style={{background:'lightskyblue'}}
           color="rose"
           icon={Favorite}
           header={intl.formatMessage(messages.toolkitNewsHeader)}
           subheader={intl.formatMessage(messages.toolkitNewsSubHeader)}>
-          <News style={{background:'bisque'}} />
+          <News style={{background:'lightskyblue'}} />
         </ToolBody>
       </ToolSection>
+
+      <GridItem xs={12} sm={12} md={12} lg={12}>
+        <div style={bannerBackground}>
+          <a target="_blank" href="https://genpool.io/">
+            <img style={bannerImage} src={genpoolWeb} alt="genpool.io" />
+          </a>
+        </div>
+      </GridItem>      
 
       <ToolSection lg={12}>
         <ToolBody

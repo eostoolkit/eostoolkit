@@ -12,8 +12,8 @@ const Home = () => {
       </h3>
       <h4>
         <FormattedMessage {...messages.scatterInfo1} />
-        <a href="https://get-scatter.com/" target="new">
-          Scatter
+        <a href="https://github.com/greymass/anchor/releases" target="new">
+          Anchor Wallet
         </a>
         <FormattedMessage {...messages.scatterInfo2} />
       </h4>

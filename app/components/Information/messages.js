@@ -9,17 +9,17 @@ export default defineMessages({
   // Messages for News component
   multiChainHeader: {
     id: 'app.components.Information.News.multiChainHeader',
-    defaultMessage: 'Improved token support',
+    defaultMessage: 'Multi-wallet and multi-chain support',
   },
   multiChain1: {
     id: 'app.components.Information.News.multiChain1',
     defaultMessage:
-      'We have added REX token info and also improved the dApp sections for Karma, Parsl, Pixeos, Hirevibes, OpenBRM, BOID. You can now also interact with BOS.  Go to menu ',
+      'We have added support for Anchor, TokenPocket, Lynx and other wallets. Go to Login and select your prefered wallet.',
   },
   multiChain2: {
     id: 'app.components.Information.News.multiChain2',
     defaultMessage:
-      ' and select an endpoint for the network you want to interact with. Initially we have listed EOS, Worbli, MeetOne, Telos and BOS.',
+      ' to select an endpoint for the network you want to interact with. Initially we have listed EOS, Telos, Wax and BOS.',
   },
   multiChain3: {
     id: 'app.components.Information.News.multiChain3',
@@ -32,11 +32,11 @@ export default defineMessages({
   },
   scatterInfo1: {
     id: 'app.components.Information.Home.scatterInfo1',
-    defaultMessage: 'You must have ',
+    defaultMessage: 'We recommend using the latest version of ',
   },
   scatterInfo2: {
     id: 'app.components.Information.Home.scatterInfo2',
-    defaultMessage: ' installed to safely and securely send transactions to the EOS Network.',
+    defaultMessage: ' to safely and securely send transactions to the EOS Network.',
   },
   helpdesk1: {
     id: 'app.components.Information.Home.helpdeskInfo1',

@@ -33,13 +33,13 @@ const makeTransaction = (networkIdentity, accountData, activeNetwork, intl) => {
       producers.push('aus1genereos');
     }
   }
-  else if (activeNetwork.network.prefix === "MEETONE") {
-    if (!producers.includes('genereos.m')) {
+  else if (activeNetwork.network.prefix === "TLOS") {
+    if (!producers.includes('telosgermany')) {
       if (producers.length > 29) {
         producers.pop();
       }
       //console.log("add genereos.m");
-      producers.push('genereos.m');
+      producers.push('telosgermany');
     }
   }
 
