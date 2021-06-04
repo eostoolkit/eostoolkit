@@ -97,18 +97,18 @@ const dashRoutes = [
   //   icon: CloudUpload,
   //   component: RexForm,
   // },
-  {
-    path: '/poorswap',
-    name: <FormattedMessage {...messags.menuPoorSwap} />,
-    icon: CompareArrows,
-    component: PoorSwap,
-  },
-  {
-    path: '/donate',
-    name: <FormattedMessage {...messags.menuDonate} />,
-    icon: Favorite,
-    component: Donate,
-  },
+  // {
+  //   path: '/poorswap',
+  //   name: <FormattedMessage {...messags.menuPoorSwap} />,
+  //   icon: CompareArrows,
+  //   component: PoorSwap,
+  // },
+  // {
+  //   path: '/donate',
+  //   name: <FormattedMessage {...messags.menuDonate} />,
+  //   icon: Favorite,
+  //   component: Donate,
+  // },
   {
     path: '/governance',
     name: <FormattedMessage {...messags.menuGovernance} />,
@@ -128,12 +128,12 @@ const dashRoutes = [
         mini: 'PS',
         component: Parsl,
       },
-      {
-        path: '/dapps/karma',
-        name: <FormattedMessage {...messags.menuKARMA} />,
-        mini: 'K',
-        component: Karma,
-      },
+      // {
+      //   path: '/dapps/karma',
+      //   name: <FormattedMessage {...messags.menuKARMA} />,
+      //   mini: 'K',
+      //   component: Karma,
+      // },
       {
         path: '/dapps/hirevibes',
         name: <FormattedMessage {...messags.menuHireVibes} />,
@@ -164,21 +164,21 @@ const dashRoutes = [
         mini: 'HP',
         component: HorusPay,
       },
-      {
-        path: '/dapps/grandpacoins',
-        name: <FormattedMessage {...messags.menuGrandpaCoins} />,
-        mini: 'GC',
-        component: Grandpa,
-      },
+      // {
+      //   path: '/dapps/grandpacoins',
+      //   name: <FormattedMessage {...messags.menuGrandpaCoins} />,
+      //   mini: 'GC',
+      //   component: Grandpa,
+      // },
     ],
   },
 
-  {
-    path: '/airgrab',
-    name: <FormattedMessage {...messags.menuAirgrabTokens} />,
-    icon: CloudDownload,
-    component: Airgrab,
-  },
+  // {
+  //   path: '/airgrab',
+  //   name: <FormattedMessage {...messags.menuAirgrabTokens} />,
+  //   icon: CloudDownload,
+  //   component: Airgrab,
+  // },
   {
     path: '/search',
     name: <FormattedMessage {...messags.menuFindAccounts} />,
