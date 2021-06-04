@@ -81,15 +81,17 @@ class NetworksSelect extends React.Component {
 
   componentDidMount() {
     const networkStorage = localStorage.getItem('networkStorage');
-    const nameStr = networkStorage.split('@_')[0];
+    if (networkStorage) {
+      const nameStr = networkStorage.split('@_')[0];
 
-    const coin = this.coins.filter(c => c.name === nameStr);
+      const coin = this.coins.filter(c => c.name === nameStr);
 
-    this.setState({
-      isVisible: this.state.isVisible,
-      name: nameStr,
-      asset: coin[0].asset,
-    });
+      this.setState({
+        isVisible: this.state.isVisible,
+        name: nameStr,
+        asset: coin[0].asset,
+      });
+    }
   }
 
   coins = [
@@ -365,7 +367,7 @@ class NetworksSelect extends React.Component {
               <OptionImage src={this.state.asset} alt="asset" />
               {this.state.name}
             </DropdownDisplay>
-            <ArrowDropDown color="#000" />
+            <ArrowDropDown color="inherit" />
           </Dropdown>
           {this.state.isVisible && (
             <SelectContent>
