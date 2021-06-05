@@ -386,8 +386,6 @@ function* getAccountDetail(reader, name) {
     const account = yield reader.get_account(name);
     const activeNetwork = yield select(makeSelectActiveNetwork());
 
-    console.log('ACTIVE NETWORK', activeNetwork);
-
     if (activeNetwork.network.prefix === 'EOS') {
       try {
         const flare = yield fetch(`https://api.light.xeos.me/api/account/eos/${account.account_name}`);
@@ -415,7 +413,7 @@ function* getAccountDetail(reader, name) {
       }
     }
 
-    if (activeNetwork.network.prefix === 'TELOS') {
+    if (activeNetwork.network.prefix === 'TLOS') {
       try {
         const flare = yield fetch(`https://api.light.xeos.me/api/account/telos/${account.account_name}`);
 

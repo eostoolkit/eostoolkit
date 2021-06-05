@@ -23,7 +23,7 @@ import messages from './messages';
 import commonMessages from '../../messages';
 
 const makeTransaction = (values, tokens) => {
-  const token = tokens.find(tk => tk.symbol === values.symbol);
+  const token = tokens.find(tk => tk.currency === values.symbol);
 
   const transaction = [
     {

@@ -160,7 +160,7 @@ class NetworksSelect extends React.Component {
         name: 'TELOS',
         network: 'telos',
         owner: 'TELOS',
-        prefix: 'TELOS',
+        prefix: 'TLOS',
         type: 'mainnet',
         asset: TELOS,
       },
