@@ -27,19 +27,19 @@ function* getAccountDetail(name) {
     const networkReader = yield select(makeSelectReader());
     const account = yield networkReader.get_account(name);
 
-    let body = {account:account.account_name};
+    let body = { account: account.account_name };
     try {
-      const flare = yield fetch('https://api-pub.eosflare.io/v1/eosflare/get_account',{
-        method: "POST",
+      const flare = yield fetch('https://api-pub.eosflare.io/v1/eosflare/get_account', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json; charset=utf-8",
+          'Content-Type': 'application/json; charset=utf-8',
         },
-        body:JSON.stringify(body),
+        body: JSON.stringify(body),
       });
       const flareData = yield flare.json();
 
-      if(flareData.account) {
-        let tokens = flareData.account.tokens.map(token=>{
+      if (flareData.account) {
+        const tokens = flareData.account.tokens.map(token => {
           return `${token.contract}:${token.symbol}`;
         });
         tokens.unshift('eosio.token:EOS');
@@ -47,18 +47,17 @@ function* getAccountDetail(name) {
           ...body,
           code: flareData.account.tokens[0],
           symbol: `${flareData.account.tokens[0].precision} ${flareData.account.tokens[0].symbol}`,
-        }
+        };
       }
-    } catch(err) {}
+    } catch (err) {}
 
-    const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balance',{
-      method: "POST",
+    const data = yield fetch('https://eos.greymass.com/v1/chain/get_currency_balance', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json; charset=utf-8",
+        'Content-Type': 'application/json; charset=utf-8',
       },
-      body:JSON.stringify(body),
+      body: JSON.stringify(body),
     });
-    console.log({data})
     const list = yield data.json();
     return {
       ...account,

@@ -23,7 +23,7 @@ import messages from './messages';
 import commonMessages from '../../messages';
 
 const makeTransaction = (values, tokens) => {
-  const token = tokens.find(tk => tk.symbol === values.symbol);
+  const token = tokens.find(tk => tk.currency === values.symbol);
 
   const transaction = [
     {
@@ -32,9 +32,7 @@ const makeTransaction = (values, tokens) => {
       data: {
         from: values.owner,
         to: values.name,
-        quantity: `${Number(values.quantity)
-          .toFixed(4)
-          .toString()} ${values.symbol}`,
+        quantity: `${Number(values.quantity).toString()} ${values.symbol}`,
         memo: values.memo,
       },
     },

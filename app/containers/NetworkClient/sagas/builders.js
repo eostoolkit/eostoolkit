@@ -4,29 +4,29 @@ import { fetchTokens, fetchClaims, fetchIdentity } from './fetchers';
 import { enableReader, enableWriter, disableWriter } from '../actions';
 
 /*
-*
-* BUILD READER
-* Create reader and fetch tokens
-*
-*/
+ *
+ * BUILD READER
+ * Create reader and fetch tokens
+ *
+ */
 
 // this is triggered by the buildDispatcher
 export function* buildReader(activeNetwork) {
   try {
     const httpEndpoint = `${activeNetwork.endpoint.protocol}://${activeNetwork.endpoint.url}:${activeNetwork.endpoint.port}`;
     const rpc = new JsonRpc(httpEndpoint);
-    
+
     const networkOptions = {
       rpc: rpc,
       chainId: activeNetwork.network.chainId,
-      
+
       // broadcast: false,
       // sign: false,
       // keyPrefix: activeNetwork.network.prefix || 'EOS',
     };
 
     //const networkReader = yield Api(networkOptions);
-    const tokens = [];//yield call(fetchTokens, networkReader);
+    const tokens = []; //yield call(fetchTokens, networkReader);
     const claims = yield call(fetchClaims);
 
     yield put(enableReader(rpc, tokens, claims));
@@ -39,8 +39,8 @@ export function* buildReader(activeNetwork) {
 // this is triggered by the buildDispatcher
 export function* storageReader(activeNetwork) {
   try {
-    const endpointStorage = activeNetwork.network.name + '@_' + activeNetwork.network.network + '@_' + activeNetwork.network.type + '@_' + activeNetwork.endpoint.name
-    localStorage.setItem('networkStorage', endpointStorage)
+    const endpointStorage = `${activeNetwork.network.name}@_${activeNetwork.network.network}@_${activeNetwork.network.type}@_${activeNetwork.endpoint.name}`;
+    localStorage.setItem('networkStorage', endpointStorage);
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
@@ -48,11 +48,11 @@ export function* storageReader(activeNetwork) {
 }
 
 /*
-*
-* BUILD WRITER
-* Create writer and fetch identity
-*
-*/
+ *
+ * BUILD WRITER
+ * Create writer and fetch identity
+ *
+ */
 
 // this is triggered by the buildDispatcher
 export function* buildWriter(signer, activeNetwork) {
@@ -75,13 +75,13 @@ export function* buildWriter(signer, activeNetwork) {
       // chainId: activeNetwork.network.chainId,
       // keyPrefix: activeNetwork.network.prefix || 'EOS',
       rpc: rpc,
-      beta3: true
+      beta3: true,
     };
     const protocol = activeNetwork.endpoint.protocol;
     //const networkWriter = signer.eos(signerClientConfig, Api, networkOptions, protocol);
     const networkWriter = signer.eos(signerClientConfig, Api, networkOptions);
     const identity = yield call(fetchIdentity, signer, activeNetwork);
-    console.log("Identity Builder", identity)
+    console.log('Identity Builder', identity);
     if (identity) {
       yield put(enableWriter(networkWriter, identity));
     } else {

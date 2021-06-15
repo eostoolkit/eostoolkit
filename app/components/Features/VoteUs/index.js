@@ -24,24 +24,31 @@ const makeTransaction = (networkIdentity, accountData, activeNetwork, intl) => {
 
   const producers = accountData.voter_info ? accountData.voter_info.producers : [];
 
-  if (activeNetwork.network.prefix === "EOS") {
-    if (!producers.includes('aus1genereos')) {
-      if (producers.length > 29) {
-        producers.pop();
-      }
-      //console.log("add aus1genereos");
-      producers.push('aus1genereos');
+  if (activeNetwork.network.prefix === 'EOS') {
+  if (!producers.includes('aus1genereos')) {
+    if (producers.length > 29) {
+      producers.pop();
     }
+    //console.log("add aus1genereos");
+    producers.push('aus1genereos');
   }
-  else if (activeNetwork.network.prefix === "TLOS") {
-    if (!producers.includes('telosgermany')) {
-      if (producers.length > 29) {
-        producers.pop();
-      }
-      //console.log("add genereos.m");
-      producers.push('telosgermany');
+} else if (activeNetwork.network.prefix === 'MEETONE') {
+  if (!producers.includes('genereos.m')) {
+    if (producers.length > 29) {
+      producers.pop();
     }
+    //console.log("add genereos.m");
+    producers.push('telosgermany');
   }
+} else if (activeNetwork.network.prefix === "TLOS") {
+  if (!producers.includes('telosgermany')) {
+    if (producers.length > 29) {
+      producers.pop();
+    }
+    //console.log("add genereos.m");
+    producers.push('telosgermany');
+  }
+}
 
   producers.sort();
   const transaction = [
@@ -88,9 +95,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default injectIntl(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(VoteUs)
-);
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(VoteUs));
