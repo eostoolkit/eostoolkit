@@ -32,9 +32,7 @@ const makeTransaction = (values, tokens) => {
       data: {
         from: values.owner,
         to: values.name,
-        quantity: `${Number(values.quantity)
-          .toFixed(4)
-          .toString()} ${values.symbol}`,
+        quantity: `${Number(values.quantity).toString()} ${values.symbol}`,
         memo: values.memo,
       },
     },
