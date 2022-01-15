@@ -193,7 +193,7 @@
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^16.4.1",
     "rimraf": "2.6.1",
-    "shelljs": "^0.7.8",
+    "shelljs": "^0.8.5",
     "style-loader": "0.18.1",
     "url-loader": "0.5.8",
     "webpack": "3.5.5",
