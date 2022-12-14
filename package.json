@@ -92,7 +92,7 @@
     "eos-transit-simpleos-provider": "^4.0.7",
     "eos-transit-tokenpocket-provider": "^4.0.7",
     "eosjs": "^20.0.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fontfaceobserver": "2.0.9",
     "formik": "^0.11.11",
     "history": "4.6.3",
